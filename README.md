@@ -14,6 +14,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Problems (To be fixed)
 
 * Certain vehicles alter P1's camera if P2 uses it
+* Certain vehicles are only responding to P1's control pad even if P2 is in it
 * Turrets alter P1's camera if P2 uses it
 * Some segments where a vehicle is required will not have enough distance to cause a respawn
 * Warphole object leaves other player behind
@@ -33,3 +34,4 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Problems (Not sure if will fix)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5.
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) only spawn once. On death, they will not respawn for the level (Side effect of current layout objects load patch)
