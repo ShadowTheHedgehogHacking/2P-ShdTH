@@ -6,16 +6,16 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Currently working on:
+* Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind
 * Display P2 UI components (Ring count, Ammo count)
-* nukkoro2.inf spawn positions for every level
 * Fixing vehicles alter P1's camera if P2 uses it
 
-## Problems
-* Some levels default spawn positions cause instant death for P2
+
+## Problems (To be fixed)
+
 * Certain vehicles alter P1's camera if P2 uses it
 * Turrets alter P1's camera if P2 uses it
 * Some segments where a vehicle is required will not have enough distance to cause a respawn
-* Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind
 * Warphole object leaves other player behind
 * Chaos control will leave other player behind; if P2 activates P1's camera is altered*
 * Gravity switches on Space Gadget only alter P1's gravity
@@ -27,3 +27,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
 * Layout objects load when P2 is within render distance
 * Pick any 2P mode Shadow as a character
+* nukkoro2.inf spawn positions for every level
+
+## Problems (Not sure if will fix)
+* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5.
