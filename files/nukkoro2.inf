@@ -1,5 +1,6 @@
 #ステージパラメータ
-#2P initial (untested) edit of 10.24.2018
+#2P spawn positions (tested) 10.24.2018
+#Known issue: On restart sometimes P2 is misaligned. Try restarting again.
 
 [Practice]
 PLAYER : 0 0 0 0 0 0 0
@@ -72,7 +73,9 @@ MISSIONCOUNT_H : 2 0
 
 [PrisonIsland]
 PLAYER : 0 0 80 -90 0 0 0
-PLAYER : 1 0 160 -90 0 0 0
+PLAYER : 1 0 -575 -880 0 0 0
+#PLAYER : 1 -10 120 -90 0 0 0
+#Doesn't seem reliable for some reason (works every other restart)
 GOALEVENTPOS_N : -23030 -5054 -10080
 GOALEVENTPOS_H : -32040 -8310 -10070
 GOALEVENTPOS_D : -22210 -5004 -10090
@@ -84,6 +87,7 @@ MISSIONCOUNT_D : 40 0
 MISSIONCOUNT_H : 5 0
 
 [Circus]
+PLAYER : 1 0 20 0 0 0 0
 MIPMAPK : -70
 GOALEVENTPOS_N : -13740 -10684 -20073
 GOALEVENTPOS_H : -5998 -6446 -19425
@@ -253,6 +257,7 @@ MISSIONCOUNT_D : 50 0
 
 [EggmansBase]
 PLAYER : 0 0 0 0 0 0 0
+PLAYER : 1 20 0 0 0 0 0
 GOALEVENTPOS_H : -744 -1334 -12845
 GOALEVENTPOS_D : -744 -1334 -12845
 GOALEVENTPOS_X : -744 -1334 -12845
