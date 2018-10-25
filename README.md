@@ -22,12 +22,14 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * SuperShadow only activates for P1
 * Level chunks load/unload based on P1 only
 
-##Done so far:
+
+## Done so far:
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
 * Layout objects load when P2 is within render distance
 * Pick any 2P mode Shadow as a character
 * nukkoro2.inf spawn positions for every level
+
 
 ## Problems (Not sure if will fix)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5.
