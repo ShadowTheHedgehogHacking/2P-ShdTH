@@ -5,13 +5,16 @@
 This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1P modes.
 Story Mode, Select Mode, Expert Mode, Last Story.
 
+## Level Status
+![Level Map](./res/map_broken.png)
+
 ## Currently working on:
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
-* Display P2 UI components (Ring count, Ammo count)
 * Fixing vehicles alter P1's camera if P2 uses it
 * Some segments where a vehicle is required will not have enough distance to cause a respawn
 
 ## Problems (To be fixed)
+* Display P2 UI components (Ring count, Ammo count) **more issues than expected for this, putting on hold
 * Bungees/Pulleys/RequiredVehicles should be doubled in layout (optional, not needed to beat most stages)
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles are only responding to P1's control pad even if P2 is in it
@@ -29,6 +32,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Layout objects load when P2 is within render distance
 * Pick any 2P mode Shadow as a character
 * nukkoro2.inf spawn positions for every level
+* P2 sound listener fixed (related to GameMode byte)
 
 
 ## Problems (Not sure if will fix)
