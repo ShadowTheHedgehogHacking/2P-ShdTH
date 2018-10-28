@@ -1,6 +1,6 @@
-<div align="center"><h1>2 Player Shadow The Hedgehog
+<div align="center"><h1>2 Player Shadow The Hedgehog</h1>
 ![2P Banner](./res/main_banner.png)
-</h1></div>
+</div>
 
 ## About
 This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1P modes.
