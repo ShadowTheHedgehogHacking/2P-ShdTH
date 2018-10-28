@@ -1,0 +1,206 @@
+802cele8-- ??
+
+
+801777c4 (reads stgid) - changing to 800 here leads to load
+8017707c lwz reads stgid
+800b7464 readsstgid
+
+
+----
+801a206c is bge for stgID (looks for various cases, sets special r3) - necessary
+to trigger
+need to patch 801a206c to always for instead of lwz r0, 0x00A8 (r3) needs to
+ldi r0, 800
+->
+C21A206C 00000001
+38000320 00000000
+
+next need to patch camera to lock on to 2P, simply by making it think its stg800
+80178380 lwz r4, 0x00A8(r29) becomes
+ldi r4, 800
+->
+C2178380 00000001
+38800320 00000000
+----------------
+Camera might be at 80176c4c
+
+
+---------
+
+8017707c controls 2p partner spawn
+so lwz r4, 0x00A8(r4)
+becomes
+C217707c 00000001
+38800320 00000000
+--------------------
+***CAMERA CALLs checked up to 801ce93c beq- call
+
+-------
+possible ones within that small area:
+80176c4c lwz r4 (but thats in pausefunc)
+--
+true value is in 801ce8f4 jumps to 80176C3C which is in PAUSEFUNC
+original instruction:
+808300a8
+
+80176c4c becomes:
+38800320
+
+----
+I want to overwrite at 801c38f4 which is bl to 0x80176C3C
+machine code: 4bfa8349
+
+I need to:
+mr r25, r30 #backup real data
+li r26, 800 #load new data
+lis r24, 0x8058
+subi r24, r24, 10592
+lwz r26, 0x00A8 (r24) # load data from mem
+stw r26, 0x00A8 (r24)
+
+
+###WIP
+
+li r26, 800
+lis r24, 0x8058
+subi r24, r24, 10592
+stw r26, 0x00A8 (r24)
+bl 0x176C3C
+
+###
+li r26, 800
+lis r24, 0x8058
+subi r24, r24, 10592
+stw r26, 0x00A8 (r24)
+bl 0x176C3C
+stw r30, 0x00A8 (r24)
+---
+simplier way:
+replacing the -1 and leaving the branch alone
+C21CE8F0 00000003
+3B400320 3F008058
+3B18D6A0 935800A8
+3880FFFF 00000000
+
+and also needed:
+after the branch:
+C21CE8F8 00000002
+93D800A8 80030008
+60000000 00000000
+
+-----------------------------------
+STGID memory address: 8057d748
+
+10.23.2018
+layout object load distance:
+38A00320 li r5, 800
+80168e88
+--------------
+normal westopolis:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ???
+80176c4c ??? x2
+80178104 reads StageID to load relative music file
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+================
+westopolis but change stageid to 800 at first read of stgid:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ???
+80176c4c ??? x1*******
+X doesnt read music
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+
+10.24.2018
+apparently different for some reason:
+--------------
+normal westopolis:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ??? x2
+80176c4c ???
+80178104 reads StageID to load relative music file
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+================
+westopolis but change stageid to 800 at first read of stgid:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ??? x1 [load starting positions?]
+80176c4c ???
+X doesnt read music
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+
+new strategy:
+8057D752 (gamemode flag) is being checked and that is what determines if objects render when P2 is in distance
+---
+list of reads (while in level):
+801e3ad4 -replace test: no apparent change
+800cb5e4 LOAD ON DISTANCE
+801fec38 //occurs many many times during load [halt]
+801fe994 -replace test : failed
+80201350 -[halt]
+801ffe0c - on change removed P1's ring counter
+(loop)
+instruction for r0 38000001
+801d9990 - tested : 
+801d9258 - tested: negative
+8041939c - tested: result: negative
+80169c08 - I found you FAKER!
+
+---
+801fec38 replaced with 1
+----
+800cb5e4 (load on distance)
+becomes:
+C20CB5E4 00000001
+38000001 00000000
+
+and
+80169c08 (unload on distance)
+C2169C08 00000001
+38000001 00000000
+
+----------------------------------
+10.25.2018 | Looking for UI change on gamemode flag
+38000001 r0 to 1
+list of reads:
+8033ad54 ???
+800bf268 ???
+801fe94c ???
+80201334 ???
+800b8700 | P1/P2 Pause Mode (Restart etc, shows no UI in P2 if set to 0)
+801ffde8
+loop back to 8033ad54 [frame update]
+------------
+80201350 Hides SinglePlayer Timer/ChaosMeter, Score
+801ffe0c ShowHide P2 Ring Count (in 2P mode hmm)
+801e3ad4
+
+801d9990 - P2 Sound Listener ON/OFF
+Patch to
+li r0, 1
+C21D9990 00000001
+38000001 00000000
+========================================================
+10.26.2018 | Looking for Pulley ?function? - maybe also related to air bug

@@ -7,7 +7,7 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Level Status
-![Level Map](./res/map_broken.png)
+![Level Map](./res/level_status.png)
 
 ## Release 1 (Scheduled for EOD 10.28.2018)
 * To be formalized with how-to...
