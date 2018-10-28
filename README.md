@@ -1,5 +1,5 @@
 <div align="center"><h1>2 Player Shadow The Hedgehog</h1>
-![2P Banner](./res/main_banner.png)
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/main_banner.png" align="center" />
 </div>
 
 ## About
