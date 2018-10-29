@@ -6,16 +6,18 @@
 This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1P modes.
 Story Mode, Select Mode, Expert Mode, Last Story.
 
-## Level Status
-![Level Map](./res/level_status.png)
+## Level Status (current changes)
+![Current Level Map](./res/level_status.png)
+## Level Status (current release)
+![Level Map](./res/level_status-v1.0.png)
 
-## Release 1 (Scheduled for EOD 10.28.2018)
-* To be formalized with how-to...
-* Due to the many issues still remaining, it is highly recommended to have Infinite lives enabled
+## Release 1
+* To be formalized with how-to... soonish
+* Has Dolphin Clock set to 165% by default - Adjust if game runs very slow on your system (try 100%, then increment slowly).
+* Due to the many issues still remaining, it is highly recommended to have 'Infinite Lives' enabled
 * Chaos Control is disabled by default
 * Chunks are tied to P1 only (stay near each other)
 * Air bug is still present (temp-fix inbound...)
-
 
 ## Credits
 * Includes `True Black Shadow` by TheHatedGravity
@@ -57,3 +59,4 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Problems (Not sure if will fix)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5.
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) only spawn if P1 sees them first (or is in-range). (Side effect of current layout objects load patch)
+* Culling issue on Final Haunt for P2's screen when near force-fields
