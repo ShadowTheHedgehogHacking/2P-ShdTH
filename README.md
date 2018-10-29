@@ -25,7 +25,7 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 ![Level Map](./res/level_status-v1.0.png)
 
 ## Release 1
-* To be formalized with how-to... soonish
+* See `HOW TO PLAY.txt` in release zip. More formal instructions inbound for 11/3
 * Has Dolphin Clock set to 165% by default - Adjust if game runs very slow on your system (try 100%, then increment slowly).
 * Due to the many issues still remaining, it is highly recommended to have 'Infinite Lives' enabled
 * Chaos Control is disabled by default
