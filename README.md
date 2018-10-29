@@ -8,6 +8,19 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Level Status (current changes)
 ![Current Level Map](./res/level_status.png)
+
+## Warp Warning
+Platforms (either a square or alien-hovering platform object) have been added to the entrance and exit of Warpholes.
+
+
+Levels marked with the yellow `!` will have these platforms.
+
+
+Make sure P2 is standing on a the platform before P1 goes in the Warphole. 
+
+
+If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
+
 ## Level Status (current release)
 ![Level Map](./res/level_status-v1.0.png)
 
