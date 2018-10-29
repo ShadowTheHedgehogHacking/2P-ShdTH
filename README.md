@@ -16,7 +16,7 @@ Platforms (either a square or alien-hovering platform object) have been added to
 Levels marked with the yellow `!` will have these platforms.
 
 
-Make sure P2 is standing on a platform before P1 goes in the Warphole. 
+Make sure P2 is standing on a platform before P1 goes in a Warphole. 
 
 
 If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
