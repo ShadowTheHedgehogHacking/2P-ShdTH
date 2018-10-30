@@ -21,11 +21,12 @@ Make sure P2 is standing on a platform before P1 goes in a Warphole.
 
 If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
 
-## Level Status (current release)
-![Level Map](./res/level_status-v1.0.png)
-
-## Release 1
-* See `HOW TO PLAY.txt` in release zip. More formal instructions inbound for 11/3
+## Release 2
+* New recommended method of play is Nintendont (no stutter issues)
+* Dolphin Clock override now defaults to OFF (turn it on if you have performance issues)
+* See `HOW TO PLAY.txt`
+* See `WARNINGS BEFORE PLAYING.txt`
+* Nintendont stuff added 
 * Has Dolphin Clock set to 165% by default - Adjust if game runs very slow on your system (try 100%, then increment slowly).
 * Due to the many issues still remaining, it is highly recommended to have 'Infinite Lives' enabled
 * Chaos Control is disabled by default

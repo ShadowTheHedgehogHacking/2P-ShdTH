@@ -1,3 +1,5 @@
+===Release 2===
+
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
 To play this game, you must copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
@@ -45,9 +47,9 @@ To play this game, you must copy over the files in 'files' onto the root of the 
 === Dolphin Setup ===
 The easiest way to do this is with the packaged PreConfigured-Dolphin
 
-**Clockspeed is set to 165% by default. Performance varies widely by system
-If performance is bad try adjust clockspeed back to 100%, then slowly raising it
-Some testers reported 100% worked best for them, others 120%, with the majority being 165%
+**Clockspeed is set to 165% - but this change is disabled by default. Performance varies widely by system
+If performance is bad try enabling it. If it gets work, dial clockspeed back to 100%, then slowly raising it
+Some testers reported 100% worked best for them, others 120%, with others being 165%
 
     Open Dolphin
     Select Config
