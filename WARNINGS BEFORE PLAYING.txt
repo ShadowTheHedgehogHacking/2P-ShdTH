@@ -1,0 +1,7 @@
+- Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel)
+- Chunks are based on P1 only - stay near each other
+- P2 does not have UI for rings/ammo
+- Checkpoint backtracking does not work
+- For flying sections, P2 must go first
+- For Warpholes, follow Warp Warning
+- Some vehicles and turrets mess up the camera of P1 if P2 uses it

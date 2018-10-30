@@ -204,3 +204,8 @@ C21D9990 00000001
 38000001 00000000
 ========================================================
 10.26.2018 | Looking for Pulley ?function? - maybe also related to air bug
+========================================================
+10.29.2018
+looking for hurt call
+807D7838 (word) - anim state?
+8060B6400 (references)

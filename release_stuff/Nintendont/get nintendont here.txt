@@ -1,0 +1,3 @@
+https://github.com/FIX94/Nintendont
+
+Follow Quick Installation segment in Nintendont's README
