@@ -4,4 +4,5 @@
 - Checkpoint backtracking does not work
 - For flying sections, P2 must go first
 - For Warpholes, follow Warp Warning
-- Some vehicles and turrets mess up the camera of P1 if P2 uses it
+- P2 should not use turrets. 
+- Some vehicles mess up the camera of P1 if P2 uses it
