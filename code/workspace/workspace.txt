@@ -209,3 +209,27 @@ C21D9990 00000001
 looking for hurt call
 807D7838 (word) - anim state?
 8060B6400 (references)
+=======================
+11.1.2018
+- looking for hurt activator, found updater for anim (same as above, still having crashing issues when looking for other reads)
+looking for ss activator, within stageid
+checking here first:
+8027f098 checks for stgid 710, promising - locks ?gravity? (superstate seems to not depend on this)
+-- superstate occurs after 801783ac, but before 8027f098
+HELPFUL ADDRESS : 801783ac (after layout, before level)
+800b7464 - after this controls to set SuperShadow on or off (later on)
+suspect:
+80176c4c in PAUSEFUNC
+-> 8017710c cmpwi r3,0 
+8000942c beq -> zz jump r3,0 (unrelated, loading func?)
+....
+this suggests PAUSEFUNC might be more important for other things...
+just like the 2P check, 80177108 is caller, same spot ....
+When the stage is 'non-super' [e.g. 201] -> the rlwinm. results in CR register updating, r0 not updating.
+When 'super' (710) -> rlwinm. results in r0 updating, CR not updating
+the rlwinm. occuring at 80177118 is the key
+noping the beq-:
+SuperShadow testing version no flying - (no mission overwrite fixed)
+0457670c 000003e7
+C217711C 00000001
+60000000 00000000
