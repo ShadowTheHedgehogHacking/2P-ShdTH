@@ -270,3 +270,38 @@ SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
 c217711c 00000001
 60000000 00000000
 c60af2e4 800af3bc
+
+--
+onhurt():
+800b7e28: noping results in ring count not diminishing, so assume:
+80178B20 is func that calls ring count loss, dropped rings and hurt anim still occurs but count remains same.
+
+------------
+11.3.2018
+after playtesting, realized Chaos Blasts breaks out of air glitch, so using that instead.
+Chaos Control is easier to do than originally thought:
+Chaos Control diminish rate:
+800a49e8 lwz r5, 0x002C(sp)
+need to half it
+original is : ffffffe8 (-24)
+needs to be:
+FFFFFFF4 -> just addi 12
+for simplicity, only altering iwthin the same func (8016f0cc)
+so 8016f0d4 cmpwi r5, 0 becomes:
+
+cmpwi r5, 0
+addi r5, r5, 12
+->
+C216F0D4 00000002
+2C050000 38A5000C
+60000000 00000000
+
+fixing splitscreen with CC (my understanding of gecko if must be wrong):
+0457d70b 00000001
+2A57D768 00000001
+0457D703 00000001
+
+2A57D768 00000000
+0457D703 00000000
+
+---
