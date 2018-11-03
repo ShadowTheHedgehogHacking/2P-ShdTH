@@ -233,3 +233,40 @@ SuperShadow testing version no flying - (no mission overwrite fixed)
 0457670c 000003e7
 C217711C 00000001
 60000000 00000000
+
+breakpoints:
+8027f098
+800b7464
+8017710c
+mbreakpoint: 8057d748
+==============
+11.2.2018
+looking for ring decrement (for onhurt call and activator for SS)
+backtrack on decrement:
+800af354
+
+800af364 -> jumps to 800af3bc if maintain superstate
+800af368 if rings are 0 and super state active (this is supercheck?)
+does beq- at 800af37c -> goes to 0x800AF3B0
+
+If 800af370 is nop'd shadow dies on ring loss
+If 800af234 is nop'd, Ring Loss Count continues forever 
+(800af2dc bl is called in both situations)
+
+onHurt():
+promising:
+80178b20
+two callers, has two calls
+
+--
+800af2fc does not take the beq-
+its 800af324 cror 2, 1, 2 -> check for 1 second has passed (not here either...)
+bne- at 328 -> takes jump when not deactivating, 
+
+: Turn 800af2e4 into bne (never disable supershadow) ... suggests the turnoff is within
+the explored func
+C60AF2E4 800AF3BC
+SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
+c217711c 00000001
+60000000 00000000
+c60af2e4 800af3bc
