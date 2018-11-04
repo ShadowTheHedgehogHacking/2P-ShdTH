@@ -21,6 +21,7 @@ Known Issues / Things to know before playing
 6. Some vehicles are broken if P2 uses them (car in Westopolis, car/motorcycle in Lethal Highway), avoid vehicles unless they are a required section (e.g. Prison Island should be fine).
 7. Turrets should only be used by P1
 8. For Black Hawk/Flying sections, make sure P2 and P1 are lined up to mount separate hawks, P2 must mount first then P1 mounts next to avoid a camera issue.
+9. For Boss Battles, players can homing-attack each other
 
 How to Install & Play
 Included in the release zip is a detailed step-by-step HOW TO PLAY.txt
@@ -38,11 +39,13 @@ Brief summary:
     -- if you opt to use your own Dolphin build, It must be 5.0-8985 or newer. Ensure you add the gecko codes, set Aspect Ratio to Stretch-to-Window (or 16:9,   
        but Stretch-to-Window gives both players more screen space), and disable Dolphin's built in Widescreen Hack if its on.
     Configure Dolphin Emulated clockspeed based on performance (varies per system)
+    Netplay:
+Dolphin's native netplay does not support dual core for Shadow The Hedgehog! Performance will be awful without Dual Core, so as an alternative you can use something like Parsec for netplay.
 
 Extras Credits  
 - Rouge over YellowAndroidShadow by Shadowth117
 - True Black Shadow by TheHatedGravity
-- Widescreen Hack by LimblessVector
+- SinglePlayer Widescreen Hack by LimblessVector
 - Infinite Lives by Link Master
 - Original Fill Dark/Hero meter codes by Zzetti
 - GCR by BSV
