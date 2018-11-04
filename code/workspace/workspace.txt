@@ -313,7 +313,7 @@ at: 801fec40 -> controls to show WeaponUI / DashPickupsEtc
 ->
 801d9258 | ?? repeats many times
 ---
-801fe994 ??
+801fe994 ?? (fe99c) controls ammo
 80201350 | hides/shows Dark/Hero Scores
 801ffe0c | hides/shows P2 ring counter (numbers)
 801e3ad4 | ???
@@ -336,6 +336,8 @@ nop 801ff65c (loading prereq)
 nop 80201f18 (loading prereq2)
 nop 80200764 (load ring icons)
 maybe nop 80201358 (hide scores)
+nop 801fe99c
+
 
 :
 C21FFE0C 00000001
@@ -353,6 +355,11 @@ hide scores: (incase I want to shift ringUIlater)
 C2201358 00000001
 60000000 00000000
 
+enable ammo counter:
+C21FE99C 00000001
+60000000 00000000
+
+
 2P UI code v1 [dreamsyntax]
 C21FFE0C 00000001
 60000000 00000000
@@ -365,5 +372,7 @@ C2201F18 00000001
 C2200764 00000001
 60000000 00000000
 C2201358 00000001
+60000000 00000000
+C21FE99C 00000001
 60000000 00000000
 
