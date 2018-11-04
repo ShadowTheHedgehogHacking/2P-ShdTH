@@ -18,26 +18,24 @@ Make sure P2 is standing on a platform before P1 goes in a Warphole.
 
 If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
 
-## Release 2
-* Dolphin no longer stutters (requires Dolphin 5.0-8985 or later)
-* Dolphin Clock override now defaults to OFF (turn it on if you have performance issues)
+## Release 3 / SHC2018 Final Version
 * See `HOW TO PLAY.txt` and `WARNINGS BEFORE PLAYING.txt`
-* Nintendont added 
 * Has Dolphin Clock set to 165% by default - Adjust if game runs very slow on your system (try 100%, then increment slowly).
-* Due to the many issues still remaining, it is highly recommended to have 'Infinite Lives' enabled
-* Chaos Control is disabled by default
+* 2P UI
+* Fixes SplitScreen Widescreen (it wasn't working before)
+* Chaos Control is enabled, but you need to Press Z+R to activate Chaos Control state for both players
 * Chunks are tied to P1 only (stay near each other)
-* Air bug is still present (temp-fix inbound...)
+* Air bug is still present (Press Z+L and then use Chaos Blast to break out of the animation)
 * Includes `True Black Shadow` by TheHatedGravity
 * Includes `Rouge over YellowAndroidShadow` by Shadowth117
-* Uses Widescreen Hack by LimblessVector
-* Infinite Lives & No Chaos Control by Link Master
+* Uses SP Widescreen Hack by LimblessVector
+* Infinite Lives by Link Master
+* Chaos Powers Activators by Zzetti
 
 ## Problems (To be fixed in order from top to bottom)
-* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel)
+* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Temp Solution is Chaos Blast
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Checkpoint Warping/Backtracking only moves P1
-* Display P2 UI components (Ring count, Ammo count) **more issues than expected for this, putting on hold
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
@@ -48,6 +46,7 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 * Level chunks load/unload based on P1 only
 
 ## Done so far:
+* Display P2 UI components (Ring count, Ammo count)
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
 * Layout objects load when P2 is within render distance
@@ -65,11 +64,12 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 ## Credits
 * Includes `True Black Shadow` by TheHatedGravity
 * Includes `Rouge over YellowAndroidShadow` by Shadowth117
-* Uses Widescreen Hack by LimblessVector
-* Infinite Lives & No Chaos Control by Link Master
+* SinglePlayer Widescreen Hack by LimblessVector
+* Infinite Lives by Link Master
+* Chaos Powers Activators by Zzetti 
 * Thanks to igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * Thanks to LimblessVector for his work on identifying objects and his initial large memorylist
 * Thanks to DonutStopGaming for ideas while function hunting
-* Thanks to TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec ;) for playtesting
+* Thanks to TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * Thanks to DeadlyFugu, Muzzarino
 * Thanks to Heroes Hacking Central (&Shadow)
