@@ -305,3 +305,65 @@ fixing splitscreen with CC (my understanding of gecko if must be wrong):
 0457D703 00000000
 
 ---
+Getting UI to work (and not break bosses)
+This way will probably break 2P VS:
+801fec3c cmplwi r0, 0 (is story game mode)
+I want 2 UI to show (realtime check), so nop the beq-
+at: 801fec40 -> controls to show WeaponUI / DashPickupsEtc
+->
+801d9258 | ?? repeats many times
+---
+801fe994 ??
+80201350 | hides/shows Dark/Hero Scores
+801ffe0c | hides/shows P2 ring counter (numbers)
+801e3ad4 | ???
+-----------------
+On stage initialize [looking for load rings UI instead of chaos bars, causes crash if they are not loaded in]
+802bebf4 | x2
+<loads>
+800c0508 | turn bne to beq (controls load/unload chaos bars)
+801ff654 | (nop 801ff65c)
+80201f10 | (nop 80201f18)
+8020075c | *for rings icon (nop 80200764)
+<loads>
+801fec38 (controls to show WeaponUI / DashPickups Etc)
+
+
+final codechanges:
+nop 801ffe0c (ringcounter)
+nop 801fec40 (UI indicators, weapon ammo for P2)
+nop 801ff65c (loading prereq)
+nop 80201f18 (loading prereq2)
+nop 80200764 (load ring icons)
+maybe nop 80201358 (hide scores)
+
+:
+C21FFE0C 00000001
+60000000 00000000
+C21FEC40 00000001
+60000000 00000000
+C21FF65C 00000001
+60000000 00000000
+C2201F18 00000001
+60000000 00000000
+C2200764 00000001
+60000000 00000000
+
+hide scores: (incase I want to shift ringUIlater)
+C2201358 00000001
+60000000 00000000
+
+2P UI code v1 [dreamsyntax]
+C21FFE0C 00000001
+60000000 00000000
+C21FEC40 00000001
+60000000 00000000
+C21FF65C 00000001
+60000000 00000000
+C2201F18 00000001
+60000000 00000000
+C2200764 00000001
+60000000 00000000
+C2201358 00000001
+60000000 00000000
+
