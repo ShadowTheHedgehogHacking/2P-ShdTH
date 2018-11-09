@@ -18,21 +18,8 @@ Make sure P2 is standing on a platform before P1 goes in a Warphole.
 
 If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
 
-## Release 3 / SHC2018 Final Version
-* See `HOW TO PLAY.txt` and `WARNINGS BEFORE PLAYING.txt`
-* Has Dolphin Clock set to 165% by default - Adjust if game runs very slow on your system (try 100%, then increment slowly).
-* 2P UI
-* Fixes SplitScreen Widescreen (it wasn't working before)
-* Chaos Control is enabled, but you need to Press Z+R to activate Chaos Control state for both players
-* Chunks are tied to P1 only (stay near each other)
-* Air bug is still present (Press Z+L and then use Chaos Blast to break out of the animation)
-* Includes `True Black Shadow` by TheHatedGravity
-* Includes `Rouge over YellowAndroidShadow` by Shadowth117
-* Uses SP Widescreen Hack by LimblessVector
-* Infinite Lives by Link Master
-* Chaos Powers Activators by Zzetti
 
-## Problems (To be fixed in order from top to bottom)
+## Problems
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Temp Solution is Chaos Blast
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Checkpoint Warping/Backtracking only moves P1
