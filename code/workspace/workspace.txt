@@ -376,3 +376,55 @@ C2201358 00000001
 C21FE99C 00000001
 60000000 00000000
 
+
+---11.9.2018
+Chunk Hunting
+- There are cam0-cam4, cam0 can move, (if P2 uses turret/CC, cam0 moves to P2)
+- cam0-4 is always active, just might not be attached to objects
+- cam0 position is responsible for chunk load/unload
+
+There are two splitscreens: 0, 1 that attach to the available cams, they have their own render separate from cam
+
+Break on splitscreen type
+mem: 8057D703
+-> 801e4c28 is branch for case 0, should hook splitscreen to cam0
+
+805F0174 || refresh render for current split, can cause artifact tears/noflush by changing from r31 (current split)
+membreak on 8057d70c
+801e4b5c stw r0, 0x006C (puts cam0 into current selected cam)
+-----------
+New attempt:
+8057D700 || SS Type
+
+When SS Type = 1
+8057D704 || Split 1 -> Removing two calls (bl to 80271BA8) unhooks splitscreen from cam
+8057D708 || Split 2 -> Removing one call  (bl to 80271BA8) unhooks splitscreen from cam
+(for split mode)
+
+When SS Type = 2
+8057D704 || Split 1 -> (same as SS=1, but needs to be nop'd separate as this is a unique branch)
+-- one of the bl was already nopped. non-nop was: 801e4d00 to 80271BA8
+                                     shared (already nop) was 801e4b80
+8057D708 || Split 2 -> (same as SS=1)
+
+When SS Type = 0
+8057D704 || Split 1 -> (also calls already nopd)
+            new bl at : 801e4c48, goes to same address
+			
+The above only unhooks splitscreen from existing cam (cam still follows respective players, we don't see it updated on the screens)
+However 80271BA8 function somehow is knowing what cam to hook to, so next search within this func
+
+break 80271BA8
+
+nop at 80271c68 -> seems to move cams back to start? Or split cannot hook to cam
+-> nop at 80487700 causes same behavior, check this one deeper
+80271c64 li r5, 2
+-------
+changing 801634a0 to r5, 1 instead of 0 seems to make _ds1.dat objects not load for p1
+               b4 as well
+
+at 8047f88c			 
+-> is reading cam values!!!! 
+Cam values are changed based on SS Type and SS Split bits!!
+Done for today, but this should be on the right track
+	
