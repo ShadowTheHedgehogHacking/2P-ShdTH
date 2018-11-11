@@ -427,4 +427,16 @@ at 8047f88c
 -> is reading cam values!!!! 
 Cam values are changed based on SS Type and SS Split bits!!
 Done for today, but this should be on the right track
-	
+
+---
+Chaos Control Music Searching
+800a4ebc bl to 8027AB1C, noping this results in blue/red effect going away, no other side effects
+800a4f0c bl to 8007939C, noping this results in no invulnerability while in chaos states
+800a4f80 bl to 800A2854, noping this results in no particle emit for initial activation of chaos state
+800a4fcc bl to 80076CA8, noping this results in no chaos power activation
+                         -> intro sound (RRRRR etc) still plays, music does not
+800a4ff0 bl to 801D3888, noping this results in no introsound, no chaos powers idle music
+ 
+8004ed6c 
+    ed48
+	f470
