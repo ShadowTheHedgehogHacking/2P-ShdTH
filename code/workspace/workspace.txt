@@ -429,6 +429,7 @@ Cam values are changed based on SS Type and SS Split bits!!
 Done for today, but this should be on the right track
 
 ---
+11.10.2018
 Chaos Control Music Searching
 800a4ebc bl to 8027AB1C, noping this results in blue/red effect going away, no other side effects
 800a4f0c bl to 8007939C, noping this results in no invulnerability while in chaos states
@@ -440,3 +441,64 @@ Chaos Control Music Searching
 8004ed6c 
     ed48
 	f470
+-------
+PlayerBasedLoading
+
+14 = RedShadow
+15 = YellowShadow
+16 = PinkGunShadow
+17 = BlueGunShadow
+18 = OrangeLauncherShadow
+19 = GreenLauncherShadow
+
+801770ac lwz r3, 0x013C (r4) , r3 holds P1 selected char
+      b0 r30 holds p2 selected char
+	  
+string for shadow.one : 804f7d40 
+^ deadend, files loaded once at initialize game.
+2P mod appears to reload 2P models but halts on change. Memallocated earlier?
+---
+Checkpoint Hunting
+80575FE4 = X Trans of CP #1
+80117738 = GLTranslateMatrix, noping results in no fadeout, no warp, control lock (due to trigger wait)
+-> 80129628 ^ same as above
+80129de4 -> update player position()?
+---
+11.14.2018
+8047f88c
+---
+11.19.2018
+searching for 2P android weapon mode / ?supershadow weapon mode?
+possible related memaddresses:
+805766F0 | obj data?
+805766F4 || ! -> instruction 801fe898
+805766F8
+and
+80B3AD68
+80B3ADA8
+------------
+abort,
+new strategy:
+load p1 = 15 (yellow)
+-> observe if any calls differ for 17 (bluegun)
+8057D7DC :: readmem
+
+noping results in :
+801770e4 | No player1 spawn. P2 is still spawned. Cam spawns in middle of map and fully renders (cam0) - USE FOR CHUNKS LATER!
+801770f4 | No player2 spawn??
+801770fc | T-pose no control, blinking still occurs  -> try here
+80177100 | ??
+80177108 | ??
+
+-> Allows me to combine 2P Spawn Enabled and 801770f4 to create:
+$Play as Chosen Character in 1P Mode [dreamsyntax] 
+C217707C 00000001
+38800320 00000000
+C21770F4 00000001
+60000000 00000000
+*Select P1's character in 2P VS, back out at P2's selection. P1 will retain the character for use in 1P modes
+
+next step:
+801770fc
+80176f28 | nop -> endless fall no respawn / blackout
+STG504|| EXP
