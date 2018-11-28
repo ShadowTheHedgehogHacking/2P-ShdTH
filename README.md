@@ -31,6 +31,7 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 * Bungees/Pulleys should be doubled in layout (optional, not needed to beat most stages)
 * SuperShadow only activates for P1
 * Level chunks load/unload based on P1 only
+* Player 2 cannot pause/unpause
 
 ## Done so far:
 * Display P2 UI components (Ring count, Ammo count)

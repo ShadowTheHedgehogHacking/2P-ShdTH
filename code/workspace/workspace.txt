@@ -502,3 +502,110 @@ next step:
 801770fc
 80176f28 | nop -> endless fall no respawn / blackout
 STG504|| EXP
+
+
+---
+Super Shadow in devil doom stage no flying
+C227F098 00000001
+2C0002C7 00000000
+
+-------------------------------
+Shadow The Hedgehog US | GC
+```$Play as Chosen Character in 1P Mode v2 [dreamsyntax] 
+C217707C 00000001
+38800320 00000000
+C21770F4 00000001
+60000000 00000000
+C240DB30 00000001
+38000000 00000000
+*Select P1's character in 2P VS, back out at P2's selection. P1 will retain the character for use in 1P modes. No controller needed in slot 2 to choose character.
+```
+From above, 
+8040db30 loads status if controller 2 is in. Set to 0 if plugged in, 1 otherwise.
+Force li r0, 0
+C240DB30 00000001
+38000000 00000000
+----------------------------
+11.21.2018
+Back to 2P stuff
+memaddress:
+8056ed78 || P2 Inputs
+8056ed88 || P2 X-Axis ControlStick
+8056ed8C || P2 Y-Axis ControlStick
+----------
+800a8608 || reads Slot 1 / 2 input for buttons
+
+-> Player 3
+mem 8056eda4 ||P3 Inputs
+2P to 3P offset is 0x2C
+conveniently the lwz checks already are set with offset 0, so:
+lwz r3, 0(r4) -> lwz r5, 2C(r4).... 44(r4) (decimal)
+-> 8064002C
+C20A8608 00000001
+8064002C 00000000
+
+^ affects ALL controllers, need different strategy (oncall?)
+-------------
+11.22.2018
+800a85f4 | lwz r4, 0x0010 (r31)
+
+
+r3 moves to r31, = 80f4c558 when checking 8056ed4c (Player 1 Input Buttons)
+                   812f4130 when checking 8056ed78 (Player 2 Input Buttons)
+target 800a85c4 mr r31, r3
+::
+perform a check if r3 = 80f4c558, continue as normal, else add 0x2C?
+No, this is the input polling not specific to parner object.
+-> search for partner
+8040da78 || ???
+803499c8 || ???
+800a8608 || In-game actions check for button press (all controllers, doesn't affect menus)
+---------------
+8009f76c || noping results in same behavior as 800a8608
+^ bctrl -> 8006f7c0 and 800a19a4
+
+in 800a19a4 -> deeper : 800a1df4 -> nop same behavior
+-> bl to 8009fd64, only caller
+---------
+BP list :
+8009f76c
+800a1d9c
+800a1df4
+--------------
+begin 8009fd64:
+prior to 8009ff58, noping results in no button input
+8009ff58 | ??
+8009ff94 | noping results in short burst chaos control (no checking bar?)
+800a0038 | near box to grab UI indicator check
+800a00ec | noping results in unable to spindash, sort of a super ring-dash
+8009ffe8 | ???
+800a0128 | noping results in spamable slide animation (X button)
+800a0174 | spamable spindash
+800a01ac | ???
+800a0234 | spamable slide animation (B button)
+800a0280 | spamable spin-kick mid air (B button)
+800a02b8 | noping -> A button does nothing (P1 and P2 controls) r3 cycles 801309268 and 80f0bd68
+800a0390 | ??
+800a03c8 | ??
+800a0430 | ??
+800a0680 | ??
+800a0d0c | ??
+800a0ee4 | noping -> X button does nothing
+^useful for dropdash later
+
+new approach:
+mem:805F2B04 partner player to AI timer
+800a19c4 bne (if control 2 input changes, activate AI timer)
+------------
+11.27.2018
+SuperShadow searching part 2
+flying mode:
+8027f0ac bl to 0x80076CA8, common function used in various places
+Try altering r3 and r4 values, maybe call this function myself on button press?
+changing addi r3 168 to 936 -> results in no fly
+                     to 424 -> same as above
+					 revert to 168 -> works 
+					 268 -> no flying
+changing r4 = 37 to 39
+-> Try from P1 Y in glyphic canyon reads, check earlier mem access
+					
