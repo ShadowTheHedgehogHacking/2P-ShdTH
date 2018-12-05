@@ -775,3 +775,47 @@ C22706D4 00000001
 60000000 00000000
 *Disables normal player position update, cam is still tied to player its attached to
 *only updates camera for events based on attached player's position
+
+In search of onHook:
+checking 801ce8f0 (spawn hook to P2)
+
+On revisiting, changing things up:
+for instruction 801ce900:
+nop instead of adding stgid to the stack
+^ confirmed works
+Now I can update camera attach to p2 to be more efficient and remove the two 'camfix' codes
+Old camfix:
+c21ce8f0  00000003
+3b400320  3f008058
+3b18d6a0  935800a8
+3880ffff  00000000
+c21ce8f8  00000002
+93d800a8  80030008
+60000000  00000000
+becomes:
+C21CE900 00000001
+60000000 00000000
+-------------
+Searching within 2nd func for attach cam:
+Copy over:
+addi r3, sp, 8
+stwu sp, -0x0010(sp)
+mflr r0
+stw r0, 0x0014(sp)
+stw r31, 0x000C(sp)
+mr r31, r3
+addi r3,r4,4
+mr r4,r5
+
+C200D284 00000005
+38610008 9421FFF0
+7C0802A6 90010014
+93E1000C 7C7F1B78
+38640004 7CA42B78
+60000000 00000000
+
+overwrite actual call 8000d288
+--
+checking stuff after:
+801ce98c || same 'bingo highway' issue
+801ce99c || blt+ (loop for cams)
