@@ -650,3 +650,128 @@ D0030000 C0040008
 D0230004 D0030008
 60000000 00000000
 ^ working to change write to direction
+12.1.2018
+(confirmed direction type and relation to 3 set floats r3, r3+0x4, r3+0x8
+reads of floats:
+8034df98
+801d55f8
+80169cbc
+8040c154
+80169cbc < loop
+80163388
+800b617c
+800a41f8
+800a3bd4
+8033e57c
+800091d0
+800a3c8c
+
+---
+gravity testing (see gravity folder for images)
+Switcher's state:
+0: down(facing behind)
+1: up(facing forward)
+2: left(facing behind)
+3: right(facing behind)
+4: forward(facing down)
+5: backward(facing up)
+
+
+Level begins with value 0
+Switcher#  : State  | store that modifies
+1 : 2 | store1
+2 : 1 | store2
+3 : 0 |  ???? (no change) -> probably because it sets gravity to default game (down)
+4 : 3 | store1
+5 : 5 | store3
+6: 4 | store3
+7: 1 | store2
+8: 2 | store1
+
+floats of interest:
+store1 8060B3F0
+store2 8060B3F4
+store3 8060B3F8
+
+break at instruction 80293964 for future testing
+---------------
+12.4.2018
+Attempting to hook cam1 to partner // chunks research ::
+break at 801d077c let next function run, break at 801d0784
+p1/p2 no change:
+before:
+r0: 8004ed64
+r3: 80b48690
+after:
+r0: 801d0784
+r3: 8056ee14
+----------------
+targeting 0788 instead
+-> in function
+take the bne+ to d19c (same func)
+d1a8 never seems to jump (level specific?)
+d1b0:
+
+CameraBigUpdater:
+80270618 -> calls a lot of functions (master cam update?)
+nop to determine:
+638 -> ???
+640 -> ???
+64c -> halt
+660 -> halt
+66c -> halt
+678 -> (noping results in many issues, crashes too) controls CC camera event/partners/spawn/flyables
+6b0 -> snaps camera in certain areas (glyphic canyon start down slope)
+6b4 -> triggers on pause (halt if removed)
+6bc -> halt
+6c4 -> ???
+6d4 -> stops following player position (events only), doesnt detach
+6e4 -> ???
+6f4 -> halt
+700 -> halt on event trigger
+70c -> ???
+72c -> halt
+bctrl at 80270748 (not checked)
+754 -> ???
+760 -> ???
+770 -> freezes game when C stick is moved, but not halt (restoring instruction resumes game)
+77c -> render()? freeze (not halt) same as above, but no C-stick input
+7a8 -> breaks cams (red/fogbg color on change (event, cc, cb))
+7b4 -> unhooks cam from player on first event
+7c4 -> unhooks cam from player on C-stick
+7dc -> ???
+7e4 -> ??? (something with event, trigger on chaos blast? / certain triggers only?)
+7f4 -> ???
+800 -> don't update cam position at all
+818 -> ???
+824 -> don't render? (fog bg color)
+830 -> detach splits from cams
+83c -> ???
+848 -> ???
+854 -> ???
+860 -> ???
+870 -> ???
+87c -> ???
+884 -> ???
+89c -> ???
+8b0 -> halt on chaos control -> touch event
+8bc -> ???
+8d0 -> ???
+8dc -> ???
+8e8 -> camera warps somewhere for a moment on ?event end?
+8f4 -> ???
+900 -> no ccg/cb event cameras / camera warp issue on checkpoint (bingo highway)
+---
+Disable Cinematic CameraEvents (broken / bad)
+C2270678 00000001
+60000000 00000000
+*Disables ChaosBlast/Control, Partner Events, Flyables
+-> need to edit the function instead of NOPing it
+-> affecting hook altogether on level start in some cases
+
+---
+$Camera Updates for Events Only [dreamsyntax]
+C22706D4 00000001
+60000000 00000000
+*Disables normal player position update, cam is still tied to player its attached to
+*only updates camera for events based on attached player's position
