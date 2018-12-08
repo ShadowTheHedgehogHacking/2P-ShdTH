@@ -819,3 +819,103 @@ overwrite actual call 8000d288
 checking stuff after:
 801ce98c || same 'bingo highway' issue
 801ce99c || blt+ (loop for cams)
+-----------
+12.7.2018
+Camera initialize 
+80178384
+
+FOV crunch/blurr speed effect are done to the splits not the cams (makes sense)
+health and lock on counters are drawn on splits not cams
+
+r30 controls how many to loop cam hooks
+80178XXX
+388 | ???
+390 | Texture Lighting?
+394 | halt 
+398 | ???
+39c | ???
+3a0 | ???
+3a4 | Initialize pause menu UI
+3a8 | ???
+3b0 | ???
+3b8 | ???
+3c4 | halt
+3d0 | ???
+3d8 | halt
+3e4 | halt
+3f8 | return to menu after "quit"
+408 | ???
+414 | ???
+420 | ???
+42c | endless load (remove correct data?)
+434 | ???
+454 | ???
+--------
+Nothing of interest
+Stepping out to the call from 801786d4
+------
+Back inside hookCamToPlayerLoop:
+on loop of blt+ at
+801ce99c
+jump to 801ce960
+:
+calls same param to function 0x03A0330
+calls 801C97A8 at 801ce978 with param of current i in loop
+-------
+Within 801c97a8::
+nop 801c97c0 -> no cam attach (setting xyz values of cam?)
+d4 -> halt
+e4 -> halt
+0c -> halt
+18 -> halt
+2c -> halt
+44 -> ???
+4c -> halt
+54 -> Break C-Stick Camera Control
+60 -> Event cam issues
+70 -> ???
+90 -> halt on event trigger
+9c -> ???
+---------
+Exploring 801c97c0:
+nop first iteration, let run 2nd iteration::
+causes no p1 attach, p2 attach::
+this is the function!
+swap params as test
+------
+801ce970 to call 978::
+r3,r4,r5
+813216a0
+81321748
+00000000
+
+81321668
+81321748
+00000001
+-- attempt 2:
+809dc8c0
+809dc818
+0
+
+809dc8f8
+809dc818
+1
+
+args of interest:
+r3 and r5
+is r3 offset constant YES... except sign may be flipped -0x38 or + 0x38:
+1st try : 0x38
+2nd try : 0x38
+          
+3rd:
+80f6dff8
+80f6dfc0
+
+4th:
+80b43d10
+80b43d48
+
+80b454e8
+.......
+dead end, function not doing what I thought, only seems to move the 'point' the camera interacts with
+-------------------

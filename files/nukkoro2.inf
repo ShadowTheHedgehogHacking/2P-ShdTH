@@ -1,5 +1,5 @@
 #ステージパラメータ
-#2P spawn positions 11.29.2018
+#2P spawn positions 12.08.2018
 #Game interprets P2 xpos spawn as xpos+-5 or xpos+-10 until Pause->Restart
 
 [Practice]
@@ -54,7 +54,7 @@ MISSIONCOUNT_H : 60 0
 #Lethal Highway
 #PLAYER : 0 7448 -1639 -12425 0 0 0
 PLAYER : 0 0 58 550 0 0 0
-PLAYER : 1 0 69 550 0 0 0
+PLAYER : 1 0 71 550 0 0 0
 STARTSPD : 0 100 0 0
 GOALEVENTPOS_H : 25316 -7189 -3589
 GOALEVENTPOS_D : 28680 -7700 -360
@@ -92,7 +92,7 @@ MISSIONCOUNT_H : 5 0
 
 [Circus]
 #Circus Park
-PLAYER : 1 0 20 0 0 0 0
+PLAYER : 1 0 22 0 0 0 0
 MIPMAPK : -70
 GOALEVENTPOS_N : -13740 -10684 -20073
 GOALEVENTPOS_H : -5998 -6446 -19425
