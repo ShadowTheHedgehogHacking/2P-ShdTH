@@ -919,3 +919,57 @@ is r3 offset constant YES... except sign may be flipped -0x38 or + 0x38:
 .......
 dead end, function not doing what I thought, only seems to move the 'point' the camera interacts with
 -------------------
+12.8.2018
+checking from layout obj render fix
+800cb5e4 (onload)
+if 2p:
+bl 80009548
+r4 = 0
+bl 80010244 | for p1
+mr r31, r3
+bl 80009548
+r4 = 1
+bl 80010244 | for p2
+mr r0, r3
+lwz  r3, 0 (r30)
+mr r5, r0
+mr r4, r31
+bl 800CA644
+jump to 800cb640
+----
+if 1p:
+r4 = 0
+bl 80010244 | count 3
+mr r0, r3
+lwz r3, 0 (r30)
+mr r4, r0
+bl 800CA820
+(shared path resumes)
+
+800cb3c8 (nop to remove set objects call)
+800cb3c0
+exiting out to 8004ed60
+----
+8004ecdc interesting behavior? Pre-load??
+---------
+12.9.2018
+8004ec68::
+random checks
+804628f8
+nop 804628fc
+-----
+801cf9dc | halt
+801cf9e4 | cam pop-in/out
+801cf9f8 | controlling camera zoom occasionally
+---------
+break mem for read cam X | 801cf9f8
+write from : 807d77f8 to camX
+(reading this)->
+blank screen || 801c1190 [called by 8000e940] -> [called by 802706d4] -> [called by 8000d1b0] -> called by [801d0788] -> [called by 8004ed60 and 6c SETObjectLoad]
+ || 801c7b64 [called by 801c70f4] -> [called by 801c1220]
+801c7b8c [called by 801c70f4] -> [called by 801c1220]
+802708e8
+(the above is continuous checking)
+
+801c4200 (only one caller, 801c41b0)
+801c412c
