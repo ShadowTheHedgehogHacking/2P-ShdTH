@@ -1006,5 +1006,12 @@ deeper into 800ad2b4:
 FOUND
 800adfbc (call to 80077304)
 80077328 bl to 80079F04 (has r0 and r5 set to ShadowChar)
+--- 80074314 also calls to 80079F04
+80079fd8 (store value of player to mem)
+-> not constant, changes
+readmem:
+8007a174
+8008769c
+80078c5c
 
-
+015 until 3rd cycle -> results in backwards shooting blueandroid
