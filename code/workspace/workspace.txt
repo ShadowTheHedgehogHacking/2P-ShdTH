@@ -962,6 +962,7 @@ nop 804628fc
 801cf9e4 | cam pop-in/out
 801cf9f8 | controlling camera zoom occasionally
 ---------
+12.17
 break mem for read cam X | 801cf9f8
 write from : 807d77f8 to camX
 (reading this)->
@@ -973,3 +974,37 @@ blank screen || 801c1190 [called by 8000e940] -> [called by 802706d4] -> [called
 
 801c4200 (only one caller, 801c41b0)
 801c412c
+-------
+12.18
+Android players weapon searching
+801770e4 || r3 is argument of which character model (and others) to load in
+e = Normal Shadow 
+f = Yellow Android Shadow
+11 = BlueGun Android Shadow
+etc
+8017709c handles the standard 1P mode spawn call
+800ad2f4 | noping results in no controls on player (menus work)
+800ad300 | noping results in T-pose no animation in ground
+--
+other calls do not seem related to weapon mode
+deeper into 800ad2b4:
+800ae034 (changing this seems to change both player type and weapon)
+800adfbc bl to 0x80077304 (load model?)
+
+801e256c calls 800ad3a8 too
+----------------
+801770e4 | leave as RedShadow
+800adfd0 | change to BlueGun
+800ad3bc | leave as BlueGun
+800ad3e0 | leave as BlueGun
+-> results in RedShadow, no gun
+(confirmed)
+801770e4 | BlueGun
+800ae034 | OrangeCannon
+-> results in OrangeCannon
+::
+FOUND
+800adfbc (call to 80077304)
+80077328 bl to 80079F04 (has r0 and r5 set to ShadowChar)
+
+
