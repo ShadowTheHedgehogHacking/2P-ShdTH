@@ -1,0 +1,179 @@
+Current development codelist :: 12.27.2018
+
+$1.5P Z+Dpad-R to activate (SplitCam only)[dreamsyntax]
+2856ED4E 000000100
+0457d703 00000000
+E2000001 80008000
+2856ED4E 00000080
+0457d703 00000000
+E2000001 80008000
+2856ED4E 00000220
+0457d703 00000002
+E2000001 80008000
+$Widescreen Hack v2 [LimblessVector]
+0458412c 3f9f7cee
+*Used for cutscenes, character intros
+$2P Essentials SplitScreen Widescreen Hack [dreamsyntax]
+045841BC 3F9F7CEE
+045841EC 3F9F7CEE
+0458415C 3F1F7CEE
+0458418C 3F1F7CEE
+*Used for 2P Vertical and 2P Horizontal aspect adjustment
+$2P Essentials AttachCamera to P2 V2 [dreamsyntax]
+c21ce900 00000001
+60000000 00000000
+$2P Essentials Spawn P2 [dreamsyntax]
+c217707c 00000001
+38800320 00000000
+$2P Essentials Spawn Special Cases [dreamsyntax]
+c21a206c 00000001
+38000320 00000000
+$2P Essentials in 1P (H Splitscreen, cam set to 2P permanently) [dreamsyntax]
+0457D70B 00000001
+0457D703 00000002
+$2P Essentials in 1P (H Splitscreen, cam set to 2P dynamicly) [dreamsyntax]
+0457D70B 00000001
+2857D768 00000001
+0457D703 00000000
+E2000001 80008000
+2857D768 00000000
+0457D703 00000002
+E2000001 80008000
+$2P Essentials in 1P (V Splitscreen, cam set to 2P permanently) [dreamsyntax]
+0457D70B 00000001
+0457D703 00000001
+$2P Essentials SETObject Fix [dreamsyntax]
+c20cb5e4 00000001
+38000001 00000000
+c2169c08 00000001
+38000001 00000000
+$2P Essentials Fix P2 Sound Listener [dreamsyntax]
+c21d9990 00000001
+38000001 00000000
+$2P Essentials Chaos Power Half Idle Drain Speed [dreamsyntax]
+c216f0d4 00000002
+2c050000 38a5000c
+60000000 00000000
+$2P Essentials UI for 1P Modes [dreamsyntax]
+c21ffe0c 00000001
+60000000 00000000
+c21fec40 00000001
+60000000 00000000
+c21ff65c 00000001
+60000000 00000000
+c2201f18 00000001
+60000000 00000000
+c2200764 00000001
+60000000 00000000
+c2201358 00000001
+60000000 00000000
+c21fe99c 00000001
+60000000 00000000
+$2P Essentials SplitScreen Cam Set to P2 [dreamsyntax]
+0457d70b 00000001
+$2P Essentials ChaosPowers Activation for P2 [dreamsyntax]
+c216f160 00000001
+60000000 00000000
+*Remove underflow/overflow check on ChaosPowers points.
+*Side effects:
+*(1) causes points to underflow up to ~-2000,
+*so roughly 1-2 extra normal sized enemies needed per activation in the worst case.
+*(2) Chaos points can stack (greater than 30000), no negative result of this.
+$2P Optionals No ChaosPowers Glow [dreamsyntax]
+c20a4ebc 00000001
+60000000 00000000
+$2P Optionals No Idle ChaosPowers Music [dreamsyntax]
+c20a4ff0 00000001
+60000000 00000000
+$SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
+c217711c 00000001
+60000000 00000000
+C60AF2E4 800AF3BC
+$Fill Dark Meter with Z + L [Zzetti]
+2856ed4e 00001020
+045766d4 00007724
+e2000001 80008000
+*Modified for both players 30000 -> 30500
+$Fill Hero Meter with Z + R [Zzetti]
+2856ed4e 00002020
+045766c8 00007724
+e2000001 80008000
+*Modified for both players 30000 -> 30500
+$Fill Dark Meter Z + L - P2 Remote [dreamsyntax]
+2856ed7A 00001020
+045766d4 00007724
+e2000001 80008000
+*Minor change from Zzetti's
+$Fill Hero Meter with Z + R - P2 Remote [dreamsyntax]
+2856ed7A 00002020
+045766c8 00007724
+e2000001 80008000
+*Minor change from Zzetti's
+$2P Essentials in 1P (V Splitscreen V2) [dreamsyntax]
+2a57d768 00000001
+0457d703 00000001
+e2000000 80008000
+2a57d768 00000000
+0457d703 00000000
+e2000000 80008000
+*Only use one of the SplitScreen codes! V has better performance over H
+*Bug: This code must be the last activated code in the list
+$2P Essentials in 1P (H Splitscreen V2) [dreamsyntax]
+2a57d768 00000001
+0457d703 00000002
+e2000000 80008000
+2a57d768 00000000
+0457d703 00000000
+e2000000 80008000
+*Only use one of the SplitScreen codes! V has better performance over H
+*Bug: This code must be the last activated code in the list
+$Play as BATTLE Characters in 1P Mode v2 [dreamsyntax]
+c217707c 00000001
+38800320 00000000
+c21770f4 00000001
+60000000 00000000
+c240db30 00000001
+38000000 00000000
+*Select P1's character in 2P GAME (BATTLE), back out to main menu at P2's turn to select. 
+*P1 will retain the character for use in 1P modes. 
+*No controller needed in slot 2 to choose character for P1.
+*
+*Bug:
+*Android characters will not work for Last Story's Devil Doom (crash).
+$DD No Flying
+C227F098 00000001
+2C0002C7 00000000
+$Enter Stage 0 with Z + Dpad Right
+2856ed4e 000000a0
+0457d748 00000000
+e2000001 80008000
+$NoFadeScreenDEBUGGING [Muzzarino]
+040448A0 4E800020
+$GravitySwitchHook [dreamsyntax]
+C2293964 00000004
+C0040000 C0240004
+D0030000 C0040008
+D0230004 D0030008
+60000000 00000000
+$Unlimited Spindash [dreamsyntax]
+c20a0174 00000001
+60000000 00000000
+$No Bloom
+f6000001 80008180
+4bffe6f9 807f00dc
+14000000 60000000
+e0000000 80008000
+*Required if using Vulkan Graphics backend for 2P Mod (crash if bloom is on)
+$No Partner Zoom [LimblessVector]
+0457d778 00000001
+0457d77c 00000001
+0457d780 00000001
+0457d784 00000001
+0457d788 00000001
+0457d78c 00000001
+0457d790 00000001
+0457d794 00000001
+0457d798 00000001
+0457d79c 00000001
+0457d7a0 00000001
+0457d7a4 00000001

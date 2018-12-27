@@ -19,18 +19,19 @@ Make sure P2 is standing on a platform before P1 goes in a Warphole.
 If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
 
 
-## Problems
-* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Temp Solution is Chaos Blast
-* Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
+## Problems (High Priority)
+* Level chunks load/unload based on P1 only
 * Checkpoint Warping/Backtracking only moves P1
+* Gravity switches on Space Gadget only alter P1's gravity
+* Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
+
+## Problems (Low Priority)
+* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Temp Solution is Chaos Blast
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
-* Gravity switches on Space Gadget only alter P1's gravity
 * Chaos control will leave other player behind; if P2 activates P1's camera is altered*
-* Bungees/Pulleys should be doubled in layout (optional, not needed to beat most stages)
 * SuperShadow only activates for P1
-* Level chunks load/unload based on P1 only
 * Player 2 cannot pause/unpause
 
 ## Done so far:
@@ -42,11 +43,11 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 * nukkoro2.inf spawn positions for every level
 * P2 sound listener fixed (related to GameMode byte)
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
-* Warphole object leaves other player behind (add safe platforms, will be solved when chunks load for P2)
+* Warphole object leaves other player behind (added safe platforms, will be solved when chunks load for P2)
 
-## Problems (Not sure if will fix)
-* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5.
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) only spawn if P1 sees them first (or is in-range). (Side effect of current layout objects load patch)
+## Known Issues (Not planned to be fixed)
+* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) only spawn if P1 sees them first (or is in-range). Side effect of current layout objects load patch.
 * Culling issue on Final Haunt for P2's screen when near force-fields
 
 ## Credits

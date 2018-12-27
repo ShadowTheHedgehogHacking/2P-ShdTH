@@ -1015,3 +1015,33 @@ readmem:
 80078c5c
 
 015 until 3rd cycle -> results in backwards shooting blueandroid
+--------------
+12.26.2018
+Menu:
+func of interest: 802bdb18
+store menu move and compare at 802bdce4
+^ jump to next image 3-5 etc
+-----
+AndroidWeapon New Attempt:
+break on memread of select,
+main compare is done:
+801770ac 
+->
+stepping through (no result, 800adfd0 only option)
+possible target:
+8027a998 (rlwinm with r3, where r3 is SelChar)
+8027aa84 (rlwinm with r4, where r4 is SelChar)
+-------------
+12.27.2018
+remove chaospowers glow:
+C20A4EBC 00000001
+60000000 00000000
+
+ChaosPowers writes:
+8016f154
+8016f160
+->
+Remove limiter caps (lower and upper) -> allows for P2 to get powers without activator holding
+C216F160 00000001
+60000000 00000000
+

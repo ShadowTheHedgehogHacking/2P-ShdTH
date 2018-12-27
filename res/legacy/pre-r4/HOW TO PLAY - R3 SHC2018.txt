@@ -1,10 +1,8 @@
-﻿===Release (unreleased wip 12.27.2018)===
+﻿===Release 3 (SHC2018 Final Build)===
 
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
-To play this mod, you must:
-(1) copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
-(2) enable Gecko codes and use provided GCT (Wii/Nintendont) or game config .ini (Dolphin)
+To play this mod, you must copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
 
 === Extracting and Rebuilding ISO with Modification ===
     Open gcr.exe (GameCube Rebuilder)
@@ -40,19 +38,19 @@ To play this mod, you must:
     Copy 'saves' folder to root of USB or SD (same one where game is)
     Nintendont should be configured as follows for the best experience:
         Cheats ON
+        Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
         Force Widescreen OFF (ensure its not ON!) 
         Unlock Read Speed ON
 		
-    Optional:
-       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
-	Force Progressive ON (prevents video mode change at start, use if you are on component/hdmi)
+		Optional:
+		Force Progressive ON (prevents video mode change at start, use if you are on component/hdmi)
         Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
 
 === Dolphin Setup ===
 The easiest way to do this is with the packaged PreConfigured-Dolphin
 
 Clockspeed is set to 165% by default. Performance varies widely by system
-If performance is bad dial clockspeed back to 100%, then slowly raising it (see "For performance issues" below)
+If performance is bad dial clockspeed back to 100%, then slowly raising it.
 Some testers reported 100% worked best for them, others 120%, with the majority being 165%
 
     Open Dolphin
@@ -63,7 +61,7 @@ Some testers reported 100% worked best for them, others 120%, with the majority 
     Configure Controllers
     Play!
 
-For performance issues adjust clockspeed while running the game (Dolphin has a bug with this where your change may not save on restart. Try checking the clockspeed adjustment setting on/off twice):
+For performance issues Adjust Clockspeed while running the game (may not save on restart, to save check setting on/off twice):
     Select Config
     Select Advanced Tab
     Adjust CPU Clock Override slider
