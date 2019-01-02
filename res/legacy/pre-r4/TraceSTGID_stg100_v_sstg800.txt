@@ -1,0 +1,71 @@
+Trace on Westopolis SP:
+[breakpoint]
+-> enter bl
+-> rlwinm runs at 00000574, bne- takes bne, jumps to 0x...588
+does 3 instructions, returns to 80375af0
+-> unavoidable b to 803757AC from 80375b3c
+-> beq- DOES NOT jump from 803757d8 to 803757F0, goes to dc
+- bne- 803757ec to 0x803757F8, takes the jump
+-> beq- 80375804 to ..5864 TAKES the jump
+-> beq- from 8037586c to 0x803758AC TAKES jump
+3758b4 beq- to 803758d0 TAKES the jump, avoid oris r0 r0 0080
+-> beq 303758d8 to 37597C TAKES JUMP
+compares r3 to 0
+-> takes the jump from 375984 to 37598C takes the jump, skipping ori with r0 r0 0020
+375994 to 37599C takes jump
+takes jump
+doesnt take jump from 803759b4 to 803759BC
+oris r0 r0 with 0x2000
+takes jump
+takes jump
+takes jump
+takes jump
+doesn't take jump from 375a04 to 0x80375A0C
+ori with r0 r0 0x4000
+jump from 375a14 to 375a1C takes
+jump 80375a34 to 80375acc DOESNT TAKE
+takes b to b that is next line (strange)
+takes b to lwz which is next line
+beq 80375a58 to 375a68 Takes jump (avoids a b)*** avoided b is 80375a64 leads to 80375a70
+takes 80375a6c b to 80375a4c instead of avoided b
+beq- 80375a58 to 0x80375A68 takes, avoids b again (missed inst cntlzw r0 r0 and extsh r29 r0 at 80375a5c
+takes 80375a6c b to 80375a4c
+takes previous beq again
+b to loop again
+b loop again
+b loop again
+beq at 80375a58 to 80375a68 finally not taken, cntlzw and then 
+b from 80375a64 to 80375a70 taken
+80375a80 beq- to 80375acc NOT taken
+375a88 ble- NOT taken to 80375aa4 
+80375a90 bl to 803787E0 (OS get time) -> return from that
+bl to 80377684
+
+---------
+SKIP ALL fucking OS functions,
+finallyget to 
+80375ac8 bl to 80371E20
+ble- takes (skipping a bge)
+beq to e70, doesnt take
+forced b to 80371e74
+returns
+now in 0000050c land
+bne 00574 to 588 TAKEN
+rfi's to external interrupt handler
+OS shit, 
+TAKES 803757ec bne- to 803757F8 to avoid taking 803757f4 which is bl to 80371E20 (zz_80371e20)
+zz_804939dc is called
+beq- at 493a08 to 493AA0 TAKEN
+zz_80371e20 is taken again
+ble- to 80371E48 is taken
+beq- 80371E70 is not taken
+forced b from 80371e6c to 80371e74
+bl 802038d4 to 80176C04 which is zz_80176c04
+beqlr not taken
+bdnz 80176c30 to 80176c1c taken 4 times until beqlr taken to zz_802038b4
+takes bne- to 800B74C8
+takes bne- at 802038f4 to 0x80203908
+takes bne- from 80178680 to 8017868C
+return
+doesnt take bne at 80178918
+takes beq- at 80178920 to 80178930

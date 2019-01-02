@@ -1044,4 +1044,40 @@ ChaosPowers writes:
 Remove limiter caps (lower and upper) -> allows for P2 to get powers without activator holding
 C216F160 00000001
 60000000 00000000
+-----
+Checkpoint Hunting
+80117690 r4 is checkpoint to jump to (if not chosen value is not active, warps to nukkoro2.inf spawn)
+----
+12.30.2018
+Chunk Hunting
+only place that writes to "RO Cam0 X (turns out its not Cam0...)
+802708e8 is call to -> 800091d8 (write)
+800b4a10 | (inside has multifunc call, writes mem of 8132A13C (suspected v-jump but not actually v-jump) - nop results in hands separate position - all damage based on hands
+8040cd74 | readmem of 80F047A0 (possible cam0 X?) || promising (check back for zz__** list near NSNMessengerScene
+			->
+			different reads:
+			8040cff8
+			8040cd74
+			800091d0
+			8040cd78
+Approach::playerstate
+found at 8132A46C
+800b5268 (write)
+------
+Pos sub dynamic struct is being written:
+80093a6c (working with Donut, not logged)
+------
+SuperShadow searching:
+in common bl with rlwinms, at stwx, check what writes there:
+write breakmem
+813084e0
+writer: 8040c158
 
+-----
+2856ed4e 00003020
+02F69482 0000004C
+e2000000 80008000
+CC000000 00000000
+
+
+02F69482 0000004C
