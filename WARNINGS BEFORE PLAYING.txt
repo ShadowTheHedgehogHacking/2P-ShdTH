@@ -1,9 +1,7 @@
 - Air-vents/Air Blower bug - either player may get stuck in the animation.
      Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
-- Chunks are based on P1 only - stay near each other
 - Checkpoint backtracking does not work
 - For flying sections, P2 must mount first
-- For Warpholes, follow Warp Warning
 - Some vehicles and turrets mess up the camera of P1 if P2 uses it
 - Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator
      If you decide to use Chaos Control (or have to, like in The Last Way), first press Z+R to activate chaos control state for P1 and P2.

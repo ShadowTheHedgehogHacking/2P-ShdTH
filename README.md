@@ -9,24 +9,13 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Warp Warning
-Platforms have been added to the entrance and exit of Warpholes.
-
-
-Make sure P2 is standing on a platform before P1 goes in a Warphole. 
-
-
-If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole exit until P1 also jumps into the Warphole.
-
-
 ## Problems (High Priority)
-* Level chunks load/unload based on P1 only
 * Checkpoint Warping/Backtracking only moves P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 
 ## Problems (Low Priority)
-* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Temp Solution is Chaos Blast
+* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
@@ -36,6 +25,7 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 
 ## Done so far:
 * Display P2 UI components (Ring count, Ammo count)
+* Level chunks load/unload based on both players (early version working, needs further verification)
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
 * Layout objects load when P2 is within render distance
@@ -51,6 +41,7 @@ If P2 jumps into a Warphole first instead of P1, P2 must wait at the Warphole ex
 * Culling issue on Final Haunt for P2's screen when near force-fields
 
 ## Credits
+* DonutStopGaming for major contributions to chunks and other address discoveries
 * Includes `True Black Shadow` by TheHatedGravity
 * Includes `Rouge over YellowAndroidShadow` by Shadowth117
 * SinglePlayer Widescreen Hack by LimblessVector

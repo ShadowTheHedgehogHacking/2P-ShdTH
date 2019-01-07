@@ -1,4 +1,4 @@
-﻿===Release (unreleased wip 12.27.2018)===
+﻿===Release (unreleased wip 01.06.2018)===
 
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 

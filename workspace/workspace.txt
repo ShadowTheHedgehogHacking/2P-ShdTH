@@ -1081,3 +1081,249 @@ CC000000 00000000
 
 
 02F69482 0000004C
+---------------------
+1.6.2019
+Chunks | Actual progress (DonutStopGaming found:)
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+^ Copy player/cam0 position and are checked against chunks
+-----
+Values that read X
+called by a lot unless *
+8040ce08 | 50000 occurances
+8040cd74
+8040cd78
+800091d0
+8003a57c ** (two)
+8000a704 *
+8040cf98
+800091ec
+
+-> progress!
+8003a588 nop -> geo does not load
+callers to 8003a57c (chunk check):
+8003a958 (main render load/unload?)
+8003a3ec | unknown (no visisble effect, triggers on other type of boundry?) || check later for is ?VehicleCam0 Check?
+------------
+checking 8003a550 (full)
+8003a56c bne | (no change)
+8003a570 | halt
+8003a578 | no next geo/collision loads in
+8003a588 bge | immediately unloads geo + no next collision/geo 
+
+---
+X: 807D77E0
+Y: 807D77E4
+Z: 807D77E8
+Donut values found:
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+difference is 130h
+===
+
+807D79A8 (cam1 X RO) (might be wrong one)
+807D7990 (cam1 X RO) : has with offset 130h
+---
+
+Confirm!
+807D7860 || Cam1X equivalent for Donut's values
+807D76B0
+1B0h
+
+-> add 1B0h to all grabs of P1 positions as test
+(assume access of r3 only): occurs 8003a57c, 8003a5ac, 8003a5dc
+result:
+*expected to fail, something with r6 is also checking with offset 0x00,0x04,0x08
+didn't fail. r6 has to do with 8003a3ec call to func
+
+next step
+OR compare for both player situation:
+8003a57c
+
+p1 not in chunk but p2 in chunk case:
+8003a58c -> replaced with
+lfs f1, 1B0h (r3)
+fcmpo cr0, f1, f0
+bge 8003A594
+
+[gecko]
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+bge- 0x0C
+li r3, 0
+nop
+C203A58C 00000003
+C02301B0 FC010040
+4080000C 38600000
+60000000 00000000
+
+Then branch at nop
+C6002610 8003a6a0 (verify later)
+
+remove original b
+C203A590 00000001
+60000000 00000000
+
+
+-> (X axis check)
+c203a58c 00000003
+c02301b0 fc010040
+4080000c 38600000
+60000000 00000000
+c6002610 8003a6a0
+c203a590 00000001
+60000000 00000000
+
+Y Axis (overwrite li at 8003a5bc):
+lfs f1, 0x1B4(r3)
+fcmpo cr0, f1, f0
+bge- 0x0C
+li r3, 0
+nop
+
+C203A5BC 00000003
+C02301B4 FC010040
+4080000C 38600000
+60000000 00000000
+
+
+Then branch at nop
+C6002648 8003a6a0 (verify later)
+
+remove original b
+C203A5C0 00000001
+60000000 00000000
+
+-> Y
+C203A5BC 00000003
+C02301B4 FC010040
+4080000C 38600000
+60000000 00000000
+C6002648 8003a6a0
+C203A5C0 00000001
+60000000 00000000
+
+Z Axis (overwrite li at 8003a5ec):
+lfs f1, 0x1B8(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bge- 0x0C
+li r3, 0
+nop
+
+C203A5EC 00000003
+C02301B8 FC010040
+4080000C 38600000
+60000000 00000000
+
+Then branch at nop
+C6002680 8003a6a0 (verify later)
+
+remove original b
+C203A5F0 00000001
+60000000 00000000
+-> Z
+C203A5EC 00000003
+C02301B8 FC010040
+4080000C 38600000
+60000000 00000000
+C6002680 8003a6a0
+C203A5F0 00000001
+60000000 00000000
+
+----
+CROR must be considered, no offset change but both values should be checked against value.
+Attempted implementation fails because:
+P2 lfs f1 (take P2 cam pos) overwrites f1 w P0 pos -> fcmpo before cror
+
+add cror to all 2p cases:
+(Z axis) 8003a5ec
+lfs f1, 0x1B8(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bge- 0x0C
+li r3, 0
+nop
+| Then branch at nop C6002680 8003a6a0 (changed per code list change)
+C203A5EC 00000004
+C02301B8 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002694 8003a6a0 ***** (change warning)
+C203A5F0 00000001
+60000000 00000000
+
+
+Y axis update
+C203A5BC 00000004
+C02301B4 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002654 8003a6a0
+C203A5C0 00000001
+60000000 00000000
+
+X axis update
+C203A58C 00000004
+C02301B0 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002614 8003a6a0
+C203A590 00000001
+60000000 00000000
+
+----------
+Testing without cror in X Y Z check change::
+add catch for bne- (equal case) and check against p2
+
+Only case this will be reached is if P2 has not been loaded, so copy P2 position:
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x0C
+li r3, 0
+nop
+
+(X): (li r3, 0) and jump to return @ A6A0
+8003a5a4
+------------- injected to 800026bc
+C203A5A4 00000004
+C02301B0 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C60026bc 8003a6a0
+C203A5A8 00000001
+60000000 00000000
+-------------
+(Y):
+8003a5d4
+-------------
+C203A5D4 00000004
+C02301B4 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C60026fc 8003a6a0
+C203A5D8 00000001
+60000000 00000000
+-------------
+(Z):
+8003a604
+-------------
+C203A604 00000004
+C02301B8 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C600273C 8003a6a0
+C603A608 8003a69c
+special case for Z: at 277
+-------------
+
+WORKS! (initial test time)
