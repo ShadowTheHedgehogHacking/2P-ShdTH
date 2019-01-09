@@ -10,6 +10,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Problems (High Priority)
+* Crashing with SET objects if P2/P1 are far apart (now an issue due to chunks being implemented)
+** Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first. May be related to above issue.
+* On P2 CC/CB activation P1's camera is altered and unloads P1's chunk
 * Checkpoint Warping/Backtracking only moves P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
@@ -19,26 +22,34 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
-* Chaos control will leave other player behind; if P2 activates P1's camera is altered*
 * SuperShadow only activates for P1
 * Player 2 cannot pause/unpause
+* Pausing/Unpausing causes SplitScreen to flash back to single screen for a frame
+* Vehicles will disappear on P2 dismount if P1 is not nearby
+* DropShips/EnemySpawners are broken
 
 ## Done so far:
-* Display P2 UI components (Ring count, Ammo count)
-* Level chunks load/unload based on both players (early version working, needs further verification)
+* P2 UI
+* Level chunks load/unload based on both players
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
-* Layout objects load when P2 is within render distance
+* SET objects load/unload based on both players
 * Carry over VS mode selected characters into CO-OP mode
+* ChaosPowers activate for both players
 * nukkoro2.inf spawn positions for every level
-* P2 sound listener fixed (related to GameMode byte)
+* P2 Sound Listener
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
-* Warphole object leaves other player behind (added safe platforms, will be solved when chunks load for P2)
 
 ## Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) only spawn if P1 sees them first (or is in-range). Side effect of current layout objects load patch.
 * Culling issue on Final Haunt for P2's screen when near force-fields
+
+## Bonus Roadmap
+* Individual death-to-checkpoint / Don't reload level for both players
+* E3 Race Mode - Hero vs Dark objective race (only some stages)
+* FriendlyFire Enable/Disable
+** WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Individual Chaos Powers points/activation
 
 ## Credits
 * DonutStopGaming for major contributions to chunks and other address discoveries
@@ -47,9 +58,11 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * SinglePlayer Widescreen Hack by LimblessVector
 * Infinite Lives by Link Master
 * Chaos Powers Activators by Zzetti 
-* Thanks to igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
-* Thanks to LimblessVector for his work on identifying objects and his initial large memorylist
-* Thanks to DonutStopGaming for ideas while function hunting
-* Thanks to TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
-* Thanks to DeadlyFugu, Muzzarino
-* Thanks to Heroes Hacking Central (&Shadow)
+
+## Thanks
+* igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
+* LimblessVector for his work on identifying objects and his initial large memorylist
+* DonutStopGaming for ideas while function hunting
+* TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
+* DeadlyFugu, Muzzarino
+* Heroes Hacking Central (&Shadow)
