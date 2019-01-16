@@ -10,8 +10,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Problems (High Priority)
-* Crashing with SET objects if P2/P1 are far apart (now an issue due to chunks being implemented)
-** Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first. May be related to above issue.
 * On P2 CC/CB activation P1's camera is altered and unloads P1's chunk
 * Checkpoint Warping/Backtracking only moves P1
 * Gravity switches on Space Gadget only alter P1's gravity
@@ -26,7 +24,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Player 2 cannot pause/unpause
 * Pausing/Unpausing causes SplitScreen to flash back to single screen for a frame
 * Vehicles will disappear on P2 dismount if P1 is not nearby
-* DropShips/EnemySpawners are broken
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first. May be related to above issue.
+* DropShips/EnemySpawners are broken - HeroesPowerPlant related
 
 ## Done so far:
 * P2 UI
@@ -46,6 +45,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Bonus Roadmap
 * Individual death-to-checkpoint / Don't reload level for both players
+* Static weapon swaps for Metal Androids
 * E3 Race Mode - Hero vs Dark objective race (only some stages)
 * FriendlyFire Enable/Disable
 ** WeaponsTargeting & HomingAttack Other Player Enable/Disable
@@ -53,6 +53,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Credits
 * DonutStopGaming for major contributions to chunks and other address discoveries
+* LimblessVector for his work on identifying objects and his initial large memory list
 * Includes `True Black Shadow` by TheHatedGravity
 * Includes `Rouge over YellowAndroidShadow` by Shadowth117
 * SinglePlayer Widescreen Hack by LimblessVector
@@ -61,7 +62,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Thanks
 * igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
-* LimblessVector for his work on identifying objects and his initial large memorylist
 * DonutStopGaming for ideas while function hunting
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * DeadlyFugu, Muzzarino
