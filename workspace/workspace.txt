@@ -1783,3 +1783,69 @@ Last Way: No Crash ???WTF???
 Assuming chunk issues are VRAM related for now, works in most cases-> crashes for few scenarios
 01.13.2019
 ChaosControl EventCamera Searching
+---
+01.17.2019
+Checkpoint warping / Death call
+Using SuperShadow reset per checkpoint to try to find it:
+8017710c
+
+(go to top of function, its called every death):
+80176fe8
+called by 80177218 and 80177244
+(244 called on death) -> noping stops loading geo/chunks until death
+mem:80576707
+LifeCount, checking writes
+
+found
+80178bdc jump to 8016ef8c (updateLifeCount function)
+going up callstack:
+find function with lots of function calls
+802044c8 shows life/key count on death and decrements life count
+from callstack, was bctrl'd to:
+802044c4 and continues down, loops once
+
+nop:
+802044c4 | load timer's checkpoint-saved value
+802044c8 | reset timer (to whatever c8 if checkpoint), ring count, hero/dark points & meters, and scores 
+802044cc | halt on death
+802044d0 | no apparent change
+802044d4 | ..
+802044d8 | ..
+802044e0 | halt
+802044e8 | no apparent change
+802044f8 | halt
+80204504 | ..
+80204510 | no apparent change
+8020451c | halt
+80204528 | ..
+80204534 | no apparent change
+<beq- block> [compares to 0 @ 80204550] -> jumps to 80204658
+----
+aside:
+-> 802ce1c0 function:
+at 802ce1f0 (li r3, 0), changing to li r3, 1 will cause instant warp to Select Stage anywhere
+----
+nop:
+8020454c | no apparent change
+80204554 | ..
+80204560 | ..
+8020456c | ..
+80204578 | ..
+<blt+ block> [compares to 2 @ 80204584] -> jumps to 802044E8
+<b>
+<bge- block> [cmp 0 @ 802045a8] -> jumps to 80204644
+802045ac | halt -> perhaps loads SET object data for b0? (does not halt if b0 is nopped)
+802045b0 | does not load SET objects (at all)
+802045b8 | halt
+<beq- block> [mr. @ 802045c0] -> jumps to 802045E0
+802045c4 | fade screen is permanently on (no control)
+802045cc (cTeam::GetPlayer) | halts at fade screen
+802045dc | (stuck at fadeScreen) stuck in spawn fall, no timer etc triggered, but world is alive | is 'unreset' state after warping player
+802045e0 | halt
+802045ec | halt
+802045f0 | halt
+802045f4 (cCharacter::IsPlayingEffect)| no apparent change
+802045f8 | no apparent change
+802045fc | ..
+80204600 | ..
+80204610 (PAUSEFUNC_READ_STGID_zz_80176c3c) | no apparent change
