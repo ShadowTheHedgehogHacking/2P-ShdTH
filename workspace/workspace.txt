@@ -1849,3 +1849,41 @@ nop:
 802045fc | ..
 80204600 | ..
 80204610 (PAUSEFUNC_READ_STGID_zz_80176c3c) | no apparent change
+
+--> add symbol for actionsupdate / position setter found
+Other objects appear to use same function, will need further analysis (history list like in Heroes?)
+----------
+01.22.2019 | Little fix-ups
+Fix split type 'jumps' during pause / restart / onload:
+80205dbc
+80205ed4
+80204a4c
+
+2P Essentials Prevent SplitScreen Reset
+C2205DBC 00000001
+60000000 00000000
+C2205ED4 00000001
+60000000 00000000
+C2204A4C 00000001
+60000000 00000000
+
+Rewrite SplitScreen Codes / Fix improper gecko-if
+
+2P Essentials Vertical-SplitScreen v3
+2857D768 00000000
+0457D700 00000001
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+
+2P Essentials Horizontal-SplitScreen v3
+2857D768 00000000
+0457D700 00000002
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+
+Disable Partner Player Control [DonutStopGaming]
+C606F830 8006F870

@@ -22,14 +22,14 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * Player 2 cannot pause/unpause
-* Pausing/Unpausing causes SplitScreen to flash back to single screen for a frame
 * Vehicles will disappear on P2 dismount if P1 is not nearby
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first. May be related to above issue.
 * DropShips/EnemySpawners are broken - HeroesPowerPlant related
+* If Dark Partner is activated first, P3 remapping fails
 
 ## Done so far:
 * P2 UI
-* Level chunks load/unload based on both players
+* Level chunks load/unload based on both players* (looking into crashes related to this, could be VRAM/hardware limitation)
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras* (chaos control is still an issue)
 * SET objects load/unload based on both players
@@ -37,6 +37,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * ChaosPowers activate for both players
 * nukkoro2.inf spawn positions for every level
 * P2 Sound Listener
+* Partner/Mission Helpers can be remapped to permanent AI
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 
 ## Known Issues (Not planned to be fixed)
@@ -48,7 +49,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Static weapon swaps for Metal Androids
 * E3 Race Mode - Hero vs Dark objective race (only some stages)
 * FriendlyFire Enable/Disable
-** WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Individual Chaos Powers points/activation
 
 ## Credits

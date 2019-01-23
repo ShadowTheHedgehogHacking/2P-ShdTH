@@ -5249,7 +5249,7 @@
 800a74cc 00000040 800a74cc 0 zz_800a74cc_
 800a750c 000001f4 800a750c 0 zz_800a750c_
 800a7700 000001fc 800a7700 0 zz_800a7700_
-800a78fc 000003fc 800a78fc 0 zz_800a78fc_
+800a78fc 000003fc 800a78fc 0 updatePlayerActionsandPosition_800a78fc_
 800a7cf8 00000040 800a7cf8 0 zz_800a7cf8_
 800a7d38 00000040 800a7d38 0 zz_800a7d38_
 800a7d78 00000174 800a7d78 0 zz_800a7d78_
@@ -5898,7 +5898,7 @@
 800bbf9c 00000068 800bbf9c 0 zz_800bbf9c_
 800bc004 0000003c 800bc004 0 zz_800bc004_
 800bc040 00000080 800bc040 0 zz_800bc040_
-800bc0c0 000002a4 800bc0c0 0 zz_800bc0c0_
+800bc0c0 000002a4 800bc0c0 0 MissionUIDrawer_800bc0c0_
 800bc364 0000016c 800bc364 0 zz_800bc364_
 800bc4d0 00000150 800bc4d0 0 zz_800bc4d0_
 800bc620 00000074 800bc620 0 zz_800bc620_
@@ -12169,7 +12169,7 @@
 8016ef74 00000008 8016ef74 0 GXInitTexObjUserData 	gx.a GXTexture.o
 8016ef7c 00000008 8016ef7c 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 8016ef84 00000008 8016ef84 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
-8016ef8c 0000005c 8016ef8c 0 zz_8016ef8c_
+8016ef8c 0000005c 8016ef8c 0 updateLifeCount_8016ef8c_
 8016efe8 000000ac 8016efe8 0 zz_8016efe8_
 8016f094 00000020 8016f094 0 zz_8016f094_
 8016f0b4 00000018 8016f0b4 0 zz_8016f0b4_
