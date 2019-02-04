@@ -1887,3 +1887,309 @@ E2000001 80008000
 
 Disable Partner Player Control [DonutStopGaming]
 C606F830 8006F870
+
+01.23.2019 | Continuing fix-ups & Chunk crash research
+Boss P2 ring start value will wait for HPP invalid byte fix | spawners
+For SuperShadow P2 start with 50 rings:
+8016f320 stw r0, 0 (r30)
+ 0 = 8057670C
+ 4C = 80576758
+stw r0, 0x0 (r30)
+stw r0, 0x4C (r30)
+
+2P Essentials SuperShadow RingCount
+C216F320 00000002
+901E0000 901E004C
+60000000 00000000
+---
+02.02.2019
+Searching for vehicle unload on P1 not close enough
+P1 cam values:
+X: 807D77E0
+Y: 807D77E4
+Z: 807D77E8
+DVF:
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+-------------
+-> BP on 807d76b0:
+8040ce08 60000 reads
+8003a57c (chunks) 1000 reads
+8040cd74 8000 reads
+chain -> 8000a704 -> 8040cf98 -> 8040cf98 -> 8040cf98 -> 800091d0 (setloadsfloats) -> 800091ec -> repeat
+            61                                              244                        122
+			
+			---
+			
+Using diff, potential check at 802de460
+-> Found Clear() for jump effect -> 802ddd10 nop (no clear on trails)
+80054c9c calls: 800545a8 (specialized, triggered on alien hit from homing attack) -> ?obj destroy?
+80054c6c (something with damage on homing attack)
+80077e6c | bounce up after homing attack
+80077ed0 | stop homing attack on one hit
+80077f40 | same result as 77e6c
+ -> multiple have same result, probably call in order.
+ skipping until finding vehicle affect
+80085098 | no target homing attack (goes straight if target within range)
+800852f0 (same as above, probably same func area)
+80078ac8 | do no damage to obj (homing attack)
+80085374 | do damage but do not reset state of attacking
+800856b4 | movement (no movement) for homing attack targeting
+800857f0 | no bounceback on hit enemy (more stable)
+8008580c | no cancel homing attack trail state if last homing attack targeted successfully (until action state effect reset)
+80085938 | halt (has compare to 2, check later)
+800859b4 | same as above
+800859fc | same as above
+80085a48 | halt (store/loads, no compares)
+80085a60 | halt (target handler? small function)
+80085ab4 | halt (on activate homing attack)
+80085acc | no bounceback on hit enemy
+80085b30 | same as above
+80085ba0 | same as above
+80085c1c | halt
+80085c98 | halt
+80085ce0 | halt
+80085d2c | halt
+80085d84 | halt (on activate homing attack)
+8008(5/6)f28 | cancel homing attack on target homing attacking
+800860fc | halt
+80086448 | ??? no change?
+800864d8 | saa
+80086510 | only occured once -> unable to homing attack after successful hit until out of range
+80086530 | ??? no change?
+800865b8 | halt
+80086644 | halt
+800866a0 | halt
+80086724 | halt
+80086780 | halt
+80086850 | hover after homing attack target hit (use for SS) -> can cancel with a second homing attack / other action
+80086b28 | proper damage parse, no knockback, continue into target until destroyed
+80086b48 | ??? unknown
+80086bd0 | halt
+80093d90 | improper target calculation (LavaShelter Shadow Android -spaz homing attack)
+8009c624 | completely block homing attack (when target is in range)
+8009c6a8 | ???
+8009c6fc | halt (prevent homing attack half time)
+800c6538 | no damage, continuous target attack
+800c658c | halt 
+800c6bb0 | unknown
+800c6c24 | move cam? or erase all drawn objs
+8017b8d4 | unknown
+8017cf18 | halt
+8017cf7c | halt
+
+sidetrack:
+__destroy_new_array calls free, may actually be symbol
+803a03bc
+--------------
+02.03.2019
+-> use diff for: vehicle disappear / partner despawn on P1 not close enough / chaospowers camera grab / gravity switches
+[vehicle disappear] || FOUND / PARTIAL || CRASHES / Flyables not affected
+8000cf84 | halts on jump off vehicle, at point of spawn
+8004eea0 | halts immediately on P2 dismount
+8007de18 | camera not detach from vehicle / bones not detach from vehicle (state too)
+8007e994 | same as above, but UI not cleared too
+800809b0 | prevent falling (no gravity?)
+80080d90 | moveable no gravity / spin animation after dismounting/jumping
+80087778 | no clear jump ball effect
+80097f98 | strange warping after jumping
+800ab58c | block dismounting
+800c162c | do not allow remount/no collision for dismounted vehicle
+800c85c8 | do not destroy collision of erased (p2) vehicle on dismount
+800c8664 | do not allow remount/no collision for dismounted vehicle
+801b1324 | deal damage to craft on actions (dismount etc)
+801b1484 | prevent standing on craft when not mounted (TODO: check for crate carrying)
+801b5848 | same as above
+801b6060 | prevent dismount
+801b6274 | craft tilts when standing on in any direction (not mounted)
+801b643c | no collision when dismounted, still mountable
+801b64d8 | prevent standing on craft when not mounted (TODO: check for crate carrying)
+--------
+801b6764 | do not erase craft, but also prevents re-mounting any craft, erases when tied entity is destroyed
+->
+80094e40 | can board craft after knocking alien off, however craft is disabled/inactive
+8018cfc8 | alien not knocked off craft, when destroyed player can mount... if player dismounts still disappears
+8018d218 | saa
+8018d5ec | can't harm enemies, but can harm player | no damage, target still occurs and knockback
+801a8230 | saa
+801a8388 | knockback enemies, but don't reduce HP
+801b280c | do not despawn craft, but inactive and cannot mount
+801b4af0 | saa
+801b5d54 | *do not despawn craft / even if dismount. BAD: Keeps all spawned saucers permanently / shadow and animation bug when timed out or not near P1
+801b6274 | *do not despawn craft / even if dismount. BAD: Rider feet bones are messed up, and on dismount cannot stand on saucer, no timeout for existing saucers except restart/death
+801b6764 | do not despawn, not mountable
+803352b0 | do not despawn craft, but inactive
+-> picking one with all spawned saucers permanently
+801b5d54 -> halts for flyables sometimes in case of dying and two flyables in the way
+-> picking one with bone and no timeout
+
+2P Essentials Prevent Vehicle Despawn v0.1 [dreamsyntax] // BAD does not effect flyables / halt on spawners
+C21B6254 00000001
+4E800020 00000000
+
+/////////
+[chaospowers camera grab] || COMPLETE
+800099b8 | do not pan camera for chaos powers intro sequence
+80009a14 | same as above
+8000a184 | same as above
+8000a2f4 | break camera transform during chaos powers intro
+8000fa20 | blank camera during chaos powers intro
+8000fd64 | camera point down, no track during intro
+80011b4c | incorrect zoom value during intro (still tracks)
+80011c38 | *cancels chaospowers intro camera event (attempts for a few frames)
+80011d24 | saa
+80012124 | incorrect zoom value during intro (still tracks)
+8001253c | *cancels chaospowers intro camera event (attempts for a few frames)
+800146c8 | saa
+8007aed8 | no chaos blast explosion, stuck in animation at end
+8007b198 | explosion-less chaos blast (pre-explosion particle still present)
+8007b440 | 'rave mode'
+8007b4c8 | explosion-less
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+8009bd40 | prevent chaos blast use at all
+800a2d9c | ***cancels chaospowers intro camera event (perfect)
+
+->
+callers are:
+8007b400 (CB)
+8007c4b0 (CC)
+->
+2P Essentials Disable ChaosPowers CameraEvent [dreamsyntax]
+C207B400 00000001
+60000000 00000000
+C207C4B0 00000001
+60000000 00000000
+
+[chaospowers chaos control blur effects] || COMPLETE
+8000b298 | no smooth transition of camera distortion
+8000f35c | incorrect zoom (continuous)
+80017500 | stops chaos control at next object
+8007ba24 | no move / no effect chaos control
+8007c23c | saa
+8007c2a0 | saa
+8007c310 | saa
+800a339c | no blur / effects / wind (found)
+
+2P Essentials Disable ChaosControl CameraEffect [dreamsyntax]
+C20A2A64 00000001
+60000000 00000000
+
+[pulley patch] || LEADS, NOT COMPLETE
+80017500 | pulley is destructible
+80019018 | warp coordinates are partially incorrect
+8001c964 | pulley is destructible
+8008e1e4 | does not warp player / follow spline. When pulley reaches end warps P1
+8008e304 | improper warp
+8008e4c4 | does not warp player (saa)
+8008e930 | pulley does not activate, P1 'raves' when P2/P1 attempt to activate
+8009bdbc | pulley does not activate, no rave
+801312c0 | pulley does not move
+80131704 | pulley does not activate, no rave
+801317e0 | saa
+80132efc | saa
+80132f60 | saa
+80132fd0 | saa
+801331cc | pulley does not move
+80133230 | saa
+8015c004 | pulley does not activate, no rave
+8015cb74 | saa
+8015d11c | pulley does not move
+801db678 | saa
+
+[Gravity Switchers] || NOT FOUND
+80293a90 | ?gravitySwitcher symbol (no change gravity on contact)
+8009a2c8 | no change gravity on contact
+801d5594 | no play gravity switcher noise on contact
+80247b40 | no activate gravity switcher
+802482d4 | saa
+80248338 | saa
+802483a8 | saa
+80482458 | no draw players / stop drawing objs
+
+[partner despawn searching] || PARTIAL
+80073078 | partner does not spawn even if P1 is within range
+800743c0 | partner instantly hooks to nearest player on partnerspawn
+800c9af4 | Continuously warp partner to proper place even if P1 is not there
+80119a24 | parnter does not spawn
+80119bbc | saa
+80119c5c | saa
+80119d5c | saa
+80119dcc | Continuously warp partner to proper place even if P1 is not there | Also Breaks Exit Level
+
+2P Essentials Partner Despawn Fix v0.1 [dreamsyntax]
+C20C9AD4 00000001
+4E800020 00000000
+*Bad , has spawners (ARK meteors constantly bombarding)
+
+[key doors for both players] || NOT FOUND
+8011b78c | prevent 5 key unlock animation
+8011bc70 | saa
+80027ff0 | door opening particles continuous
+
+[flyable hawk / vehicle cam disable] ||
+800099b8 | do not track camera after initialize
+80009a14 | saa
+8000a184 | saa
+8000a304 | improper angle
+8000db78 | track direction, do not track position / no initialize
+8001c8dc | flyable does not move/activate from idle
+8007dd10 | player does not move onto flyable on mount, stuck in animation
+8007e190 | flyable does not move/activate from idle, player does not get flying animation
+8007e2c0 | black screen / player mount warp
+8007e774 | no control flyable when mounted
+8007ed34 | hop, does not mount
+8009aae4 | does not mount, no hop
+800a6794 | does not track, does initialize
+800a6800 | saa
+800a684c | saa
+801b316c | do not attach to split0 || halt on dismount || does not effect cutscene || flyable specific?
+801b3d14 | saa
+801b459c | break splines with rotation messed up
+801b4698 | travel to nukkoro2.inf spawn point
+801b47d4 | incorrect rotation, break split0
+801b483c | hook to enemy splines?
+801b6830 | prevent dismount until certain points in spline
+801c94b4 | **do not attach to split0 || no halts || effects cutscene || global?
+801cb820 | saa
+801cc004 | saa
+801cc1e0 | does not detach from split0 on dismount, halts shortly after
+---looking for true detach:
+8007de18 | does not detach from either split
+8007df28 | does not detach on split1 until obj destroyed
+8007e994 | does not detach on either split
+800871d8 | player stuck at dismount location
+8009c8d4 | prevent dismount
+801b1dd4 | player flips upsidedown and starts spinning
+801b30b0 | strange detach behavior for split0
+801b310c | saa
+801b34f0 | saa
+802cb628 | does not detach from split0
+-->
+combine: 801b316c (halts on dismount, probably stores prevcam->nextcam pointer, tries to go to it then halts) -> stick blr on 801b3148
+         802cb628 (does not detach split0) -> stick blr on 802cb5d0
+		  -> success, no more halt
+
+2P Essentials FlyablesCam Fix TestVer
+C21B3148 00000001
+4E800020 00000000
+C22CB5D0 00000001
+4E800020 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+*Halts on exit level
+
+-> possible stack to free @ 803a0300:
+803a02e4 80061c50 80061c20 80060d10 80060cc0 800605e4 cFielder
+----
+nop at 801b317c 
+nop at 802cb65c
+-> BEST RNG EVER
+this fixes the halt, *might leak, check here later if memory becomes an issue
+2P Essentials FlyablesCam Fix v1 [dreamsyntax]
+C21B317C 00000001
+60000000 00000000
+C22CB65C 00000001
+60000000 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
