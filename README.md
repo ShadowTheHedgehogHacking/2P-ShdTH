@@ -4,6 +4,7 @@
 
 ## About
 This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1P modes.
+
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Level Status
@@ -15,14 +16,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Gravity switches on Space Gadget only alter P1's gravity
 
 ## Problems (Low Priority)
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 loads them first
-* Vehicles no longer disappear on P2 dismount if P1 is not nearby
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
-* Player 2 cannot pause/unpause
 * DropShips/EnemySpawners are broken - HeroesPowerPlant related
 * If Dark Partner is activated first, P3 remapping fails
 
@@ -40,6 +39,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * ChaosPowers EventsCamera and ChaosControl Effects removed
 * P2's flyables do not overwrite P1's camera
+* Vehicles no longer disappear on P2 dismount if P1 is not nearby
+* P2 can pause
+
 
 
 ## Other Known Issues (Not planned to be fixed)
@@ -63,8 +65,10 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Chaos Powers Activators by Zzetti 
 
 ## Thanks
+* 
 * igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * DonutStopGaming for ideas while function hunting
+* TryTwo for extremely useful new debugging features in Dolphin
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * DeadlyFugu, Muzzarino
 * Heroes Hacking Central (&Shadow)

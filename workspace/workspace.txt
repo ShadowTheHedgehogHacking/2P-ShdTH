@@ -1985,7 +1985,7 @@ __destroy_new_array calls free, may actually be symbol
 --------------
 02.03.2019
 -> use diff for: vehicle disappear / partner despawn on P1 not close enough / chaospowers camera grab / gravity switches
-[vehicle disappear] || FOUND / PARTIAL || CRASHES / Flyables not affected
+[vehicle disappear] || COMPLETE
 8000cf84 | halts on jump off vehicle, at point of spawn
 8004eea0 | halts immediately on P2 dismount
 8007de18 | camera not detach from vehicle / bones not detach from vehicle (state too)
@@ -2028,6 +2028,7 @@ __destroy_new_array calls free, may actually be symbol
 C21B6254 00000001
 4E800020 00000000
 
+-> found out regular 2P gamemode bit effects this, TODO: find this and patch
 /////////
 [chaospowers camera grab] || COMPLETE
 800099b8 | do not pan camera for chaos powers intro sequence
@@ -2077,7 +2078,7 @@ C207C4B0 00000001
 C20A2A64 00000001
 60000000 00000000
 
-[pulley patch] || LEADS, NOT COMPLETE
+[pulley patch] || FOUND POSSIBLE LEADS, NOT COMPLETE
 80017500 | pulley is destructible
 80019018 | warp coordinates are partially incorrect
 8001c964 | pulley is destructible
@@ -2129,7 +2130,7 @@ C20C9AD4 00000001
 8011bc70 | saa
 80027ff0 | door opening particles continuous
 
-[flyable hawk / vehicle cam disable] ||
+[flyable hawk cam disable] || COMPLETE
 800099b8 | do not track camera after initialize
 80009a14 | saa
 8000a184 | saa
@@ -2193,3 +2194,47 @@ C21B317C 00000001
 C22CB65C 00000001
 60000000 00000000
 *Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+----
+2.4.2019
+P2 Pause/Vehicle Dismount based on GameMode Bit instead of other way:
+801e3adc | Lucky first try, allows P2 to pause
+801d9260 | ???
+801b5f4c | Flyer gamemode bit check
+
+2P Essentials P2 Can Pause [dreamsyntax]
+C21E3ADC 00000001
+60000000 00000000
+
+2P Essentials Prevent Vehicle Despawn [dreamsyntax]
+C21B5F4C 00000001
+60000000 00000000
+
+
+[Air Bug Fix] || INCOMPLETE
+80031548 | changes air blower behavior
+8008f858 | no move, no height increase, stuck in 'in air' animation
+8008f890 | both players do not get out of 'in-air' animation
+8008f970 | lock player control, start rising, but animation is stuck at current state
+8009ad4c | forces player to slow crawl, animation cycle continues but not in air animations
+800b7960 | does not activate blower
+800f3308 | no rise, weird animation on first entered player 
+8010252c | Player not stuck does not fall out of blower, slowly descends to ground
+80102aec | does not activate blower
+80102b50 | saa
+80102bc0 | saa
+801030e4 | saa
+80103210 | no rise, weird animation on first entered player
+80103c4c | **no rise unless slide/jump/fall , no animation
+80103d2c | both players stuck
+80103d44 | no rise, weird animation on first entered player
+8015aad4 | no activate, no exception case of jump
+8015bc7c | saa
+801db970 | no rise, proper animation/state
+
+-> Replace Air Blower with High-Jump
+blr @ 80103c4c
+
+Donut lead: 8015cb70 -> disables fan activation (backtrack to caller of bctrl)
+
+
+[Partner Despawn search, BMEM at 807d7720 (other camX)]
