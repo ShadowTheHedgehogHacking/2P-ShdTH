@@ -43,7 +43,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2 can pause
 
 
-
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
 * Culling issue on Final Haunt for P2's screen when near force-fields
@@ -65,7 +64,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Chaos Powers Activators by Zzetti 
 
 ## Thanks
-* 
 * igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * DonutStopGaming for ideas while function hunting
 * TryTwo for extremely useful new debugging features in Dolphin
