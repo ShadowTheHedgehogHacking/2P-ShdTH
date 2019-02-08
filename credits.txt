@@ -1,6 +1,7 @@
 Team function hunting and other significant memory discoveries credit to DonutStopGaming
-Rouge Vector by Nibroc-Rock
-**update with other renders!! //12.18
+
+TheHatedGravity for Menu UI Text in 2.0
+
 SinglePlayer Widescreen Hack by LimblessVector
 
 Infinite Lives by Link Master
