@@ -91,7 +91,7 @@ C21CE8F8 00000002
 -----------------------------------
 STGID memory address: 8057d748
 
-10.23.2018
+2018-10-23
 layout object load distance:
 38A00320 li r5, 800
 80168e88
@@ -122,7 +122,7 @@ X doesnt read music
 80168eec ???
 801a2064 2P special bit cases (end here)
 
-10.24.2018
+2018-10-24
 apparently different for some reason:
 --------------
 normal westopolis:
@@ -182,7 +182,7 @@ C2169C08 00000001
 38000001 00000000
 
 ----------------------------------
-10.25.2018 | Looking for UI change on gamemode flag
+2018-10-25 | Looking for UI change on gamemode flag
 38000001 r0 to 1
 list of reads:
 8033ad54 ???
@@ -203,14 +203,14 @@ li r0, 1
 C21D9990 00000001
 38000001 00000000
 ========================================================
-10.26.2018 | Looking for Pulley ?function? - maybe also related to air bug
+2018-10-26 | Looking for Pulley ?function? - maybe also related to air bug
 ========================================================
-10.29.2018
+2018-10-29
 looking for hurt call
 807D7838 (word) - anim state?
 8060B6400 (references)
 =======================
-11.1.2018
+2018-11-01
 - looking for hurt activator, found updater for anim (same as above, still having crashing issues when looking for other reads)
 looking for ss activator, within stageid
 checking here first:
@@ -240,7 +240,7 @@ breakpoints:
 8017710c
 mbreakpoint: 8057d748
 ==============
-11.2.2018
+2018-11-02
 looking for ring decrement (for onhurt call and activator for SS)
 backtrack on decrement:
 800af354
@@ -277,7 +277,7 @@ onhurt():
 80178B20 is func that calls ring count loss, dropped rings and hurt anim still occurs but count remains same.
 
 ------------
-11.3.2018
+2018-11-03
 after playtesting, realized Chaos Blasts breaks out of air glitch, so using that instead.
 Chaos Control is easier to do than originally thought:
 Chaos Control diminish rate:
@@ -377,7 +377,7 @@ C21FE99C 00000001
 60000000 00000000
 
 
----11.9.2018
+2018-11-09
 Chunk Hunting
 - There are cam0-cam4, cam0 can move, (if P2 uses turret/CC, cam0 moves to P2)
 - cam0-4 is always active, just might not be attached to objects
@@ -429,7 +429,7 @@ Cam values are changed based on SS Type and SS Split bits!!
 Done for today, but this should be on the right track
 
 ---
-11.10.2018
+2018-11-10
 Chaos Control Music Searching
 800a4ebc bl to 8027AB1C, noping this results in blue/red effect going away, no other side effects
 800a4f0c bl to 8007939C, noping this results in no invulnerability while in chaos states
@@ -464,10 +464,10 @@ Checkpoint Hunting
 -> 80129628 ^ same as above
 80129de4 -> update player position()?
 ---
-11.14.2018
+2018-11-14
 8047f88c
 ---
-11.19.2018
+2018-11-19
 searching for 2P android weapon mode / ?supershadow weapon mode?
 possible related memaddresses:
 805766F0 | obj data?
@@ -526,7 +526,7 @@ Force li r0, 0
 C240DB30 00000001
 38000000 00000000
 ----------------------------
-11.21.2018
+2018-11-21
 Back to 2P stuff
 memaddress:
 8056ed78 || P2 Inputs
@@ -546,7 +546,7 @@ C20A8608 00000001
 
 ^ affects ALL controllers, need different strategy (oncall?)
 -------------
-11.22.2018
+2018-11-22
 800a85f4 | lwz r4, 0x0010 (r31)
 
 
@@ -597,7 +597,7 @@ new approach:
 mem:805F2B04 partner player to AI timer
 800a19c4 bne (if control 2 input changes, activate AI timer)
 ------------
-11.27.2018
+2018-11-27
 SuperShadow searching part 2
 flying mode:
 8027f0ac bl to 0x80076CA8, common function used in various places
@@ -609,7 +609,7 @@ changing addi r3 168 to 936 -> results in no fly
 changing r4 = 37 to 39
 -> Try from P1 Y in glyphic canyon reads, check earlier mem access
 ------------
-11.30.2018	
+2018-11-30	
 Checkpoint warping for p2
 break on write to freezeinput 8057D768
 -> occurs after position move
@@ -650,7 +650,7 @@ D0030000 C0040008
 D0230004 D0030008
 60000000 00000000
 ^ working to change write to direction
-12.1.2018
+2018-12-01
 (confirmed direction type and relation to 3 set floats r3, r3+0x4, r3+0x8
 reads of floats:
 8034df98
@@ -695,7 +695,7 @@ store3 8060B3F8
 
 break at instruction 80293964 for future testing
 ---------------
-12.4.2018
+2018-12-04
 Attempting to hook cam1 to partner // chunks research ::
 break at 801d077c let next function run, break at 801d0784
 p1/p2 no change:
@@ -820,7 +820,7 @@ checking stuff after:
 801ce98c || same 'bingo highway' issue
 801ce99c || blt+ (loop for cams)
 -----------
-12.7.2018
+2018-12-07
 Camera initialize 
 80178384
 
@@ -919,7 +919,7 @@ is r3 offset constant YES... except sign may be flipped -0x38 or + 0x38:
 .......
 dead end, function not doing what I thought, only seems to move the 'point' the camera interacts with
 -------------------
-12.8.2018
+2018-12-08
 checking from layout obj render fix
 800cb5e4 (onload)
 if 2p:
@@ -952,7 +952,7 @@ exiting out to 8004ed60
 ----
 8004ecdc interesting behavior? Pre-load??
 ---------
-12.9.2018
+2018-12-09
 8004ec68::
 random checks
 804628f8
@@ -962,7 +962,7 @@ nop 804628fc
 801cf9e4 | cam pop-in/out
 801cf9f8 | controlling camera zoom occasionally
 ---------
-12.17
+2018-12-17
 break mem for read cam X | 801cf9f8
 write from : 807d77f8 to camX
 (reading this)->
@@ -975,7 +975,7 @@ blank screen || 801c1190 [called by 8000e940] -> [called by 802706d4] -> [called
 801c4200 (only one caller, 801c41b0)
 801c412c
 -------
-12.18
+2018-12-18
 Android players weapon searching
 801770e4 || r3 is argument of which character model (and others) to load in
 e = Normal Shadow 
@@ -1016,7 +1016,7 @@ readmem:
 
 015 until 3rd cycle -> results in backwards shooting blueandroid
 --------------
-12.26.2018
+2018-12-26
 Menu:
 func of interest: 802bdb18
 store menu move and compare at 802bdce4
@@ -1032,7 +1032,7 @@ possible target:
 8027a998 (rlwinm with r3, where r3 is SelChar)
 8027aa84 (rlwinm with r4, where r4 is SelChar)
 -------------
-12.27.2018
+2018-12-27
 remove chaospowers glow:
 C20A4EBC 00000001
 60000000 00000000
@@ -1048,7 +1048,7 @@ C216F160 00000001
 Checkpoint Hunting
 80117690 r4 is checkpoint to jump to (if not chosen value is not active, warps to nukkoro2.inf spawn)
 ----
-12.30.2018
+2018-12-30
 Chunk Hunting
 only place that writes to "RO Cam0 X (turns out its not Cam0...)
 802708e8 is call to -> 800091d8 (write)
@@ -1082,7 +1082,7 @@ CC000000 00000000
 
 02F69482 0000004C
 ---------------------
-1.6.2019
+2019-01-06
 Chunks | Actual progress (DonutStopGaming found:)
 807D76B0 (X)
 807D76B4 (Y)
@@ -1382,7 +1382,7 @@ C603A608 8003a69c
 special case for Z: at 277
 
 -----------------------------
-1.8.2019
+2019-01-08
 
 Rewrite by using LR to fix C6 OPs being code-order dependent (should also work with Nintendont):
 8003a57c (op after last bl in chunks function)
@@ -1554,7 +1554,7 @@ C02301B8 FC010040
 C603A608 8003a69c
 
 --------------
-1.10.2019
+2019-01-10
 Current Chunk code does:
 P1X Greater than ChunkX > Yes > P1X LessThan ChunkX > No > P2X LessThanChunkX > Yes > P1Y GT -> ... continues without ever checking the GreatThan for P2X and is continuing to check P1 values when it should not be
 (because in the original code at this point P1 is considered done)P1X GT ChunkX > Yes > P1X LT ChunkX > Yes > P1Y GT ChunkY > No > P2Y GT ChunkY > Yes > continues without ever checking P2X
@@ -1781,10 +1781,10 @@ Last Way: No Crash ???WTF???
 
 ----
 Assuming chunk issues are VRAM related for now, works in most cases-> crashes for few scenarios
-01.13.2019
+2019-01-13
 ChaosControl EventCamera Searching
 ---
-01.17.2019
+2019-01-17
 Checkpoint warping / Death call
 Using SuperShadow reset per checkpoint to try to find it:
 8017710c
@@ -1853,7 +1853,7 @@ nop:
 --> add symbol for actionsupdate / position setter found
 Other objects appear to use same function, will need further analysis (history list like in Heroes?)
 ----------
-01.22.2019 | Little fix-ups
+2019-01-22 | Little fix-ups
 Fix split type 'jumps' during pause / restart / onload:
 80205dbc
 80205ed4
@@ -1888,7 +1888,7 @@ E2000001 80008000
 Disable Partner Player Control [DonutStopGaming]
 C606F830 8006F870
 
-01.23.2019 | Continuing fix-ups & Chunk crash research
+2019-01-23 | Continuing fix-ups & Chunk crash research
 Boss P2 ring start value will wait for HPP invalid byte fix | spawners
 For SuperShadow P2 start with 50 rings:
 8016f320 stw r0, 0 (r30)
@@ -1902,7 +1902,7 @@ C216F320 00000002
 901E0000 901E004C
 60000000 00000000
 ---
-02.02.2019
+2019-02-02
 Searching for vehicle unload on P1 not close enough
 P1 cam values:
 X: 807D77E0
@@ -1983,7 +1983,7 @@ sidetrack:
 __destroy_new_array calls free, may actually be symbol
 803a03bc
 --------------
-02.03.2019
+2019-02-03
 -> use diff for: vehicle disappear / partner despawn on P1 not close enough / chaospowers camera grab / gravity switches
 [vehicle disappear] || COMPLETE
 8000cf84 | halts on jump off vehicle, at point of spawn
@@ -2195,7 +2195,7 @@ C22CB65C 00000001
 60000000 00000000
 *Disables EventCam for flyables. In future version might apply EventCam to both cameras.
 ----
-2.4.2019
+2019-02-04
 P2 Pause/Vehicle Dismount based on GameMode Bit instead of other way:
 801e3adc | Lucky first try, allows P2 to pause
 801d9260 | ???
@@ -2238,3 +2238,27 @@ Donut lead: 8015cb70 -> disables fan activation (backtrack to caller of bctrl)
 
 
 [Partner Despawn search, BMEM at 807d7720 (other camX)]
+-----------
+2019-02-06
+[Respawns/OnDeath] || INCOMPLETE
+800155ac | don't teleport models to objects, once loaded into nukkoro2.inf spawn point, stays there| Useful for testing memory issue?
+800c402c | cFielder::IsStriker(void) -> prevent all damage collision in world
+8000eb50 | deathCam event zoom has issue
+80044724 | respawn() and unhook death event is never called
+8004480c | permanent black screen
+80044994 | no fadeout
+8007726c | do not draw player object model/shadow
+80078ac8 | prevent all damage collision
+8007d840 | **Restart() including toggling death cam
+8007da1c | no player on player damage? odd behavior 
+80095e9c | no player damage at all
+8009685c | saa
+800968c0 | saa
+80096930 | saa
+800998c0 | no reset death cam
+800999ac | saa
+
+-> relevant area:
+8007d808-8007d834
+-----------
+
