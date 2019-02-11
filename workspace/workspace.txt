@@ -2261,4 +2261,99 @@ Donut lead: 8015cb70 -> disables fan activation (backtrack to caller of bctrl)
 -> relevant area:
 8007d808-8007d834
 -----------
+2019-02-08
+[BlackKnight] || INCOMPLETE
+80067458 | No melee wep effect markers / damage
+80016390 | glCopyMatrix (copy player model to animation data)
+8004f040 | No melee wep effect, yes damage
+800461d0 | saa
+8007b4c8 | disable no move on 3rd strike | throw away weapon = stuck
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+80084108 | disable no move on 3rd strike
+800841e4 | no move at all during/after melee
+8008452c | allow for one swing only
+800847d4 | disable no move on 3rd strike
+80084a18 | don't swing, slow walk
+80093b74 | permanent strafe in one direction/ walk 
+80093bd4 | saa
+8009ca20 | prevent all melee attack calls
+800c658c | deplete all ammo on hit
+802dea10 | no melee wep effect
+-----------
+2019-02-09
+-> exploring 8009ca20 area
+--nop to inspect--
+8009ca34 | bne -> can't attack melee specific
+8009ca40 | only perform in-air spin attack
+8009ca48 | saa
+8009ca78 bctrl to load weapon state??
+-----------
+2019-02-10
+minor camera fix runthrough:
+SCREENSHAKES
+[launch ramp] | COMPLETE
+800891a8 | move player on ramp
+80089610 | *disable 'slingshot' animation, no screenshake
+8009ae48 | saa
+800f08f0 | *?* do not move some loaded in objects (bombs, boxes) to positions after loading in model (in gronud)
+800f7704 | saa, but properly 'drop' to ground
+800f773c | saa, with collision detection against player
+800f83a4 | move p1 left (result of collision detection above?
+8010e5ec | do not activate boost panel at all (no collision)
+8010e634 | saa
+8010ebc4 | saa
+8010ec28 | saa
+8010ec98 | saa
+801fa2dc | **no screenshake, yes 'slingshot' animation
+801fa5ec | saa
+8042a640 | corrupts screenshake effect, makes strange 'film' over split
+8042a6e4 | no screenshake
+8042d9a0 | saa
+8042e058 | adds additional effect at end of screenshake
+80438e6c | no screenshake
+80439574 | saa
+->
+(and springs)
+Inspect these for possible 'master' screenshake that applies to CB, All shake types etc -> not the case
+801fa2dc
+801fa5ec | toplevel call
+8042a6e4
+8042d9a0
+80438e6c
+80439574
+add blr to 801fa5d4 OR nop 801d0d10 (call to it) -> causing halt occasionally
+try next layer
+blr @ 8042a6e4 -> 
+halting on death ruins jump area
+blr @ 801fa2dc -> no halts? (boost ramps / springs effect removed)
+[chaos blast / tornado / object shake] |
+8000d6c4 | no screenshake on CB
+8000d710 | saa
+8000ef84 | **saa (executed 230 times) -> includes tornado, shake activated objects (orbs in Glyphic canyon) | does not include boost ramps/ springs
+
+8000ef58
+
+2P Essentials Remove ScreenShake [dreamsyntax]
+C21FA2DC 00000001
+4E800020 00000000
+C200EF58 00000001
+4E800020 00000000
+
+[turret cams]
+800099b8 | special camera does not track turret/incorrect placement
+80009a14 | saa
+8000a184 | saa
+8000db50 | sc (special camera) jumps to turret position, but barely adjusts, looking in one main direction
+8000db8c | saa (partial), different axis?
+8007dd10 | spin stuck trying to mount turret
+8007e190 | turret inactive, no cam call etc
+8007eb14 | jump-hop does not mount (similar to saucers)
+800999ac (register global obj) -> 801cedc0 is bl to it | *do not attach split to special camera
+The above includes boss camera event, chaos powers, flyables, vehicles, turrets etc (master special camera controller?)
+vehicles no crash: 801cedc0 and 801cedcc nop'd
+alternatively, same result can be achieved with just noping 801cedec
+-> this resulted into divert to figure out some symbols for SpecialCamera.
+found calls for subbosses/black doom, diablon and generic boss tracker (diablon, doom, egg dealer)
 
