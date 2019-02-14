@@ -2357,3 +2357,67 @@ alternatively, same result can be achieved with just noping 801cedec
 -> this resulted into divert to figure out some symbols for SpecialCamera.
 found calls for subbosses/black doom, diablon and generic boss tracker (diablon, doom, egg dealer)
 
+[boss cam tracker]
+802913fc | main track after special cam is created
+
+2019-02-11
+[turret cams] 
+explore 8007e190
+-> DonutNotes
+
+2019-02-13
+[Death respawn searching]
+80018ce0-801a65e0
+8000eb50 | corrupt DeathCameraEvent
+802beb88 | faster logo disappear
+8023a1b0 | throw away weapon (overflow of dropping guns if only blr this func by itself)
+80205C70 | endless black screen
+80204928 | halt on death call
+80204794 | endless falling, no black screen / camera follow
+80204740 | halt after black screen
+802043ac | endless black screen
+801eb2e0 | inspect*
+801cf05c | do not detatch from deathCam / reattach to player?
+801cb8c0 | saa
+801cb3c8 | saa; do not move cam0/cam1 anymore after or to respawn location
+801c0b60 | do not track player on death
+801a3524 | endless black
+801772d0 | saa
+80177230 | saa
+80176f1c | do not warp players**
+80175f10 | endless falling, no cam etc or fadeout
+80175d04 | endless falling, eventcam, no fadeout
+
+-> exploring 80176f1c
+80176f28 | nop results in P1 deathcam stuck ON, P2 respawns, P1 does not.
+Restart still works fine (different branch)
+ 
+80176f74 | same but P2 and P1 roles reversed
+
+While digging in warpAndResetStatePlayers2 (2nd layer, see symbol map)
+Look at Pointer->805EE2E8 (always 4?)
+near where its pointing:
+found:
+Byte 80575F87
+takes a control param and sets to 0 after executing
+0 = reset/no execute state
+1 = menu state (1 = default when at menu)
+2 = freeze player models and timer
+3 = regular play
+4 = show camera view only, no input (debug?)
+5 = freeze timer, no input (player models are live)
+6 = clear a stage
+7 = restart stage
+8 = reset to checkpoint
+9 = trigger death camera / reset
+10 = exit and save (expert?)
+11 = Black out screen
+12 = Initialize 2P Intro Sequence (anywhere) -> triggers 2P vs Music
+13 = Regular exit (select mode?)
+14 = Time's up, Draw (restart's level)
+15 = Soft restart???
+16 = Regular exit (2P?)
+
+
+
+

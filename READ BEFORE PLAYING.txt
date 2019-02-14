@@ -1,0 +1,10 @@
+- Chunks Fix currently causes crashes if players are too far away.
+	This is especially present on The Doom / Lost Impact.
+	Stay within reasonable range to not crash.
+- Air-vents/Air Blower bug - either player may get stuck in the animation.
+	Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
+- Checkpoint backtracking does not work
+- Some vehicles and turrets mess up the camera of P1 if P2 uses it
+- Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator, Z+L+R is Clear Chaos Powers
+- Change characters:
+	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
