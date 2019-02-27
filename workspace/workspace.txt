@@ -2418,6 +2418,79 @@ takes a control param and sets to 0 after executing
 15 = Soft restart???
 16 = Regular exit (2P?)
 
+2019-02-14
+[pulley]
+From prior searching, found top-level function that has no behavior on contact.
+80132efc
+check 80131730 ->
+deeper:
+80131780 -> controls relative rotation to motion of pulley
+801317a0 -> P1 raves, no warp, no activate
 
+2019-02-15
+804823f0 | brighter stage? 
+8007da1c | no death animation / sfx
+800b2a18 | saa
+803c2e38 | death no sfx or reset
+600c6538 | no damage all
+800c6c24 | incorrect knockback relative rotation
+80119ec0 | no drop rings
+8011a254 | dropped rings dont activate or move
+8007da1c | lock up, no death call otherwise
+80097c88 | * homing attack targeting system all
+800b77c8 | keeps track of who dies in 2P VS *
 
+[supershadow]
+80009a14 | DevilDoom no track camera during intro
+8000a304/a5ac | no rotate cam
 
+2019-02-23
+[supershadow, no flyer stage checking]
+80015dd0 | break left hand, garbled mess on use chaosspear
+80016048 | saa, and make glow effect break large area
+80016104 | saa
+8005cff0 | do not create chaos spear bullets
+8005ec24 | no chaos spear weapon (cannot punch, cannot swap guns, enemies do not drop weapon on death)
+80065048 | chaos spears hurt self, halt a lot
+80099f4c | no supershadow **
+800a2bac | saa
+800aa5b4 | do not load in supershadow.one model. Load in effect, weapon, state
+800b0058 | detatch arms from model (on ground at nukkoro2 spawn)
+800b1e98 | break hand, make aim follow twisting messed up hand
+800b27a0 | missing hand
+800b4d88 | no chaos spear bullet, hands missing, box pickup disappears
+800b4df4 | saa
+800b5668 | hand missing
+800b66e8 | model aims lower
+800b6804 | chaos spears target odd things
+800b7254 | saa, no targeting on real enemies
+801ab804 | ** static weapon set function** setWeapon() do not give chaos spear
+801d2cc4 | do not draw chaos spear bullets and effects; damage/still exist (invisible bullets)
+801d2f2c | saa
+8023a74c | ** static weapon set function** setWeatpon(); saa
+8023aaa0 | hands, effects working; no visible bullets nor damage
+8023b278 | ** static weapon
+8023c7ac | prevent shooting
+8027e19c | transparent player model
+8027e314 | no super shadow
+8027e3c0 | transparent player model
+8027e560 | saa
+8027e980 | unhook player from model; transparent state but model at nukkoro2.inf start
+8027ecec | transparent player model
+8027ee34 | saa
+8027eefc | saa
+802f0ac8 | no charging effect chaos spear
+802f0f54 | entrail arms (hold and move for 2 hooks)
+802f1018 | no charge chaos spear (little ones only)
+8040f058 | no hand, polygon mess on charge
+8040ffbc | crazy warping, weirdness
+8044ce98 | polygon mess 24/7
+8045144c | 
+
+-> Inspect 804549dc - 80454aa0 symbol
+
+2019-02-26
+['Chunk crash' / TextureBuffer overflow]
+80162c74 [lwz]
+80043ff4 [stb]
+8036751c [stw]
