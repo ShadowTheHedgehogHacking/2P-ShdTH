@@ -1,10 +1,12 @@
-﻿===Release (unreleased wip 02.13.2019)===
+﻿=== Release 4 / v1.2 - 2019.03.03 ===
 
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
 To play this mod, you must:
 (1) copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
 (2) enable Gecko codes and use provided GCT (Wii/Nintendont) or game config .ini (Dolphin)
+
+You can find a setup tutorial video at: https://youtube.com/dreamsyntax
 
 === Extracting and Rebuilding ISO with Modification ===
     Open gcr.exe (GameCube Rebuilder)

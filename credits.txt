@@ -1,6 +1,6 @@
 Team function hunting and other significant memory discoveries credit to DonutStopGaming
 
-TheHatedGravity for Menu UI Text in 2.0
+TheHatedGravity for Menu UI Text in v1.2
 
 SinglePlayer Widescreen Hack by LimblessVector
 
