@@ -2494,3 +2494,89 @@ deeper:
 80162c74 [lwz]
 80043ff4 [stb]
 8036751c [stw]
+800091d8
+
+2019-03-01
+['Chunk crash']
+access to 805a5240 (master malloc list?)
+::
+write  | blocked all some minor errors but game runs fine, crashes still occur at same spots
+803a3f00 | allocate_from_var_pools
+803a3fdc | link new block
+803a3e1c | soft_allocate_from_var_pools
+read
+803a3eb0 | allocate_from_var_pools
+803a3f0c | allocate_from_var_pools
+803a3de8 | soft_allocate_from_var_pools
+------------------------------------------
+Abort;
+->
+[pulley]
+Found a game bug with pulley and camera:
+does not respawn pulley after use -> move camera out of range and jump off then return to pulley device
+
+rather than resuming previous searching, I will try from scratch but recording all shared state pulleys
+(record data for cosmic fall, cryptic castle, circus park, GUN fortress, etc)
+nop:
+801317e0
+80132f60
+80132efc
+80131704
+80132fd0
+-------- ^ prior knowns
+8008e1e4
+8008e304
+8008e4c4
+8008e560
+8008e6d8 | does not 'boost/eject' player forward at end of pulley
+8008e918 | 
+8008e930 | rave
+8008eac4 | can reattach to pulley after jumping off
+8008eb74 | halt
+8009bdfc | does not take pulley || also affects regular pulleys
+8009be80 | 
+8009bee0 | does not take pulley || saa
+8009d5e4
+800b3290 | Animation State Change on using Pulley
+80115ba0
+8015d350
+801c9088
+801c9394
+801cafe8
+801ceab4
+801d3e34 | Play Pulley Sound Effect while using
+
+--------------
+| Character Select Diff |
+80015dd0 | no arm when shooting, no bullets etc
+8005bd5c | corrupted weapon drops transparent overlay
+8005d0f4 | no shoot (half), halt on weapondrop
+8005ec24 | no shoot (half)
+800b1e98 | crazy shooting
+800b27a0 | shoot lower
+800b4df4 | gun wrong model position on shoot
+
+2019-03-02
+['Chunk crash']
+80162c74 [lwz]
+80043ff4 [stb]
+8036751c [stw]
+800091d8 [stfs]
+------^ prior search
+8016fe40 [lwz]
+80015a34 [lwz]
+--------------------
+nop 80171280 -> models not mapped in EV, warp to nukkoro2.inf spawn
+
+[CCG Crash]
+801a4b44 (failed but did not crash)
+---------------------------------
+2019-03-03
+Temp spline swap for pulley/ziplines:
+based on 80132fd0
+blr @ 80132f70
+
+2P Essentials Temporary Pulley/Zipline Disable [dreamsyntax]
+C2132f70 00000001
+4E800020 00000000
+*Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
