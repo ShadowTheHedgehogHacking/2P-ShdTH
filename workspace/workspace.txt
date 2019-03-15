@@ -2580,3 +2580,29 @@ blr @ 80132f70
 C2132f70 00000001
 4E800020 00000000
 *Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
+
+--------------------
+2019-03-14
+
+Byte 80575F87 || ExecuteStageAction
+
+Get StringName of lastState by:
+pointer(80575F78) deref 4x at offset 0 for each deref
+String-name verified ExecuteStageAction values:
+0 = maintain | no string name, maintains last executed action
+1 =  ???  | no string name, is maintain value while in the menus
+2 = InitAction | freezes player state, timer. Other object animations are alive.
+3 = PlayAction | Player has control, normal gameplay
+4 = EventAction | switches to nearest EventCamera, sets state to Event
+5 = PauseAction 
+6 = GoalAction
+7 = RestartAction | Restart level completely
+8 = ContinueAction | Restart to last checkpoint state
+9 = DeadAction
+10 = SaveAction
+11 = TryAgainAction | Blackout/Continue? screen
+12 = ShowAction | 2PIntroAnimation Event trigger
+13 = FlashbackAction | Presumably used to end Events, calls 16
+14 = Result2PAction | 2P win/loss/timeup text at end of 2P Battlemode match
+15 = TimeupAction | Presumably for levels with timer restriction, calls 7 if triggered.
+16 = EndAction | Quit 

@@ -33,7 +33,7 @@ You can find a setup tutorial video at: https://youtube.com/dreamsyntax
         https://github.com/FIX94/Nintendont
     You do NOT need kenobiwii.bin! 
 
-    Tested with Build v5.485 - Aug 26 2018 on a Wii
+    Tested with Build v5.486 - Dec 18 2018 on a Wii
     Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
        e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
                                game.iso
