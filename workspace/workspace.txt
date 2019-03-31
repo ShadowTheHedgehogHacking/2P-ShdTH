@@ -2262,7 +2262,7 @@ Donut lead: 8015cb70 -> disables fan activation (backtrack to caller of bctrl)
 8007d808-8007d834
 -----------
 2019-02-08
-[BlackKnight] || INCOMPLETE
+[BlackKnight] || INCOMPLETE || SEE NEXT ITERATION
 80067458 | No melee wep effect markers / damage
 80016390 | glCopyMatrix (copy player model to animation data)
 8004f040 | No melee wep effect, yes damage
@@ -2602,7 +2602,80 @@ String-name verified ExecuteStageAction values:
 10 = SaveAction
 11 = TryAgainAction | Blackout/Continue? screen
 12 = ShowAction | 2PIntroAnimation Event trigger
-13 = FlashbackAction | Presumably used to end Events, calls 16
+13 = FlashbackAction | Same as Event, but exclusive to Library mode (has additional B button action); calls 16
 14 = Result2PAction | 2P win/loss/timeup text at end of 2P Battlemode match
 15 = TimeupAction | Presumably for levels with timer restriction, calls 7 if triggered.
-16 = EndAction | Quit 
+16 = EndAction | Quit
+------------------------
+2019-03-18
+GravitySwitcher | Space Gadget (3 calls unless specified)
+80293a10 / ?gravitySwithcer? | (39 calls)
+80074908 | halt at touch switch (39 calls)
+8009a2c8 | Activate object, no switch gravity
+8009a388 | Activate object, no switch gravity
+801eb588 | halt after change gravity (1 call) / seems unrelated
+80247b40 | No activate object
+802482d4 | No activate object
+80248338 | saa
+802483a8 | saa
+80270450 | unknown / maybe on checkpoint if gravity? / seems unrelated
+802704dc | saa / seems related
+8040f058 | unload all setobjs for duration of gravity switcher change (130 calls)
+8042270c | unknown / maybe on checkpoint if gravity?
+
+Call order on hit switcher:
+802482d4 -> 80247b40 -> 802483a8 (nop) -> 80248338 -> 8009a388 -> 80074908 (x2) -> 80293a10 (?gravitySwitcher) -> 80074908 (x2) -> (?gravitySwitcher) (repeat segment of a10 to 908) -> 8009a388 -> 8040f058 (green glow happens) -> 8009a2c8 (x2) -> 8040f058 (xmulti) (repeats whole cycle) -> 8040bcc0 (load and set floats small func, has two callers)
+
+note: exclusiveGravitySwitcher call 8009a388 occurs on restart; only occurs on Space Gadget (bingo?)
+calledbyGravitySwithcerALot also called on other levels, Glyphic canyon when leaving first checkpoint area (not caused by the checkpoint itself, seems to be a trigger)
+
+2019-03-29
+[BlackKnight] || INCOMPLETE || [Iter2]
+80067458 | No melee wep effect markers / damage
+80016390 | glCopyMatrix (copy player model to animation data)
+8004f040 | No melee wep effect, yes damage
+800461d0 | saa
+8007b4c8 | disable no move on 3rd strike | throw away weapon = stuck
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+80084108 | disable no move on 3rd strike
+800841e4 | no move at all during/after melee
+8008452c | allow for one swing only
+800847d4 | disable no move on 3rd strike
+80084a18 | don't swing, slow walk
+80093b74 | permanent strafe in one direction/ walk 
+80093bd4 | saa
+8009ca20 | prevent all melee attack calls
+800c658c | deplete all ammo on hit
+802dea10 | no melee wep effect
+-----------
+-> exploring 8009ca20 area
+--nop to inspect--
+8009ca34 | bne -> can't attack melee specific
+8009ca40 | only perform in-air spin attack
+8009ca48 | saa
+8009ca78 bctrl to load weapon state??
+--------------------------------
+prior old
+new iter:
+80084108 | 46 calls, same as 800847d4 (disable no move on 3rd strike)
+80084840 | saa
+800848a4 | saa
+80084914 | saa
+8008452c | rapid press for 2 swings, normally 1 swing (timer?)
+80084a18 | slow down when attacking, no animation or damage done
+80084b54 | disable no move on 3rd strike
+80084be4 | saa
+8023b114 | no weapon trails
+
+digging into 8009c9f0 / 8009ca20 (in list) / WeaponAttackSlowSpeedFunction
+[3rd for code]
+Disable Unarmed Melee (Allow B = Slide Only) [dreamsyntax]
+0409ca60 408200a0
+---
+2019-03-30
+8023b114 | no shoot gun, melee weapons do no trails and no damage, no count down. Animation still happens. Also prevents in-air shooting attack but not melee
+Noweapon melee works normal
+
+

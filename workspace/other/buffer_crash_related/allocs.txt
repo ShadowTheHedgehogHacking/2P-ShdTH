@@ -1,0 +1,31 @@
+Route alloc fixedPOOLS to varPOOLS:
+nop 803a36d0
+nop 803a36d4
+Route free fixedPOOLS to varPOOLS:
+nop 803a367c
+nop 803a3680
+
+C23A36D0 00000001
+60000000 00000000
+C23A36D4 00000001
+60000000 00000000
+C23A367C 00000001
+60000000 00000000
+C23A3680 00000001
+60000000 00000000
+
+
+prevent soft alloc from var pools (within fixed pools func)
+nop 803a38e8
+803a3e80 == alloc from var pools
+48000598
+-------
+swap fixed/var calls (-+63C)
+pool alloc
+803a36d0 becomes 480007b1 (fixed to var)
+63C
+803a36d8 becomes 4800016d (var to fixed)
+pool free
+803a367c becomes 48000499 (fixed to var)
+428
+803a3684 becomes 48000069 (var to fixed)

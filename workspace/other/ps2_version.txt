@@ -1,0 +1,40 @@
+chunks code range 8003a550 - 8003a6b0
+cam 812875b4
+P1 RingCount: 8057670C
+Writeable P1 X: 80575FA8 (pointer) 3 levels
+
+57670C
+9BFF3C
+
+Offset : +0x449830
+80575FA8 = 209BF7D8
+
+--
+00483D80
+
+--
+z_un_00483b70 
+--------
+ReadOnly X GC
+807D77E0 -> PS2 20C21010
+
+807D77E0 == 21D4D270
+-> -130h
+= 21D4D140 | -3
+807D77E0 == 21D4D250
+= 21D4D120 | -2
+807D77E0 == 20993054
+= 20992F24 | -1
+----------
+New approach:
+P2X RO w Rotate at -130h from below :
+807D77E0 RO P1 GC
+807D7990 RO P2 GC
+
+1B0
+----------------------------
+z_un_0045dac0 - 0045DC3C
+0045dba8
+lui at, 0x0000
+ori v0,at,0x1
+b 0x0045dc28
