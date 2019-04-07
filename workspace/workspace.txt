@@ -2692,3 +2692,24 @@ possible main free controller of camera @ 8007df28?
 
 : Alien Turret Sky Troops :
 malloc : 800999ac
+
+2019-04-07
+---Boss Calls---
+802d4cc0 | dead() for Diablon / Bottom continues attacking
+802e8114 | saa, but stops attacking
+
+80310160 | EggDealer Lava stop attacking, dead / no endstage @ 80310160
+----
+TrackSpecialCam
+8031aaf4 // egg dealer and diablon
+8029120c // sub bosses and black doom
+
+2P Optionals Freecam for All Bosses [dreamsyntax]
+C229120C 00000001
+4E800020 00000000
+C231AAF4 00000001
+4E800020 00000000
+------
+Death Warp
+80176fd0 | no P2 warp?
+
