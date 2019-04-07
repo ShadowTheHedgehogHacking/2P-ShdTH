@@ -2678,4 +2678,17 @@ Disable Unarmed Melee (Allow B = Slide Only) [dreamsyntax]
 8023b114 | no shoot gun, melee weapons do no trails and no damage, no count down. Animation still happens. Also prevents in-air shooting attack but not melee
 Noweapon melee works normal
 
+2019-03-31
+still digging in same func
+nop results|
+8009ca40 | no mid-air halt attack melee, gun, unarmed
 
+2019-04-05
+---CameraFixes---
+: Lost Impact Turrets :
+found malloc parent chain at 801cef54
+
+possible main free controller of camera @ 8007df28?
+
+: Alien Turret Sky Troops :
+malloc : 800999ac
