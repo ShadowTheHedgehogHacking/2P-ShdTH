@@ -2712,4 +2712,34 @@ C231AAF4 00000001
 ------
 Death Warp
 80176fd0 | no P2 warp?
+-------------------
+2019-04-09
+GravitySwitcher
+New method: use GravitySwithcher found state of switchers, look for reads, check string references
+Look for dynamic pointer for "Player::SetGravityCommand"
+-> found PlayerBase instead
+call to read GravitySwitcher state @ bl at 80258f68
 
+mem 813513a0 -> player pointer?? -> no, its pointer to "GravitySignBoard" object
+lwz @ 80293958 ->  reads from GravitySwitcherState -> results in no playerStateSwitch
+
+find where floats are stored, first one read @exclusiveGravitySwitcher 8009a388
+
+
+Store SetGravityCommand (execute) @ into (r30 @ 8009a3ac) @ 812fcb80
+
+
+nop @ 8009a3ac for do not store SetGravityCommand on PlayerCommands executor
+
+
+Force character?
+802285dc 
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+
+
+Found Player::PlayerObject @ PlayerSpawnLoadCharacterModelAndWeapon? @ 80079f40 in r0
+Possible objectList @ 80f72c98 / r27 0x0038 @ 80079f44
+
+
+Stopping @ 80079f48 SaveState F7
