@@ -22,8 +22,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Certain vehicles only respond to P1's control pad
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
-* DropShips/EnemySpawners are broken - HeroesPowerPlant related
 * If Dark Partner is activated first, P3 remapping fails
+* Key Doors do not react to P2
+* Some triggers (see Westopolis) do not react to P2
+* Disable ScreenShake GeckoCode sometimes results in endless screenshake (Chaos Blast to get out of it)
+* Enemy Target Draw will show locked to P1 even if targeting P2
+* Heavy Dog / Blue Falcon do not damage P2
 
 ## Done so far:
 * P2 UI
@@ -41,11 +45,13 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2's flyables do not overwrite P1's camera
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
 * P2 can pause
+* Spawners / Worms work properly
 
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
 * Culling issue on Final Haunt for P2's screen when near force-fields
+* Item Bubbles / Hint Bubbles content render based on P1's relative location
 
 ## Bonus Roadmap
 * Individual death-to-checkpoint / Don't reload level for both players
@@ -53,6 +59,10 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * E3 Race Mode - Hero vs Dark objective race (only some stages)
 * FriendlyFire Enable/Disable
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
+
+## Dev
+* dreamsyntax
+* DonutStopGaming
 
 ## Credits
 * DonutStopGaming for major contributions to chunks, P3/AI partner mapping, and other address discoveries
