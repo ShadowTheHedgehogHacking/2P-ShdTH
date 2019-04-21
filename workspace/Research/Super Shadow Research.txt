@@ -58,20 +58,19 @@ unrelated maybe:
 800af6b8 bctrl called when player hit, followed by a beq. nopping beq causes death every hit, even for super
 
 
-8027e184 stw  r0, 0x0074 (r3) -> nopping this prevents the super "effect" pointer from being set to null, and keeps the super model, even though shadow is no longer "super"
+8027e184 stw  r0, 0x74 (r3) -> nopping this prevents the super "effect" pointer from being set to null, and keeps the super model, even though shadow is no longer "super"
 
 after doing a write bp on the pointer to super effect, 8004eed4 appears to set it to 0 as follows:
-8004ef64 stw  r0, 0x000C (r3)
+8004ef64 stw  r0, 0xC (r3)
 
 stepping out to the previous function 8027e1e0, the top of which sets 0x18(r30) to 8054defc, which appears to be a proper pointer to Player::Shadow::Super
 never seen this "object" before, might be related
 
 turns out the pointer to the "super effect" only makes regular shadow invisible, thus not quite what im after
 
-going back to 
-
-8027e0ec
-b3tt3r-th4n-dreamsyntax-workspace.t3xt <- maek name
+going back to 8027e184 to see why 0x74(r3) being set to 2 causes super model to dissapear, and shadow to reappear
+so actually after setting the pointer to "Super"(playerpointer->0x23c->0x44) to null it looks like it detaches super shadows model from shadow
+so this probably is related to creating/destroying the model, but will likely be in a differnet function
 
 
 
