@@ -1,0 +1,85 @@
+		(*Transformation*)
+	4/17/19
+super loading model:
+80086ec0: loads status bit(0xAC) 40000000
+
+
+reads(0xAC):
+800b5240
+<deleted rest as lead to nothing>
+
+8027f088 changes to 0x00000010
+80079378 changes to 0xc0000000
+8027f144 changes to 0x00080000
+
+--this doesnt work, new approach---
+
+----------------
+
+80099f78 -> magic happens in here, nop the next check for always super
+---not quite, isnt always called
+
+800af8b8 -> the next step out, bctrl, appears to call multiple things
+-without gecko code enabled the following are ctrl destinations:
+	-801dbae4
+	-80099898
+	-80099a50
+	-80099658
+-with gecko code enabled
+	-801dbae4
+	-80099898
+	-80099a50
+	-80099658
+	-80099f1c******** <- this one?
+	
+for the bctrl above, code goes like this:
+	lwz r12, 0(r31);
+	lwz r12, 0xC(r12);
+	mtctr r12;
+	bctrl;
+
+(r12)801dbae4 originates from (r31)80992a00, which when dereferenced equates to string: "ClrVelocityCommand"
+(r12)80099898 originates from (r31)809e5120, which when dereferenced equates to string: "Player::ResetCameraCommand"
+(r12)80099a50 originates from (r31)809e5160, which when dereferenced equates to string: "Player::CancelActingCommand"
+(r12)80099658 originates from (r31)809e51a0, which when dereferenced equates to string: "Player::ResetCommand"
+(r12)80099f1c originates from (r31)809e51a0, which when dereferenced equates to string: "Player::ToSuperCommand"
+
+80099f1c contains 80099f78 so.... partial success. now to find out why ToSuperCommand is called
+
+	4/18/19
+801a0480 a few steps out, might be main function caller?
+sets position, angle, super etc on restart. confirmed working as nopping makes it not happen
+looking for player pointer
+		(/	*Transformation*)
+
+		(*De-Transformation*)
+	4/20/19
+unrelated maybe:
+800af6b8 bctrl called when player hit, followed by a beq. nopping beq causes death every hit, even for super
+
+
+8027e184 stw  r0, 0x0074 (r3) -> nopping this prevents the super "effect" pointer from being set to null, and keeps the super model, even though shadow is no longer "super"
+
+after doing a write bp on the pointer to super effect, 8004eed4 appears to set it to 0 as follows:
+8004ef64 stw  r0, 0x000C (r3)
+
+stepping out to the previous function 8027e1e0, the top of which sets 0x18(r30) to 8054defc, which appears to be a proper pointer to Player::Shadow::Super
+never seen this "object" before, might be related
+
+turns out the pointer to the "super effect" only makes regular shadow invisible, thus not quite what im after
+
+going back to 
+
+8027e0ec
+b3tt3r-th4n-dreamsyntax-workspace.t3xt <- maek name
+
+
+
+		(/*De-Transformation*)
+
+
+		(*2P Super*)
+	4/17/19
+for potential 2p shadow: 80099f48 changes the stack in some way to put the player pointer at 0x20(sp), investigate
+...
+actually its just r4 that contains player pointer
