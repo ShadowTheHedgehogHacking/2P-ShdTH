@@ -6,7 +6,7 @@ super loading model:
 
 reads(0xAC):
 800b5240
-<deleted rest as lead to nothing>
+(deleted rest as lead to nothing)
 
 8027f088 changes to 0x00000010
 80079378 changes to 0xc0000000
@@ -50,7 +50,7 @@ for the bctrl above, code goes like this:
 801a0480 a few steps out, might be main function caller?
 sets position, angle, super etc on restart. confirmed working as nopping makes it not happen
 looking for player pointer
-		(/	*Transformation*)
+		(/*Transformation*)
 
 		(*De-Transformation*)
 	4/20/19
@@ -69,12 +69,27 @@ never seen this "object" before, might be related
 turns out the pointer to the "super effect" only makes regular shadow invisible, thus not quite what im after
 
 going back to 8027e184 to see why 0x74(r3) being set to 2 causes super model to dissapear, and shadow to reappear
-so actually after setting the pointer to "Super"(playerpointer->0x23c->0x44) to null it looks like it detaches super shadows model from shadow
-so this probably is related to creating/destroying the model, but will likely be in a differnet function
 
+	4/21/19
+so actually after setting the pointer to "Super"(playerpointer->0x23c->0x44) to null it looks like it detaches super shadows model from shadow
+so while this probably is related to creating/destroying the model, but it will likely be in a differnet function
 
 
 		(/*De-Transformation*)
+		
+		(*Super State & Actions*)
+			<Weapons>
+	4/21/19
+determined that the following bctrl in 8027e0d8 leads to the function that removes the chaos spear "weapon" upon reverting to normal:
+8027e178 bctrl -> 8023aff0
+can confirm, as nopping this bctrl allows shadow to keep chaos spear even after reverting to normal
+does not appear however to be the function everything uses for weapons, as shadow still gains chaos spear even after adding a blr at the top
+hmm... shadow appears to be able to "drop" it but never actually lets go
+additionally, swapping with another weapon causes a halt
+but good news is that super shadow is able to pickup other weapons, but was only able to acheive this by nopping the code that keeps super shadows model, so the game thinks shadow is normal otherwise
+will look into what other checks I am not accounting for that may affect chaos spear, will probably revisit 8023aff0 as there are some "status" checks in there
+			</Weapons>
+		(/*Super State & Actions*)
 
 
 		(*2P Super*)
