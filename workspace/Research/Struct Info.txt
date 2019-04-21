@@ -1,0 +1,48 @@
+Shadow Player Struct:
+	0xA8 - Status 2:
+		-0x80000000 hasGun
+	0xAC - Status 3:
+		-0x40000000 enables super shadow during loadzz
+		-0x04000000 controls dont turn with camera
+		-0x00000100 no shadow
+		-0x00004000 disable walking
+		-0x00000400 disable movement
+		-0x00000010 dont lose rings when hit
+		-0x00000020 super fly mode
+		-0x00000040 animation doesnt change
+		-0x00000080 player invisible
+		-0x00000004 canChaosControl
+		-0x00000008 canChaosBlast
+		
+		
+Player:
+	0x0 - char* pName
+	0x4 - size ?
+	0x8 - enemy ?
+
+
+Shadow:
+	0x0 - char* pName
+	0x4 - size ?
+	0x8 - Shadow pShadow
+	0xC - Player pPlayer
+	0x10 - CharaColliMove* pCharaColliMove
+
+ShadowExecuter:
+	0x4 - size?
+	0x8 - CharaColliMove* pCharaColliMove
+	0xC - Motion* pMotion
+	0x10 - Shadow* pShadow
+	0x14 - int ?
+	0x18 - Player::Shadow::ShadowExecuter** ?
+	0x28 - my player pointer
+	0x30 - Player::Behavior ?
+	0x38 - ?
+	0x40 - int ?
+	0x48 - float IdleTalkTime
+	
+	---Struct Sizes---
+CharaColliMove - 0x3B
+Motion - 0x1428
+ShadowExecuter - 0x888
+Shadow - 0xC30
