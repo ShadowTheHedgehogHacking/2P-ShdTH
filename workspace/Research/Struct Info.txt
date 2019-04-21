@@ -29,6 +29,7 @@ Shadow:
 	0x10 - CharaColliMove* pCharaColliMove
 
 ShadowExecuter:
+	0x0 - char* pName
 	0x4 - size?
 	0x8 - CharaColliMove* pCharaColliMove
 	0xC - Motion* pMotion
@@ -41,8 +42,15 @@ ShadowExecuter:
 	0x40 - int ?
 	0x48 - float IdleTalkTime
 	
-	---Struct Sizes---
+ShadowWeapon:
+	0x0 - char* pName
+	0x4 - int size?
+	0x28 - my player pointer
+	
+	
+		(*Struct Sizes*)
 CharaColliMove - 0x3B
 Motion - 0x1428
-ShadowExecuter - 0x888
 Shadow - 0xC30
+ShadowExecuter - 0x888
+ShadowWeapon - 0x1490
