@@ -88,6 +88,84 @@ hmm... shadow appears to be able to "drop" it but never actually lets go
 additionally, swapping with another weapon causes a halt
 but good news is that super shadow is able to pickup other weapons, but was only able to acheive this by nopping the code that keeps super shadows model, so the game thinks shadow is normal otherwise
 will look into what other checks I am not accounting for that may affect chaos spear, will probably revisit 8023aff0 as there are some "status" checks in there
+
+	4/23/19
+after putting a blr at the top of 8023aff0, shadow maintains chaos spear after reverting.
+shadow attempts to drop weapon but cannot. able to switch for other weapons, vaccum gun doesnt appear to work(although on a second test and beyond it does?), but shadow rifle does
+shadow is now not able to drop shadow rifle, and does not drop even after running out of ammo, can keep shooting
+does not drop shadow rifle while dying, upon respawning shadow regains chaos spear
+8023b03c bl	->0x8023AD08 appears to be the important call, nopping does the same as above
+putting a breakpoint on 8023aff0, trips when a weapons is dropped (but not picked up), and when all ammo is consumed
+put a breakpoint on 8023ad08 -> same as above
+inspecting 8023ad08:
+8023ad1c lwz r3, 0x0034 (r3)
+8023ad20 cmplwi	r3, 0
+8023ad24 beq- ->0x8023AEA0 <- if its equal and makes the branch, it jumps over the code that drops weapon
+...
+
+8023ad58 beq- ->0x8023AD84 <- appears to always branch when weapon dropped, appears to be some check to load alternate drop speed parameters (slightly father away)
+8023ad7c bl	->0x800091D0 <- branched over by above^
+8023ad80 b ->0x8023ADA8 <- branched over by above^
+8023ada4 bl	->0x800091D0 <- when nopped weapon immediate hits ground when dropped
+8023adb4 bl	->0x80079628 <- when nopped the weapon is dropped, dissapears, and does not land on ground (although not like when consuming all ammo)
+8023adc0 bl	->0x800091D0 <- when nopped dropped weapon always falls the same direction
+8023adcc bl	->0x80079698 <- no apparent change when nopped
+8023add8 bl	->0x800091EC <- no apparent change when nopped
+8023ade4 bl	->0x800091EC <- when nopped the weapon is dropped, dissapears and does not land on ground (although not like when consuming all ammo)
+8023adf4 bl	->0x8040CD74 <- no apparent change when nopped
+8023ae00 bl	->0x800091EC <- no apparent change when nopped
+8023ae0c bl	->0x80221D94 <- no apparent change when nopped
+8023ae18 bl	->0x80093230 <- no apparent change when nopped
+8023ae24 bl	->0x8040CFF8 <- no apparent change when nopped
+8023ae34 bl	->0x8023ABF0 <- weapon ammo reset when dropped, even when ammo is exausted
+8023ae50 bl	->0x80221B08 <- when nopped the weapon is dropped, dissapears and does not land on ground (although not like when consuming all ammo)
+8023ae58 bl	->0x8023ABF0 <- no apparent change when nopped
+8023ae60 bne- ->0x8023AE8C <- no apparent change when nopped, no apparent change when changed to b
+8023ae64 bl	->0x8040EE90 <- no apparent change when nopped
+8023ae74 bne- ->0x8023AE8C <- no apparent change when nopped
+8023ae78 bl	->0x80053164 <- no breakpoint hits during weapon drop
+8023ae88 bl	->0x801D560C <- no change when nopped
+8023ae9c bl	->0x8023A10C <- when nopped the weapon is dropped, but shadow also keeps a copy of weapon in his hand
+
+tsking a look at 8023ae34 bl ->0x8023ABF0:
+the line above it is 8023ae30 lwz r31, 0x0014 (r4)
+in this case r31 appears to be some sort of weapon ID. changing ad-hoc after a breakpoint makes a different weapon drop while maintaining ammo amount
+...
+after experimenting with this for a bit. I feel like I remember weapon ID 0xB but dont remember seeing it in game?
+this also appears to count with chaos spear, replacing the weapon id drops a weapon with 999 ammo (not infinite)
+looking at 8023ae9c bl ->0x8023A10C:
+inside of 8023a10c is 8023a128 beq- ->0x8023A134, which appears to branch over if weapon is dropped, and pass through if ammo is exausted
+8023a128 beq- ->0x8023A134 <- nopping has no apparent effect
+8023a130 bl	->0x801AB81C <- when nopped, weapon drops and shadow keeps a copy in his hand, however shadow punches instead of shooting. cannot drop the "weapon" and collecting another weapon of the same type makes it dissapear as if collecting it, however it can be switched for a differnt type of weapon
+8023a13c beq- ->0x8023A158 <- seems to always pass through, so nopping has no effect, changing to b does the same as below
+8023a140 beq- ->0x8023A158 <- seems to always pass through, so nopping has no effect, changing to b does the same as below
+^not a typo, both lines appear to do same thing(maybe?)
+
+8023a154 bctrl(8023c800) <- when nopped, weapon is dropped but the model of the weapon shadow holds doesnt unload, model no longer stays with shadow
+^maybe model unload function??? will need to look deeper later
+
+8023a16c beq- ->0x8023A1B0 <- appears to always pass through, both nopping and changing to b have no effect
+8023a180 bctrl(800b5008) <- no apparent change when nopped
+8023a19c bctrl(800b4f3c) <- no apparent change when nopped
+8023a1ac bl	->0x800AA6C0 <- no apparent change when nopped
+8023a1bc bl	->0x80076CC8 <- when nopped, upon dropping weapon, unable to punch or melee attack. only able to pickup weapons by "switching" to them with x button, cannot drop anything with y button unless weapon is in hand
+8023a1c0 bl	->0x80079808 <- does nothing when nopped alone, combine with above^ will have same affect as above but also continue to display ammo gui. doesnt seem to be useful
+8023a1cc bl	->0x80178B5C <- no apparent change when nopped
+8023a1d4 beq- ->0x8023A1EC <- appears to always pass through, no apparent change when replacing with b
+8023a1dc bl	->0x8016EEE8 <- no apparent change when nopped
+8023a1e8 bl	->0x8016EEE0 <- no apparent change when nopped
+
+points of interest:
+			in 8023AD08:
+	8023ae34 bl ->0x8023ABF0: r4 contains pointer to weapon type object, and r30 contains pointer to ShadowWeapon, also found in my player pointer
+	8023ae50 bl	->0x80221B08
+	8023ae9c bl	->0x8023A10C
+	
+			in 8023A10C:
+	8023a130 bl	->0x801AB81C
+	8023a1bc bl	->0x80076CC8
+	8023a1c0 bl	->0x80079808
+
 			</Weapons>
 		(/*Super State & Actions*)
 
