@@ -165,7 +165,85 @@ points of interest:
 	8023a130 bl	->0x801AB81C
 	8023a1bc bl	->0x80076CC8
 	8023a1c0 bl	->0x80079808
+	
+	
+	4/24/19
+looking at 801ab81c:
+801ab834 bl	->0x8005BEDC <- nopping causes halt when weapon dropped
+801ab840 bl	->0x801AB864 <- when nopped, drops weapon but copy remains in hand. shadow able to punch and not shoot
+801ab84c bl	->0x8005BD24 <- when nopped, model left floating when weapon is dropped
+address needed likely 801ab840. with a bp set, also tripped after blinking following being hit for some reason? hmm maybe not? was doing it for a while but does not anymore
+...
+determined that the other wierd trip of bp is when enemy is too far away and despawns, presumably despawning weapon
+this function swaps (r4) and (r4 + 4) with (r3) and (r3 + 4)
+r3 = ??, maybe weapon to be dropped
+r4 = weapon shadow is holding
+nopping 801ab870 stw r5, 0 (r4) alone crashes, but if 801ab880 stw r5, 0x0004 (r3) is also nopped, it behaves like previous nops, with persistent weapon model
+the usual function is similar to this:
+	
+	r3: 0
+	r3+4: 0
+	r4: pointer1
+	r4+4: pointer2
+		|
+		V
+	r3: pointer1
+	r3+4: pointer2
+	r4: 0
+	r4+4: 0
+	
+with the nops it looks more like this:
+	r3: pointer1
+	r3+4: 0
+	r4: pointer1
+	r4+4: 0
 
+first guess is that the model existing both on the ground and in the hands is due to r3 and r4 being equal
+manually setting r4 to 0 afer the function executes results in the same two models, but one does not follow shadow
+manually setting r3 to 0 has no immediate effect, will need to test all permuations
+
+	r3: 0
+	r3+4: 0
+	r4: 0
+	r4+4: 0
+		--->>>:floating weapon
+	
+	r3: 0
+	r3+4: 0
+	r4: 0
+	r4+4: pointer2
+		--->>>:floating weapon, dissapears when real weapon is picked up
+	
+	r3: 0
+	r3+4: pointer2
+	r4: pointer1
+	r4+4: 0
+		--->>>: halt
+	
+	r3: 0
+	r3+4: 0
+	r4: pointer1
+	r4+4: 0
+		--->>>: drops weapon, shadow keeps copy but only can punch
+	
+	r3: 0
+	r3+4: 0
+	r4: pointer1
+	r4+4: pointer2
+		--->>>: drops weapon, shadow keeps copy but only can punch
+	
+	r3: 0
+	r3+4: pointer2
+	r4: 0
+	r4+4: pointer2
+		--->>>: drops weapon like normal, crashes when picked up
+	
+	r3: pointer1
+	r3+4: pointer2
+	r4: 0
+	r4+4: pointer2
+		--->>>: regular weapon drop
+	
 			</Weapons>
 		(/*Super State & Actions*)
 
