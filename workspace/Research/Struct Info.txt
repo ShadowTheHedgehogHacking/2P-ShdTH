@@ -27,6 +27,7 @@ Shadow:
 	0x8 - Shadow pShadow
 	0xC - Player pPlayer
 	0x10 - CharaColliMove* pCharaColliMove
+	0x68 - Shadow pSelf?
 
 ShadowExecuter:
 	0x0 - char* pName
