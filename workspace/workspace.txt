@@ -2743,3 +2743,19 @@ Possible objectList @ 80f72c98 / r27 0x0038 @ 80079f44
 
 
 Stopping @ 80079f48 SaveState F7
+
+
+
+--------
+2019-04-20
+|| Texture Buffer Crash ||
+RelatedFunc5 does frees, no evident change on blr @ 800159d8
+RelatedParentFunc4 does EVENT BON/ANIM map || @ throw blr @ 80172560 || should prevent EV crash on end of stage
+
+Prevent End of Stage Crash v0.1
+C2172560 00000001
+4E800020 00000000
+* Breaks all models in events
+
+
+Try nop @ 801725b8 and @ 80172604
