@@ -243,6 +243,19 @@ manually setting r3 to 0 has no immediate effect, will need to test all permuati
 	r4: 0
 	r4+4: pointer2
 		--->>>: regular weapon drop
+		
+	4/25/19
+after looking at multiple combinations, it appears that r4 containing pointer1 coincides with shadow holding a weapon copy after dropping
+	4/26/19
+setting a write BP on the address pointed to by r4
+located functions with static pointers to objects, such as Weapon::WeaponBase, maybe the function factory destructor?
+using ring shooter as an example when dropped, will look into 80064aac(Weapon::RingShot):
+appears to be destructor, appears to not call next two if blr'd
+next is 8005ebb0(Weapon::WeaponGunBase):
+looks like destructor, wont call next one if blr'd
+then comes 8005d03c(Weapon::WeaponBase):
+looks like its a destructor too
+further looking shows that these functions are called by eachother in hierarchy
 	
 			</Weapons>
 		(/*Super State & Actions*)
