@@ -2759,3 +2759,49 @@ C2172560 00000001
 
 
 Try nop @ 801725b8 and @ 80172604
+
+
+---------------
+2019-04-27
+Fixing Library/Event sequence crashes
+Strategy: remove P2 spawn on Event
+EV_CutsceneItemsWarp 805EF2B5 | Not affected by Partner/SpecialCams | 
+Verifying possible values:
+Set to 0 on starting game and first load of regular level = should be P2
+(arbitrary) -> becomes this on EV level clear (westopolis neutral)
+-> becomes FF on falling (break before cutscene 1 westopolis)
+immediately becomes (arbitrary) after (during cutscene)
+-> becomes FF on falling again
+----------
+
+debug_bba:
+80330cb8
+8032c594
+8032863c
+801eb358
+
+
+C2330CB8 00000001
+38000001 00000000
+C232C594 00000001
+38000001 00000000
+C232863C 00000001
+38000001 00000000
+C21EB358 00000001
+38000001 00000000
+-----
+Not able to verify Cutscene in progress,
+for now, prevent spawn on non-playable stages:
+@ 8017707c
+
+lwz r4, 0xA8 (r4)
+cmpwi r4, 811
+bgt 0x8
+li r4, 800
+
+$2P Essentials Spawn P2 v2 [dreamsyntax]
+C217707C 00000003
+808400A8 2C04032B
+41810008 38800320
+60000000 00000000
+*Reduces crashes during in-game cutscenes
