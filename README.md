@@ -10,13 +10,24 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Problems (High Priority)
+## Road to 2.0 (WIP)
+* Verify 1:1 misc bytes for level edits per HPP v0.7.5
+* Fix "Disable ScreenShake" - (occasional endless shake issue)
+* Fix Air bug - (player state pointer overlap issue)
+* Fix "ChaosPowers activate for both players" - (add underflow/overflow checks)
+* Key Door trigger patch for P2
+* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
+* Space Gadget, Devil Doom, Zipline/Pulleys fixed
+* Turrets must hook to proper split/camera
+* All bosses are free-cam
+* Checkpoint Warping/Backtracking warps both players
+* **Buffer crash research / possible crash reductions if possible
+
+## Problems
 * Checkpoint Warping/Backtracking only moves P1
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
-
-## Problems (Low Priority)
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 loads them first
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 activates trigger without P1 being in range
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
@@ -30,23 +41,22 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Heavy Dog / Blue Falcon do not damage P2
 
 ## Done so far:
-* P2 UI
-* Level chunks load/unload based on both players* (looking into crashes related to this, could be buffer overflow or VRAM/hardware limitation)
+* Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
+* ChaosPowers activate for both players* (underflow/overflow identified)
+* Partner/Mission Helpers can be remapped to permanent AI or P3* (P3 has some issues depending on Partner activation order)
+* ChaosPowers EventsCamera and ChaosControl Effects removed* (ScreenShake issue identified in some levels) 
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras
 * SET objects load/unload based on both players
 * Carry over VS mode selected characters into CO-OP mode
-* ChaosPowers activate for both players
 * nukkoro2.inf spawn positions for every level
 * P2 Sound Listener
-* Partner/Mission Helpers can be remapped to permanent AI or P3* (P3 has some issues depending on Partner activation order)
-* Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
-* ChaosPowers EventsCamera and ChaosControl Effects removed
+* P2 UI
+* P2 can pause
 * P2's flyables do not overwrite P1's camera
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
-* P2 can pause
+* Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * Spawners / Worms work properly
-
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
@@ -56,7 +66,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Bonus Roadmap
 * Individual death-to-checkpoint / Don't reload level for both players
 * Static weapon swaps for Metal Androids
-* E3 Race Mode - Hero vs Dark objective race (only some stages)
 * FriendlyFire Enable/Disable
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
 
