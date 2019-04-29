@@ -19,6 +19,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
 * Space Gadget, Devil Doom, Zipline/Pulleys fixed
 * Turrets must hook to proper split/camera
+* All bosses are free-cam
 * Checkpoint Warping/Backtracking warps both players
 * **Buffer crash research / possible crash reductions if possible
 
