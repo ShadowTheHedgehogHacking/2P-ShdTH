@@ -2335,7 +2335,7 @@ blr @ 801fa2dc -> no halts? (boost ramps / springs effect removed)
 
 8000ef58
 
-2P Essentials Remove ScreenShake [dreamsyntax]
+2P Essentials Remove ScreenShake v1 [dreamsyntax]
 C21FA2DC 00000001
 4E800020 00000000
 C200EF58 00000001
@@ -2805,3 +2805,175 @@ C217707C 00000003
 41810008 38800320
 60000000 00000000
 *Reduces crashes during in-game cutscenes
+-----------------------------------------------------------------------------------------------
+2019-04-29 [Rush]
+Found shake bug example: laser strikes in Westopolis (and self weapon ?)
+Key doors:
+- Based off P1 player position
+Partner Despawn:
+- Based off P1 camera position
+
+||Partner Despawn||
+-> Attempt without looking at prior
+Strategy: Break on '?deeperStateCall'
+
+found @ "Player::Npc::ShowCommand"
+Hide is not executed when P2 triggers and P1 is out of range.
+
+Confirmed using main camread with rotate
+-> NOT affecting:
+80433898
+801d9aac
+800c38bc
+801d9a14
+801d9290
+8000a3d8
+800bf62c
+800a0574
+
+--Back to diff:
+80019e10 no update any
+8006c2e8 -> stays scrunched
+80079a70 -> stays disappeared (no update any)
+
+Key Doors:
+8011b78c | door still opens no unlocking keys animation
+8011bc70 | saa 
+
+halt: 801211c4, 
+will crash dolphin: 80120d0c, 8015d780
+
+Shake Fix?
+blr @ 8000a508
+Seems to fix lasers but causes strange camera event instead in some partner areas
+C200A508 00000001
+4E800020 00000000 // do not use
+
+
+2P Essentials Remove ScreenShake v2 ??? [needs more added] [dreamsyntax]
+C21FA2DC 00000001
+4E800020 00000000
+C200EF58 00000001
+4E800020 00000000
+
+Switch to Key Doors
+
+
+2019-04-30
+Attempt to patch in Player Warp POC for GoalState Trigger to Possibly Reduce End Level Overflow/Crashes
+8016b2b0 original inst = li r0, 1
+
+patch to replace:
+P1 struct is always @ 807D71A0
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 80000
+stw r16, 0x0(r15)
+
+C216B2B0 00000004
+3DE0807D 61EF71A0
+81EF0000 820F0008
+3A100320 920F0008
+60000000 00000000
+
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 800
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 C2EF0000
+3AF70320 920F0000
+60000000 00000000
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lwz r16, 0x0(r15)
+addi r16, r16, 8000
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 820F0000
+3A101F40 920F0000
+60000000 00000000
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0 # 999999f (word format)
+lis r15, 0x807D
+ori r15, r15, 0x71A0 # p1
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+#p2
+lis r15, 0x807D
+ori r15, r15, 0x71A8 # p2
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+li r0, 1 # original inst overwrote
+
+No comments version: 
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+lis r15, 0x807D
+ori r15, r15, 0x71A8
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+li r0, 1
+
+2P Experimental Crash Prevention on Goal Event v1
+C216B2B0 0000000B
+3E004974 621023F0
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+920F0000 39EF0004
+920F0000 39EF0004
+920F0000 3DE0807D
+61EF71A8 81EF0000
+81EF0000 920F0000
+39EF0004 920F0000
+39EF0004 920F0000
+38000001 00000000
+*Experimental version, sometimes fails to warp correctly
