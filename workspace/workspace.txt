@@ -2977,3 +2977,36 @@ C216B2B0 0000000B
 39EF0004 920F0000
 38000001 00000000
 *Experimental version, sometimes fails to warp correctly
+
+--------------
+2019-05-03
+New theory on buffers discussed with Donut
+PREDEFINED_LIMIT may exist per level instance.
+To test going to swap Central City (high fail rate) onto Mad Matrix. Prior test used The Doom but that may have been caused by Dolphin FST crash issue
+More on this later.
+
+Misc fixups :
+Circus Park
+Hero Mission should be co-op (count both rings):
+8016ed2c @ mr r4, r3
+where r3 contains current P1 ring count to be sent to MissionChecker with MissionRingCount in r3 after value moved to r4 checker
+
+lis r15, 0x8057
+ori r15, r15, 0x6758
+lwz r15, 0 (r15)
+add r3, r3, r15
+mr r4, r3
+
+2P Essentials Circus Park Hero Mission Co-Op [dreamsyntax]
+C216ED2C 00000003
+3DE08057 61EF6758
+81EF0000 7C637A14
+7C641B78 00000000
+
+Looking for Final Haunt / Vacuum Effect Split2 issue:
+Found @ 804342cc (master split/cam effects?)
+
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2
+C24342CC 00000001
+4E800020 00000000
+

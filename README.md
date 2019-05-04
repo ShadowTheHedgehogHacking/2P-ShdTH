@@ -18,9 +18,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Key Door trigger patch for P2
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
 * Space Gadget, Devil Doom, Zipline/Pulleys fixed
-* Turrets must hook to proper split/camera
-* All bosses are free-cam
+* Turrets are free-cam
+* All bosses are free-cam [DONE]
 * Checkpoint Warping/Backtracking warps both players
+* Circus Park Hero Mission counts P2's rings [DONE]
+* GUN Fortress Security Camera segments are free-cam
+* Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * **Buffer crash research / possible crash reductions if possible
 
 ## Problems
@@ -57,10 +60,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * Spawners / Worms work properly
+* Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
+* Circus Park Hero Mission counts P2's rings
+
 
 ## Other Known Issues (Not planned to be fixed)
-* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
-* Culling issue on Final Haunt for P2's screen when near force-fields
+* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
 
 ## Bonus Roadmap
