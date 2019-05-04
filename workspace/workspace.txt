@@ -3006,7 +3006,7 @@ C216ED2C 00000003
 Looking for Final Haunt / Vacuum Effect Split2 issue:
 Found @ 804342cc (master split/cam effects?)
 
-2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2 [dreamsyntax]
 C24342CC 00000001
 4E800020 00000000
 
