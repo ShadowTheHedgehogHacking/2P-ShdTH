@@ -18,7 +18,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Key Door trigger patch for P2
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
 * Space Gadget, Devil Doom, Zipline/Pulleys fixed
-* Turrets are free-cam
+* Turrets attach to correct player's camera
+* Vehicles map to correct player's controlpad and camera
 * All bosses are free-cam [DONE]
 * Checkpoint Warping/Backtracking warps both players
 * Circus Park Hero Mission counts P2's rings [DONE]
