@@ -3013,4 +3013,13 @@ C24342CC 00000001
 
 2019-05-04
 Turret Free Cam / Vehicle searching
+-> found bctrl master for type
+-----
+Security Camera GUN Fortress
+malloc @ 80269010 nop -> Seems this use of free may have a nullcheck so it may not be necessary to nop. Did not find free, only disables malloc
+Will make it v1 in case free needs to be nop'd later if the above is false and memory gets corrupted
 
+2P Essentials GUN Fortress SecurityTurret Fix v1 [dreamsyntax]
+C2269010 00000001
+60000000 00000000
+* Disables effects on Split1 and SpecialCamera for security turret segments
