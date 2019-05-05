@@ -12,18 +12,18 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Road to 2.0 (WIP)
 * Verify 1:1 misc bytes for level edits per HPP v0.7.5
-* Fix "Disable ScreenShake" - (occasional endless shake issue)
-* Fix Air bug - (player state pointer overlap issue)
 * Fix "ChaosPowers activate for both players" - (add underflow/overflow checks)
 * Key Door trigger patch for P2
-* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
+* Fix "Disable ScreenShake" - (occasional endless shake issue)
+* Fix Air bug - (player state pointer overlap issue)
 * Space Gadget, Devil Doom, Zipline/Pulleys fixed
 * Turrets attach to correct player's camera
 * Vehicles map to correct player's controlpad and camera
-* All bosses are free-cam [DONE]
 * Checkpoint Warping/Backtracking warps both players
+* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
+* All bosses are free-cam [DONE]
 * Circus Park Hero Mission counts P2's rings [DONE]
-* GUN Fortress Security Camera segments are free-cam
+* GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * **Buffer crash research / possible crash reductions if possible
 
@@ -31,7 +31,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Checkpoint Warping/Backtracking only moves P1
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) despawn if P2 activates trigger without P1 being in range
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Certain vehicles alter P1's camera if P2 uses it
 * Certain vehicles only respond to P1's control pad
@@ -63,7 +62,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Spawners / Worms work properly
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Circus Park Hero Mission counts P2's rings
-
+* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)

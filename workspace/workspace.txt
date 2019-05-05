@@ -2110,7 +2110,7 @@ C20A2A64 00000001
 802483a8 | saa
 80482458 | no draw players / stop drawing objs
 
-[partner despawn searching] || PARTIAL
+[partner despawn searching] || DONE (search for v1, not v0.1)
 80073078 | partner does not spawn even if P1 is within range
 800743c0 | partner instantly hooks to nearest player on partnerspawn
 800c9af4 | Continuously warp partner to proper place even if P1 is not there
@@ -3023,3 +3023,20 @@ Will make it v1 in case free needs to be nop'd later if the above is false and m
 C2269010 00000001
 60000000 00000000
 * Disables effects on Split1 and SpecialCamera for security turret segments
+-----
+2019-05-05
+NPC / Partner Hide Despawn Fix | [DONE]
+from earlier: BP @ 8006c2e8
+Identified DPAD and non-active PartnerSETObj Show/Hide command are separate instances
+Searching for non-active PartnerSETOBj Hide
+8001bdac halt
+Found @ 8007397c 
+-> This is master controller (all show/hide DPAD/non-active type are routed to this func)
+->> Found varience for Mission/Partner
+801f4454 has Hide on InactiveSETobj Partner, nop or change compare to include P2
+For now nop
+
+2P Essentials Partner Despawn Fix v1 [dreamsyntax]
+C21F4454 00000001
+60000000 00000000
+* Fixes partners disappearing if P2 gets to them while P1 is not in range
