@@ -3059,3 +3059,44 @@ C21BEEF8 00000001
 C21BF410 00000001
 4E800020 00000000
 * Only disables SpecialCam right now, Controls are still grabbing P1's 
+
+---
+ShakeFix?
+8000efe8
+blr @ 8000efc0
+No apparent side effects
+
+
+C200EFC0 00000001
+4E800020 00000000
+append to ScreenShake
+
+2P Essentials Remove ScreenShake v2 [dreamsyntax]
+c21fa2dc  00000001
+4e800020  00000000
+c200ef58  00000001
+4e800020  00000000
+c200efc0  00000001
+4e800020  00000000
+---
+For ChaosPowers underflow, due to strange handling of the check I have decided to just use a 2C + 04 gecko to force any negative bar to 0
+CC Points : 805766C8
+CB Points : 805766D4
+
+2C5766C8 00000000 // if Chaos Control 
+045766C8 00000000
+e2000001 80008000
+2C5766D4 00000000 // if Chaos Blast
+045766D4 00000000
+e2000001 80008000
+
+2P Essentials ChaosPowers Activation for P2 v2 [dreamsyntax]
+C216F160 00000001
+60000000 00000000
+2C5766C8 00000000
+045766C8 00000000
+E2000001 80008000
+2C5766D4 00000000
+045766D4 00000000
+E2000001 80008000
+* Prevents underflow of meters
