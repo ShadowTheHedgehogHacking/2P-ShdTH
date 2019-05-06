@@ -3977,7 +3977,7 @@
 8007dc14 00000004 8007dc14 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8007dc18 00000048 8007dc18 0 dCreateGeom
 8007dc60 00000144 8007dc60 0 zz_8007dc60_
-8007dda4 00000168 8007dda4 0 ??bctrlToDismountVehicle_and_Turrets_8007dda4_
+8007dda4 00000168 8007dda4 0 bctrlToDismountVehiclesAndTurrets_8007dda4_
 8007df0c 00000048 8007df0c 0 zz_8007df0c_
 8007df54 00000024 8007df54 0 zz_8007df54_
 8007df78 00000040 8007df78 0 zz_8007df78_
@@ -3986,7 +3986,7 @@
 8007e0a4 00000044 8007e0a4 0 zz_8007e0a4_
 8007e0e8 00000010 8007e0e8 0 nlListContainer<P8SaveData>::__ct(void)
 8007e0f8 0000002c 8007e0f8 0 zz_8007e0f8_
-8007e124 0000010c 8007e124 0 ?hasbctrlToMountVehiclesAndTurrets_8007e124_
+8007e124 0000010c 8007e124 0 bctrlToMountVehiclesAndTurrets_8007e124_
 8007e230 0000005c 8007e230 0 zz_8007e230_
 8007e28c 0000025c 8007e28c 0 zz_8007e28c_
 8007e4e8 0000002c 8007e4e8 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
@@ -5707,7 +5707,7 @@
 800b4e58 00000060 800b4e58 0 zz_800b4e58_
 800b4eb8 00000054 800b4eb8 0 zz_800b4eb8_
 800b4f0c 00000030 800b4f0c 0 TRK_memset
-800b4f3c 0000005c 800b4f3c 0 zz_800b4f3c_
+800b4f3c 0000005c 800b4f3c 0 ??calledInbctrlDismountOfVehicle_TRK_memsetIdentified_800b4f3c_
 800b4f98 00000070 800b4f98 0 zz_800b4f98_
 800b5008 0000002c 800b5008 0 cCharacter::UpdateBlinking(float)
 800b5034 000000ac 800b5034 0 zz_800b5034_
@@ -7464,7 +7464,7 @@
 800e8cf8 0000008c 800e8cf8 0 zz_800e8cf8_
 800e8d84 000001dc 800e8d84 0 zz_800e8d84_
 800e8f60 0000012c 800e8f60 0 zz_800e8f60_
-800e908c 000000ac 800e908c 0 zz_800e908c_
+800e908c 000000ac 800e908c 0 OnDismountGUNTypeTurret_800e908c_
 800e9138 00000088 800e9138 0 zz_800e9138_
 800e91c0 00000074 800e91c0 0 zz_800e91c0_
 800e9234 00000030 800e9234 0 zz_800e9234_
@@ -7476,7 +7476,7 @@
 800e9398 00000078 800e9398 0 zz_800e9398_
 800e9410 00000004 800e9410 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800e9414 00000008 800e9414 0 OSGetStackPointer 	os.a OSContext.o
-800e941c 00000174 800e941c 0 createGUNTurretIronJungleSpecialCameraEvent_800e941c_
+800e941c 00000174 800e941c 0 OnMountGUNTypeTurret_800e941c_
 800e9590 00000040 800e9590 0 zz_800e9590_
 800e95d0 00000074 800e95d0 0 zz_800e95d0_
 800e9644 0000005c 800e9644 0 zz_800e9644_
@@ -7528,7 +7528,7 @@
 800ead78 00000108 800ead78 0 zz_800ead78_
 800eae80 000001dc 800eae80 0 zz_800eae80_
 800eb05c 0000012c 800eb05c 0 zz_800eb05c_
-800eb188 00000098 800eb188 0 zz_800eb188_
+800eb188 00000098 800eb188 0 OnDismountAlienTypeTurret_800eb188_
 800eb220 00000088 800eb220 0 zz_800eb220_
 800eb2a8 00000074 800eb2a8 0 zz_800eb2a8_
 800eb31c 00000030 800eb31c 0 zz_800eb31c_
@@ -7540,7 +7540,7 @@
 800eb480 00000078 800eb480 0 zz_800eb480_
 800eb4f8 00000004 800eb4f8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800eb4fc 00000008 800eb4fc 0 OSGetStackPointer 	os.a OSContext.o
-800eb504 00000160 800eb504 0 createAlienTurretSpecialCameraEvent_800eb504_
+800eb504 00000160 800eb504 0 OnMountAlienTypeTurret_800eb504_
 800eb664 00000040 800eb664 0 calledbyAlienTurretSpecialCam_800eb664_
 800eb6a4 00000074 800eb6a4 0 zz_800eb6a4_
 800eb718 0000005c 800eb718 0 zz_800eb718_
@@ -11334,7 +11334,7 @@
 8015a818 00000040 8015a818 0 zz_8015a818_
 8015a858 00000040 8015a858 0 zz_8015a858_
 8015a898 000000ac 8015a898 0 zz_8015a898_
-8015a944 00000064 8015a944 0 zz_8015a944_
+8015a944 00000064 8015a944 0 ??SETObjIteration?HAS_SetWeaponTask_SetDoor_cone_Gadget_SetParticle_SetHintRing_bollister_dumpster_debris_concpillarsm_RocketBase__8015a944_
 8015a9a8 00000074 8015a9a8 0 zz_8015a9a8_
 8015aa1c 00000068 8015aa1c 0 zz_8015aa1c_
 8015aa84 000001c0 8015aa84 0 zz_8015aa84_
@@ -14431,7 +14431,7 @@
 801ade3c 00000040 801ade3c 0 zz_801ade3c_
 801ade7c 00000024 801ade7c 0 cFielder::UpdatePlay(float)
 801adea0 00000008 801adea0 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-801adea8 00000074 801adea8 0 zz_801adea8_
+801adea8 00000074 801adea8 0 OnDismountGUNMechTypeVehicle_801adea8_
 801adf1c 00000088 801adf1c 0 zz_801adf1c_
 801adfa4 00000074 801adfa4 0 zz_801adfa4_
 801ae018 00000030 801ae018 0 zz_801ae018_
@@ -14443,7 +14443,7 @@
 801ae17c 00000078 801ae17c 0 zz_801ae17c_
 801ae1f4 00000004 801ae1f4 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801ae1f8 00000008 801ae1f8 0 OSGetStackPointer 	os.a OSContext.o
-801ae200 00000294 801ae200 0 zz_801ae200_
+801ae200 00000294 801ae200 0 OnMountGUNMechTypeVehicle_801ae200_
 801ae494 00000074 801ae494 0 zz_801ae494_
 801ae508 0000005c 801ae508 0 zz_801ae508_
 801ae564 00000090 801ae564 0 zz_801ae564_
@@ -14522,8 +14522,8 @@
 801b13f8 00000024 801b13f8 0 cFielder::UpdatePlay(float)
 801b141c 00000024 801b141c 0 cFielder::UpdatePlay(float)
 801b1440 00000024 801b1440 0 cFielder::UpdatePlay(float)
-801b1464 0000003c 801b1464 0 ??dismountSaucerTypeVehicle_801b1464_
-801b14a0 0000005c 801b14a0 0 ??mountSaucerTypeVehicle_801b14a0_
+801b1464 0000003c 801b1464 0 OnDismountSaucerTypeVehicle_801b1464_
+801b14a0 0000005c 801b14a0 0 OnMountSaucerTypeVehicle_801b14a0_
 801b14fc 000008b4 801b14fc 0 zz_801b14fc_
 801b1db0 00000024 801b1db0 0 tanf
 801b1dd4 00000024 801b1dd4 0 zz_801b1dd4_
@@ -14798,7 +14798,7 @@
 801b7790 000001b4 801b7790 0 zz_801b7790_
 801b7944 00000004 801b7944 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801b7948 00000004 801b7948 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-801b794c 00000074 801b794c 0 zz_801b794c_
+801b794c 00000074 801b794c 0 ??CarTypeSpecialCamCallToFree_801b794c_
 801b79c0 00000050 801b79c0 0 zz_801b79c0_
 801b7a10 00000088 801b7a10 0 zz_801b7a10_
 801b7a98 00000074 801b7a98 0 zz_801b7a98_
@@ -14863,8 +14863,8 @@
 801b90fc 00000088 801b90fc 0 zz_801b90fc_
 801b9184 00000020 801b9184 0 cPlayer::PostPhysicsUpdate(void)
 801b91a4 0000004c 801b91a4 0 zz_801b91a4_
-801b91f0 0000003c 801b91f0 0 ??Vehicle_CarType_DismountCommand_801b91f0_
-801b922c 0000003c 801b922c 0 ??CarTypeVehicle_Player::Behavior::DriveVehicle_801b922c_
+801b91f0 0000003c 801b91f0 0 OnDismountCarTypeVehicle_801b91f0_
+801b922c 0000003c 801b922c 0 OnMountCarTypeVehicle__Player::Behavior::DriveVehicle_801b922c_
 801b9268 00000070 801b9268 0 zz_801b9268_
 801b92d8 00000008 801b92d8 0 J3DTexGenBlock4::getNBTScale(void) 	J3DGraphBase.a J3DMatBlock.o
 801b92e0 00000008 801b92e0 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
@@ -14951,7 +14951,7 @@
 801bedd4 00000078 801bedd4 0 zz_801bedd4_
 801bee4c 00000004 801bee4c 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801bee50 00000008 801bee50 0 OSGetStackPointer 	os.a OSContext.o
-801bee58 000002d0 801bee58 0 ??CarType_3UnknownsShare_Layer2_801bee58_
+801bee58 000002d0 801bee58 0 ??CarType_HookControlsAndAttachSpecialCam3UnknownsShare_Layer2_801bee58_
 801bf128 00000074 801bf128 0 zz_801bf128_
 801bf19c 0000005c 801bf19c 0 zz_801bf19c_
 801bf1f8 00000090 801bf1f8 0 zz_801bf1f8_
@@ -14959,7 +14959,7 @@
 801bf2c8 00000050 801bf2c8 0 zz_801bf2c8_
 801bf318 0000005c 801bf318 0 zz_801bf318_
 801bf374 0000009c 801bf374 0 zz_801bf374_
-801bf410 00000028 801bf410 0 zz_801bf410_
+801bf410 00000028 801bf410 0 ??CarTypeVehicle_FreeSpecialCam_801bf410_
 801bf438 00000034 801bf438 0 zz_801bf438_
 801bf46c 00000048 801bf46c 0 zz_801bf46c_
 801bf4b4 00000024 801bf4b4 0 zz_801bf4b4_
@@ -23177,7 +23177,7 @@
 802cb59c 00000024 802cb59c 0 cFielder::UpdatePlay(float)
 802cb5c0 00000008 802cb5c0 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 802cb5c8 00000008 802cb5c8 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-802cb5d0 000000ac 802cb5d0 0 FlyablesFreeSpecialCam_802cb5d0_
+802cb5d0 000000ac 802cb5d0 0 OnDismountFlyableNoWeaponTypeVehicle_802cb5d0_
 802cb67c 00000088 802cb67c 0 zz_802cb67c_
 802cb704 00000074 802cb704 0 zz_802cb704_
 802cb778 00000034 802cb778 0 zz_802cb778_
@@ -23185,7 +23185,7 @@
 802cb7ec 00000078 802cb7ec 0 zz_802cb7ec_
 802cb864 00000004 802cb864 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 802cb868 00000008 802cb868 0 OSGetStackPointer 	os.a OSContext.o
-802cb870 00000180 802cb870 0 zz_802cb870_
+802cb870 00000180 802cb870 0 OnMountFlyableNoWeaponTypeVehicle_802cb870_
 802cb9f0 00000330 802cb9f0 0 zz_802cb9f0_
 802cbd20 00000050 802cbd20 0 zz_802cbd20_
 802cbd70 000000cc 802cbd70 0 zz_802cbd70_
@@ -23208,8 +23208,8 @@
 802cc588 000001ac 802cc588 0 zz_802cc588_
 802cc734 000000a8 802cc734 0 zz_802cc734_
 802cc7dc 00000008 802cc7dc 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-802cc7e4 00000034 802cc7e4 0 cCharacter::IsPlayingEffect( (EffectsGroup *))
-802cc818 00000044 802cc818 0 zz_802cc818_
+802cc7e4 00000034 802cc7e4 0 OnDismountFlyableWeaponTypeVehicle__cCharacter::IsPlayingEffect( (EffectsGroup *))
+802cc818 00000044 802cc818 0 OnMountFlyableWeaponTypeVehicle_802cc818_
 802cc85c 00000044 802cc85c 0 zz_802cc85c_
 802cc8a0 00000098 802cc8a0 0 zz_802cc8a0_
 802cc938 0000009c 802cc938 0 zz_802cc938_
@@ -25760,9 +25760,9 @@
 803166ec 00000070 803166ec 0 zz_803166ec_
 8031675c 0000000c 8031675c 0 GXGetTexObjWrapT 	gx.a GXTexture.o
 80316768 000005b4 80316768 0 zz_80316768_
-80316d1c 00000290 80316d1c 0 zz_80316d1c_
+80316d1c 00000290 80316d1c 0 OnDismountARKTypeTurret_80316d1c_
 80316fac 0000008c 80316fac 0 zz_80316fac_
-80317038 0000030c 80317038 0 LostImpactTurretsACTIVATE_OBJECT_80317038_
+80317038 0000030c 80317038 0 OnMountARKTypeTurret_80317038_
 80317344 00000040 80317344 0 zz_80317344_
 80317384 00000040 80317384 0 zz_80317384_
 803173c4 00000098 803173c4 0 zz_803173c4_
@@ -31202,7 +31202,7 @@
 8040cd74 00000034 8040cd74 0 zz_8040cd74_
 8040cda8 00000028 8040cda8 0 zz_8040cda8_
 8040cdd0 00000034 8040cdd0 0 nlVecAdd(nlVector3 &, nlVector3 &, nlVector3 &)
-8040ce04 00000034 8040ce04 0 zz_8040ce04_
+8040ce04 00000034 8040ce04 0 updateCameraLocationDataForSETObjectLoadUnload_8040ce04_
 8040ce38 00000028 8040ce38 0 dVectorScale(float *, float)
 8040ce60 00000014 8040ce60 0 FormationPos::__ct(void)
 8040ce74 00000074 8040ce74 0 zz_8040ce74_
@@ -31588,7 +31588,7 @@
 80426ddc 00000218 80426ddc 0 zz_80426ddc_
 80426ff4 000002f4 80426ff4 0 zz_80426ff4_
 804272e8 00000688 804272e8 0 zz_804272e8_
-80427970 00000434 80427970 0 zz_80427970_
+80427970 00000434 80427970 0 keyDoorEffect_80427970_
 80427da4 00000124 80427da4 0 zz_80427da4_
 80427ec8 0000030c 80427ec8 0 zz_80427ec8_
 804281d4 00000390 804281d4 0 zz_804281d4_

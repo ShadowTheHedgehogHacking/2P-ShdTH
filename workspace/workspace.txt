@@ -3040,3 +3040,22 @@ For now nop
 C21F4454 00000001
 60000000 00000000
 * Fixes partners disappearing if P2 gets to them while P1 is not in range
+
+-
+Vehicle Testing
+8007df28 (do not restore P2/P1 camera to Player, instead track vehicle until despawn)
+801b6060 free camera but leave Player in driving state
+Camera Free @ 801b7974 
+Prevent dismount @ 801ba5e8
+Camera Free @ 801bf428
+
+From above,
+nop @ 801beef8 // disable special cam malloc, attach etc
+blr @ 801bf410 // disable free (vehicle type specific verified)
+
+2P Essentials Fix Vehicles for P2 v0.1 [dreamsyntax]
+C21BEEF8 00000001
+60000000 00000000
+C21BF410 00000001
+4E800020 00000000
+* Only disables SpecialCam right now, Controls are still grabbing P1's 
