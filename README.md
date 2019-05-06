@@ -1,5 +1,5 @@
 <div align="center"><h1>2 Player Shadow The Hedgehog</h1>
-<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/main_banner.png" align="center" />
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/legacy/pre-r5/main_banner.png" align="center" />
 </div>
 
 ## About
@@ -7,23 +7,13 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 
 Story Mode, Select Mode, Expert Mode, Last Story.
 
-## Level Status
+## Level Status as of v1.2
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP)
-* Verify 1:1 misc bytes for level edits per HPP v0.7.5
-* Fix "Disable ScreenShake" - (occasional endless shake issue)
-* Fix Air bug - (player state pointer overlap issue)
-* Fix "ChaosPowers activate for both players" - (add underflow/overflow checks)
-* Key Door trigger patch for P2
-* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
-* Space Gadget, Devil Doom, Zipline/Pulleys fixed
-* Turrets must hook to proper split/camera
-* All bosses are free-cam
-* Checkpoint Warping/Backtracking warps both players
-* **Buffer crash research / possible crash reductions if possible
+## Release plan
+The dev branch contains the latest non-release ready fixes. Next merge to master/release will be 2.0.
 
-## Problems
+## Problems as of v1.2
 * Checkpoint Warping/Backtracking only moves P1
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
@@ -40,7 +30,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Enemy Target Draw will show locked to P1 even if targeting P2
 * Heavy Dog / Blue Falcon do not damage P2
 
-## Done so far:
+## Done so far as of v1.2
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
 * ChaosPowers activate for both players* (underflow/overflow identified)
 * Partner/Mission Helpers can be remapped to permanent AI or P3* (P3 has some issues depending on Partner activation order)
@@ -58,12 +48,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * Spawners / Worms work properly
 
-## Other Known Issues (Not planned to be fixed)
+## Other Known Issues (Not planned to be fixed as of v1.2
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug).
 * Culling issue on Final Haunt for P2's screen when near force-fields
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
 
-## Bonus Roadmap
+## Bonus Roadmap as of v1.2
 * Individual death-to-checkpoint / Don't reload level for both players
 * Static weapon swaps for Metal Androids
 * FriendlyFire Enable/Disable
