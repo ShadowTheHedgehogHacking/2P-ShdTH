@@ -11,15 +11,15 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Road to 2.0 (WIP)
-* Verify 1:1 misc bytes for level edits per HPP v0.7.5
-* Fix "ChaosPowers activate for both players" - (add underflow/overflow checks)
+* Verify 1:1 misc bytes for level edits per HPP v0.7.5 [BLOCKED, WAIT FOR HPP v0.7.6, FOUND BUG]
 * Key Door trigger patch for P2
-* Fix "Disable ScreenShake" - (occasional endless shake issue)
 * Fix Air bug - (player state pointer overlap issue)
 * Space Gadget, Devil Doom, Zipline/Pulleys fixed
 * Turrets attach to correct player's camera
-* Vehicles map to correct player's controlpad and camera
+* Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
+* Fix "ChaosPowers activate for both players" - add underflow check [DONE]
+* Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
 * All bosses are free-cam [DONE]
 * Circus Park Hero Mission counts P2's rings [DONE]
@@ -32,22 +32,20 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
-* Certain vehicles alter P1's camera if P2 uses it
-* Certain vehicles only respond to P1's control pad
+* CarType vehicles only map to P1's control pad
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Key Doors do not react to P2
 * Some triggers (see Westopolis) do not react to P2
-* Disable ScreenShake GeckoCode sometimes results in endless screenshake (Chaos Blast to get out of it)
-* Enemy Target Draw will show locked to P1 even if targeting P2
+* Worm Enemies will only target P1
 * Heavy Dog / Blue Falcon do not damage P2
 
 ## Done so far:
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
-* ChaosPowers activate for both players* (underflow/overflow identified)
+* ChaosPowers activate for both players
 * Partner/Mission Helpers can be remapped to permanent AI or P3* (P3 has some issues depending on Partner activation order)
-* ChaosPowers EventsCamera and ChaosControl Effects removed* (ScreenShake issue identified in some levels) 
+* ChaosPowers EventsCamera and ChaosControl Effects removed
 * Load P2 in any mode (including camera)
 * Enable splitscreen in 1P, disable when in cutscenes/event cameras
 * SET objects load/unload based on both players
@@ -63,6 +61,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
+* Vehicles no longer alter P1's camera if P2 uses it
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
