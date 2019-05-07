@@ -2110,7 +2110,7 @@ C20A2A64 00000001
 802483a8 | saa
 80482458 | no draw players / stop drawing objs
 
-[partner despawn searching] || PARTIAL
+[partner despawn searching] || DONE (search for v1, not v0.1)
 80073078 | partner does not spawn even if P1 is within range
 800743c0 | partner instantly hooks to nearest player on partnerspawn
 800c9af4 | Continuously warp partner to proper place even if P1 is not there
@@ -2335,7 +2335,7 @@ blr @ 801fa2dc -> no halts? (boost ramps / springs effect removed)
 
 8000ef58
 
-2P Essentials Remove ScreenShake [dreamsyntax]
+2P Essentials Remove ScreenShake v1 [dreamsyntax]
 C21FA2DC 00000001
 4E800020 00000000
 C200EF58 00000001
@@ -2805,3 +2805,298 @@ C217707C 00000003
 41810008 38800320
 60000000 00000000
 *Reduces crashes during in-game cutscenes
+-----------------------------------------------------------------------------------------------
+2019-04-29 [Rush]
+Found shake bug example: laser strikes in Westopolis (and self weapon ?)
+Key doors:
+- Based off P1 player position
+Partner Despawn:
+- Based off P1 camera position
+
+||Partner Despawn||
+-> Attempt without looking at prior
+Strategy: Break on '?deeperStateCall'
+
+found @ "Player::Npc::ShowCommand"
+Hide is not executed when P2 triggers and P1 is out of range.
+
+Confirmed using main camread with rotate
+-> NOT affecting:
+80433898
+801d9aac
+800c38bc
+801d9a14
+801d9290
+8000a3d8
+800bf62c
+800a0574
+
+--Back to diff:
+80019e10 no update any
+8006c2e8 -> stays scrunched
+80079a70 -> stays disappeared (no update any)
+
+Key Doors:
+8011b78c | door still opens no unlocking keys animation
+8011bc70 | saa 
+
+halt: 801211c4, 
+will crash dolphin: 80120d0c, 8015d780
+
+Shake Fix?
+blr @ 8000a508
+Seems to fix lasers but causes strange camera event instead in some partner areas
+C200A508 00000001
+4E800020 00000000 // do not use
+
+
+2P Essentials Remove ScreenShake v2 ??? [needs more added] [dreamsyntax]
+C21FA2DC 00000001
+4E800020 00000000
+C200EF58 00000001
+4E800020 00000000
+
+Switch to Key Doors
+
+
+2019-04-30
+Attempt to patch in Player Warp POC for GoalState Trigger to Possibly Reduce End Level Overflow/Crashes
+8016b2b0 original inst = li r0, 1
+
+patch to replace:
+P1 struct is always @ 807D71A0
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 80000
+stw r16, 0x0(r15)
+
+C216B2B0 00000004
+3DE0807D 61EF71A0
+81EF0000 820F0008
+3A100320 920F0008
+60000000 00000000
+
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 800
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 C2EF0000
+3AF70320 920F0000
+60000000 00000000
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lwz r16, 0x0(r15)
+addi r16, r16, 8000
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 820F0000
+3A101F40 920F0000
+60000000 00000000
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0 # 999999f (word format)
+lis r15, 0x807D
+ori r15, r15, 0x71A0 # p1
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+#p2
+lis r15, 0x807D
+ori r15, r15, 0x71A8 # p2
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+li r0, 1 # original inst overwrote
+
+No comments version: 
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+lis r15, 0x807D
+ori r15, r15, 0x71A8
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+li r0, 1
+
+2P Experimental Crash Prevention on Goal Event v1
+C216B2B0 0000000B
+3E004974 621023F0
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+920F0000 39EF0004
+920F0000 39EF0004
+920F0000 3DE0807D
+61EF71A8 81EF0000
+81EF0000 920F0000
+39EF0004 920F0000
+39EF0004 920F0000
+38000001 00000000
+*Experimental version, sometimes fails to warp correctly
+
+--------------
+2019-05-03
+New theory on buffers discussed with Donut
+PREDEFINED_LIMIT may exist per level instance.
+To test going to swap Central City (high fail rate) onto Mad Matrix. Prior test used The Doom but that may have been caused by Dolphin FST crash issue
+More on this later.
+
+Misc fixups :
+Circus Park
+Hero Mission should be co-op (count both rings):
+8016ed2c @ mr r4, r3
+where r3 contains current P1 ring count to be sent to MissionChecker with MissionRingCount in r3 after value moved to r4 checker
+
+lis r15, 0x8057
+ori r15, r15, 0x6758
+lwz r15, 0 (r15)
+add r3, r3, r15
+mr r4, r3
+
+2P Essentials Circus Park Hero Mission Co-Op [dreamsyntax]
+C216ED2C 00000003
+3DE08057 61EF6758
+81EF0000 7C637A14
+7C641B78 00000000
+
+Looking for Final Haunt / Vacuum Effect Split2 issue:
+Found @ 804342cc (master split/cam effects?)
+
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2 [dreamsyntax]
+C24342CC 00000001
+4E800020 00000000
+
+
+2019-05-04
+Turret Free Cam / Vehicle searching
+-> found bctrl master for type
+-----
+Security Camera GUN Fortress
+malloc @ 80269010 nop -> Seems this use of free may have a nullcheck so it may not be necessary to nop. Did not find free, only disables malloc
+Will make it v1 in case free needs to be nop'd later if the above is false and memory gets corrupted
+
+2P Essentials GUN Fortress SecurityTurret Fix v1 [dreamsyntax]
+C2269010 00000001
+60000000 00000000
+* Disables effects on Split1 and SpecialCamera for security turret segments
+-----
+2019-05-05
+NPC / Partner Hide Despawn Fix | [DONE]
+from earlier: BP @ 8006c2e8
+Identified DPAD and non-active PartnerSETObj Show/Hide command are separate instances
+Searching for non-active PartnerSETOBj Hide
+8001bdac halt
+Found @ 8007397c 
+-> This is master controller (all show/hide DPAD/non-active type are routed to this func)
+->> Found varience for Mission/Partner
+801f4454 has Hide on InactiveSETobj Partner, nop or change compare to include P2
+For now nop
+
+2P Essentials Partner Despawn Fix v1 [dreamsyntax]
+C21F4454 00000001
+60000000 00000000
+* Fixes partners disappearing if P2 gets to them while P1 is not in range
+
+-
+Vehicle Testing
+8007df28 (do not restore P2/P1 camera to Player, instead track vehicle until despawn)
+801b6060 free camera but leave Player in driving state
+Camera Free @ 801b7974 
+Prevent dismount @ 801ba5e8
+Camera Free @ 801bf428
+
+From above,
+nop @ 801beef8 // disable special cam malloc, attach etc
+blr @ 801bf410 // disable free (vehicle type specific verified)
+
+2P Essentials Fix Vehicles for P2 v0.1 [dreamsyntax]
+C21BEEF8 00000001
+60000000 00000000
+C21BF410 00000001
+4E800020 00000000
+* Only disables SpecialCam right now, Controls are still grabbing P1's 
+
+---
+ShakeFix?
+8000efe8
+blr @ 8000efc0
+No apparent side effects
+
+
+C200EFC0 00000001
+4E800020 00000000
+append to ScreenShake
+
+2P Essentials Remove ScreenShake v2 [dreamsyntax]
+c21fa2dc  00000001
+4e800020  00000000
+c200ef58  00000001
+4e800020  00000000
+c200efc0  00000001
+4e800020  00000000
+---
+For ChaosPowers underflow, due to strange handling of the check I have decided to just use a 2C + 04 gecko to force any negative bar to 0
+CC Points : 805766C8
+CB Points : 805766D4
+
+2C5766C8 00000000 // if Chaos Control 
+045766C8 00000000
+e2000001 80008000
+2C5766D4 00000000 // if Chaos Blast
+045766D4 00000000
+e2000001 80008000
+
+2P Essentials ChaosPowers Activation for P2 v2 [dreamsyntax]
+C216F160 00000001
+60000000 00000000
+2C5766C8 00000000
+045766C8 00000000
+E2000001 80008000
+2C5766D4 00000000
+045766D4 00000000
+E2000001 80008000
+* Prevents underflow of meters
