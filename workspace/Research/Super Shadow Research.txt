@@ -50,6 +50,32 @@ for the bctrl above, code goes like this:
 801a0480 a few steps out, might be main function caller?
 sets position, angle, super etc on restart. confirmed working as nopping makes it not happen
 looking for player pointer
+
+	4/29/19
+800b7e44 appears to be the function that calls ToSuper for shadow, called by 80177124 bl ->0x800B7E44
+added no fade code, able to confirm that shadow loads in like normal, and super is done later, so it should be possible to reproduce at any time
+800b7e68 bl	->0x800A8B74 <- appears to be the one that makes shadow super, nopping makes it not happen
+so far r3/r30, and r4/r31 do not have anything player related
+well wait..
+nopping 800b7ed4 bctrl	prevents super as well
+yeah that makes more sense
+so this should be possible, but due to everything being in the stack, and the stack always changing, not sure how to call this function at will
+although it appears that the loading of the model has nothing to do with the to super function??
+it looks like it may be a call to createeffect(), super specific call a few steps out, 800a2bc0 bl ->0x8027E2D0
+interesting..
+one more step out brings me to 80099f1c, which looks alot like the opposite of revertsuper() after glimpsing over the asm
+bingo!? blr'ing 80099f1c prevents any of supers traits, despite the previous functions
+80099fc8 bl	->0x800A7F14 <- seems to make super not happen when nopped?
+actually upon further testing it seems the above halts(?), and 80099f8c bne- ->0x80099F90 prevents super when nopped
+	4/30/19
+oh ok so it was actually a rlwinm/bne combo that i nopped, which bnes over 80099fc8, so something inbetween causing halt?
+anyways, the rlwinm appears to be testing some resu;t of the above 80099f8c bne- ->0x80099F90, inside of which has 800a2bc0 bl ->0x8027E2D0, which has a call to CreateEffect() at 8027e2ec bl ->0x8004EFC4
+hmmmm
+this is starting to resemble part of revert, also cotaining a string "super" and assigning it to something
+looks like player super pointer is set but not read in this function, mey have to do read bp on player super pointers
+...
+OR may have to check further into 8027e310 bl ->0x8027EFC4, inside is a stage check for 701, changing to current stage activates fly mode
+
 		(/*Transformation*)
 
 		(*De-Transformation*)
@@ -256,7 +282,9 @@ looks like destructor, wont call next one if blr'd
 then comes 8005d03c(Weapon::WeaponBase):
 looks like its a destructor too
 further looking shows that these functions are called by eachother in hierarchy
-	
+	4/30/19
+side note: found the code that gives shadow the chaos spear "weapon" while looking at related transformation code above. changing ammo from 999 to 1 but still infinite
+
 			</Weapons>
 		(/*Super State & Actions*)
 

@@ -48,6 +48,11 @@ ShadowWeapon:
 	0x4 - int size?
 	0x28 - my player pointer
 	
+Super:
+	0x0 - char* pName
+	0x4 - int size?
+	0x18 - Player::Shadow::Super** ?
+	
 	
 		(*Struct Sizes*)
 CharaColliMove - 0x3B
@@ -55,3 +60,4 @@ Motion - 0x1428
 Shadow - 0xC30
 ShadowExecuter - 0x888
 ShadowWeapon - 0x1490
+Super - 0xF460
