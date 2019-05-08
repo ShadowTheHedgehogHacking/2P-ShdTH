@@ -3100,3 +3100,91 @@ E2000001 80008000
 045766D4 00000000
 E2000001 80008000
 * Prevents underflow of meters
+
+-----
+2019-05-07
+Key Door Fix
+DonutStopGaming found: 8011b928 [seems to load in a distance used to compare f1 which contains P1 distance from door]
+ ^ used in KeyDoors only 
+ 
+ 
+ 
+Can't start at fail case as success case steps to fail case area code
+8011b934 = entrypoint
+INSTR OVERWRITING:
+8011b934 bne-	 ->0x8011B958 (otherwise success = 8011b938 [nextline])
+
+GECKO BEGIN:
+bne- 0x14 [skip over success case mtlr jump, check P2 next]
+lis r15, 0x8011 // P1 in range, trigger success
+ori r15, r15, 0xB938
+mtlr r15
+blr
+//p1 is not in range, now we are injecting our P2 position and re doing the checks
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
+
+No comment version:
+bne- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r5, 0x807D
+ori r5, r5, 0x71A8
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13)
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB958
+mtlr r15
+blr
+
+2P Essentials Keydoors Detect P2 [DonutStopGaming & dreamsyntax]
+C211B934 0000000D
+40820014 3DE08011
+61EFB938 7DE803A6
+4E800020 3CA0807D
+60A571A8 80A50000
+80A50000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08040
+61EFCF2C 7DE803A6
+4E800021 C00D38B0
+FC010040 4C401382
+41820014 3DE08011
+61EFB958 7DE803A6
+4E800020 00000000
