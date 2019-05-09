@@ -36,7 +36,7 @@
 80008e2c 00000378 80008e2c 0 zz_80008e2c_
 800091a4 0000002c 800091a4 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 800091d0 0000001c 800091d0 0 ?TakeR3asFunctionAsset?setFloatsLoadFloats__droprings?drawObject?_800091d0_
-800091ec 0000001c 800091ec 0 zz_800091ec_
+800091ec 0000001c 800091ec 0 CopyValuesFromPointerR4toPointerR3_800091ec_
 80009208 0000006c 80009208 0 zz_80009208_
 80009274 00000058 80009274 0 zz_80009274_
 800092cc 00000008 800092cc 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
@@ -1011,7 +1011,7 @@
 80028ecc 00000090 80028ecc 0 zz_80028ecc_
 80028f5c 00000008 80028f5c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 80028f64 000001b4 80028f64 0 zz_80028f64_
-80029118 00000060 80029118 0 zz_80029118_
+80029118 00000060 80029118 0 ??somethingThatComparesDistanceToPlayer_80029118_
 80029178 000000f0 80029178 0 zz_80029178_
 80029268 0000005c 80029268 0 zz_80029268_
 800292c4 00000074 800292c4 0 zz_800292c4_
@@ -7192,7 +7192,7 @@
 800e07f0 00000024 800e07f0 0 cFielder::EndAction(void)
 800e0814 00000034 800e0814 0 zz_800e0814_
 800e0848 00000078 800e0848 0 zz_800e0848_
-800e08c0 0000005c 800e08c0 0 zz_800e08c0_
+800e08c0 0000005c 800e08c0 0 ??ToWestopolisLasers_800e08c0_
 800e091c 00000064 800e091c 0 zz_800e091c_
 800e0980 00000004 800e0980 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800e0984 0000002c 800e0984 0 MoviePlayerScene::PlayScreenBackSFX(void)
@@ -7201,12 +7201,12 @@
 800e0a74 00000010 800e0a74 0 nlListContainer<P8SaveData>::__ct(void)
 800e0a84 00000168 800e0a84 0 zz_800e0a84_
 800e0bec 00000050 800e0bec 0 zz_800e0bec_
-800e0c3c 00000374 800e0c3c 0 zz_800e0c3c_
+800e0c3c 00000374 800e0c3c 0 ??createWestopolisLasers_800e0c3c_
 800e0fb0 00000040 800e0fb0 0 zz_800e0fb0_
 800e0ff0 00000040 800e0ff0 0 zz_800e0ff0_
 800e1030 00000020 800e1030 0 cPlayer::PostPhysicsUpdate(void)
 800e1050 0000005c 800e1050 0 zz_800e1050_
-800e10ac 00000568 800e10ac 0 zz_800e10ac_
+800e10ac 00000568 800e10ac 0 ??WestopolisDistanceAndStateManagementForLasers?_800e10ac_
 800e1614 00000020 800e1614 0 cPlayer::PostPhysicsUpdate(void)
 800e1634 00000044 800e1634 0 zz_800e1634_
 800e1678 00000014 800e1678 0 nw4hbm::lyt::Material::GetTexSRTAry(void) 	homebuttonLib.a lyt_material.o
@@ -31199,7 +31199,7 @@
 8040cd20 0000001c 8040cd20 0 zz_8040cd20_
 8040cd3c 00000024 8040cd3c 0 zz_8040cd3c_
 8040cd60 00000014 8040cd60 0 zz_8040cd60_
-8040cd74 00000034 8040cd74 0 zz_8040cd74_
+8040cd74 00000034 8040cd74 0 ??StepOneDistanceFromPlayer_8040cd74_
 8040cda8 00000028 8040cda8 0 zz_8040cda8_
 8040cdd0 00000034 8040cdd0 0 nlVecAdd(nlVector3 &, nlVector3 &, nlVector3 &)
 8040ce04 00000034 8040ce04 0 updateCameraLocationDataForSETObjectLoadUnload_8040ce04_
@@ -31207,8 +31207,8 @@
 8040ce60 00000014 8040ce60 0 FormationPos::__ct(void)
 8040ce74 00000074 8040ce74 0 zz_8040ce74_
 8040cee8 00000044 8040cee8 0 zz_8040cee8_
-8040cf2c 00000024 8040cf2c 0 zz_8040cf2c_
-8040cf50 00000040 8040cf50 0 zz_8040cf50_
+8040cf2c 00000024 8040cf2c 0 CompareDistanceFromPlayer_8040cf2c_
+8040cf50 00000040 8040cf50 0 SquareXYZAndStoreTof1_and_bl and stw_8040cf50_
 8040cf90 00000028 8040cf90 0 zz_8040cf90_
 8040cfb8 00000040 8040cfb8 0 zz_8040cfb8_
 8040cff8 00000034 8040cff8 0 dVector3Add(float *, float *)
@@ -31216,7 +31216,7 @@
 8040d044 00000068 8040d044 0 zz_8040d044_
 8040d0ac 0000006c 8040d0ac 0 zz_8040d0ac_
 8040d118 00000068 8040d118 0 zz_8040d118_
-8040d180 00000034 8040d180 0 zz_8040d180_
+8040d180 00000034 8040d180 0 ??WestopolisTriggerDistanceFromPlayer_8040d180_
 8040d1b4 00000034 8040d1b4 0 zz_8040d1b4_
 8040d1e8 00000024 8040d1e8 0 ListContainerBase<P6cSAnim,33NewAdapter<19ListEntry<P6cSAnim>>>::DeleteEntry(ListEntry<P6cSAnim> *)
 8040d20c 00000024 8040d20c 0 ListContainerBase<P6cSAnim,33NewAdapter<19ListEntry<P6cSAnim>>>::DeleteEntry(ListEntry<P6cSAnim> *)

@@ -3188,3 +3188,63 @@ FC010040 4C401382
 41820014 3DE08011
 61EFB958 7DE803A6
 4E800020 00000000
+
+2019-05-08
+Westopolis P1 only Triggers Fix |
+800e0c3c @ create Westopolis Lasers
+800e10ac = float checks etc for Westopolis Lasers / StateUpdate (can be set to any stage of laser)
+
+800e1174 @ bge- ->0x800E1184
+Reuse most of Keydoor code:
+GECKO BEGIN: (THIS DOES NOT WORK, needs to account for stack in other bl and the r5 strange behavior)
+bge- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lwz	r3, 0 (r30)
+lfs	f0, 0x003C (r3)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x800E
+ori r15, r15, 0x1184
+mtlr r15
+blr
+//natural return to 800e1178 (failure)
+
+2P Essentials Westopolis Triggers Detect P2 v0.1 TEST (broken does not work, Halts) [dreamsyntax]
+C20E1174 0000000F
+40800014 3DE08011
+61EFB938 7DE803A6
+4E800020 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08000
+61EF91EC 7DE803A6
+4E800021 3DE08040
+61EFCF50 7DE803A6
+4E800021 807E0000
+C003003C FC010040
+41800014 3DE0800E
+61EF1184 7DE803A6
+4E800020 00000000
+
+2P DevilDoom Super:
+800b7ed4 (onRestart/onDeath)
