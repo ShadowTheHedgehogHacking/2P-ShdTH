@@ -13,7 +13,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Road to 2.0 (WIP)
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6
 * Fix Air bug - (player state pointer overlap issue)
-* Space Gadget, Devil Doom, Zipline/Pulleys fixed
+* Space Gadget Gravity Switchers Fixed
+* Devil Doom [TESTING]
+* Zipline/Pulleys fixed
 * Turrets attach to correct player's camera
 * Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
