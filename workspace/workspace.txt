@@ -3248,3 +3248,12 @@ C003003C FC010040
 
 2P DevilDoom Super:
 800b7ed4 (onRestart/onDeath)
+
+2019-05-09
+Less cycles, accomplishes close to vanilla behavior: nop 800e1174 for instant lasers onRange detection
+nop 800e1174
+
+2P Essentials Westopolis Lasers Fix v1 [dreamsyntax]
+C20E1174 00000001
+60000000 00000000
+* Hacky fix that has lasers immediately fire when in range instead of comparing distance
