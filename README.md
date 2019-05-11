@@ -11,13 +11,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Road to 2.0 (WIP)
-* Verify 1:1 misc bytes for level edits per HPP v0.7.5 [BLOCKED, WAIT FOR HPP v0.7.6, FOUND BUG]
-* Key Door trigger patch for P2
+* Verify 1:1 misc bytes for level edits per HPP v0.7.6
 * Fix Air bug - (player state pointer overlap issue)
-* Space Gadget, Devil Doom, Zipline/Pulleys fixed
+* Space Gadget Gravity Switchers Fixed
+* Devil Doom [TESTING]
+* Zipline/Pulleys fixed
 * Turrets attach to correct player's camera
 * Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
+* Dark/Hero orbs activate Chaos Powers for both players
+* Computer Room Trigger does not activate for P2
+* Key Door trigger patch for P2 [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
@@ -25,6 +29,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Circus Park Hero Mission counts P2's rings [DONE]
 * GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
+* Westopolis Triggers activate immediately [DONE]
 * **Buffer crash research / possible crash reductions if possible
 
 ## Problems
@@ -36,10 +41,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
-* Key Doors do not react to P2
-* Some triggers (see Westopolis) do not react to P2
 * Worm Enemies will only target P1
 * Heavy Dog / Blue Falcon do not damage P2
+* Dark/Hero orbs activate Chaos Powers for both players 
 
 ## Done so far:
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
@@ -62,6 +66,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it
+* Key Doors react to P2
+* Westopolis Triggers activate immediately
+
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)

@@ -3100,3 +3100,231 @@ E2000001 80008000
 045766D4 00000000
 E2000001 80008000
 * Prevents underflow of meters
+
+-----
+2019-05-07
+Key Door Fix
+DonutStopGaming found: 8011b928 [seems to load in a distance used to compare f1 which contains P1 distance from door]
+ ^ used in KeyDoors only 
+ 
+ 
+ 
+Can't start at fail case as success case steps to fail case area code
+8011b934 = entrypoint
+INSTR OVERWRITING:
+8011b934 bne-	 ->0x8011B958 (otherwise success = 8011b938 [nextline])
+
+GECKO BEGIN:
+bne- 0x14 [skip over success case mtlr jump, check P2 next]
+lis r15, 0x8011 // P1 in range, trigger success
+ori r15, r15, 0xB938
+mtlr r15
+blr
+//p1 is not in range, now we are injecting our P2 position and re doing the checks
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
+
+No comment version:
+bne- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r5, 0x807D
+ori r5, r5, 0x71A8
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13)
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB958
+mtlr r15
+blr
+
+2P Essentials Keydoors Detect P2 [DonutStopGaming & dreamsyntax]
+C211B934 0000000D
+40820014 3DE08011
+61EFB938 7DE803A6
+4E800020 3CA0807D
+60A571A8 80A50000
+80A50000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08040
+61EFCF2C 7DE803A6
+4E800021 C00D38B0
+FC010040 4C401382
+41820014 3DE08011
+61EFB958 7DE803A6
+4E800020 00000000
+
+2019-05-08
+Westopolis P1 only Triggers Fix |
+800e0c3c @ create Westopolis Lasers
+800e10ac = float checks etc for Westopolis Lasers / StateUpdate (can be set to any stage of laser)
+
+800e1174 @ bge- ->0x800E1184
+Reuse most of Keydoor code:
+GECKO BEGIN: (THIS DOES NOT WORK, needs to account for stack in other bl and the r5 strange behavior)
+bge- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lwz	r3, 0 (r30)
+lfs	f0, 0x003C (r3)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x800E
+ori r15, r15, 0x1184
+mtlr r15
+blr
+//natural return to 800e1178 (failure)
+
+2P Essentials Westopolis Triggers Detect P2 v0.1 TEST (broken does not work, Halts) [dreamsyntax]
+C20E1174 0000000F
+40800014 3DE08011
+61EFB938 7DE803A6
+4E800020 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08000
+61EF91EC 7DE803A6
+4E800021 3DE08040
+61EFCF50 7DE803A6
+4E800021 807E0000
+C003003C FC010040
+41800014 3DE0800E
+61EF1184 7DE803A6
+4E800020 00000000
+
+2P DevilDoom Super:
+800b7ed4 (onRestart/onDeath)
+
+2019-05-09
+Less cycles, accomplishes close to vanilla behavior: nop 800e1174 for instant lasers onRange detection
+nop 800e1174
+
+2P Essentials Westopolis Lasers Fix v1 [dreamsyntax]
+C20E1174 00000001
+60000000 00000000
+* Hacky fix that has lasers immediately fire when in range instead of comparing distance
+
+BallColor:
+800a5ab0 = Other Activity Color (Homing attack, spindash, slide trail) [r4]
+80087190 = JumpBall Color [r0]
+80080734 = Falling Color (and slide foot effect) [r0]
+80087df0 = nope
+80087eb4 = nope
+80087278 = nope
+80087190 = nope
+800a02d8 = nope
+80080648 = nope 
+800806f0 = nope
+80397434 = nope  
+
+Example Gecko: Other-Activity must li to r4, other two to r0
+X VALID VALUES:
+0 = White/0000000 Color
+1 = Sonic 
+2 = Tails
+3 = Knuckles
+4 = Amy
+5 = Rouge
+6 = Omega
+7 = Vector
+8 = Espio
+9 = Maria
+A = Bee
+B = Eggmonitor
+C = Dooms Eye
+
+Sonic-Color: 
+80080734
+
+Jump Ball Color Switch [dreamsyntax]
+C20A5AB0 00000001
+3880000X 00000000
+C2087190 00000001
+3800000X 00000000
+C2080734 00000001
+3800000X 00000000
+*Change all 3 X to valid values:
+*0 = White/0000000 Color
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink) 
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
+
+2019-05-11
+Computer Room object identified to not trigger goal on P2 touch:
+Found at 802317f4 (bge- skip)
+
+ChaosPowers Music Idle Disable v2::
+803c3bac (IronJungle load() track function
+Found 800a4d84 (bl to StopAndLoadNewTrack() of 800a4cd8 (ChaosPowersDisable))
+nop 800a4d84, append to existing music code:
+
+
+2P Optionals No Idle ChaosPowers Music v2
+C20A4FF0 00000001
+60000000 00000000
+C20A4D84 00000001
+60000000 00000000
+
