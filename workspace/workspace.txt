@@ -3315,3 +3315,16 @@ C2080734 00000001
 2019-05-11
 Computer Room object identified to not trigger goal on P2 touch:
 Found at 802317f4 (bge- skip)
+
+ChaosPowers Music Idle Disable v2::
+803c3bac (IronJungle load() track function
+Found 800a4d84 (bl to StopAndLoadNewTrack() of 800a4cd8 (ChaosPowersDisable))
+nop 800a4d84, append to existing music code:
+
+
+2P Optionals No Idle ChaosPowers Music v2
+C20A4FF0 00000001
+60000000 00000000
+C20A4D84 00000001
+60000000 00000000
+
