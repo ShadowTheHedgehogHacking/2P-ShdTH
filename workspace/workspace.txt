@@ -3257,3 +3257,57 @@ nop 800e1174
 C20E1174 00000001
 60000000 00000000
 * Hacky fix that has lasers immediately fire when in range instead of comparing distance
+
+BallColor:
+800a5ab0 = Other Activity Color (Homing attack, spindash, slide trail) [r4]
+80087190 = JumpBall Color [r0]
+80080734 = Falling Color (and slide foot effect) [r0]
+80087df0 = nope
+80087eb4 = nope
+80087278 = nope
+80087190 = nope
+800a02d8 = nope
+80080648 = nope 
+800806f0 = nope
+80397434 = nope  
+
+Example Gecko: Other-Activity must li to r4, other two to r0
+X VALID VALUES:
+0 = White/0000000 Color
+1 = Sonic 
+2 = Tails
+3 = Knuckles
+4 = Amy
+5 = Rouge
+6 = Omega
+7 = Vector
+8 = Espio
+9 = Maria
+A = Bee
+B = Eggmonitor
+C = Dooms Eye
+
+Sonic-Color: 
+80080734
+
+Jump Ball Color Switch [dreamsyntax]
+C20A5AB0 00000001
+3880000X 00000000
+C2087190 00000001
+3800000X 00000000
+C2080734 00000001
+3800000X 00000000
+*Change all 3 X to valid values:
+*0 = White/0000000 Color
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink) 
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
