@@ -3311,3 +3311,7 @@ C2080734 00000001
 *A = Bee (Default Orange, but White Homing Attack)
 *B = Eggmonitor (Default Orange, but White Homing Attack)
 *C = Dooms Eye (Default Orange, but White Homing Attack)
+
+2019-05-11
+Computer Room object identified to not trigger goal on P2 touch:
+Found at 802317f4 (bge- skip)

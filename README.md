@@ -19,6 +19,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Turrets attach to correct player's camera
 * Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
+* Dark/Hero orbs activate Chaos Powers for both players
+* Computer Room Trigger does not activate for P2
 * Key Door trigger patch for P2 [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
@@ -41,6 +43,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * If Dark Partner is activated first, P3 remapping fails
 * Worm Enemies will only target P1
 * Heavy Dog / Blue Falcon do not damage P2
+* Dark/Hero orbs activate Chaos Powers for both players 
 
 ## Done so far:
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
