@@ -3328,3 +3328,9 @@ C20A4FF0 00000001
 C20A4D84 00000001
 60000000 00000000
 
+2019-05-14
+Turret/Vehicle Camera searching
+8060b274 (reoccuring r3)
+8060b27c (reoccuring r4)
+
+before 801ced24 is called (all turrets/vehicles)

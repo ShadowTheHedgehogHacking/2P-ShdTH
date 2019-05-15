@@ -61,8 +61,8 @@
 80009704 0000009c 80009704 0 ??prevents_showing_events_80009704_
 800097a0 00000040 800097a0 0 ??prevents_loading_events_800097a0_
 800097e0 00000024 800097e0 0 zz_800097e0_
-80009804 00000040 80009804 0 zz_80009804_
-80009844 00000050 80009844 0 zz_80009844_
+80009804 00000040 80009804 0 ??SomethingCameraSpecialCamUnknown_80009804_
+80009844 00000050 80009844 0 ??TurretMountUnknownWithGuiSomethingAndGenericCallToFree_NoAffectOnCamera_80009844_
 80009894 00000050 80009894 0 ??UnknownCallToMalloc__80009894_
 800098e4 0000004c 800098e4 0 zz_800098e4_
 80009930 0000002c 80009930 0 zz_80009930_
@@ -714,7 +714,7 @@
 8001ae14 0000002c 8001ae14 0 LoadFrame::Replayable<0,18EmissionController>(EmissionController &)
 8001ae40 00000068 8001ae40 0 zz_8001ae40_
 8001aea8 00000040 8001aea8 0 zz_8001aea8_
-8001aee8 00000024 8001aee8 0 zz_8001aee8_
+8001aee8 00000024 8001aee8 0 ??LoadSomethingfromR4StoreInR3,R5__8001aee8_
 8001af0c 00000374 8001af0c 0 zz_8001af0c_
 8001b280 00000084 8001b280 0 zz_8001b280_
 8001b304 0000004c 8001b304 0 zz_8001b304_
@@ -2144,7 +2144,7 @@
 80051fc8 000000bc 80051fc8 0 zz_80051fc8_
 80052084 00000040 80052084 0 zz_80052084_
 800520c4 00000050 800520c4 0 zz_800520c4_
-80052114 0000009c 80052114 0 zz_80052114_
+80052114 0000009c 80052114 0 ??GetPlayerPointer1EvenIfArgIsP2_80052114_
 800521b0 00000044 800521b0 0 zz_800521b0_
 800521f4 00000010 800521f4 0 nlListContainer<P8SaveData>::__ct(void)
 80052204 0000002c 80052204 0 zz_80052204_
@@ -14719,7 +14719,7 @@
 801b6244 00000008 801b6244 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 801b624c 00000008 801b624c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 801b6254 00000070 801b6254 0 zz_801b6254_
-801b62c4 00000084 801b62c4 0 ??sharedVehicleTurretRelatedFunction_Camera?_801b62c4_
+801b62c4 00000084 801b62c4 0 sharedVehicleTurretRelatedFunction_801b62c4_
 801b6348 00000004 801b6348 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801b634c 00000004 801b634c 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801b6350 00000030 801b6350 0 LexicalCast<45BasicString<c,Q26Detail19TempStringAllocator>,PCc>(char *&)
@@ -14895,7 +14895,7 @@
 801b9ca8 0000084c 801b9ca8 0 zz_801b9ca8_
 801ba4f4 00000064 801ba4f4 0 zz_801ba4f4_
 801ba558 00000050 801ba558 0 zz_801ba558_
-801ba5a8 00000070 801ba5a8 0 zz_801ba5a8_
+801ba5a8 00000070 801ba5a8 0 ??CarTypeDismountNonBctrlCall_801ba5a8_
 801ba618 000000bc 801ba618 0 zz_801ba618_
 801ba6d4 0000009c 801ba6d4 0 zz_801ba6d4_
 801ba770 000000e4 801ba770 0 zz_801ba770_
@@ -15229,7 +15229,7 @@
 801c8a80 00000050 801c8a80 0 zz_801c8a80_
 801c8ad0 00000060 801c8ad0 0 zz_801c8ad0_
 801c8b30 0000006c 801c8b30 0 zz_801c8b30_
-801c8b9c 00000128 801c8b9c 0 zz_801c8b9c_
+801c8b9c 00000128 801c8b9c 0 UnknownExclusive_createSpecialCameraEvent_801c8b9c_
 801c8cc4 000000a0 801c8cc4 0 zz_801c8cc4_
 801c8d64 00000030 801c8d64 0 zz_801c8d64_
 801c8d94 00000030 801c8d94 0 zz_801c8d94_
@@ -15249,9 +15249,9 @@
 801c9304 00000048 801c9304 0 zz_801c9304_
 801c934c 00000068 801c934c 0 zz_801c934c_
 801c93b4 00000048 801c93b4 0 zz_801c93b4_
-801c93fc 00000050 801c93fc 0 zz_801c93fc_
-801c944c 00000040 801c944c 0 zz_801c944c_
-801c948c 00000048 801c948c 0 zz_801c948c_
+801c93fc 00000050 801c93fc 0 ??StoreForDetatchLater?_801c93fc_
+801c944c 00000040 801c944c 0 ??SomethingSpecialCamCalled_801c944c_
+801c948c 00000048 801c948c 0 ??UnknownCreateSpecialCameraEvent_801c948c_
 801c94d4 0000000c 801c94d4 0 DrawableCharacter::GetAnimController( (void))
 801c94e0 00000024 801c94e0 0 cFielder::UpdatePlay(float)
 801c9500 00000004 801c9500 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -15266,7 +15266,7 @@
 801c998c 00000054 801c998c 0 zz_801c998c_
 801c99e0 00000034 801c99e0 0 zz_801c99e0_
 801c9a14 00000008 801c9a14 0 J3DTexGenBlock4::getNBTScale(void) 	J3DGraphBase.a J3DMatBlock.o
-801c9a1c 00000038 801c9a1c 0 zz_801c9a1c_
+801c9a1c 00000038 801c9a1c 0 ??SomethingSpecialCamCallsJ3DTex_801c9a1c_
 801c9a54 00000020 801c9a54 0 cPlayer::PostPhysicsUpdate(void)
 801c9a74 0000000c 801c9a74 0 cAIPad::__ct(void)
 801c9a80 00000020 801c9a80 0 cPlayer::PostPhysicsUpdate(void)
@@ -15282,7 +15282,7 @@
 801c9d14 00000024 801c9d14 0 CommonDesireData::CalcBoolChance(float)
 801c9d38 000000b8 801c9d38 0 zz_801c9d38_
 801c9df0 000000b4 801c9df0 0 zz_801c9df0_
-801c9ea4 000009fc 801c9ea4 0 zz_801c9ea4_
+801c9ea4 000009fc 801c9ea4 0 ??InsanelyLongSpecialCamAttachMaybeToStageManagerFunction_801c9ea4_
 801ca8a0 00000010 801ca8a0 0 zz_801ca8a0_
 801ca8b0 00000020 801ca8b0 0 cPlayer::PostPhysicsUpdate(void)
 801ca8d0 00000020 801ca8d0 0 cPlayer::PostPhysicsUpdate(void)
@@ -15304,8 +15304,8 @@
 801cb720 00000050 801cb720 0 zz_801cb720_
 801cb770 00000054 801cb770 0 ?Unknown4_801cb770_
 801cb7c4 00000040 801cb7c4 0 zz_801cb7c4_
-801cb804 00000044 801cb804 0 zz_801cb804_
-801cb848 0000004c 801cb848 0 zz_801cb848_
+801cb804 00000044 801cb804 0 ??ExclusiveUnknownCreatedSpecialCameraEvent_801cb804_
+801cb848 0000004c 801cb848 0 SpecialCamLayer2ExclusiveUnknwnCreatedFunc1_801cb848_
 801cb894 00000054 801cb894 0 zz_801cb894_
 801cb8e8 000000a8 801cb8e8 0 zz_801cb8e8_
 801cb990 0000004c 801cb990 0 zz_801cb990_
@@ -15453,8 +15453,8 @@
 801ce5bc 00000008 801ce5bc 0 J3DTexGenBlock4::getNBTScale(void) 	J3DGraphBase.a J3DMatBlock.o
 801ce5c4 0000006c 801ce5c4 0 zz_801ce5c4_
 801ce630 00000014 801ce630 0 zz_801ce630_
-801ce644 00000054 801ce644 0 zz_801ce644_
-801ce698 00000020 801ce698 0 cPlayer::PostPhysicsUpdate(void)
+801ce644 00000054 801ce644 0 ??GetStageCameraManagerToR3_or_0_if_not_found_PutExternalCamInList(r4 = externalCamID)_801ce644_
+801ce698 00000020 801ce698 0 getStageCameraManager_IntoR3_cPlayer::PostPhysicsUpdate(void)
 801ce6b8 00000020 801ce6b8 0 cPlayer::PostPhysicsUpdate(void)
 801ce6d8 00000008 801ce6d8 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 801ce6e0 00000020 801ce6e0 0 cPlayer::PostPhysicsUpdate(void)
@@ -15481,8 +15481,8 @@
 801ced24 00000128 801ced24 0 createSpecialCameraEvent_801ced24_
 801cee4c 00000048 801cee4c 0 zz_801cee4c_
 801cee94 00000024 801cee94 0 zz_801cee94_
-801ceeb8 00000040 801ceeb8 0 zz_801ceeb8_
-801ceef8 0000005c 801ceef8 0 zz_801ceef8_
+801ceeb8 00000040 801ceeb8 0 ??OtherDetatch?_801ceeb8_
+801ceef8 0000005c 801ceef8 0 ??ExclusiveSpecialCameraEventCALLS_SHAREDINCLUDES_801ceef8_
 801cef54 0000009c 801cef54 0 ?SHARED_INCLUDES_FLYABLES_LostImpactTurrets_CallWith_ConstantlyCalledCallToMalloc_801cef54_
 801ceff0 00000028 801ceff0 0 zz_801ceff0_
 801cf018 00000034 801cf018 0 zz_801cf018_
@@ -15498,7 +15498,7 @@
 801cf238 0000005c 801cf238 0 FormationOffensive::__dt(void)
 801cf294 00000028 801cf294 0 SidelineExplodable::Allocate(void)
 801cf2bc 0000004c 801cf2bc 0 zz_801cf2bc_
-801cf308 00000064 801cf308 0 zz_801cf308_
+801cf308 00000064 801cf308 0 RetrieveStageCameraManagerToR3_801cf308_
 801cf36c 00000054 801cf36c 0 zz_801cf36c_
 801cf3c0 00000064 801cf3c0 0 zz_801cf3c0_
 801cf424 000000fc 801cf424 0 zz_801cf424_
