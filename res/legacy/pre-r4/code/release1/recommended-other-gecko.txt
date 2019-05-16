@@ -1,7 +1,0 @@
-$Infinite Lives [Link Master]
-04576704 00000063
-$No Chaos Control [Link Master]
-045766c8 00000000
-$Widescreen Hack [LimblessVector]
-0458412c 3fa00000
-*Use this WITH Dolphin's built-in Widescreen Hack (for Type V SplitScreen)
