@@ -1,0 +1,1537 @@
+{
+    "watchList": [
+        {
+            "groupEntries": [
+                {
+                    "groupEntries": [
+                        {
+                            "address": "8132A478",
+                            "baseIndex": 0,
+                            "label": "h-speed",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "807D77D4",
+                            "baseIndex": 0,
+                            "label": "Velocity",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "807D77D8",
+                            "baseIndex": 0,
+                            "label": "VelocityAccelRate",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8132A13C",
+                            "baseIndex": 0,
+                            "label": "weird v-jump false thing - hands remover",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8134B854",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8134B858",
+                            "baseIndex": 0,
+                            "label": "ignore---bracket",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F04798",
+                            "baseIndex": 0,
+                            "label": "Cam0 Height ",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F04814",
+                            "baseIndex": 0,
+                            "label": "Cam0 Closeness Zoom",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80F04818",
+                            "baseIndex": 0,
+                            "label": "Cam0 Height 2?",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "80F047CC",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "8060D7B4",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "807D76B4",
+                                    "baseIndex": 0,
+                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D7730",
+                                    "baseIndex": 0,
+                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D7748",
+                                    "baseIndex": 0,
+                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D77A4",
+                                    "baseIndex": 0,
+                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "80F0466C",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "8056EEB0",
+                                    "baseIndex": 0,
+                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                }
+                            ],
+                            "groupName": "camtrash_searches"
+                        },
+                        {
+                            "address": "80F04788",
+                            "baseIndex": 0,
+                            "label": "Cam0 X-Axis Rotation Speed",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80F047A0",
+                            "baseIndex": 0,
+                            "label": "Cam0 Position??",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D76BC",
+                            "baseIndex": 0,
+                            "label": "FetchedCam0X",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B268",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B1E8",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A46C",
+                            "baseIndex": 0,
+                            "label": "PlayerState",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8132A468",
+                            "baseIndex": 0,
+                            "label": "PlayerState2?",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A470",
+                            "baseIndex": 0,
+                            "label": "CrawlingInForwardAnimations",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A464",
+                            "baseIndex": 0,
+                            "label": "PlayerStateAnimationIndex?",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A460",
+                            "baseIndex": 0,
+                            "label": "AnimationIndex?",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A45C",
+                            "baseIndex": 0,
+                            "label": "CrawlingInMyAnimations",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A474",
+                            "baseIndex": 0,
+                            "label": "???",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A478",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8132A46A",
+                            "baseIndex": 0,
+                            "label": "HalfWordVersionAttempt",
+                            "typeIndex": 1,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80080EF8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "804B0000",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80082C00",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "PlayerAnim"
+                }
+            ],
+            "groupName": "Dynamic Memory (Use for Struct Identification later w/ Pointer)"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "8058454F",
+                    "baseIndex": 0,
+                    "label": "Menu Cursor (0= 1P ...)",
+                    "typeIndex": 0,
+                    "unsigned": true
+                },
+                {
+                    "address": "8058453F",
+                    "baseIndex": 0,
+                    "label": "Menu Cursor (0= 1P, 1= 2P, 2 = OPTION)",
+                    "typeIndex": 0,
+                    "unsigned": true
+                }
+            ],
+            "groupName": "Main Menu"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "805EF2A8",
+                    "baseIndex": 0,
+                    "label": "EV_CurrentFrame",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "805F4C48",
+                    "baseIndex": 0,
+                    "label": "EV_FramesPerSecond",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "805F4C4C",
+                    "baseIndex": 0,
+                    "label": "EV_Unknown_60",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "805EF2B5",
+                    "baseIndex": 1,
+                    "label": "EV_CutsceneItemsWarp",
+                    "typeIndex": 2,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "EventCutsceneState"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "80575F78",
+                    "baseIndex": 0,
+                    "label": "Current StageAction",
+                    "length": 35,
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "typeIndex": 5,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F87",
+                    "baseIndex": 0,
+                    "label": "Execute/Change StageAction (0-16)",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D748",
+                    "baseIndex": 0,
+                    "label": "Current Stage ID",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D752",
+                    "baseIndex": 0,
+                    "label": "Game Mode (0 = story, 1= 2P battle)",
+                    "typeIndex": 0,
+                    "unsigned": true
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "807D24E8",
+                            "baseIndex": 0,
+                            "label": "NumberOfShotsOnScreen(IncludesEnemyShooting)",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8057D768",
+                            "baseIndex": 0,
+                            "label": "FreezeControlOnSeeingPartner/ChaosControl/PauseGame",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057D768",
+                            "baseIndex": 0,
+                            "label": "Pause timer when paused",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "Misc Game State / Properties"
+                }
+            ],
+            "groupName": "StageManager"
+        },
+        {
+            "groupEntries": [
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 Writeable X",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 Writeable Y",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "4"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 Writeable Z",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "8"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 X-Axis Velocity",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "18"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 Y-Axis Velocity",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "1C"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 Z-Axis Velocity",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "20"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P1 ChosenCharacter",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "64"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D783A",
+                            "baseIndex": 0,
+                            "label": "P1 Status Byte 0 = normal, 2 = spindash, 8 = zipline, 64 = wallcling, 128 = in air",
+                            "typeIndex": 0,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "P1"
+                },
+                {
+                    "address": "8057670C",
+                    "baseIndex": 0,
+                    "label": "P1 Ring Count",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D7DC",
+                    "baseIndex": 0,
+                    "label": "P1 Selected Character",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057D7E0",
+                    "baseIndex": 0,
+                    "label": "P2 Selected Character",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "80576758",
+                    "baseIndex": 0,
+                    "label": "P2 Ring Count",
+                    "typeIndex": 2,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "PlayerStruct"
+        },
+        {
+            "groupEntries": [
+                {
+                    "groupEntries": [
+                        {
+                            "address": "8058412C",
+                            "baseIndex": 0,
+                            "label": "1P Screen 1 Aspect",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "805841BC",
+                                    "baseIndex": 0,
+                                    "label": "2P H SplitScreen Screen 1 Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "805841C0",
+                                    "baseIndex": 0,
+                                    "label": "2P H SplitScreen Screen 1 V-Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "805841EC",
+                                    "baseIndex": 0,
+                                    "label": "2P H SplitScreen Screen 2 Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "805841F0",
+                                    "baseIndex": 0,
+                                    "label": "2P H SplitScreen Screen 2 V-Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                }
+                            ],
+                            "groupName": "Horizontal"
+                        },
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "8058415C",
+                                    "baseIndex": 0,
+                                    "label": "2P V SplitScreen Screen 1 Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80584160",
+                                    "baseIndex": 0,
+                                    "label": "2P V SplitScreen Screen 1 V-Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "8058418C",
+                                    "baseIndex": 0,
+                                    "label": "2P V SplitScreen Screen 2 Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80584190",
+                                    "baseIndex": 0,
+                                    "label": "2P V SplitScreen Screen 2 V-Aspect",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                }
+                            ],
+                            "groupName": "Vertical"
+                        }
+                    ],
+                    "groupName": "Aspect Ratio"
+                },
+                {
+                    "address": "8057D70C",
+                    "baseIndex": 0,
+                    "label": "0x006C Access Current Camera",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "805F0174",
+                    "baseIndex": 0,
+                    "label": "Camera Number acting on for render()",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D710",
+                    "baseIndex": 0,
+                    "label": "Split Number acting on for render()",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D700",
+                    "baseIndex": 0,
+                    "label": "Splitscreen type",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D704",
+                    "baseIndex": 0,
+                    "label": "Splitscreen split 1",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D708",
+                    "baseIndex": 0,
+                    "label": "Splitscreen split 2",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "807D7990",
+                    "baseIndex": 0,
+                    "label": "RO | Cam1X | One with offset",
+                    "typeIndex": 3,
+                    "unsigned": true
+                },
+                {
+                    "address": "807D79A8",
+                    "baseIndex": 0,
+                    "label": "RO | Cam1 X  | Set obj controller",
+                    "typeIndex": 3,
+                    "unsigned": true
+                },
+                {
+                    "address": "807D7994",
+                    "baseIndex": 0,
+                    "label": "RO | P2 Y ?",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "807D7998",
+                    "baseIndex": 0,
+                    "label": "RO | P2 Z ?",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "807D76B0",
+                                    "baseIndex": 0,
+                                    "label": "Cam0 Position With Rotate X",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "807D76B4",
+                                    "baseIndex": 0,
+                                    "label": "Cam0 Position With Rotate Y",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "807D76B8",
+                                    "baseIndex": 0,
+                                    "label": "Cam0 Position With Rotate Z",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                }
+                            ],
+                            "groupName": "Camera0"
+                        },
+                        {
+                            "groupEntries": [
+                            ],
+                            "groupName": "Camera1"
+                        },
+                        {
+                            "groupEntries": [
+                            ],
+                            "groupName": "Splits"
+                        },
+                        {
+                            "address": "807D7990",
+                            "baseIndex": 0,
+                            "label": "RO | P2 X ?",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "807D79A8",
+                            "baseIndex": 0,
+                            "label": "RO | P2 X ?",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8057D703",
+                            "baseIndex": 0,
+                            "label": "Splitscreen type",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057D70B",
+                            "baseIndex": 0,
+                            "label": "Splitscreen split 2",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057D707",
+                            "baseIndex": 0,
+                            "label": "Splitscreen split 1",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D77E0",
+                            "baseIndex": 0,
+                            "label": "RO | P1 Position X",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D77E4",
+                            "baseIndex": 0,
+                            "label": "RO | P1 Position Y",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D77E8",
+                            "baseIndex": 0,
+                            "label": "RO | P1 Position Z",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "8056EEC0",
+                                    "baseIndex": 0,
+                                    "label": "Small Reads, Partner does not use",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "807D7740",
+                                    "baseIndex": 0,
+                                    "label": "attachScreenToCamUses",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D774C",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D77A8",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "80EFA1D8",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "80EFA304",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "80EFA338",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                }
+                            ],
+                            "groupName": "All Cam0 PosWRotate Z Copies"
+                        },
+                        {
+                            "address": "807D77FC",
+                            "baseIndex": 0,
+                            "label": "ReadFrom Cam0 Y (Glyphic Canyon)",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "Cameras"
+                },
+                {
+                    "address": "807D7860",
+                    "baseIndex": 0,
+                    "label": "Cam1 Position X",
+                    "typeIndex": 3,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "Camera and Split Properties"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "8056ED4C",
+                    "baseIndex": 0,
+                    "label": "P1 ButtonInputs",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8056ED78",
+                    "baseIndex": 0,
+                    "label": "P2 ButtonInputs",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8056ED88",
+                    "baseIndex": 0,
+                    "label": "P2 ControlStick Accel X-Axis",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "8056ED8C",
+                    "baseIndex": 0,
+                    "label": "P2 ControlStick Accel Y-Axis",
+                    "typeIndex": 3,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "Controller Input Polling"
+        },
+        {
+            "groupEntries": [
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80575FBF",
+                            "baseIndex": 0,
+                            "label": "Highest Checkpoint",
+                            "typeIndex": 0,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80575FE4",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FE8",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FEC",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FF0",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FF4",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FF8",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FFC",
+                            "baseIndex": 0,
+                            "label": "Checkp. 1 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576000",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576004",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576008",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057600C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576010",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576014",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576018",
+                            "baseIndex": 0,
+                            "label": "Checkp. 2 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057601C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576020",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576024",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576028",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057602C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576030",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576034",
+                            "baseIndex": 0,
+                            "label": "Checkp. 3 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576038",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057603C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576040",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576044",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576048",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057604C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576050",
+                            "baseIndex": 0,
+                            "label": "Checkp. 4 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576054",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576058",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057605C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576060",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576064",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576068",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057606C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 5 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576070",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576074",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576078",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057607C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576080",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576084",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576088",
+                            "baseIndex": 0,
+                            "label": "Checkp. 6 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057608C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576090",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576094",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576098",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057609C",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760A0",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760A4",
+                            "baseIndex": 0,
+                            "label": "Checkp. 7 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760A8",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760AC",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760B0",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760B4",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760B8",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760BC",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805760C0",
+                            "baseIndex": 0,
+                            "label": "Checkp. 8 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "P1 Checkpoint"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80576364",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 X Trans",
+                            "typeIndex": 3,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80576368",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 Y Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057636C",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 Z Trans",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576370",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 X Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576374",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 Y Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80576378",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 Z Rot",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057637C",
+                            "baseIndex": 0,
+                            "label": "P2 Checkp. 1 On?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8057633F",
+                            "baseIndex": 0,
+                            "label": "P2 Highest Checkpoint ?? maybe not",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "P2 Checkpoint"
+                }
+            ],
+            "groupName": "Checkpoints"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "80575F1C",
+                    "baseIndex": 0,
+                    "label": "Mission Selected",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "80B6631C",
+                    "baseIndex": 0,
+                    "label": "Mission SelectedCompareBitDisplay (2 = DisplayBoth MissionSelected is 2)",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80FE49E0",
+                    "baseIndex": 0,
+                    "label": "No label",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80FE4A08",
+                    "baseIndex": 0,
+                    "label": "No label",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80FE4A20",
+                    "baseIndex": 0,
+                    "label": "r4",
+                    "typeIndex": 2,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "Mission"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "805766EC",
+                    "baseIndex": 0,
+                    "label": "P1 UI State (Rings, Weapon etc)",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057673B",
+                    "baseIndex": 0,
+                    "label": "UI X button State - 0 none, 1 ringdash, 2 pickupbox",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D7D4",
+                    "baseIndex": 0,
+                    "label": "P1 Win Count/Graphic",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057673B",
+                    "baseIndex": 0,
+                    "label": "UI X button State - 0 none, 1 ringdash, 2 pickupbox, 9 android",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D7D8",
+                    "baseIndex": 0,
+                    "label": "P2 Win Count/Graphic",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "8057D7E8",
+                    "baseIndex": 0,
+                    "label": "Hide HUD (not subtitles)",
+                    "typeIndex": 0,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "UI"
+        },
+        {
+            "groupEntries": [
+                {
+                    "groupEntries": [
+                        {
+                            "address": "805E4960",
+                            "baseIndex": 0,
+                            "label": "Distance to Activate Key Door",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "Secret Key Door"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "807D3970",
+                            "baseIndex": 0,
+                            "label": "SpaceGadget_GravitySwitcher_AnimState",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80584390",
+                            "baseIndex": 0,
+                            "label": "SpaceGadgetR40x0",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80584394",
+                            "baseIndex": 0,
+                            "label": "SpaceGadget_GravitySwitcher_CamROT",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80584398",
+                            "baseIndex": 0,
+                            "label": "SpaceGadget_GravitySwitcher_CamROT2",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80293968",
+                            "baseIndex": 0,
+                            "label": "STW",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B3A4",
+                            "baseIndex": 0,
+                            "label": "stored?",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B3F0",
+                            "baseIndex": 0,
+                            "label": "store1",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B3F4",
+                            "baseIndex": 0,
+                            "label": "store2",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B3F8",
+                            "baseIndex": 0,
+                            "label": "store3",
+                            "typeIndex": 3,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "SpaceGadget GravitySwitchers"
+                }
+            ],
+            "groupName": "SETObjs_Specifics_Static"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "805E498C",
+                    "baseIndex": 0,
+                    "label": "0=CannotShoot; 1= CanShoot",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "805F2BD8",
+                    "baseIndex": 0,
+                    "label": "Character Gravity",
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "805766D4",
+                    "baseIndex": 0,
+                    "label": "Chaos Blast points",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "805766C8",
+                    "baseIndex": 0,
+                    "label": "Chaos Control Points",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80576707",
+                    "baseIndex": 0,
+                    "label": "Life Count",
+                    "typeIndex": 0,
+                    "unsigned": false
+                }
+            ],
+            "groupName": "Properties Affecting All Players"
+        }
+    ]
+}
