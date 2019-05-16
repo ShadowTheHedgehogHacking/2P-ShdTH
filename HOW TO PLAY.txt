@@ -1,12 +1,55 @@
-﻿=== Release 4 / v1.2 - 2019.03.03 ===
+﻿
+		██▄   █▄▄▄▄ ▄███▄   ██   █▀▄▀█    ▄▄▄▄▄ ▀▄    ▄  ▄     ▄▄▄▄▀ ██       ▄  
+		█  █  █  ▄▀ █▀   ▀  █ █  █ █ █   █     ▀▄ █  █    █ ▀▀▀ █    █ █  ▀▄   █ 
+		█   █ █▀▀▌  ██▄▄    █▄▄█ █ ▄ █ ▄  ▀▀▀▀▄    ▀█ ██   █    █    █▄▄█   █ ▀  
+		█  █  █  █  █▄   ▄▀ █  █ █   █  ▀▄▄▄▄▀     █  █ █  █   █     █  █  ▄ █   
+		███▀    █   ▀███▀      █    █            ▄▀   █  █ █  ▀         █ █   ▀▄ 
+			   ▀              █    ▀                  █   ██           █   ▀     
+							 ▀                                        ▀  
+								.----------------. 
+								| .--------------. |
+								| |    ___       | |
+								| |  .' _ '.     | |
+								| |  | (_) '___  | |
+								| |  .`___'/ _/  | |
+								| | | (___)  \_  | |
+								| | `._____.\__| | |
+								| |              | |
+								| '--------------' |
+								'----------------' 
+					 
+######                              #####                       #####                                
+#     #  ####  #    # #    # ##### #     # #####  ####  #####  #     #   ##   #    # # #    #  ####  
+#     # #    # ##   # #    #   #   #         #   #    # #    # #        #  #  ##  ## # ##   # #    # 
+#     # #    # # #  # #    #   #    #####    #   #    # #    # #  #### #    # # ## # # # #  # #      
+#     # #    # #  # # #    #   #         #   #   #    # #####  #     # ###### #    # # #  # # #  ### 
+#     # #    # #   ## #    #   #   #     #   #   #    # #      #     # #    # #    # # #   ## #    # 
+######   ####  #    #  ####    #    #####    #    ####  #       #####  #    # #    # # #    #  ####
 
+									Bring you
+							2 Player Shadow The Hedgehog
+
+=== Release 5 / v2.0 - 2019.07.07 ===
+
+=== Things to Know ===
+- Chunks Fix currently causes crashes if players are too far away.
+	This is especially present on The Doom / GUN Fortress / Central City
+	Stay within reasonable range to not crash.
+- Air-vents/Air Blower bug - either player may get stuck in the animation.
+	Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
+- Checkpoint backtracking does not work
+- Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator, Z+L+R is Clear Chaos Powers
+- Change characters:
+	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
+
+=== Setup ===
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
 To play this mod, you must:
 (1) copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
 (2) enable Gecko codes and use provided GCT (Wii/Nintendont) or game config .ini (Dolphin)
 
-You can find a setup tutorial video at: https://youtube.com/dreamsyntax
+You can find a setup tutorial video at: https://www.youtube.com/watch?v=FNH20sALtJM or search for "dreamsyntax" on YouTube
 
 === Extracting and Rebuilding ISO with Modification ===
     Open gcr.exe (GameCube Rebuilder)
@@ -70,15 +113,8 @@ For performance issues adjust clockspeed while running the game (Dolphin has a b
     Select Advanced Tab
     Adjust CPU Clock Override slider
 
-
 Enjoy!
-=====================================================================
-=====================================================================
 
-██▄   █▄▄▄▄ ▄███▄   ██   █▀▄▀█    ▄▄▄▄▄ ▀▄    ▄  ▄     ▄▄▄▄▀ ██       ▄  
-█  █  █  ▄▀ █▀   ▀  █ █  █ █ █   █     ▀▄ █  █    █ ▀▀▀ █    █ █  ▀▄   █ 
-█   █ █▀▀▌  ██▄▄    █▄▄█ █ ▄ █ ▄  ▀▀▀▀▄    ▀█ ██   █    █    █▄▄█   █ ▀  
-█  █  █  █  █▄   ▄▀ █  █ █   █  ▀▄▄▄▄▀     █  █ █  █   █     █  █  ▄ █   
-███▀    █   ▀███▀      █    █            ▄▀   █  █ █  ▀         █ █   ▀▄ 
-       ▀              █    ▀                  █   ██           █   ▀     
-                     ▀                                        ▀  
+
+For future updates:
+https://github.com/ShadowTheHedgehogHacking/2P-ShdTH

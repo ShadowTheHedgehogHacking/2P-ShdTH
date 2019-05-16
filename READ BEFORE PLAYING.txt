@@ -1,5 +1,5 @@
 - Chunks Fix currently causes crashes if players are too far away.
-	This is especially present on The Doom / Lost Impact.
+	This is especially present on The Doom / GUN Fortress / Central City
 	Stay within reasonable range to not crash.
 - Air-vents/Air Blower bug - either player may get stuck in the animation.
 	Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
