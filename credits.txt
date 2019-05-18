@@ -9,3 +9,5 @@ SinglePlayer Widescreen Hack by LimblessVector
 Infinite Lives by Link Master
 
 Chaos Powers Activators by Zzetti
+
+Stray pixel under HP bars fix by LimblessVector
