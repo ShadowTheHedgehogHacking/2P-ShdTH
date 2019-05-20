@@ -29,7 +29,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Circus Park Hero Mission counts P2's rings [DONE]
 * GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
-* Westopolis Triggers activate immediately [DONE]
+* Westopolis Triggers & Computer Room activate immediately [DONE]
 * **Buffer crash research / possible crash reductions if possible
 
 ## Problems
@@ -67,7 +67,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it
 * Key Doors react to P2
-* Westopolis Triggers activate immediately
+* Westopolis Triggers & Computer Room react to P2
 
 
 ## Other Known Issues (Not planned to be fixed)

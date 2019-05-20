@@ -3334,3 +3334,125 @@ Turret/Vehicle Camera searching
 8060b27c (reoccuring r4)
 
 before 801ced24 is called (all turrets/vehicles)
+
+2019-05-17
+Westopolis Laser Fix v1 is invalid;; Causes crash on any EVENT that uses stg0100 (lasers will attempt to fire during cutscene result in out of buffer memory)
+Solution: properly implement distance check per laser per player::
+
+800e1174 @ bge- ->0x800E1184
+Reuse most of Keydoor code:
+r3 init = 8060b350
+
+
+2019-05-19
+r1 (sp) and r30 does not change within this func, account for this;
+OOPS I was sending this to the keydoor code !! (fixed in this attempt)
+Also should be blt- not bge as we want success case to jump to next line in original code
+
+blt- 0x78
+lwz r5, 0x000C (r30)
+addi r3, sp, 204
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+addi r3, sp, 240
+addi r4, sp, 204
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+addi r3, sp, 240
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lwz	r3, 0 (r30)
+lfs	f0, 0x003C (r3)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x800E
+ori r15, r15, 0x1184
+mtlr r15
+blr
+//natural return to 800e1184 (success)
+
+works
+
+2P Essentials Westopolis Lasers Fix v2 [dreamsyntax]
+C20E1174 00000010
+41800078 80BE000C
+386100CC 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 386100F0
+388100CC 3DE08000
+61EF91EC 7DE803A6
+4E800021 386100F0
+3DE08040 61EFCF50
+7DE803A6 4E800021
+807E0000 C003003C
+FC010040 41800014
+3DE0800E 61EF1184
+7DE803A6 4E800020
+60000000 00000000
+
+---
+Fix Computer Room goal ring detect for P2:
+bge- @ 802317f4
+
+Uses same format as Westopolis lasers, code can be mostly reused:
+
+blt- 0x74
+lwz r5, 0x0030 (r31)
+addi r3, sp, 56
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+addi r3, sp, 68
+addi r4, sp, 56
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+addi r3, sp, 68
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lfs	f0, 0x003C (r31)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x8023
+ori r15, r15, 0x18B4
+mtlr r15
+blr
+//natural return to 802317f8 (success)
+
+2P Essentials Computer Room Goal Fix [dreamsyntax]
+C22317F4 0000000F
+41800074 80BF0030
+38610038 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 38610044
+38810038 3DE08000
+61EF91EC 7DE803A6
+4E800021 38610044
+3DE08040 61EFCF50
+7DE803A6 4E800021
+C01F003C FC010040
+41800014 3DE08023
+61EF18B4 7DE803A6
+4E800020 00000000
