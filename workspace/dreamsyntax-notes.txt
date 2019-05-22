@@ -3456,3 +3456,46 @@ C01F003C FC010040
 41800014 3DE08023
 61EF18B4 7DE803A6
 4E800020 00000000
+
+
+---
+Checkpoint Switching Searching::
+
+
+@ 800a8b98
+ori r3, r3, 0x8
+mr	r31, r3
+
+Attempt PlayerPointerSwap
+C20A8B98 00000002
+60630008 7C7F1B78
+60000000 00000000
+
+
+2019-05-20
+
+and completely overwrite wTexCal toplevel:
+@ 800a8bec
+stwu sp, -0x0010(sp)
+mflr r0
+stw r0, 0x0014(sp)
+lwz r0, 0x0004(r3)
+lwz r3, 0x0008(r3)
+ori r3, r3, 0x8
+nop (replace me with 54001838) == rlwinm r0, r0, 3, 0, 28 (1fffffff)
+add r3, r3, r0
+lwz r0, 0x0014(sp)
+mtlr r0
+addi sp, sp, 16
+
+C20A8BEC 00000006
+9421FFF0 7C0802A6
+90010014 80030004
+80630008 60630008
+54001838 7C630214
+80010014 7C0803A6
+38210010 00000000
+
+Failure, breaks P1 no change for P2 (checkpoints are broken)
+
+
