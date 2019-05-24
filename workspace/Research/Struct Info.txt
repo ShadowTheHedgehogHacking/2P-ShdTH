@@ -4,7 +4,7 @@ Shadow Player Struct:
 	0xA8 - Status 2:
 		-0x80000000 hasGun
 	0xAC - Status 3:
-		-0x40000000 enables super shadow during loadzz
+		-0x40000000 enables super shadow during load
 		-0x04000000 controls dont turn with camera
 		-0x00000100 no shadow
 		-0x00004000 disable walking
@@ -22,6 +22,35 @@ Behavior:
 
 CharCommand:
 	0x8 - void fpConstructor
+
+GravityChangeCollision:
+	0x0 - char* pName
+	0x4 - size ?
+
+GravityChangeSwitch:
+	0x0 - char* pName
+	0x4 - size ?
+	0xC - GravitySignBoard* ?
+	0x10 - Gadget* ?
+	0x18 - GravityChangeSwitch** ?
+	0x28 - pXYZ?
+	0x30 - direction?
+	0x34 - pXYZ real?
+	0x3C - GadgetModelInfo**** ?
+	0x50 - ?
+	0x54 - Effect::PJS::EffectArrangerPJS* ?
+	0x58 - boost::detail::sp_counted_base_impl<Effect::System::EffectElement *, boost::checked_deleter<Effect::System::EffectElement>>
+	0x5C - ?
+	0x68 - XYZ?
+
+GravityChangeZone:
+	0x0 - char* pName
+	0x4 - size ?
+	0x28 - float[3]** pXYZ?
+	0x34 - float[3]* pRealXYZ?
+	0x70 - float X
+	0x74 - float Y
+	0x78 - float Z
 
 Player:
 	0x0 - char* pName
@@ -69,6 +98,9 @@ Super:
 	
 		(*Struct Sizes*)
 CharaColliMove - 0x3B
+GravityChangeCollision - 0x9410
+GravityChangeSwitch - 0xBEE8
+GravityChangeZone - 0x7620
 Motion - 0x1428
 Shadow - 0xC30
 ShadowExecuter - 0x888
