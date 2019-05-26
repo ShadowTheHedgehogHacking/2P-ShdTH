@@ -329,9 +329,16 @@
                     "unsigned": false
                 },
                 {
+                    "address": "80584720",
+                    "baseIndex": 0,
+                    "label": "StageID SelectMode Picked ToLoad",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
                     "address": "8057D748",
                     "baseIndex": 0,
-                    "label": "Current Stage ID",
+                    "label": "StageID CurrentLoaded",
                     "typeIndex": 2,
                     "unsigned": false
                 },
