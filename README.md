@@ -13,15 +13,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Road to 2.0 (WIP)
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6
 * Fix Air bug - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers Fixed
+* Space Gadget Gravity Switchers Fixed [PARTIAL]
 * Devil Doom [TESTING]
-* Zipline/Pulleys fixed
+* Zipline/Pulleys fixed [TESTING]
 * Turrets attach to correct player's camera
 * Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
-* Dark/Hero orbs activate Chaos Powers for both players
-* Computer Room Trigger does not activate for P2
-* Key Door trigger patch for P2 [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
@@ -29,7 +26,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Circus Park Hero Mission counts P2's rings [DONE]
 * GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
-* Westopolis Triggers & Computer Room activate immediately [DONE]
+* Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
 * **Buffer crash research / possible crash reductions if possible
 
 ## Problems
@@ -41,9 +38,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
-* Worm Enemies will only target P1
-* Heavy Dog / Blue Falcon do not damage P2
-* Dark/Hero orbs activate Chaos Powers for both players 
 
 ## Done so far:
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
@@ -66,19 +60,21 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it
-* Key Doors react to P2
-* Westopolis Triggers & Computer Room react to P2
-
+* Key Doors, Westopolis Triggers, Computer Room react to P2
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
+* If ChaosPoints are at 0 Dark/Hero orbs only activate P1's ChaosState
+* Worm Enemies will only target P1
+* Heavy Dog / Blue Falcon do not damage P2
+* Bosses (with the exception of Sonic & Diablon) only react to P1
 
 ## Bonus Roadmap
 * Individual death-to-checkpoint / Don't reload level for both players
 * Static weapon swaps for Metal Androids
-* FriendlyFire Enable/Disable
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Optional BlackKnight style melee replacement
 
 ## Dev
 * dreamsyntax
