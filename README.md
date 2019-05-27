@@ -13,12 +13,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Road to 2.0 (WIP)
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6
 * Fix Air bug - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers Fixed [PARTIAL]
+* Space Gadget Gravity Switchers Fixed [TESTING]
 * Devil Doom [TESTING]
-* Zipline/Pulleys fixed [TESTING]
+* Coasters fixed [TESTING]
 * Turrets attach to correct player's camera
-* Vehicles map to correct player's controlpad and camera [PARTIAL]
 * Checkpoint Warping/Backtracking warps both players
+* Vehicles map to correct player's controlpad and freecam [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
@@ -31,10 +31,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Problems
 * Checkpoint Warping/Backtracking only moves P1
-* Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
+* Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
-* CarType vehicles only map to P1's control pad
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
@@ -59,16 +58,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
-* Vehicles no longer alter P1's camera if P2 uses it
+* Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
-* If ChaosPoints are at 0 Dark/Hero orbs only activate P1's ChaosState
+* If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
 * Worm Enemies will only target P1
 * Heavy Dog / Blue Falcon do not damage P2
 * Bosses (with the exception of Sonic & Diablon) only react to P1
+* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 
 ## Bonus Roadmap
 * Individual death-to-checkpoint / Don't reload level for both players
@@ -81,17 +81,16 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * DonutStopGaming
 
 ## Credits
-* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, and other address discoveries
+* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, and other address discoveries
 * LimblessVector for his work on identifying objects and his initial large memory list
-* Includes `True Black Shadow` by TheHatedGravity
-* Includes `Rouge over YellowAndroidShadow` by Shadowth117
 * SinglePlayer Widescreen Hack by LimblessVector
 * Infinite Lives by Link Master
 * Chaos Powers Activators by Zzetti 
 
 ## Thanks
 * igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
-* DonutStopGaming for ideas while function hunting
+* DonutStopGaming for ideas while function hunting and the many nights spent pair reversing
+* aldelaro5 for Dolphin Memory Engine
 * TryTwo for extremely useful new debugging features in Dolphin
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * DeadlyFugu, Muzzarino

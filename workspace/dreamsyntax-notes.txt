@@ -3499,3 +3499,138 @@ C20A8BEC 00000006
 Failure, breaks P1 no change for P2 (checkpoints are broken)
 
 
+2019-05-26
+TrailBlaze State Shadow: nop @ 8008580c
+HomingAttack state transition on target hit? @ 80085f28
+MultiChain HomingAttack @ 80086850
+No HomingAttack others, but HALT later @ 80089930
+No HomingAttack others, no halt @ 800899d4
+80097c88 saa
+----
+CarType Fixup:
+li	r5, 0 = 801b924c (P1 control for MOUNT)
+li	r5, 0 = 801ba5d0 (P1 control for DISMOUNT)
+li	r5, 0 = 801b9210 (P1 control for ??DISMOUNT PT2)
+
+StatusBit Version: 
+P1 WhenBeginTransitionToDrive->0x10000
+P2 WhenBeginTransitionToDrive->0x65536
+
+OnMount:
+801b924c = Has isDriving flag [r4 needs to be 2 at end]
+OnDismount:
+801ba5d0 = Has isDriving flag [r4 needs to be 1 at end]
+801b9210 = Does not have isDriving flag (but hacky fix is to check for 0, but this is not unique) ||NOT NEEDED
+
+Also need to fetch UI State to determine who is elligible to mount/dismount based on UI shown to prevent dual players in vehicles case issues
+
+ignoring 801b9210/PT2 (not sure what it does, no crash even if ignored):
+Only using isDriving flag types:
+
+
+||DRAFT||
+FOR: MOUNT / 801b924c / r4 should be 2 at end 
+	P1Check GetFlag:
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+	Constants per player ifCheck:
+lis r4, 1 	//0x10000 (P1)
+cmpw r5, r4
+bne 0xC 		//branch to P2 check
+li r5, 0
+bne 0x** 		//re-use bne and jump to end and set r4
+	P2Check GetFlag:
+lis r5, 0x807D
+ori r5, r5, 0x71A8
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 6
+ori r4, r4, 0x5536 (P2)
+cmpw r5, r4
+bne 0x8
+li r5, 1
+li r4, 2 		//set original r4
+//natural return
+
+As I was writing that I realized since this is only called during CarMount/Dismount its pointless to check P2 at all if P1 fails, since it then must be P2. It should still be checked verbosely for UI elements to reduce error cases though
+
+
+This test version should allow for proper player to drive, but only if P2 gets in first. If P1 is in a vehicle and P2 attempts to get in vehicle P1 will still have control
+||P1 CheckOnly Version (no UI)||
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1 	//0x10000 (P1)
+cmpw r5, r4
+bne 0xC 		//branch to P2 check
+li r5, 0		//CONTROLLER TO P1
+beq+ 0x8 		//re-use known status and jump to end and set r4
+li r5, 1		//CONTROLLER TO P2
+li r4, 2 		//set original r4
+
+Code only:
+APPLY TO 801b924c // MOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+
+
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v1 [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+80A500A8 3C800001
+7C052000 4082000C
+38A00000 41A20008
+38A00001 38800002
+60000000 00000000
+C21BA5D0 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+80A500A8 3C800001
+7C052000 4082000C
+38A00000 41A20008
+38A00001 38800001
+60000000 00000000
+*Disables SpecialCam & allows for P2 to drive if P2 gets in a CarType when P1 is not already driving
+*For P2 to drive, P2 needs to get in a vehicle while P1 is not in one
+
+Works!
+
+Adding UI check:
+P1 UI 805766EC
+A->CarType = 12 (valid during dismount call)... and is set before onMount is called...
+Stuck. Need different method for v2
+---------------------
+
