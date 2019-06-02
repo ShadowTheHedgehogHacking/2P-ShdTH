@@ -18,7 +18,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Coasters fixed [TESTING]
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking warps both players
-* Vehicles map to correct player's controlpad and freecam [PARTIAL]
+* Vehicles map to correct player's controlpad and freecam [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
@@ -28,7 +28,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
 * **Buffer crash research / possible crash reductions if possible
-* -> Problematic stages will have TXD reductions (32x32 DXT1 format) [PARTIAL]
+* -> Problematic stages will have TXD reductions [PARTIAL]
 
 ## Problems
 * Checkpoint Warping/Backtracking only moves P1
@@ -38,6 +38,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
+* Phase 2 Warp for P2 in Diablon Boss
 
 ## Done so far:
 * Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
@@ -59,7 +60,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
-* Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving* (has bugs)
+* Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 
 ## Other Known Issues (Not planned to be fixed)
