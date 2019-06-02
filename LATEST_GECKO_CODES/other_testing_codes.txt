@@ -141,3 +141,18 @@ E2000001 80008000
 $TrailBlaze Shadow
 c208580c  00000001
 4e800020  00000000
+
+2P Experimental Crash Prevention on Goal Event v1 [dreamsyntax]
+c216b2b0  0000000b
+3e004974  621023f0
+3de0807d  61ef71a0
+81ef0000  81ef0000
+920f0000  39ef0004
+920f0000  39ef0004
+920f0000  3de0807d
+61ef71a8  81ef0000
+81ef0000  920f0000
+39ef0004  920f0000
+39ef0004  920f0000
+38000001  00000000
+*Experimental version, sometimes fails to warp correctly
