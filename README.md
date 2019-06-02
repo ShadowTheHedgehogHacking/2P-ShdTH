@@ -85,6 +85,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Credits
 * DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, and other address discoveries
 * LimblessVector for his work on identifying objects and his initial large memory list
+* TheHatedGravity for TrueBlackShadow textures
 * SinglePlayer Widescreen Hack by LimblessVector
 * Infinite Lives by Link Master
 * Chaos Powers Activators by Zzetti 

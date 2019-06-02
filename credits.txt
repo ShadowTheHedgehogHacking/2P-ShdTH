@@ -1,6 +1,6 @@
 Team function hunting and other significant memory discoveries credit to DonutStopGaming
 
-TheHatedGravity for Menu UI Text in v1.2+
+TheHatedGravity for Menu UI Text in v1.2+ and regular and yellow android TrueBlackShadow
 
 Original Shadow vector used in banner by nibroc_rock (modified)
 
