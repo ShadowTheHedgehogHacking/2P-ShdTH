@@ -1,5 +1,5 @@
 <div align="center"><h1>2 Player Shadow The Hedgehog</h1>
-<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/main_banner.png" align="center" />
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/dev/res/main_banner.png" align="center" />
 </div>
 
 ## About
@@ -87,15 +87,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * DonutStopGaming
 
 ## Credits
-* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, and other address discoveries
-* LimblessVector for his work on identifying objects and his initial large memory list, & SinglePlayer Widescreen Hack
-* TheHatedGravity for TrueBlackShadow textures, v1.2+ MenuUI, 2.0 Banner
+* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, structs analysis, and numerous other address discoveries
+* LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix, 
+* TheHatedGravity for red/yellow TrueBlackShadow textures, v1.2+ MenuUI, v2.0 Banner
 * Infinite Lives by Link Master
-* Chaos Powers Activators by Zzetti 
+* Chaos Powers Activators by Zzetti
+* Original Shadow vector used in banner by nibroc_rock (modified)
 
 ## Thanks
-* igorseabra4 and Sewer56 for Heroes and Shadow editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
-* DonutStopGaming for ideas while function hunting and the many nights spent pair reversing
+* DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
+* igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
+* LimblessVector for Shadow file reversing work (HeroesPowerPlant)
 * aldelaro5 for Dolphin Memory Engine
 * TryTwo for extremely useful new debugging features in Dolphin
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
