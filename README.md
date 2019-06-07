@@ -10,14 +10,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP)
-* Verify 1:1 misc bytes for level edits per HPP v0.7.6
-* Fix Air bug - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers Fixed [TESTING]
-* Devil Doom [TESTING]
-* Coasters fixed [TESTING]
+## Road to 2.0 (WIP) | ETA: 7/7/2019
+* Verify 1:1 misc bytes for level edits per HPP v0.7.6+
+* Fix "Air bug" - (player state pointer overlap issue)
+* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
+* Devil Doom [WIP / DonutStopGaming Task]
+* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
+* Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
-* Checkpoint Warping/Backtracking warps both players
+* Checkpoint Warping/Backtracking separate warping
+* Individual death-to-checkpoint / Don't reload level for both players
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Vehicles map to correct player's controlpad and freecam [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
@@ -28,20 +31,23 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
 * **Buffer crash research / possible crash reductions if possible
-* -> Problematic stages will have TXD reductions [PARTIAL]
+* -> Verified problematic stages will have TXD reductions [PARTIAL]
+* -> Reductions planned: Lethal Highway, Central City, GUN Fortress, (maybe: SETObj textures?)
 
 ## Problems
-* Checkpoint Warping/Backtracking only moves P1
+* Checkpoint Warping/Backtracking only moves P1, only P1 controls Checkpoint UI
 * Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
-* Air bug (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
+* "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
+* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates cehckpoint
+* Flyables throw exception if one player is riding one when restart, OnGoal, OnExit is called
 
 ## Done so far:
-* Level chunks load/unload based on both players* (crashes seem to be TextureBuffer related)
+* Level chunks load/unload based on both players
 * ChaosPowers activate for both players
 * Partner/Mission Helpers can be remapped to permanent AI or P3* (P3 has some issues depending on Partner activation order)
 * ChaosPowers EventsCamera and ChaosControl Effects removed
@@ -53,7 +59,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2 Sound Listener
 * P2 UI
 * P2 can pause
-* P2's flyables do not overwrite P1's camera
+* P2's flyables do not overwrite P1's camera* (exception issue identified)
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * Spawners / Worms work properly
@@ -73,9 +79,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 
 ## Bonus Roadmap
-* Individual death-to-checkpoint / Don't reload level for both players
 * Static weapon swaps for Metal Androids
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Optional BlackKnight style melee replacement
 
 ## Dev
@@ -84,9 +88,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Credits
 * DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, and other address discoveries
-* LimblessVector for his work on identifying objects and his initial large memory list
-* TheHatedGravity for TrueBlackShadow textures
-* SinglePlayer Widescreen Hack by LimblessVector
+* LimblessVector for his work on identifying objects and his initial large memory list, & SinglePlayer Widescreen Hack
+* TheHatedGravity for TrueBlackShadow textures, v1.2+ MenuUI, 2.0 Banner
 * Infinite Lives by Link Master
 * Chaos Powers Activators by Zzetti 
 
