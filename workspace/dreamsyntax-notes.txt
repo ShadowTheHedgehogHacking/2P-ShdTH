@@ -3700,3 +3700,20 @@ C21BA5D0 00000007
 *Disables SpecialCam & allows for P2 to drive if P2 gets in a CarType when P1 is not already driving
 *For P2 to drive, P2 needs to get in a vehicle while P1 is not in one
 *Now will work regardless of WeaponType and ChaosPower state
+
+----
+2019-06-08
+Flyables TrueCam searching;
+Meanwhile also patchup Flyable FreeCams to not throw exception on restart/onGoal etc while player(s) are flying:
+blr @ 801b3148 instead of nop @ 801b317c
+blr @ 801b308c instead of nop @ 802cb65c
+
+Found reason for onGoal/onRestart/onDeath attempted free was because freeFlyableSpecialCam call occurs for that scenario @ 802cc084, and was not nop'd
+
+2P Essentials Flyables Freecam v2 [dreamsyntax]
+C21B3148 00000001
+4E800020 00000000
+C21B308C 00000001
+4E800020 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras. v2 fixes exception being thrown on restarting a stage or clearing it while one player is still on a flyable.
+
