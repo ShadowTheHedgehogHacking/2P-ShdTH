@@ -3717,3 +3717,5 @@ C21B308C 00000001
 4E800020 00000000
 *Disables EventCam for flyables. In future version might apply EventCam to both cameras. v2 fixes exception being thrown on restarting a stage or clearing it while one player is still on a flyable.
 
+The attach to 'ExternalCam' has been verified to be tied to Cam0, not to a split. 
+
