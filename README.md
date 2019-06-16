@@ -10,17 +10,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP) | ETA: 7/7/2019
+## Road to 2.0 (WIP) | PREVIEW / QA Build ETA: 6/20/2019 | Release ETA: 7/7/2019
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6+
-* Fix "Air bug" - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
-* Devil Doom [WIP / DonutStopGaming Task]
-* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking separate warping
 * Individual death-to-checkpoint / Don't reload level for both players
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* **Buffer crash research / possible crash reductions if possible
+* -> Verified problematic stages will have TXD reductions [PARTIAL]
+* -> Reductions planned: See `Buffer(s) Issue Identication` section below
+
+#### Completed for 2.0
 * Vehicles map to correct player's controlpad and freecam [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
@@ -30,9 +30,61 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
-* **Buffer crash research / possible crash reductions if possible
-* -> Verified problematic stages will have TXD reductions [PARTIAL]
-* -> Reductions planned: Lethal Highway, Central City, GUN Fortress, (maybe: SETObj textures?)
+
+## Items expected not to make 2.0 deadline
+* Fix "Air bug" - (player state pointer overlap issue)
+* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
+* Devil Doom [WIP / DonutStopGaming Task]
+* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+
+## Buffer(s) Issue Identification
+
+So far three buffers have been confirmed via the PS2 executable :
+* GLOBAL
+* EVENT
+* ETC
+
+
+It is unknown if AUDIO is part of GLOBAL or ETC
+
+
+Overflowing for the types:
+
+* GLOBAL (Texture) = May crash during play or if level completes successfully RankUI will not draw. After this occurs the game is unstable. Next levels may crash at any time
+* AUDIO = Just causes distorted audio while too many sound sources are playing. No adverse effect
+* EVENT = May crash during EVENT cutscene or after reaching a Goal (after Fade to white on mission completion)
+* ETC (Effects) = Same crash type as GLOBAL (Texture)
+#### Glyphic Canyon
+* Solution: NOT NEEDED
+* AUDIO
+#### Lethal Highway
+* Solution: NOT YET ATTEMPTED
+* GLOBAL (Texture)
+#### Central City
+* Solution: 32x32 DXT1
+* GLOBAL (Texture)
+* EVENT (StoryMode Intro & GoalEvent)
+#### The Doom
+* Solution: NOT YET ATTEMPTED
+* ETC (Effects)
+#### Sky Troops
+* Solution: NOT NEEDED
+* AUDIO
+#### Lost Impact
+* Solution: NOT YET ATTEMPTED
+* GLOBAL (Texture)
+* AUDIO
+#### GUN Fortress
+* Solution: FAILED / Attempted: Divide by 2 for same-ratio, reduce textures over 64x64
+* GLOBAL (Texture)
+* EVENT (GoalEvent)
+#### Black Comet
+* Solution: NOT YET ATTEMPTED
+* EVENT (GoalEvent)
+#### Final Haunt
+* Solution: NOT YET ATTEMPTED
+* EVENT (GoalEvent)
 
 ## Problems
 * Checkpoint Warping/Backtracking only moves P1, only P1 controls Checkpoint UI
@@ -43,8 +95,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
-* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates cehckpoint
-* Flyables throw exception if one player is riding one when restart, OnGoal, OnExit is called
+* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -59,7 +110,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2 Sound Listener
 * P2 UI
 * P2 can pause
-* P2's flyables do not overwrite P1's camera* (exception issue identified)
+* P2's flyables do not overwrite P1's camera
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
 * Spawners / Worms work properly
@@ -73,10 +124,11 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
-* Worm Enemies will only target P1
+* Worm Enemies and AlienShips will only target P1
 * Heavy Dog / Blue Falcon do not damage P2
 * Bosses (with the exception of Sonic & Diablon) only react to P1
 * If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
+* Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
 
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
