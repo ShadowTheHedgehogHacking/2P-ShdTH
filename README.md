@@ -73,7 +73,8 @@ Overflowing for the types:
 * GLOBAL (Texture)
 * AUDIO
 #### GUN Fortress
-* Solution: FAILED / Attempted: 32x32, Divide by 2 for same-ratio, reduce textures over 64x64
+* Solution: TEST: 32x32 stage GDT, reduce textures over 64x64, w Attempt 1 changes
+-> Attempt 1 FAILED / Attempted: 32x32, Divide by 2 for same-ratio, reduce textures over 64x64
 * GLOBAL (Texture)
 * EVENT (GoalEvent)
 #### Black Comet
