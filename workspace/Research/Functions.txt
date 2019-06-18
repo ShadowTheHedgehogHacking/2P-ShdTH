@@ -1,0 +1,10 @@
+====General Function Stuff====
+	*::Exec() - SET objects, as well as player objects appear to have "Exec()"-esque functions in their respective vTables. These tend to contain main logic for the object, and only is executed if the object is active, and being drawn
+
+	*::Init()
+
+	*::*(__ct)
+	
+	*::~*(__dt) - Contains code that is called for a particular object when it is destroyed, deactivated, or is no longer in range. Usually contains multiple layers of calls to "free" or something equivalent for itself, and its children objects. Typically found at the beginning or the end of an objects vTable.
+	
+====Game Functions====

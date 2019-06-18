@@ -10,7 +10,7 @@ Shadow Player Struct:
 		-0x00004000 disable walking
 		-0x00000400 disable movement
 		-0x00000010 dont lose rings when hit
-		-0x00000020 super fly mode
+		-0x00000020 super fly mod
 		-0x00000040 animation doesnt change
 		-0x00000080 player invisible
 		-0x00000004 canChaosControl
@@ -22,6 +22,16 @@ Behavior:
 
 CharCommand:
 	0x8 - void fpConstructor
+
+Coaster:
+	0x60 - int state
+			-0x0 inactive
+			-0x1 playerRiding
+			-0x2 ridingWithoutPlayer
+			-0x3 breaking
+			
+	0xE8 - float xPos Maybe
+	0xF4 - float hangAngle
 
 GravityChangeCollision:
 	0x0 - char* pName
@@ -62,6 +72,15 @@ PlayerCommand:
 	0x8 - (void*() fpExec)()
 	0xC - (void*() fpInit)()
 	0x14 - int 
+
+Player::Behavior::Behavior:
+	0x4 - PlayerPointer*
+
+Player::Behavior::SomethingHang:
+	0x24 - pXYZ
+
+Player::Behavior::InitializeArgsSomethingHang:
+	0x4 - int ID?
 	
 Shadow:
 	0x0 - char* pName
@@ -98,6 +117,7 @@ Super:
 	
 		(*Struct Sizes*)
 CharaColliMove - 0x3B
+Coaster - 0xDB28
 GravityChangeCollision - 0x9410
 GravityChangeSwitch - 0xBEE8
 GravityChangeZone - 0x7620
