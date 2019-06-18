@@ -46,45 +46,45 @@ So far three buffers have been confirmed via the PS2 executable :
 * ETC
 
 
-It is unknown if AUDIO is part of GLOBAL or ETC
-
-
 Overflowing for the types:
 
 * GLOBAL (Texture) = May crash during play or if level completes successfully RankUI will not draw. After this occurs the game is unstable. Next levels may crash at any time
-* AUDIO = Just causes distorted audio while too many sound sources are playing. No adverse effect
+* AUDIO = Just causes distorted audio while too many sound sources are playing. No adverse effect. Unknown if related to 3 buffers
 * EVENT = May crash during EVENT cutscene or after reaching a Goal (after Fade to white on mission completion)
 * ETC (Effects) = Same crash type as GLOBAL (Texture)
 #### Glyphic Canyon
 * Solution: NOT NEEDED
 * AUDIO
 #### Lethal Highway
-* Solution: NOT YET ATTEMPTED
+* Solution: TEST: 32x32 for tile, 1/2 for all other
 * GLOBAL (Texture)
 #### Central City
-* Solution: 32x32 DXT1
+* Solution: 32x32 DXT1 (XBOX TEX)
 * GLOBAL (Texture)
 * EVENT (StoryMode Intro & GoalEvent)
 #### The Doom
-* Solution: NOT YET ATTEMPTED
+* Solution: TEST: 32x32 for non-anim, 1/2 for screens
 * ETC (Effects)
 #### Sky Troops
 * Solution: NOT NEEDED
 * AUDIO
 #### Lost Impact
-* Solution: NOT YET ATTEMPTED
+* Solution: TEST: 32x32 for non-anims, 1/2 for screens, skybox
 * GLOBAL (Texture)
 * AUDIO
 #### GUN Fortress
-* Solution: FAILED / Attempted: Divide by 2 for same-ratio, reduce textures over 64x64
+* Solution: FAILED / Attempted: 32x32, Divide by 2 for same-ratio, reduce textures over 64x64
 * GLOBAL (Texture)
 * EVENT (GoalEvent)
 #### Black Comet
-* Solution: NOT YET ATTEMPTED
+* Solution: TEST: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
 #### Final Haunt
-* Solution: NOT YET ATTEMPTED
+* Solution: TEST: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
+#### Last Way
+* Solution: TEST: 32x32, reduce textures over 64x64
+* GLOBAL (Texture)
 
 ## Problems
 * Checkpoint Warping/Backtracking only moves P1, only P1 controls Checkpoint UI
