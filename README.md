@@ -11,7 +11,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Road to 2.0 (WIP) | PREVIEW / QA Build ETA: 6/20/2019 | Release ETA: 7/7/2019
-* Verify 1:1 misc bytes for level edits per HPP v0.7.6+
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking separate warping
@@ -21,6 +20,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
 
 #### Completed for 2.0
+* Verify 1:1 misc bytes for level edits per HPP v0.7.6+ [DONE]
 * Vehicles map to correct player's controlpad and freecam [DONE]
 * Fix "ChaosPowers activate for both players" - add underflow check [DONE]
 * Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
@@ -31,7 +31,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
 
-## Items expected not to make 2.0 deadline
+#### Items expected not to make 2.0 deadline
 * Fix "Air bug" - (player state pointer overlap issue)
 * Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
 * Devil Doom [WIP / DonutStopGaming Task]
@@ -145,6 +145,7 @@ Overflowing for the types:
 * Infinite Lives by Link Master
 * Chaos Powers Activators by Zzetti
 * Original Shadow vector used in banner by nibroc_rock (modified)
+* Muzzarino for some symbol findings
 
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
