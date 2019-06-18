@@ -3719,3 +3719,15 @@ C21B308C 00000001
 
 The attach to 'ExternalCam' has been verified to be tied to Cam0, not to a split. 
 
+----
+2019-06-15
+Attempting to reduce global used textures:
+Candidates: 
+stg_cmn_gdt.one -> STG_GDT.TXD [212kb]
+common/WeaponResource.one -> WEAPONRESOURCE.TXD [92.5kb]
+common/vehicleResource.one -> VEHICLE.TXD [103kb]
+common/LensFlare.one -> LENSFLARE.TXD  [16.6kb]
+common/CommonEffect.one -> COMMONEFFECT.TXD [120kb] [[*Did not get loaded]]
+enemy/* [various]
+
+Updated README with testing done 6/15/2019 to identify crashes
