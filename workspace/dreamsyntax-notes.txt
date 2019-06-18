@@ -3731,3 +3731,48 @@ common/CommonEffect.one -> COMMONEFFECT.TXD [120kb] [[*Did not get loaded]]
 enemy/* [various]
 
 Updated README with testing done 6/15/2019 to identify crashes
+----
+2019-06-18
+Stages redone with HPP 0.8.1 except digital circuit.
+TXD stage TEX crunch done, needs testing. stg0600 GDT crunched.
+
+Separate Respawns:
+deathCamsRespawnEtc -> does not call deathcam post death state
+800447b0 -> never check after deathcam is active
+found SETObj checkpoint/death type load/unload @ 
+800cb654 Load
+800cb758 Unload
+8016f380 | warp related on death
+801738ac | never check after deathcam is active
+80204794 | never check after deathcam is active
+Weapon Drop Spasm
+
+nop @ 80178c10, 8023afd8
+
+
+$2P Optionals Independent Death WeaponDrop Management [dreamsyntax]
+c2178c10 00000001
+60000000 00000000
+c223afd8 00000001
+60000000 00000000
+*Player X will not lose weapon if Player Y dies.
+*
+*Known bug: UI will not show for current held weapon until swapped or dropped and re-pickup.
+
+
+$2P Optionals SETObjs Do Not Reset for Player Death [dreamsyntax]
+c20cb654 00000001
+4e800020 00000000
+c20cb758 00000001
+4e800020 00000000
+*SETObjs will not reset if a player dies.
+*Only applies to death, not to Restart.
+
+Success for first steps:
+- Non-dead player maintain weapon (DONE)
+- SETObj state is maintained (DONE)
+- Identify Which Player is Dying/Dead
+- Disable DeathCam for all
+- Disable Death-FadeToBlack
+- Warp and reset state of identified player
+- Reset rings of identified player

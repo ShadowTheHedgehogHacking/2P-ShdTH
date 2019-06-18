@@ -14,9 +14,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking separate warping
-* Individual death-to-checkpoint / Don't reload level for both players
+* Individual death-to-checkpoint / Don't reload level for both players [PARTIAL]
 * **Buffer crash research / possible crash reductions if possible
-* -> Verified problematic stages will have TXD reductions [PARTIAL]
+* -> Verified problematic stages will have TXD reductions [DONE; IN TESTING]
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
 
 #### Completed for 2.0
