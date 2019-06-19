@@ -3755,9 +3755,9 @@ c2178c10 00000001
 60000000 00000000
 c223afd8 00000001
 60000000 00000000
-*Player X will not lose weapon if Player Y dies.
+*Player X will not lose weapon if Player Y dies
 *
-*Known bug: UI will not show for current held weapon until swapped or dropped and re-pickup.
+*Known bug: UI will not show for current held weapon until swapped or dropped and re-pickup
 
 
 $2P Optionals SETObjs Do Not Reset for Player Death [dreamsyntax]
@@ -3765,14 +3765,109 @@ c20cb654 00000001
 4e800020 00000000
 c20cb758 00000001
 4e800020 00000000
-*SETObjs will not reset if a player dies.
-*Only applies to death, not to Restart.
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+ 
+For player is dying identification:
+Use Status2:
+80575FA8 -> 0x0 -> 0x0 -> 0xAE
+Or
+807D71A0 -> 0x0 -> 0xAE
+same for P2 0x8 -> ...
+0xAE for P1/P2 on DeathState = 0x44 [note dashramp uses same byte but 0x40, checkpoint warp is 0x02]
 
-Success for first steps:
+Copy old notes:
+"
+-> exploring 80176f1c
+80176f28 | nop results in P1 deathcam stuck ON, P2 respawns, P1 does not.
+Restart still works fine (different branch)
+ 
+80176f74 | same but P2 and P1 roles reversed
+"
+
+APPLY TO 80176f28 // P1 respawn code()
+// ORIGINAL code: "bl->0x800B7F88"
+// This should check if P1 status byte 0xAE = 0x44, then take original bl. Else skip over it.
+// Accounts for StartStage() calling same function.
+// Attempted fix is to use offset 0x0, and check if its 00, if it is allow call to happen (hopefully only ever occurs at StageInitialize)
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r15
+beq 0x14
+lbz r15, 0x0(r16)
+li r17, 0x0
+cmpw r17, r15
+bne 0x14
+lis r15, 0x800B
+ori r15, r15, 0x7F88
+mtlr r15
+blrl
+
+APPLY TO 80176f74 // P2 respawn code()
+// ORIGINAL code: "bl->0x800B7F88" 
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r15
+beq 0x14
+lbz r15, 0x0(r16)
+li r17, 0x0
+cmpw r17, r15
+bne 0x14
+lis r15, 0x800B
+ori r15, r15, 0x7F88
+mtlr r15
+blrl
+
+Success
+
+$2P Optionals Independent Respawns [dreamsyntax]
+c2176f28 00000009
+3e00807d 621071a0
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c2176f74 00000009
+3e00807d 621071a8
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+*Experimental version
+*Player X's death will not cause Player Y to respawn
+
+
+Phase 1:
 - Non-dead player maintain weapon (DONE)
 - SETObj state is maintained (DONE)
-- Identify Which Player is Dying/Dead
-- Disable DeathCam for all
-- Disable Death-FadeToBlack
-- Warp and reset state of identified player
-- Reset rings of identified player
+- Identify way to tell which Player is Dying/Dead (DONE)
+- Warp and reset state of identified player (DONE)
+- Disable DeathCam for all [and temporarily use NoFadeScreen code]
+
+Phase 2:
+- Only reset rings of respawned player
+- Partner State not reset
+- Timer should not reset (continuous timer)
+- Disable Death exclusive FadeToBlack (maintain it for other actions)
+- Remove respawn 'stutter' if possible for non-respawning player
+
+DeathCam possible locations:
+DeathStateRelated and DeathCamsRespawn are two ones occuring PRIOR to the shift
+StuckOnDeathCam3 occurs after
+likely whichever is closer to DeathCam3
