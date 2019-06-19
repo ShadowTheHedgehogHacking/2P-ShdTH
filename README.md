@@ -16,7 +16,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Checkpoint Warping/Backtracking separate warping
 * Individual death-to-checkpoint / Don't reload level for both players [PARTIAL]
 * **Buffer crash research / possible crash reductions if possible
-* -> Verified problematic stages will have TXD reductions [DONE; IN TESTING]
+* -> Verified problematic stages will have TXD reductions [ISSUES FOUND / IN TESTING]
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
 
 #### Completed for 2.0
@@ -56,20 +56,20 @@ Overflowing for the types:
 * Solution: NOT NEEDED
 * AUDIO
 #### Lethal Highway
-* Solution: TEST: 32x32 for tile, 1/2 for all other
+* Solution: 32x32 for tile, 1/2 for all other
 * GLOBAL (Texture)
 #### Central City
 * Solution: 32x32 DXT1 (XBOX TEX)
 * GLOBAL (Texture)
 * EVENT (StoryMode Intro & GoalEvent)
 #### The Doom
-* Solution: TEST: 32x32 for non-anim, 1/2 for screens
+* Solution: 32x32 for non-anim, 1/2 for screens
 * ETC (Effects)
 #### Sky Troops
 * Solution: NOT NEEDED
 * AUDIO
 #### Lost Impact
-* Solution: TEST: 32x32 for non-anims, 1/2 for screens, skybox
+* Solution: 32x32 for non-anims, 1/2 for screens, skybox
 * GLOBAL (Texture)
 * AUDIO
 #### GUN Fortress
@@ -80,6 +80,9 @@ Overflowing for the types:
 #### Black Comet
 * Solution: TEST: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
+#### Cosmic Fall
+* Solution : TEST: 32x32, half large except earth, and 32x32 GDT
+* GLOBAL (Texture)
 #### Final Haunt
 * Solution: TEST: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
