@@ -3849,16 +3849,18 @@ c2176f74 00000009
 3de0800b 61ef7f88
 7de803a6 4e800021
 60000000 00000000
+C21CB454 00000001
+60000000 00000000
 *Experimental version
 *Player X's death will not cause Player Y to respawn
 
 
-Phase 1:
+Phase 1: SUCCESS / COMPLETE
 - Non-dead player maintain weapon (DONE)
 - SETObj state is maintained (DONE)
 - Identify way to tell which Player is Dying/Dead (DONE)
 - Warp and reset state of identified player (DONE)
-- Disable DeathCam for all [and temporarily use NoFadeScreen code]
+- Disable DeathCam for all [and temporarily use NoFadeScreen code] (DONE)
 
 Phase 2:
 - Only reset rings of respawned player
@@ -3871,3 +3873,19 @@ DeathCam possible locations:
 DeathStateRelated and DeathCamsRespawn are two ones occuring PRIOR to the shift
 StuckOnDeathCam3 occurs after
 likely whichever is closer to DeathCam3
+
+--- Not the case.
+New theory: Shadow manually sets the camera for some actions instead of creating and attaching to an ExternalCamera (specialCam in my symbol notes)
+and one of these cases is DeathCam
+
+Found that blr on ??InsanelyLongSpecialCamAttachMaybeToStageManagerFunction_801c9ea4_
+results in no deathcam, but then breaks everything else and on initialize case.
+
+Bingo, caller on deathCam case:
+801cb454
+
+nop @ 801cb454
+
+DeathCam Remove, applied to Independent Respawns code above
+C21CB454 00000001
+60000000 00000000
