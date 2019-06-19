@@ -3865,9 +3865,11 @@ Phase 1: SUCCESS / COMPLETE
 Phase 2:
 - Only reset rings of respawned player
 - Partner State not reset
-- Timer should not reset (continuous timer)
+- Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
 - Disable Death exclusive FadeToBlack (maintain it for other actions)
-- Remove respawn 'stutter' if possible for non-respawning player
+- Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
+- Fix Mission sync
+- Fix effects unloading for non-respawning player
 
 DeathCam possible locations:
 DeathStateRelated and DeathCamsRespawn are two ones occuring PRIOR to the shift
@@ -3888,4 +3890,9 @@ nop @ 801cb454
 
 DeathCam Remove, applied to Independent Respawns code above
 C21CB454 00000001
+60000000 00000000
+
+LimblessVector's Time Reset disable:
+$Timer No Reset On Death
+C2178bc4 00000001
 60000000 00000000

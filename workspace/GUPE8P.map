@@ -12182,7 +12182,7 @@
 8016f268 00000018 8016f268 0 zz_8016f268_
 8016f280 00000008 8016f280 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 8016f288 00000054 8016f288 0 PARAM_RING::addRingNum(int, int)_8016f288_
-8016f2dc 00000068 8016f2dc 0 zz_8016f2dc_
+8016f2dc 00000068 8016f2dc 0 PlayerRingReset_Store_8016f2dc_
 8016f344 0000001c 8016f344 0 zz_8016f344_
 8016f360 00000020 8016f360 0 zz_8016f360_
 8016f380 00000020 8016f380 0 ?WarpRelatedOnDeath_8016f380_

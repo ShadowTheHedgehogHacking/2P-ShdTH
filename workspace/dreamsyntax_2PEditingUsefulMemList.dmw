@@ -1550,6 +1550,30 @@
                     "unsigned": true
                 },
                 {
+                    "address": "80A0DD28",
+                    "baseIndex": 0,
+                    "label": "TextureBeingRead",
+                    "length": 55,
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "typeIndex": 5,
+                    "unsigned": false
+                },
+                {
                     "groupEntries": [
                         {
                             "address": "80000028",
@@ -5762,6 +5786,1298 @@
                         }
                     ],
                     "groupName": "Growth and Shrink Buffer?"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "8121F540",
+                            "baseIndex": 0,
+                            "label": "boost ExternalCameraRequest* @ 801b3d04",
+                            "length": 8888,
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805E3468",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 66,
+                            "pointerOffsets": [
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B268",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 5555,
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "801B3D14",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 566,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "801B3D20",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "801B3D2C",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "801B3CE4",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8170B864",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060B278",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 555,
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "81624D18",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 555,
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8060AF48",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8051C45C",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 2222,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "81709DB0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805E3470",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 555,
+                            "pointerOffsets": [
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8000996C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8170A0B0",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 155,
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "CameraStuff"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "807C72C8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80994114",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8099411C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A1E328",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A213D8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A21600",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A251D8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A25410",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A27484",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A29DD0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A29E18",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2D730",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2D798",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2F7F0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2F808",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A315B0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A315C8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A32154",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A35B2C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A35B34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A37788",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A377C0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5BAF0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5BB58",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5D1FC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5FE7C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5FE84",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A615AC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A62BA8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A62BB0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A66E18",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A67670",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6877C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6B05C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6B064",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6CD3C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6F8F4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7A8CC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7A8D4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7EDEC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7EDF4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A83D50",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A86848",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A86850",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A97A74",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9EFB4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AA7880",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AA7888",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AADB6C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB408C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7884",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB78CC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB8144",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB823C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9AC4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9BFC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABBFBC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABC004",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABC03C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC0524",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC062C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC4A5C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC4A64",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ACAD04",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ACAD1C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ACBE0C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ACBE14",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B18E2C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B18E34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B1AC2C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B1AD34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "Potential Global BufferConstant"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80A1DF78",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A1DF80",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A21228",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A212A0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A212A8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A25038",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A250A0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A250A8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A974F4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A97504",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9765C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A97794",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9EA34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9EA44",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9EB9C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9ECD4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "Potential Event BufferConstant"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "809F1DE8",
+                            "baseIndex": 1,
+                            "label": "ScoreDataWrittenOver",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A1E1F0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A214B0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A214B8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A252B0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A252B8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A26FCC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A29DE0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A29DE8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2D750",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2D758",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2F630",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A2F638",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A313F0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A313F8",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A37838",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A37840",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5BB10",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5BB18",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5D4BC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A5D4C4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A6FA34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7EAEC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A7EAF4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9813C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80A9F67C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AA7890",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AA7898",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AACDFC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7A34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7A64",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7AD4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7B00",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7B3C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB7B5C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB809C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB80A4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB80D0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB8174",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB825C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB82D4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9A5C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9AFC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9B18",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9BDC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9D34",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AB9D6C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABBFB4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABC028",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80ABC0DC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC04B4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC04DC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC05D0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC06A4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC07BC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80AC07FC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B1AD0C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80B1AD84",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "Potential ETC BufferConstant"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80521C50",
+                            "baseIndex": 0,
+                            "label": "PulleyWarpPlayerCalledByStateControl_801317d4",
+                            "length": 29,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80521C50",
+                            "baseIndex": 0,
+                            "label": "PulleyWarpPlayerCalledByStateControl_801317d4",
+                            "length": 9998,
+                            "pointerOffsets": [
+                                "10",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "Coasters/Pulley"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "809E3C40",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "809E3E00",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 551,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D24F8",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80F8C8F0",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "pointerOffsets": [
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "807D2648",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "809E3E00",
+                            "baseIndex": 0,
+                            "label": "No label",
+                            "length": 55,
+                            "typeIndex": 5,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "LAND_Buffer?"
                 }
             ],
             "groupName": "RESEARCH / UNDEFINED"

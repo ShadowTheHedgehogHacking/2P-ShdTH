@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21FFDD2C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D87F90</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"P2X-2"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D420</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"P1Z-3"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D278</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"P1Y-3"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D274</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"P1X-3"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D270</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"P1Z-2"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D258</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"P1Y-2"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D254</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"P1X-2"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D250</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"*SplitEffect? Potential Camera"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D128</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"*Potential Camera"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D124</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D120 </Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"NewTester"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D120 </Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"*Potential Camera"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D120</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"CamToRender?"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D0D4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"EventCam?"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D0B0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"FailedConvertFromGC"</Description>
+      <VariableType>Float</VariableType>
+      <Address>20C21010</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"P1 Rings"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>209BFF3C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Nukkoro2LoadedX"</Description>
+      <VariableType>Float</VariableType>
+      <Address>209BF700</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"P1Z-1"</Description>
+      <VariableType>Float</VariableType>
+      <Address>2099305C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"P1Y-1"</Description>
+      <VariableType>Float</VariableType>
+      <Address>20993058</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"P1X-1"</Description>
+      <VariableType>Float</VariableType>
+      <Address>20993054</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>20992F24 </Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"ChunkCam 0"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D0A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"ChunkCam 0"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D0A4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"ChunkCam 0"</Description>
+      <VariableType>Float</VariableType>
+      <Address>21D4D0A0</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
