@@ -3863,13 +3863,13 @@ Phase 1: SUCCESS / COMPLETE
 - Disable DeathCam for all [and temporarily use NoFadeScreen code] (DONE)
 
 Phase 2:
-- Only reset rings of respawned player
+- Only reset rings of respawned player (PARTIAL)
 - Partner State not reset
 - Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
 - Disable Death exclusive FadeToBlack (maintain it for other actions)
 - Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
 - Fix Mission sync
-- Fix effects unloading for non-respawning player
+- Fix effects unloading for non-respawning player (DONE)
 
 DeathCam possible locations:
 DeathStateRelated and DeathCamsRespawn are two ones occuring PRIOR to the shift
@@ -3896,3 +3896,63 @@ LimblessVector's Time Reset disable:
 $Timer No Reset On Death
 C2178bc4 00000001
 60000000 00000000
+-----------
+2019-06-19
+Phase 2 Death Respawns some fixes
+Stutter is ended by StageAction:ContinueAction, check later for StageAction halter
+
+Found Effects Unloading code:
+8042554c -> blr for no unload
+(Load effects address is function above it in Dolphin)
+
+Rings store @ 8016f32c (also occurs at initial spawn)
+For basic version nop, will initialize at 50 rings for first stage played and will maintain rings across stages.
+
+$Temporary Ring Carry [dreamsyntax]
+C216F32C 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
+
+
+$2P Optionals Independent Respawns TESTVERSION [dreamsyntax]
+c2176f28 00000009
+3e00807d 621071a0
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c2176f74 00000009
+3e00807d 621071a8
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c21cb454 00000001
+60000000 00000000
+c242554c 00000001
+4e800020 00000000
+*Experimental version
+*Player X's death will not cause Player Y to respawn
+*REQUIRES No FadeScreen
+*DeathCamFix, EffectFix included.
+
+$Timer No Reset On Death [LimblessVector]
+C2178bc4 00000001
+60000000 00000000
+
+$Temporary Ring Carry [dreamsyntax]
+C216F32C 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
