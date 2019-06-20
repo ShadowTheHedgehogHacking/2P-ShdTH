@@ -156,3 +156,10 @@ c216b2b0  0000000b
 39ef0004  920f0000
 38000001  00000000
 *Experimental version, sometimes fails to warp correctly
+
+$2P Optionals GUN Soldier Textures Identical Special Cases [dreamsyntax]
+C21A206C 00000001
+38000320 00000000
+*This is not needed to spawn P2. This was prior known as 2P Unknowns Spawn Special Cases, it has been identified:
+*Overrides textures for some? (GUN Soldiers have been confirmed)
+*Removed from codelist as it makes GUN Soldiers not match their stage environment.

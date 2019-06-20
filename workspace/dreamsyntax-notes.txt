@@ -3990,3 +3990,9 @@ C2204400 00000001
 *Player X's death will not cause Player Y to respawn
 *REQUIRES No FadeScreen
 *DeathCamFix, EffectFix included.
+
+2019-06-20
+FINALLY 2P Unknowns Spawn Special Cases Identified:
+c21a206c  00000001
+38000320  00000000
+This overrides some? textures (GUN Soldiers confirmed) to match the stage800-802 soldiers
