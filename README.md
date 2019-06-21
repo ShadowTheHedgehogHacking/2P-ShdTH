@@ -58,6 +58,9 @@ Overflowing for the types:
 #### Lethal Highway
 * Solution: 32x32 for tile, 1/2 for all other
 * GLOBAL (Texture)
+#### Circus Park
+* Solution: 32x32 for tile, 1/2 for all others
+* GLOBAL (Texture)
 #### Central City
 * Solution: 32x32 DXT1 (XBOX TEX)
 * GLOBAL (Texture)
@@ -73,21 +76,21 @@ Overflowing for the types:
 * GLOBAL (Texture)
 * AUDIO
 #### GUN Fortress
-* Solution: TEST: 32x32 stage GDT, reduce textures over 64x64, w Attempt 1 changes
+* Solution: 32x32 stage GDT, reduce textures over 64x64, w Attempt 1 changes
 -> Attempt 1 FAILED / Attempted: 32x32, Divide by 2 for same-ratio, reduce textures over 64x64
 * GLOBAL (Texture)
 * EVENT (GoalEvent)
 #### Black Comet
-* Solution: TEST: 32x32, reduce textures over 64x64
+* Solution: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
 #### Cosmic Fall
-* Solution : TEST: 32x32, half large except earth, and 32x32 GDT
+* Solution : 32x32, half large except earth, and 32x32 GDT
 * GLOBAL (Texture)
 #### Final Haunt
-* Solution: TEST: 32x32, reduce textures over 64x64
+* Solution: 32x32, reduce textures over 64x64
 * EVENT (GoalEvent)
 #### Last Way
-* Solution: TEST: 32x32, reduce textures over 64x64
+* Solution: 32x32, reduce textures over 64x64
 * GLOBAL (Texture)
 
 ## Problems
