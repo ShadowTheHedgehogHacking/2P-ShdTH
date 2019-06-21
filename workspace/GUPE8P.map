@@ -85,7 +85,7 @@
 80009d88 00000014 80009d88 0 GKI_init_timer_list 	bte.a gki_time.o
 80009d9c 0000002c 80009d9c 0 zz_80009d9c_
 80009dc8 00000084 80009dc8 0 zz_80009dc8_
-80009e4c 00000064 80009e4c 0 zz_80009e4c_
+80009e4c 00000064 80009e4c 0 ??CrashIndependentReloadswEffectFix_CCPlayer1_WhileP2_GetsItemTrigger_80009e4c_
 80009eb0 00000074 80009eb0 0 zz_80009eb0_
 80009f24 00000058 80009f24 0 zz_80009f24_
 80009f7c 00000078 80009f7c 0 zz_80009f7c_
@@ -1747,7 +1747,7 @@
 80045b60 0000005c 80045b60 0 zz_80045b60_
 80045bbc 000000c0 80045bbc 0 zz_80045bbc_
 80045c7c 00000050 80045c7c 0 zz_80045c7c_
-80045ccc 00000040 80045ccc 0 zz_80045ccc_
+80045ccc 00000040 80045ccc 0 BLR_THIS_FOR_3FPS_LEVEL_IMPORTRELATED?_80045ccc_
 80045d0c 00000070 80045d0c 0 zz_80045d0c_
 80045d7c 00000008 80045d7c 0 zz_80045d7c_
 80045d84 00000078 80045d84 0 zz_80045d84_
@@ -11948,11 +11948,11 @@
 8016aa98 00000004 8016aa98 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8016aa9c 00000008 8016aa9c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 8016aaa4 0000004c 8016aaa4 0 zz_8016aaa4_
-8016aaf0 00000044 8016aaf0 0 zz_8016aaf0_
+8016aaf0 00000044 8016aaf0 0 ResetDarkMissionCollectibleUI_onDeath_8016aaf0_
 8016ab34 00000044 8016ab34 0 zz_8016ab34_
 8016ab78 00000018 8016ab78 0 zz_8016ab78_
 8016ab90 00000098 8016ab90 0 ??missionManager?CircusParkReadAmountOfRings_8016ab90_
-8016ac28 000000c0 8016ac28 0 zz_8016ac28_
+8016ac28 000000c0 8016ac28 0 StoreDarkMissionCollectibleToUI@8016ac7c_8016ac28_
 8016ace8 00000008 8016ace8 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 8016acf0 00000008 8016acf0 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 8016acf8 00000018 8016acf8 0 zz_8016acf8_
@@ -11965,7 +11965,7 @@
 8016af4c 0000010c 8016af4c 0 zz_8016af4c_
 8016b058 00000054 8016b058 0 TriggerGoalStateOfGame_8016b058_
 8016b0ac 00000064 8016b0ac 0 zz_8016b0ac_
-8016b110 00000060 8016b110 0 zz_8016b110_
+8016b110 00000060 8016b110 0 ??bctrlToRelevantMissionTypeReset_8016b110_
 8016b170 00000060 8016b170 0 zz_8016b170_
 8016b1d0 00000040 8016b1d0 0 zz_8016b1d0_
 8016b210 00000004 8016b210 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -12114,7 +12114,7 @@
 8016ddc4 00000078 8016ddc4 0 zz_8016ddc4_
 8016de3c 000000b8 8016de3c 0 zz_8016de3c_
 8016def4 00000088 8016def4 0 zz_8016def4_
-8016df7c 0000007c 8016df7c 0 zz_8016df7c_
+8016df7c 0000007c 8016df7c 0 ResetMissionStateRelated_8016df7c_
 8016dff8 00000078 8016dff8 0 zz_8016dff8_
 8016e070 00000098 8016e070 0 zz_8016e070_
 8016e108 00000264 8016e108 0 zz_8016e108_
@@ -13975,9 +13975,9 @@
 801a2270 0000002c 801a2270 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 801a229c 00000034 801a229c 0 zz_801a229c_
 801a22d0 0000002c 801a22d0 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
-801a22fc 000000f8 801a22fc 0 zz_801a22fc_
+801a22fc 000000f8 801a22fc 0 ??updateMissionCount_OnDeath_801a22fc_
 801a23f4 000000f8 801a23f4 0 zz_801a23f4_
-801a24ec 00000034 801a24ec 0 cCharacter::IsPlayingEffect( (EffectsGroup *))
+801a24ec 00000034 801a24ec 0 KillTypeMissionBitResetsForDeathCheckpointRespawn_cCharacter::IsPlayingEffect( (EffectsGroup *))
 801a2520 00000020 801a2520 0 cPlayer::PostPhysicsUpdate(void)
 801a2540 00000034 801a2540 0 zz_801a2540_
 801a2574 00000100 801a2574 0 zz_801a2574_
@@ -15574,7 +15574,7 @@
 801d1238 000001e0 801d1238 0 zz_801d1238_
 801d1418 0000008c 801d1418 0 zz_801d1418_
 801d14a4 00000068 801d14a4 0 zz_801d14a4_
-801d150c 00000170 801d150c 0 zz_801d150c_
+801d150c 00000170 801d150c 0 QuitGame_UNLOAD_801d150c_
 801d167c 00000214 801d167c 0 zz_801d167c_
 801d1890 00000064 801d1890 0 zz_801d1890_
 801d18f4 00000064 801d18f4 0 zz_801d18f4_

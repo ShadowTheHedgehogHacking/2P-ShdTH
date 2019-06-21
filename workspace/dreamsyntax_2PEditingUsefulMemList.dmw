@@ -1364,6 +1364,62 @@
                     "label": "r4",
                     "typeIndex": 2,
                     "unsigned": false
+                },
+                {
+                    "address": "809DCFF8",
+                    "baseIndex": 0,
+                    "label": "UI MissionHeroGlyphicCanyon",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057FB54",
+                    "baseIndex": 0,
+                    "label": "HeroMission KillEnemiesCount",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809DCF50",
+                    "baseIndex": 0,
+                    "label": "UI DarkMission GlyphicCanyon Collectible",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809E2F50",
+                    "baseIndex": 0,
+                    "label": "UI DarkMission Westopolis KillEnemies",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057FB4C",
+                    "baseIndex": 0,
+                    "label": "GlobalDarkMission KillEnemies",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809E2D60",
+                    "baseIndex": 0,
+                    "label": "DYNAMIC UI HeroMission PrisonIsland Collectibles",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809DCFF8",
+                    "baseIndex": 0,
+                    "label": "DYNAMIC UI HeroMission PrisonIsland Collectibles",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809E2CB8",
+                    "baseIndex": 0,
+                    "label": "UI PrisonIsland Dark KillEnemies",
+                    "typeIndex": 2,
+                    "unsigned": true
                 }
             ],
             "groupName": "Mission"

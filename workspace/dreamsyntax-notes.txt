@@ -3868,7 +3868,7 @@ Phase 2:
 - Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
 - Disable Death exclusive FadeToBlack (maintain it for other actions)
 - Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
-- Fix Mission sync
+- Fix Mission sync (DONE)
 - Fix effects unloading for non-respawning player (DONE)
 
 DeathCam possible locations:
@@ -3996,3 +3996,231 @@ FINALLY 2P Unknowns Spawn Special Cases Identified:
 c21a206c  00000001
 38000320  00000000
 This overrides some? textures (GUN Soldiers confirmed) to match the stage800-802 soldiers
+
+Stuff found to add to Respawn code:
+EnemyState is reset
+If player is wallclinging state is reset
+
+AnyAffinity:
+KillEnemiesType sync reset fix: blr @ 801a24ec
+TriggerType sync reset fix: blr @ 8016b110
+
+2P Optionals SETObjs Do Not Reset for Player Death TESTVERSION v2 [dreamsyntax]
+C20CB654 00000001
+4E800020 00000000
+C20CB758 00000001
+4E800020 00000000
+C21A24EC 00000001
+4E800020 00000000
+C216B110 00000001
+4E800020 00000000
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+*v2 now has Mission Sync
+
+Ring Fix:
+stw	r0, 0 (r30) @ 8016f32c
+Stores to playerRing bytes, called twice (once per player)
+Solution?
+Add if check for relevant isDead state 
+HOWEVER Restart() does not account for player state. Solution? use an unused register and fill it with a marker
+====
+ContinueAction type reg = 0
+RingStart type: reg = 1
+if reg = 0{
+	if (player1state == DEAD)
+		jmp EXEC
+	}
+	if (player2state == DEAD)
+		jmp EXEC
+	}
+	jmp NOEXEC
+}
+EXEC: 
+	original code (stw r0, 0 (r30))
+NOEXEC:
+    nop/return out of gecko injection
+====
+-> Thought of an oversight with original pseudocode, if P1 is dying and respawns just as P2 dies, P2 will never reset rings.
+
+Solution:
+
+r30 holds relevant player ring pointer
+8057670C = P1
+80576758 = P2 
+
+====
+ContinueAction type reg = 0
+RingStart type: reg = 1
+if reg = 0{
+	if r30 = 8057670C
+		if (player1state == DEAD)
+			jmp EXEC
+		}
+	else (assume P2) {
+		if (player2state == DEAD)
+			jmp EXEC
+		}
+	}
+	jmp NOEXEC
+}
+EXEC: 
+	original code (stw r0, 0 (r30))
+NOEXEC:
+    nop/return out of gecko injection
+====
+
+8016f32c = Write to player ring count
+
+80178cc8 = Restart/Initialize 
+Original OP : addi	r3, r29, 40
+use r15 as dummy register
+----------
+@ 80178cc8
+li r15, 1
+addi r3, r29, 40
+----------
+ASM :
+C2178CC8 00000002
+39E00001 387D0028
+60000000 00000000
+
+
+80178c14 = ContinueAction 
+Original OP : addi	r3, r30, 40
+----------
+@ 80178c14
+li r15, 0
+addi r3, r30, 40
+----------
+ASM : 
+C2178C14 00000002
+39E00000 387E0028
+60000000 00000000
+
+
+8016f32c = StoreRings to 0
+li r16, 1
+cmpw r15, r16
+beq 0xXX //if reg = 1, jump to EXEC
+//if r30 == 8057670C
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0xXX [jump to p2 is dead check]
+//if player 1 is dead
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0xXX //jump if not dead to NOEXEC
+beq 0xXX //jump to EXEC
+//if player 2 is dead
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0xXX //jump if not dead to NOEXEC
+stw r0, 0(r30) :: EXEC
+::NOEXEC
+
+NO SEPARATE LINE COMMENT VERSION:
+li r16, 1
+cmpw r15, r16
+beq 0x58 jump to EXEC
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0x28 [jump to p2 is dead check]
+lis r16, 0x807D // P1 ded
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x2C //jump if not dead to NOEXEC
+beq 0x24 //jump to EXEC
+lis r16, 0x807D // P2 ded
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x8 //jump if not dead to NOEXEC
+stw r0, 0(r30) :: EXEC
+::NOEXEC
+
+NO COMMMENTS
+li r16, 1
+cmpw r15, r16
+beq 0x58
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0x28
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x2C
+beq 0x24
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x8
+stw r0, 0(r30)
+
+ASM:
+C216F32C 0000000D
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 00000000
+
+COMBINED CODE:
+
+$2P Optionals Independent Ring Management [dreamsyntax]
+C2178CC8 00000002
+39E00001 387D0028
+60000000 00000000
+C2178C14 00000002
+39E00000 387E0028
+60000000 00000000
+C216F32C 0000000D
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 00000000

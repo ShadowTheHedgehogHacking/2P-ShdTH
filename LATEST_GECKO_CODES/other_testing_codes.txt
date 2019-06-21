@@ -163,3 +163,10 @@ C21A206C 00000001
 *This is not needed to spawn P2. This was prior known as 2P Unknowns Spawn Special Cases, it has been identified:
 *Overrides textures for some? (GUN Soldiers have been confirmed)
 *Removed from codelist as it makes GUN Soldiers not match their stage environment.
+
+$Ring Carry Code [dreamsyntax]
+c216f32c 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
