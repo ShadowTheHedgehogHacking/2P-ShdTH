@@ -4224,3 +4224,232 @@ C216F32C 0000000D
 8A1000AE 3A200044
 7C118000 40820008
 901E0000 00000000
+
+----------------------
+2019-06-26 Jump Ball Codes for 2P
+
+800a5ab0 = Other Activity Color (Homing attack, spindash, slide trail) [r4]
+80087190 = JumpBall Color [r0]
+80080734 = Falling Color (and slide foot effect) [r0]
+
+Original JumpBall Code:
+c20a5ab0  00000001
+0388000X  00000000
+c2087190  00000001
+0380000X  00000000
+c2080734  00000001
+0380000X  00000000
+
+1 = Sonic (Blue)
+2 = Tails (Yellow)
+3 = Knuckles (Red)
+4 = Amy (Light Pink)
+5 = Rouge (Very Light Purple)
+6 = Omega (Red, Large Radius)
+7 = Vector (Green, Large Radius)
+8 = Espio (Light Blue)
+
+Draft:
+COLORS TO USE || 2 = Yellow [15] | 4 = Pink [16]
+		| 1 = Blue [17] | 6 = Orange [18] | 7 = Green [19]
+				
+	Account for non-playable characters first:
+	li r15, 15 // player bounds+1 start (skip redshadow)
+	lwz	r4, 0x0064 (r4) // original exec (entity ID retrieval)
+	cmpw r4, r15
+	blt 0x** [jump to exit]
+	--repeat per entity ID--
+	li r15, [entity ID]
+	cmpw r4, r15 
+	bgt 0xC [skip next 2 lines]
+	li r4, COLOR
+	beq 0x** [jump to exit]
+	--end repeat per entity ID--
+	
+	
+------
+Found non-jumpball type (maria, bee, eggmon, dooms eye) result in an exception
+with enough jumps, so these will not be utilized
+EDIT: -> This is not true, found the exception is caused by the fall color code
+Looking into why
+Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite; different junk register must be used for inject3
+EDIT2: -> This did not fix the problem
+
+800a5ab0 = [r4] 0388000X | lwz	r4, 0x0064 (r4)
+80087190 = [r0] 0380000X
+80080734 = [r0] 0380000X
+ID BOUNDS : 14 = Red Shadow | 19 = Green Android
+
+@ 800a5ab0 [JumpDash/Slide]
+li r15, 15
+lwz	r4, 0x0064 (r4)
+cmpw r4, r15
+blt 0x50
+bgt 0xC
+li r4, 0x2
+beq 0x44
+li r15, 16
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x4
+beq 0x30
+li r15, 17
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x1
+beq 0x1C
+li r15, 18
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x6
+beq 0x8
+li r4, 7
+------
+Complete:
+[INJECT 1]
+C20A5AB0 0000000C
+39E0000F 80840064
+7C047800 41800050
+4181000C 38800002
+41820044 39E00010
+7C047800 4181000C
+38800004 41820030
+39E00011 7C047800
+4181000C 38800001
+4182001C 39E00012
+7C047800 4181000C
+38800006 41820008
+38800007 00000000
+
+@ 80087190 [JumpBall]
+li r15, 15
+lwz r0, 0x0064 (r4)
+cmpw r0, r15
+blt 0x50
+bgt 0xC
+li r0, 0x2
+beq 0x44
+li r15, 16
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x4
+beq 0x30
+li r15, 17
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x1
+beq 0x1C
+li r15, 18
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+Complete:
+[INJECT 2]
+C2087190 0000000C
+39E0000F 80040064
+7C007800 41800050
+4181000C 38000002
+41820044 39E00010
+7C007800 4181000C
+38000004 41820030
+39E00011 7C007800
+4181000C 38000001
+4182001C 39E00012
+7C007800 4181000C
+38000006 41820008
+38000007 00000000
+
+@ 80080734 [Falling]
+-> This is causing a recoverable exception occasionally
+Why? Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite
+Found playerID is being read 'f' in a place it should not be (r4?)
+Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite
+EDIT2: This did not fix the issue
+
+
+Different Junk register must be used: r20
+li r20, 15
+lwz r0, 0x0064 (r4)
+cmpw r0, r20
+blt 0x50
+bgt 0xC
+li r0, 0x2
+beq 0x44
+li r20, 16
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x4
+beq 0x30
+li r20, 17
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x1
+beq 0x1C
+li r20, 18
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+[INJECT 3]
+C2080734 0000000C
+3A80000F 80040064
+7C00A000 41800050
+4181000C 38000002
+41820044 3A800010
+7C00A000 4181000C
+38000004 41820030
+3A800011 7C00A000
+4181000C 38000001
+4182001C 3A800012
+7C00A000 4181000C
+38000006 41820008
+38000007 00000000
+
+Combined Code
+C20A5AB0 0000000C
+39E0000F 80840064
+7C047800 41800050
+4181000C 38800002
+41820044 39E00010
+7C047800 4181000C
+38800004 41820030
+39E00011 7C047800
+4181000C 38800001
+4182001C 39E00012
+7C047800 4181000C
+38800006 41820008
+38800007 00000000
+C2087190 0000000C
+39E0000F 80040064
+7C007800 41800050
+4181000C 38000002
+41820044 39E00010
+7C007800 4181000C
+38000004 41820030
+39E00011 7C007800
+4181000C 38000001
+4182001C 39E00012
+7C007800 4181000C
+38000006 41820008
+38000007 00000000
+C2080734 0000000C
+3A80000F 80040064
+7C00A000 41800050
+4181000C 38000002
+41820044 3A800010
+7C00A000 4181000C
+38000004 41820030
+3A800011 7C00A000
+4181000C 38000001
+4182001C 3A800012
+7C00A000 4181000C
+38000006 41820008
+38000007 00000000
