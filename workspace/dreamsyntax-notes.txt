@@ -4600,3 +4600,9 @@ C2080734 0000000A
 38000006 41820008
 38000007 00000000
 *Gives all the 2P Androids custom JumpBall colors
+
+-----
+Checkpoint Hunting
+Found SETObj logic
+Maybe found render
+Symbols updated

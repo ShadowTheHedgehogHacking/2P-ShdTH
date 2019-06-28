@@ -10,7 +10,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP) | PREVIEW / QA Build ETA: 6/20/2019 | Release ETA: 7/7/2019
+## Road to 2.0 (WIP) | Release ETA: 7/7/2019
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking separate warping
@@ -30,6 +30,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * GUN Fortress Security Camera segments are free-cam [DONE]
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
 * Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
+* Android characters have unique jump balls
 
 #### Items expected not to make 2.0 deadline
 * Fix "Air bug" - (player state pointer overlap issue)
