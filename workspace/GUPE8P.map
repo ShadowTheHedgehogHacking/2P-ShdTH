@@ -4065,7 +4065,7 @@
 80080cd0 00000040 80080cd0 0 zz_80080cd0_
 80080d10 00000004 80080d10 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 80080d14 0000007c 80080d14 0 zz_80080d14_
-80080d90 0000017c 80080d90 0 zz_80080d90_
+80080d90 0000017c 80080d90 0 ??DashToFallGroundTransition_80080d90_
 80080f0c 00000040 80080f0c 0 zz_80080f0c_
 80080f4c 00000008 80080f4c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 80080f54 00000074 80080f54 0 zz_80080f54_

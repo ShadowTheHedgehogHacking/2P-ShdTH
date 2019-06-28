@@ -4398,7 +4398,7 @@ li r0, 0x6
 beq 0x8
 li r0, 7
 
-[INJECT 3]
+[INJECT 3] (Broken / Issues)
 C2080734 0000000C
 3A80000F 80040064
 7C00A000 41800050
@@ -4413,7 +4413,7 @@ C2080734 0000000C
 38000006 41820008
 38000007 00000000
 
-Combined Code
+Combined Code (Unoptimized)
 C20A5AB0 0000000C
 39E0000F 80840064
 7C047800 41800050
@@ -4453,3 +4453,150 @@ C2080734 0000000C
 7C00A000 4181000C
 38000006 41820008
 38000007 00000000
+
+--
+2019-06-27
+
+Last time, exception was found on INJECT 3
+Problem was assumed to be junk register,
+moved to r20, no change.
+
+Further testing today found that its the 
+jump-dash to -> hit ground transition throwing the exception
+and is exclusive to INJECT 3 (isolated with no other codes)
+
+Now previous "all partners change to color type" 
+shall be tested. 
+
+Theories of what could be causing exception:
+1. There is a previous cmp value that is used in a cror
+being overwritten by our cmps in the gecko
+-> Original CR everytime: 90000088; with my changes: XYYYYYYY is non matching (at minimum for fail case)
+-> No exception thrown on attempted branch replacement -> NO
+
+2. Improper setting (all partners code should have same exception) -> NO
+
+3. Gecko location is overwriting used RAM? -> NO
+
+4. Too many cycles? -> NO
+
+5. Bad Gecko Code? (Consider cases above 19?) -> Not needed
+-> Rewriting: (optimize length with cmpwi instead)
+lwz r0, 0x0064 (r4)
+cmpwi r0, 15
+blt 0x44
+bgt 0xC
+li r0, 0x2
+beq 0x38
+cmpwi r0, 16 
+bgt 0xC
+li r0, 0x4
+beq 0x28
+cmpwi r0, 17 
+bgt 0xC
+li r0, 0x1
+beq 0x18
+cmpwi r0, 18
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+INJECT 3 [optimized, no issues]
+C2080734 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+
+Optimize INJECT 1 & INJECT 2
+
+INJECT 1 [optimized] / swap out r0 with r4 in INJECT 3
+lwz r4, 0x0064 (r4)
+cmpwi r4, 15
+blt 0x44
+bgt 0xC
+li r4, 0x2
+beq 0x38
+cmpwi r4, 16 
+bgt 0xC
+li r4, 0x4
+beq 0x28
+cmpwi r4, 17 
+bgt 0xC
+li r4, 0x1
+beq 0x18
+cmpwi r4, 18
+bgt 0xC
+li r4, 0x6
+beq 0x8
+li r4, 7
+
+C20A5AB0 0000000A
+80840064 2C04000F
+41800044 4181000C
+38800002 41820038
+2C040010 4181000C
+38800004 41820028
+2C040011 4181000C
+38800001 41820018
+2C040012 4181000C
+38800006 41820008
+38800007 00000000
+
+INJECT 2 [optimized] / Identical to INJECT 3 except @ 80087190
+C2087190 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+
+--> Final code:
+
+$2P Optionals Unique Android JumpBall Colors [dreamsyntax]
+C20A5AB0 0000000A
+80840064 2C04000F
+41800044 4181000C
+38800002 41820038
+2C040010 4181000C
+38800004 41820028
+2C040011 4181000C
+38800001 41820018
+2C040012 4181000C
+38800006 41820008
+38800007 00000000
+C2087190 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+C2080734 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+*Gives all the 2P Androids custom JumpBall colors

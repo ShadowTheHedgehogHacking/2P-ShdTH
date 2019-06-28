@@ -170,3 +170,25 @@ c216f32c 00000001
 *Testing/Temp version for Independent Respawns code
 *Will initialize at 50 rings for first stage played
 *and will maintain rings across succeeding stages
+
+$Jump Ball Color Switch [dreamsyntax]
+c20a5ab0 00000001
+03880001 00000000
+c2087190 00000001
+03800001 00000000
+c2080734 00000001
+03800001 00000000
+*Applies to every object with jump ball. v2 will be player specific.
+*Change all 3 X to valid values:
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink)
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
