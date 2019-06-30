@@ -4636,7 +4636,7 @@ nop @ 802044cc for no mission UI (and select lock) reset on death
 @!inspect 80204554 for falling while wallrunning
 
 
-$2P Optionals Independent Death WeaponDrop Management v2 [dreamsyntax]
+$2P Optionals Independent Death WeaponDrop Management v2 [BUG IDENTIFIED DO NOT USE] [dreamsyntax]
 C2178C10 00000001
 60000000 00000000
 C223AFD8 00000001
@@ -4644,6 +4644,7 @@ C223AFD8 00000001
 C22044C4 00000001
 60000000 00000000
 *Player X will not lose weapon if Player Y dies
+*Select Mode corruption bug identified DO NOT USE
 
 $2P Optionals SETObjs Do Not Reset for Player Death TESTVERSION v3 [dreamsyntax]
 C20CB654 00000001
@@ -4660,3 +4661,62 @@ C22044CC 00000001
 *Only applies to death, not to Restart
 *v2 now has Mission Sync
 *v3 now has MissionSelected Sync
+
+----
+Idea for non-death fade to black exclusive:
+@ 800448a0 | stwu sp, -0x0030(sp)
+Perform an if check if player1 or player2 status = dying/dead state, blr in this event
+
+Copying from Indendent Ring Method:
+lis r16, 0x807D // P1 ded?
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+beq 0x20 //jump to blr
+lis r16, 0x807D // P2 ded?
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpw r17, r16
+bne 0x8 //jump past blr
+blr
+stwu sp, -0x0030(sp)
+
+NO COMMENTS:
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+beq 0x20
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpw r17, r16
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+C20448A0 00000009
+3E00807D 621071A0
+82100000 82100000
+8A1000AE 3A200044
+7C118000 41820020
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 7C118000
+40820008 4E800020
+9421FFD0 00000000
+
+Works except for 2 frames (when state reset happens maybe?)
+
+
+IDENTIFIED BUG: WeaponUI Maintain is corrupting select mode available stages
