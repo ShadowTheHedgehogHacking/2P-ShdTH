@@ -192,3 +192,17 @@ c2080734 00000001
 *A = Bee (Default Orange, but White Homing Attack)
 *B = Eggmonitor (Default Orange, but White Homing Attack)
 *C = Dooms Eye (Default Orange, but White Homing Attack)
+
+$2P Optionals Temporary Pulley/Zipline Disable [dreamsyntax]
+c2132f70 00000001
+4e800020 00000000	
+*Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
+*If you intend to play Cryptic Castle this should be left off
+
+$2P Optionals Replace Air Blower with High Jump [dreamsyntax]
+c2103c4c 00000001
+4e800020 00000000
+*Replaces any Air Blowers with boost to vertical height if in jump/falling animation.
+*Prevents Air Bug but replaces original game behavior.
+*Will cause some stages to be unplayable (The Doom)
+**Does not include Mad Matrix

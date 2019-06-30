@@ -4609,3 +4609,54 @@ Symbols updated
 
 2019-06-29
 - Revisiting prior research functions listed, most point to Checkpoint Virtual function Layer4, one @ Layer3
+-----------
+2019-06-30
+Switching to Independent Respawns Phase 2
+
+Phase 1: SUCCESS / COMPLETE
+- Non-dead player maintain weapon (DONE)
+- SETObj state is maintained (DONE)
+- Identify way to tell which Player is Dying/Dead (DONE)
+- Warp and reset state of identified player (DONE)
+- Disable DeathCam for all [and temporarily use NoFadeScreen code] (DONE)
+
+Phase 2:
+- Only reset rings of respawned player (DONE)
+- Partner/Mission Selected State not reset (PARTIAL) 
+- Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
+- Disable Death exclusive FadeToBlack (maintain it for other actions)
+- Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
+- Fix Mission sync (DONE)
+- Fix effects unloading for non-respawning player (DONE)
+- Fix UI for non-dead player maintain weapon (DONE)
+
+nop @ 802044c4 for no weapon UI reset on other player death
+nop @ 802044cc for no mission UI (and select lock) reset on death
+
+@!inspect 80204554 for falling while wallrunning
+
+
+$2P Optionals Independent Death WeaponDrop Management v2 [dreamsyntax]
+C2178C10 00000001
+60000000 00000000
+C223AFD8 00000001
+60000000 00000000
+C22044C4 00000001
+60000000 00000000
+*Player X will not lose weapon if Player Y dies
+
+$2P Optionals SETObjs Do Not Reset for Player Death TESTVERSION v3 [dreamsyntax]
+C20CB654 00000001
+4E800020 00000000
+C20CB758 00000001
+4E800020 00000000
+C21A24EC 00000001
+4E800020 00000000
+C216B110 00000001
+4E800020 00000000
+C22044CC 00000001
+60000000 00000000
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+*v2 now has Mission Sync
+*v3 now has MissionSelected Sync
