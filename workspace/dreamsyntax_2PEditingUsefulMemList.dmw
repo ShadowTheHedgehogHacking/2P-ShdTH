@@ -477,6 +477,47 @@
                     "groupName": "P1"
                 },
                 {
+                    "groupEntries": [
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P2 Writeable X",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P2 Writeable Y",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "4"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "P2 Writeable Z",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "8"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "P2"
+                },
+                {
                     "address": "8057670C",
                     "baseIndex": 0,
                     "label": "P1 Ring Count",
@@ -7137,6 +7178,88 @@
                 }
             ],
             "groupName": "RESEARCH / UNDEFINED"
+        },
+        {
+            "address": "8060B428",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8144C58C",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8060B42C",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8144C590",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 555,
+            "pointerOffsets": [
+                "0",
+                "0",
+                "0",
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "8060B3E8",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8060B3E8",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8060B3E8",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0",
+                "4"
+            ],
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8060B3E8",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0",
+                "8"
+            ],
+            "typeIndex": 3,
+            "unsigned": false
         }
     ]
 }

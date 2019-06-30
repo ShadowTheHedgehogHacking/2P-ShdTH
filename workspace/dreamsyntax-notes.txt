@@ -4606,3 +4606,6 @@ Checkpoint Hunting
 Found SETObj logic
 Maybe found render
 Symbols updated
+
+2019-06-29
+- Revisiting prior research functions listed, most point to Checkpoint Virtual function Layer4, one @ Layer3
