@@ -4720,3 +4720,35 @@ Works except for 2 frames (when state reset happens maybe?)
 
 
 IDENTIFIED BUG: WeaponUI Maintain is corrupting select mode available stages
+
+----
+2019-07-03
+Due date of 2.0 has been moved back another month, now planned for 9-9-2019
+
+IDENTIFIED BUG2: FadeToBlack attempted fix causes exceptions at game initial initialize
+
+Mapping Mission/Goal functions for attempt POC:
+
+PoC for kill amount based affinity on goal ring:
+
+"Assuming you can set Dark/Hero/Neutral
+I think modifying the dark/hero points UI, replacing with enemy affinity counter would be a good way to have 'true route freedom'
+And then have expert goal rings as only goal trigger which then calculates your route based on the enemies killed
+I don't think that should be in reloaded since that throws out objectives entirely
+Difference calculation happens at the end
+E.g. westopolis you killed 30 humans, 44 aliens and reach goal
+44-30 
+14 -> take this number and check neutral ratio (-5 to 5 maybe )
+Not in range, so trigger Hero Route next stage
+More complex system would be object affinity e.g. the lanterns in cryptic castle
+But definitely enemy affinity count killed can be used
+And in the event there is an imbalance, holding DPAD down while going into goal will force Neutral route if that is preferred
+But it does depend on the goal trigger function having a shared function
+But I think it is given GoalAction is in the StageActionExecutor we found way earlier"
+
+Phase 0
+- Identify Global enemy counts [DONE] -> BlackArms, GUN, Eggman affinities are separate types
+- Identify How Dark/Hero/Neutral stage complete is determined
+- Identify way to inject enemy counts
+
+A good 

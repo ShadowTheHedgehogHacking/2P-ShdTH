@@ -10,7 +10,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP) | Release ETA: 7/7/2019
+## Road to 2.0 (WIP) | Release ETA: 9/9/2019
+* Fix "Air bug" - (player state pointer overlap issue)
+* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
+* Devil Doom [WIP / DonutStopGaming Task]
+* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
 * Checkpoint Warping/Backtracking separate warping
@@ -20,24 +25,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
 
 #### Completed for 2.0
-* Verify 1:1 misc bytes for level edits per HPP v0.7.6+ [DONE]
-* Vehicles map to correct player's controlpad and freecam [DONE]
-* Fix "ChaosPowers activate for both players" - add underflow check [DONE]
-* Fix "Disable ScreenShake" - (occasional endless shake issue) [DONE]
-* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2 [DONE]
-* All bosses are free-cam [DONE]
-* Circus Park Hero Mission counts P2's rings [DONE]
-* GUN Fortress Security Camera segments are free-cam [DONE]
-* Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed) [DONE]
-* Key Doors, Westopolis Triggers, Computer Room react to P2 [DONE]
-* Android characters have unique jump balls
-
-#### Items expected not to make 2.0 deadline
-* Fix "Air bug" - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
-* Devil Doom [WIP / DonutStopGaming Task]
-* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Verify 1:1 misc bytes for level edits per HPP v0.7.6+
+* Vehicles map to correct player's controlpad and freecam
+* Fix "ChaosPowers activate for both players" - add underflow check
+* Fix "Disable ScreenShake" - (occasional endless shake issue)
+* Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
+* All bosses are free-cam
+* Circus Park Hero Mission counts P2's rings
+* GUN Fortress Security Camera segments are free-cam
+* Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
+* Key Doors, Westopolis Triggers, Computer Room react to P2
+* Android characters have unique JumpBall colors
 
 ## Buffer(s) Issue Identification
 
@@ -141,6 +139,7 @@ Overflowing for the types:
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
 * Optional BlackKnight style melee replacement
+* Both players required to reach GoalRing for stage complete
 
 ## Dev
 * dreamsyntax

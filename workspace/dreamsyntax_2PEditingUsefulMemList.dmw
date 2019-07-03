@@ -1416,7 +1416,28 @@
                 {
                     "address": "8057FB54",
                     "baseIndex": 0,
-                    "label": "HeroMission KillEnemiesCount",
+                    "label": "Global BlackArms Affinity KillCount",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057FB4C",
+                    "baseIndex": 0,
+                    "label": "Global GUN Affinity KillCount",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057FB5C",
+                    "baseIndex": 0,
+                    "label": "Global Eggman Affinity KillCount",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8057FB50",
+                    "baseIndex": 0,
+                    "label": "Global MadMatrixPanels AND Eggman Affinity KillCount2 ",
                     "typeIndex": 2,
                     "unsigned": true
                 },
@@ -1431,13 +1452,6 @@
                     "address": "809E2F50",
                     "baseIndex": 0,
                     "label": "UI DarkMission Westopolis KillEnemies",
-                    "typeIndex": 2,
-                    "unsigned": true
-                },
-                {
-                    "address": "8057FB4C",
-                    "baseIndex": 0,
-                    "label": "GlobalDarkMission KillEnemies",
                     "typeIndex": 2,
                     "unsigned": true
                 },
@@ -7259,6 +7273,31 @@
                 "8"
             ],
             "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80575EFC",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "809DCF94",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "pointerOffsets": [
+                "0",
+                "0",
+                "0"
+            ],
+            "typeIndex": 5,
             "unsigned": false
         }
     ]
