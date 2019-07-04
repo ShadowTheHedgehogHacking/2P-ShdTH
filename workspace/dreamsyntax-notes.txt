@@ -2729,7 +2729,7 @@ find where floats are stored, first one read @exclusiveGravitySwitcher 8009a388
 Store SetGravityCommand (execute) @ into (r30 @ 8009a3ac) @ 812fcb80
 
 
-nop @ 8009a3ac for do not store SetGravityCommand on PlayerCommands executor
+nop @ 8009a3ac for do not store SetGravityCommand on PlayerCommands executer
 
 
 Force character?
@@ -4744,11 +4744,27 @@ More complex system would be object affinity e.g. the lanterns in cryptic castle
 But definitely enemy affinity count killed can be used
 And in the event there is an imbalance, holding DPAD down while going into goal will force Neutral route if that is preferred
 But it does depend on the goal trigger function having a shared function
-But I think it is given GoalAction is in the StageActionExecutor we found way earlier"
+But I think it is given GoalAction is in the StageActionExecuter we found way earlier"
 
 Phase 0
 - Identify Global enemy counts [DONE] -> BlackArms, GUN, Eggman affinities are separate types
 - Identify How Dark/Hero/Neutral stage complete is determined
 - Identify way to inject enemy counts
 
-A good 
+A good ---_ SIDETRACKED
+
+
+Coolmode :
+Freeze State bytes 1,2,3 on slope physics mode
+
+Physics Controller @ 80093728
+run friction @ 800937c4
+all air physics @ 80093838 -> does not reset velocity when returning to ground (but air has 0)\
+In-air hover friction assignment @ 800937f4  -> melee kick in air or shoot in air etc
+
+rlwinm magic function physics boom @ 8006cd78
+r4 contains magic number parameter -> find out what it does
+Guess: Physics type to compare
+
+
+800841e0 : BlackKnight mode | Physics friction reset for melee | 
