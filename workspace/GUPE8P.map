@@ -99,7 +99,7 @@
 8000a1c8 00000008 8000a1c8 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 8000a1d0 00000070 8000a1d0 0 zz_8000a1d0_
 8000a240 00000094 8000a240 0 zz_8000a240_
-8000a2d4 00000030 8000a2d4 0 zz_8000a2d4_
+8000a2d4 00000030 8000a2d4 0 ??ExternalCam_Render()?_BOSSDIABLON_8000a2d4_
 8000a304 000000b8 8000a304 0 zz_8000a304_
 8000a3bc 00000034 8000a3bc 0 zz_8000a3bc_
 8000a3f0 00000040 8000a3f0 0 zz_8000a3f0_
@@ -379,7 +379,7 @@
 8000f860 00000054 8000f860 0 ??calls_tanf_8000f860_
 8000f8b4 00000134 8000f8b4 0 zz_8000f8b4_
 8000f9e8 00000214 8000f9e8 0 ??breaksEV_CameraAngles_8000f9e8_
-8000fbfc 000002e8 8000fbfc 0 zz_8000fbfc_
+8000fbfc 000002e8 8000fbfc 0 ??ExternCamTracker_8000fbfc_
 8000fee4 00000020 8000fee4 0 cPlayer::PostPhysicsUpdate(void)
 8000ff04 000000e4 8000ff04 0 ?MathyFunctionWithSqrte_8000ff04_
 8000ffe8 00000024 8000ffe8 0 tanf
@@ -407,20 +407,20 @@
 800115dc 0000017c 800115dc 0 zz_800115dc_
 80011758 00000134 80011758 0 zz_80011758_
 8001188c 000001a8 8001188c 0 zz_8001188c_
-80011a34 00000148 80011a34 0 zz_80011a34_
+80011a34 00000148 80011a34 0 ??ExternCamAngles_80011a34_
 80011b7c 0000016c 80011b7c 0 ??controlsWaitingForEVToFinish_80011b7c_
 80011ce8 00000080 80011ce8 0 zz_80011ce8_
 80011d68 00000068 80011d68 0 zz_80011d68_
 80011dd0 00000068 80011dd0 0 zz_80011dd0_
 80011e38 0000010c 80011e38 0 zz_80011e38_
-80011f44 000000d0 80011f44 0 zz_80011f44_
+80011f44 000000d0 80011f44 0 ??ExternCamAngles2_80011f44_
 80012014 000000dc 80012014 0 zz_80012014_
 800120f0 000000a0 800120f0 0 zz_800120f0_
 80012190 00000044 80012190 0 zz_80012190_
 800121d4 00000044 800121d4 0 zz_800121d4_
-80012218 00000044 80012218 0 zz_80012218_
+80012218 00000044 80012218 0 ??ExternCam_Render()?_80012218_
 8001225c 00000044 8001225c 0 zz_8001225c_
-800122a0 00000034 800122a0 0 zz_800122a0_
+800122a0 00000034 800122a0 0 UnknownMainFunc42(r3/r31=ResourceManagerTask, r29=System)_800122a0_
 800122d4 00000034 800122d4 0 zz_800122d4_
 80012308 00000058 80012308 0 NisPlayer::Instance(void)
 80012360 00000058 80012360 0 zz_80012360_
@@ -1330,7 +1330,7 @@
 8003a8ac 00000184 8003a8ac 0 HAS_TBlockManage__?callsChunks?_8003a8ac_
 8003aa30 00000080 8003aa30 0 zz_8003aa30_
 8003aab0 00000010 8003aab0 0 cPoseNode::SetChild(int, cPoseNode *)
-8003aac0 00000048 8003aac0 0 zz_8003aac0_
+8003aac0 00000048 8003aac0 0 UnknownMainFunc7(r3/r31=TBlockManage, r29=Landscape)_8003aac0_
 8003ab08 00000060 8003ab08 0 zz_8003ab08_
 8003ab68 000000e4 8003ab68 0 zz_8003ab68_
 8003ac4c 0000005c 8003ac4c 0 zz_8003ac4c_
@@ -1665,7 +1665,7 @@
 800437ec 00000020 800437ec 0 cPlayer::PostPhysicsUpdate(void)
 8004380c 00000008 8004380c 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 80043814 00000010 80043814 0 cFielder::IsStriker( (void))
-80043824 00000020 80043824 0 cPlayer::PostPhysicsUpdate(void)
+80043824 00000020 80043824 0 UnknownMainFunc40(r3/r31=TDestoryManager, r29=System)__cPlayer::PostPhysicsUpdate(void)
 80043844 00000074 80043844 0 zz_80043844_
 800438b8 00000050 800438b8 0 zz_800438b8_
 80043908 00000060 80043908 0 zz_80043908_
@@ -1712,7 +1712,7 @@
 80044cfc 00000058 80044cfc 0 zz_80044cfc_
 80044d54 00000034 80044d54 0 zz_80044d54_
 80044d88 00000058 80044d88 0 zz_80044d88_
-80044de0 00000030 80044de0 0 FadeToBlackTick_80044de0_
+80044de0 00000030 80044de0 0 MainFuncTo(r3/r31=FadeDrawTask, r29=RenderLevel_OnFade)__FadeToBlackTick_80044de0_
 80044e10 00000024 80044e10 0 ??ValidateFadeIsComplete,BlackScreenON_80044e10_
 80044e34 0000004c 80044e34 0 zz_80044e34_
 80044e80 0000002c 80044e80 0 zz_80044e80_
@@ -1727,7 +1727,7 @@
 800452a0 00000058 800452a0 0 relatedTo:TBGReadManager_800452a0_
 800452f8 00000050 800452f8 0 zz_800452f8_
 80045348 00000070 80045348 0 zz_80045348_
-800453b8 00000140 800453b8 0 zz_800453b8_
+800453b8 00000140 800453b8 0 UnknownMainFunc38(r3/r31=TBGReadManager, r29=System)_800453b8_
 800454f8 000000dc 800454f8 0 zz_800454f8_
 800455d4 00000084 800455d4 0 zz_800455d4_
 80045658 0000006c 80045658 0 zz_80045658_
@@ -1765,14 +1765,14 @@
 80046098 000000d4 80046098 0 zz_80046098_
 8004616c 0000000c 8004616c 0 zz_8004616c_
 80046178 0000006c 80046178 0 zz_80046178_
-800461e4 00000050 800461e4 0 zz_800461e4_
+800461e4 00000050 800461e4 0 UnknownMainFuncSPECIALSHARED(r3/r31=LandDispManager_N)_800461e4_
 80046234 00000090 80046234 0 zz_80046234_
 800462c4 000000bc 800462c4 0 zz_800462c4_
 80046380 00000070 80046380 0 zz_80046380_
 800463f0 00000020 800463f0 0 zz_800463f0_
 80046410 000000f4 80046410 0 LandALoadManager_80046410_
 80046504 00000188 80046504 0 zz_80046504_
-8004668c 000003ac 8004668c 0 zz_8004668c_
+8004668c 000003ac 8004668c 0 UnknownMainFunc6(r3/r31=LandALoadMananger, r29=Landscape)_8004668c_
 80046a38 00000090 80046a38 0 zz_80046a38_
 80046ac8 000000c4 80046ac8 0 zz_80046ac8_
 80046b8c 00000138 80046b8c 0 zz_80046b8c_
@@ -1882,7 +1882,7 @@
 8004b1f4 00000050 8004b1f4 0 zz_8004b1f4_
 8004b244 000000ac 8004b244 0 zz_8004b244_
 8004b2f0 00000088 8004b2f0 0 zz_8004b2f0_
-8004b378 000002d8 8004b378 0 zz_8004b378_
+8004b378 000002d8 8004b378 0 ?FileRelated(r3/r31=TOneFileAsync, r29=System)_8004b378_
 8004b650 00000010 8004b650 0 zz_8004b650_
 8004b660 000000ac 8004b660 0 zz_8004b660_
 8004b70c 00000088 8004b70c 0 zz_8004b70c_
@@ -1982,7 +1982,7 @@
 8004e218 00000034 8004e218 0 zz_8004e218_
 8004e24c 00000088 8004e24c 0 zz_8004e24c_
 8004e2d4 00000078 8004e2d4 0 zz_8004e2d4_
-8004e34c 00000078 8004e34c 0 ??MonitorForPossibleBlackComet_EVENTBufferOverflow_8004e34c_
+8004e34c 00000078 8004e34c 0 MainLoopThingSHARED(r3/r31=RenderUnit OR SetRing)__??MonitorForPossibleBlackComet_EVENTBufferOverflow_8004e34c_
 8004e3c4 0000002c 8004e3c4 0 CallSETObjRender_8004e3c4_
 8004e3f0 00000010 8004e3f0 0 cFielder::IsStriker( (void))
 8004e400 00000058 8004e400 0 zz_8004e400_
@@ -2404,7 +2404,7 @@
 8005895c 00000014 8005895c 0 zz_8005895c_
 80058970 00000094 80058970 0 zz_80058970_
 80058a04 00000048 80058a04 0 dCreateGeom
-80058a4c 00000038 80058a4c 0 zz_80058a4c_
+80058a4c 00000038 80058a4c 0 UnknownMainFunc9(r3/r31=BulletManager, r29=PostManager)_80058a4c_
 80058a84 00000068 80058a84 0 zz_80058a84_
 80058aec 0000004c 80058aec 0 zz_80058aec_
 80058b38 00000024 80058b38 0 cFielder::UpdatePlay(float)
@@ -4995,7 +4995,7 @@
 8009eba4 00000024 8009eba4 0 cFielder::UpdatePlay(float)
 8009ebc8 00000024 8009ebc8 0 cFielder::UpdatePlay(float)
 8009ebec 00000040 8009ebec 0 zz_8009ebec_
-8009ec2c 00000024 8009ec2c 0 cFielder::UpdatePlay(float)
+8009ec2c 00000024 8009ec2c 0 UnknownMainFunc45(r3/r31=Controller, r29=Player::Watch)_cFielder::UpdatePlay(float)
 8009ec50 00000078 8009ec50 0 zz_8009ec50_
 8009ecc8 0000004c 8009ecc8 0 zz_8009ecc8_
 8009ed14 00000024 8009ed14 0 cFielder::EndAction(void)
@@ -5811,7 +5811,7 @@
 800b8740 000000e0 800b8740 0 zz_800b8740_
 800b8820 00000150 800b8820 0 zz_800b8820_
 800b8970 000000b4 800b8970 0 zz_800b8970_
-800b8a24 00000090 800b8a24 0 zz_800b8a24_
+800b8a24 00000090 800b8a24 0 UnknownMainFunc19(r3/r31=TGiPause, r29=TGameInfomation)_800b8a24_
 800b8ab4 000000c4 800b8ab4 0 zz_800b8ab4_
 800b8b78 00000050 800b8b78 0 zz_800b8b78_
 800b8bc8 00000050 800b8bc8 0 zz_800b8bc8_
@@ -5939,7 +5939,7 @@
 800bd93c 00000014 800bd93c 0 zz_800bd93c_
 800bd950 00000060 800bd950 0 TGiHissatu::Render()_800bd950_
 800bd9b0 0000008c 800bd9b0 0 zz_800bd9b0_
-800bda3c 00000124 800bda3c 0 zz_800bda3c_
+800bda3c 00000124 800bda3c 0 UnknownMainFunc16(r3/r31=TGiHissatu, r29=TGameInfomation)_800bda3c_
 800bdb60 000000a4 800bdb60 0 zz_800bdb60_
 800bdc04 0000004c 800bdc04 0 zz_800bdc04_
 800bdc50 00000088 800bdc50 0 zz_800bdc50_
@@ -6254,7 +6254,7 @@
 800c8ff4 0000004c 800c8ff4 0 zz_800c8ff4_
 800c9040 00000028 800c9040 0 SidelineExplodable::Allocate(void)
 800c9068 0000004c 800c9068 0 zz_800c9068_
-800c90b4 00000024 800c90b4 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+800c90b4 00000024 800c90b4 0 UnknownMainFunc4(r3/r31=CharaColliManageTask, 29=CharaColli)__homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 800c90d8 00000058 800c90d8 0 zz_800c90d8_
 800c9130 00000048 800c9130 0 zz_800c9130_
 800c9178 0000030c 800c9178 0 zz_800c9178_
@@ -6343,7 +6343,7 @@
 800cb304 0000003c 800cb304 0 zz_800cb304_
 800cb340 00000028 800cb340 0 zz_800cb340_
 800cb368 00000044 800cb368 0 zz_800cb368_
-800cb3ac 00000034 800cb3ac 0 zz_800cb3ac_
+800cb3ac 00000034 800cb3ac 0 SETObjRelated(r3/r31=SetManagerTask, r29=Manager)_800cb3ac_
 800cb3e0 00000058 800cb3e0 0 zz_800cb3e0_
 800cb438 00000044 800cb438 0 zz_800cb438_
 800cb47c 0000002c 800cb47c 0 cCharacter::UpdateBlinking(float)
@@ -11933,7 +11933,7 @@
 8016a35c 00000048 8016a35c 0 zz_8016a35c_
 8016a3a4 00000124 8016a3a4 0 zz_8016a3a4_
 8016a4c8 00000058 8016a4c8 0 zz_8016a4c8_
-8016a520 000003cc 8016a520 0 zz_8016a520_
+8016a520 000003cc 8016a520 0 UnknownMainFunc20(r3/r31=TFogSet)_8016a520_
 8016a8ec 0000006c 8016a8ec 0 zz_8016a8ec_
 8016a958 00000088 8016a958 0 zz_8016a958_
 8016a9e0 00000040 8016a9e0 0 zz_8016a9e0_
@@ -12120,7 +12120,7 @@
 8016e108 00000264 8016e108 0 zz_8016e108_
 8016e36c 00000068 8016e36c 0 zz_8016e36c_
 8016e3d4 0000006c 8016e3d4 0 zz_8016e3d4_
-8016e440 00000034 8016e440 0 zz_8016e440_
+8016e440 00000034 8016e440 0 UnknownMainFunc10(r3/r31=MissionManagerTask, r29=PostManager)_8016e440_
 8016e474 00000064 8016e474 0 zz_8016e474_
 8016e4d8 00000310 8016e4d8 0 zz_8016e4d8_
 8016e7e8 00000020 8016e7e8 0 cPlayer::PostPhysicsUpdate(void)
@@ -12436,7 +12436,7 @@
 80176e08 0000007c 80176e08 0 zz_80176e08_
 80176e84 00000164 80176e84 0 SetPlayerPosition_OnRestartOrDeathOrCheckPoint_80176e84_
 80176fe8 00000174 80176fe8 0 LAND_ReloadOnInitOrDeathOrRestart_READSTGID_zz_80176fe8_
-8017715c 00000174 8017715c 0 ??InitOrDeathOrRestart_WarpETC_8017715c_
+8017715c 00000174 8017715c 0 InitOrDeathOrRestart_WarpETC(r3/r31=TStageInitalizeTask, r29=Manager)_8017715c_
 801772d0 00000080 801772d0 0 ??UnfadePending?_801772d0_
 80177350 00000058 80177350 0 zz_80177350_
 801773a8 00000004 801773a8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -15248,7 +15248,7 @@
 801c92e0 00000024 801c92e0 0 zz_801c92e0_
 801c9304 00000048 801c9304 0 zz_801c9304_
 801c934c 00000068 801c934c 0 zz_801c934c_
-801c93b4 00000048 801c93b4 0 zz_801c93b4_
+801c93b4 00000048 801c93b4 0 ??DontDetachFromExternCam_801c93b4_
 801c93fc 00000050 801c93fc 0 ??StoreForDetatchLater?_801c93fc_
 801c944c 00000040 801c944c 0 ??SomethingSpecialCamCalled_801c944c_
 801c948c 00000048 801c948c 0 ??UnknownCreateSpecialCameraEvent_801c948c_
@@ -15297,8 +15297,8 @@
 801cb330 00000064 801cb330 0 zz_801cb330_
 801cb394 00000074 801cb394 0 UpdatedToNewCamOnRespawnOrWarp_801cb394_
 801cb408 00000178 801cb408 0 ??DeathCameraEvent_801cb408_
-801cb580 00000120 801cb580 0 zz_801cb580_
-801cb6a0 0000002c 801cb6a0 0 zz_801cb6a0_
+801cb580 00000120 801cb580 0 ??AnotherDontDetachExternCam_801cb580_
+801cb6a0 0000002c 801cb6a0 0 ??DontReattachToBossExternCam_801cb6a0_
 801cb6cc 00000004 801cb6cc 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801cb6d0 00000050 801cb6d0 0 zz_801cb6d0_
 801cb720 00000050 801cb720 0 zz_801cb720_
@@ -15531,12 +15531,12 @@
 801cfeb0 0000003c 801cfeb0 0 zz_801cfeb0_
 801cfeec 00000050 801cfeec 0 ??writeToTextureBufferSize?@80573B7C_IsTextBuffer?_801cfeec_
 801cff3c 00000050 801cff3c 0 zz_801cff3c_
-801cff8c 00000050 801cff8c 0 zz_801cff8c_
+801cff8c 00000050 801cff8c 0 RenderRelated(r3/r31=RenderStart, r29=RenderLevel_PreRender)_801cff8c_
 801cffdc 00000044 801cffdc 0 zz_801cffdc_
 801d0020 00000058 801d0020 0 zz_801d0020_
-801d0078 00000054 801d0078 0 zz_801d0078_
+801d0078 00000054 801d0078 0 UnknownMainFunc22(r3/r31=CameraRenderClose, r29=RenderLevel_PunchWorld OR RenderLevel_GlareWorld OR RenderLevel_OnFade)_801d0078_
 801d00cc 00000068 801d00cc 0 zz_801d00cc_
-801d0134 00000080 801d0134 0 zz_801d0134_
+801d0134 00000080 801d0134 0 UnknownMainFunc23(r3/r31=CameraRender)_801d0134_
 801d01b4 00000038 801d01b4 0 zz_801d01b4_
 801d01ec 00000070 801d01ec 0 zz_801d01ec_
 801d025c 00000058 801d025c 0 zz_801d025c_
@@ -15593,46 +15593,46 @@
 801d1e64 00000048 801d1e64 0 dCreateGeom
 801d1eac 00000070 801d1eac 0 zz_801d1eac_
 801d1f1c 0000005c 801d1f1c 0 zz_801d1f1c_
-801d1f78 000000a8 801d1f78 0 frameskip/timescale_related__801d1f78_
+801d1f78 000000a8 801d1f78 0 UnknownMainFunc15(r3/r31=EffectManageTask, r29=Particle)__frameskip/timescale_related__801d1f78_
 801d2020 00000068 801d2020 0 zz_801d2020_
 801d2088 0000004c 801d2088 0 zz_801d2088_
 801d20d4 00000024 801d20d4 0 cFielder::EndAction(void)
 801d20f8 00000074 801d20f8 0 zz_801d20f8_
 801d216c 00000058 801d216c 0 zz_801d216c_
-801d21c4 00000034 801d21c4 0 zz_801d21c4_
+801d21c4 00000034 801d21c4 0 UnknownMainFunc14(r3/r31=FullScreenShimmerDrawSub, r29=Particle)_801d21c4_
 801d21f8 00000058 801d21f8 0 zz_801d21f8_
-801d2250 00000024 801d2250 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d2250 00000024 801d2250 0 UnknownMainFunc24(r3/r31=FullScreenShimmerDraw, r29=LandDispManager_N)__homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2274 00000058 801d2274 0 zz_801d2274_
-801d22cc 00000024 801d22cc 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d22cc 00000024 801d22cc 0 UnknownMainFunc30(r3/r31=PreGlare, r29=RenderLevel_GlareWorld)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d22f0 00000058 801d22f0 0 zz_801d22f0_
-801d2348 00000024 801d2348 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d2348 00000024 801d2348 0 UnknownMainFunc33(r3/r31=PostGlare, r29=RenderLevel_GlareWorld)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d236c 00000058 801d236c 0 zz_801d236c_
 801d23c4 00000024 801d23c4 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d23e8 00000074 801d23e8 0 zz_801d23e8_
-801d245c 00000024 801d245c 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d245c 00000024 801d245c 0 UnknownMainFunc34(r3/r31=DrawBlur, r29=RenderLevel_GlareWorld)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2480 00000058 801d2480 0 zz_801d2480_
-801d24d8 00000024 801d24d8 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d24d8 00000024 801d24d8 0 UnknownMainFunc35(r3/r31=DrawScreenColor, r29=RenderLevel_PostEffect)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d24fc 0000008c 801d24fc 0 zz_801d24fc_
-801d2588 000000b0 801d2588 0 zz_801d2588_
+801d2588 000000b0 801d2588 0 UnknownMainFunc31(r3/r31=DrawGlobalLensFlare, r29=RenderLevel_GlareWorld)_801d2588_
 801d2638 00000064 801d2638 0 zz_801d2638_
 801d269c 00000058 801d269c 0 zz_801d269c_
-801d26f4 00000028 801d26f4 0 zz_801d26f4_
+801d26f4 00000028 801d26f4 0 UnknownMainFunc32(r3/r31=DrawGlobalLensFlare(another), r29=RenderLevel_GlareWorld)_801d26f4_
 801d271c 00000058 801d271c 0 zz_801d271c_
 801d2774 00000024 801d2774 0 EffectDrawOpaq_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2798 00000058 801d2798 0 zz_801d2798_
-801d27f0 00000024 801d27f0 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d27f0 00000024 801d27f0 0 UnknownMainFunc25(r3=EffectDrawPunch)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2814 00000058 801d2814 0 zz_801d2814_
-801d286c 00000024 801d286c 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d286c 00000024 801d286c 0 UnknownMainFunc27(r3/r31=EffectDrawTrans, r29=RenderLevel_Trans)__homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2890 00000058 801d2890 0 zz_801d2890_
-801d28e8 00000024 801d28e8 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d28e8 00000024 801d28e8 0 UnknownMainFunc28(r3/r31=EffectDrawAdd, r29=RenderLevel_Add)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d290c 00000058 801d290c 0 zz_801d290c_
-801d2964 00000024 801d2964 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d2964 00000024 801d2964 0 UnknownMainFunc29(r3/r31=EffectDrawSub, r29=RenderLevel_Add)_homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2988 00000058 801d2988 0 zz_801d2988_
 801d29e0 00000024 801d29e0 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2a04 00000058 801d2a04 0 zz_801d2a04_
 801d2a5c 00000024 801d2a5c 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2a80 00000058 801d2a80 0 zz_801d2a80_
-801d2ad8 00000024 801d2ad8 0 homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
+801d2ad8 00000024 801d2ad8 0 UnknownMainFunc21(r3/r31=EffectDeleteResourceTask, r29=RenderLevel_PreRender)__homebutton::MotorCallback(OSAlarm *, OSContext *) 	homebuttonLib.a HBMBase.o
 801d2afc 0000003c 801d2afc 0 zz_801d2afc_
 801d2b38 0000003c 801d2b38 0 zz_801d2b38_
 801d2b74 0000003c 801d2b74 0 zz_801d2b74_
@@ -15695,7 +15695,7 @@
 801d3928 00000028 801d3928 0 zz_801d3928_
 801d3950 00000030 801d3950 0 zz_801d3950_
 801d3980 00000048 801d3980 0 zz_801d3980_
-801d39c8 000000c0 801d39c8 0 zz_801d39c8_
+801d39c8 000000c0 801d39c8 0 UnknownMainFunc2(r3/r31=ActStageController, r29=Manager)_801d39c8_
 801d3a88 00000080 801d3a88 0 zz_801d3a88_
 801d3b08 0000010c 801d3b08 0 zz_801d3b08_
 801d3c14 00000024 801d3c14 0 nlVirtualTotalFree(void)
@@ -15706,7 +15706,7 @@
 801d3dc8 00000090 801d3dc8 0 ??isCalledBySaucerTypeVehicleFunc??_801d3dc8_
 801d3e58 00000098 801d3e58 0 zz_801d3e58_
 801d3ef0 0000007c 801d3ef0 0 zz_801d3ef0_
-801d3f6c 00000034 801d3f6c 0 zz_801d3f6c_
+801d3f6c 00000034 801d3f6c 0 AudioRelated(r3=AudioLoopManagerTask, r29=Audio)_801d3f6c_
 801d3fa0 00000058 801d3fa0 0 zz_801d3fa0_
 801d3ff8 00000050 801d3ff8 0 zz_801d3ff8_
 801d4048 00000054 801d4048 0 zz_801d4048_
@@ -15752,7 +15752,7 @@
 801d4b00 00000004 801d4b00 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801d4b04 00000030 801d4b04 0 TRK_memset
 801d4b34 00000008 801d4b34 0 GXInitTexObjUserData 	gx.a GXTexture.o
-801d4b3c 00000034 801d4b3c 0 zz_801d4b3c_
+801d4b3c 00000034 801d4b3c 0 AudioRelated3(r3/r31=AudioManagerTask,r29=Audio)_801d4b3c_
 801d4b70 00000058 801d4b70 0 zz_801d4b70_
 801d4bc8 00000050 801d4bc8 0 zz_801d4bc8_
 801d4c18 00000020 801d4c18 0 cPlayer::PostPhysicsUpdate(void)
@@ -15813,11 +15813,11 @@
 801d6914 000000a0 801d6914 0 zz_801d6914_
 801d69b4 00000098 801d69b4 0 zz_801d69b4_
 801d6a4c 00000028 801d6a4c 0 zz_801d6a4c_
-801d6a74 00000090 801d6a74 0 zz_801d6a74_
+801d6a74 00000090 801d6a74 0 UnknownMainFunc1(r3/r31=TObjSERIF, r29=Audio)_801d6a74_
 801d6b04 000000bc 801d6b04 0 zz_801d6b04_
 801d6bc0 0000008c 801d6bc0 0 zz_801d6bc0_
 801d6c4c 000000a8 801d6c4c 0 zz_801d6c4c_
-801d6cf4 00000394 801d6cf4 0 zz_801d6cf4_
+801d6cf4 00000394 801d6cf4 0 AudioRelated2(r3/r31=TObjBGM, r29=Audio)_801d6cf4_
 801d7088 000000a0 801d7088 0 zz_801d7088_
 801d7128 0000006c 801d7128 0 zz_801d7128_
 801d7194 00000058 801d7194 0 zz_801d7194_
@@ -15883,7 +15883,7 @@
 801d9ca8 00000008 801d9ca8 0 zz_801d9ca8_
 801d9cb0 0000004c 801d9cb0 0 zz_801d9cb0_
 801d9cfc 00000004 801d9cfc 0 nullsub()_DBClose 	NdevExi2A.a DebuggerDriver.o
-801d9d00 00000034 801d9d00 0 zz_801d9d00_
+801d9d00 00000034 801d9d00 0 UnknownMainFunc3(r3/r31=CharCommandManagerTask,r29=Command)_801d9d00_
 801d9d34 0000006c 801d9d34 0 zz_801d9d34_
 801d9da0 00000060 801d9da0 0 zz_801d9da0_
 801d9e00 0000004c 801d9e00 0 zz_801d9e00_
@@ -16078,7 +16078,7 @@
 801dddd4 000000c8 801dddd4 0 zz_801dddd4_
 801dde9c 00000054 801dde9c 0 zz_801dde9c_
 801ddef0 00000060 801ddef0 0 zz_801ddef0_
-801ddf50 00000034 801ddf50 0 zz_801ddf50_
+801ddf50 00000034 801ddf50 0 UnknownMainFunc43(r3/r31=DeltaMorphAnimManagerTask, r29=System)_801ddf50_
 801ddf84 00000058 801ddf84 0 zz_801ddf84_
 801ddfdc 0000007c 801ddfdc 0 zz_801ddfdc_
 801de058 0000002c 801de058 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
@@ -16248,7 +16248,7 @@
 801e3404 00000624 801e3404 0 zz_801e3404_
 801e3a28 00000118 801e3a28 0 ??SomethingCheckingGameMode_801e3a28_
 801e3b40 0000007c 801e3b40 0 zz_801e3b40_
-801e3bbc 00000308 801e3bbc 0 zz_801e3bbc_
+801e3bbc 00000308 801e3bbc 0 UnknownMainFunc41(r3/r31=TPauseManager, r29=System)_801e3bbc_
 801e3ec4 00000060 801e3ec4 0 zz_801e3ec4_
 801e3f24 00000060 801e3f24 0 zz_801e3f24_
 801e3f84 00000070 801e3f84 0 zz_801e3f84_
@@ -16282,11 +16282,11 @@
 801e47fc 00000334 801e47fc 0 zz_801e47fc_
 801e4b30 00000068 801e4b30 0 zz_801e4b30_
 801e4b98 00000048 801e4b98 0 zz_801e4b98_
-801e4be0 0000017c 801e4be0 0 cameraAssignSplitStatus_801e4be0_
+801e4be0 0000017c 801e4be0 0 cameraAssignSplitStatus(r29=Render)_801e4be0_
 801e4d5c 00000048 801e4d5c 0 zz_801e4d5c_
 801e4da4 00000004 801e4da4 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801e4da8 00000048 801e4da8 0 zz_801e4da8_
-801e4df0 00000030 801e4df0 0 updateSplitScreenAspect_801e4df0
+801e4df0 00000030 801e4df0 0 updateSplitScreenAspect_(r3/r31=RenderAttach_Start,r29=Render)_801e4df0
 801e4e20 00000048 801e4e20 0 zz_801e4e20_
 801e4e68 00000058 801e4e68 0 zz_801e4e68_
 801e4ec0 00000058 801e4ec0 0 zz_801e4ec0_
@@ -16423,7 +16423,7 @@
 801e7624 0000002c 801e7624 0 zz_801e7624_
 801e7650 0000004c 801e7650 0 zz_801e7650_
 801e769c 0000005c 801e769c 0 zz_801e769c_
-801e76f8 00000064 801e76f8 0 zz_801e76f8_
+801e76f8 00000064 801e76f8 0 UnknownMainFunc8(r3/r31=TargetManager, r29=PostManager)_801e76f8_
 801e775c 0000007c 801e775c 0 zz_801e775c_
 801e77d8 00000034 801e77d8 0 zz_801e77d8_
 801e780c 00000008 801e780c 0 J3DTexGenBlock4::getNBTScale(void) 	J3DGraphBase.a J3DMatBlock.o
@@ -16766,7 +16766,7 @@
 801eddcc 0000000c 801eddcc 0 AnimatedModelExplodable::GetWorldMatrix( (void))
 801eddd8 0000003c 801eddd8 0 zz_801eddd8_
 801ede14 00000004 801ede14 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-801ede18 000007b0 801ede18 0 HAS_Effect::PJS::EffectLensFlarePJS_801ede18_
+801ede18 000007b0 801ede18 0 UnknownMainFunc12(r3/r31=LightColliMasterTask, r29=PostManager)__HAS_Effect::PJS::EffectLensFlarePJS_801ede18_
 801ee5c8 00000040 801ee5c8 0 LENSFLARE?(r3/r4 separate pointers to Effect::PJS::EffectLensFlarePJS, r31=LightColliMasterTask)_801ee5c8_
 801ee608 00000048 801ee608 0 zz_801ee608_
 801ee650 00000020 801ee650 0 cPlayer::PostPhysicsUpdate(void)
@@ -17254,7 +17254,7 @@
 801fb224 00000040 801fb224 0 JUTTexture::JUTTexture(void) 	J3DU.a J3DUShadow.o
 801fb264 00000030 801fb264 0 TRK_memset
 801fb294 00000008 801fb294 0 GXInitTexObjUserData 	gx.a GXTexture.o
-801fb29c 0000038c 801fb29c 0 zz_801fb29c_
+801fb29c 0000038c 801fb29c 0 UnknownMainFunc36(r3/r31=MessageTask, r29=RenderLevel_SpriteFront)_801fb29c_
 801fb628 00000064 801fb628 0 zz_801fb628_
 801fb68c 0000007c 801fb68c 0 zz_801fb68c_
 801fb708 00000074 801fb708 0 zz_801fb708_
@@ -17354,7 +17354,7 @@
 801fdde0 0000007c 801fdde0 0 zz_801fdde0_
 801fde5c 000000a0 801fde5c 0 zz_801fde5c_
 801fdefc 00000040 801fdefc 0 zz_801fdefc_
-801fdf3c 00000024 801fdf3c 0 cFielder::UpdatePlay(float)
+801fdf3c 00000024 801fdf3c 0 UnknownMainFunc17(r3/r31=TGiCommandWindow, r29=TGameInfomation)__cFielder::UpdatePlay(float)
 801fdf60 00000068 801fdf60 0 zz_801fdf60_
 801fdfc8 0000004c 801fdfc8 0 zz_801fdfc8_
 801fe014 00000024 801fe014 0 cFielder::EndAction(void)
@@ -17424,7 +17424,7 @@
 80200ed0 0000007c 80200ed0 0 zz_80200ed0_
 80200f4c 00000050 80200f4c 0 zz_80200f4c_
 80200f9c 00000014 80200f9c 0 zz_80200f9c_
-80200fb0 00000058 80200fb0 0 zz_80200fb0_
+80200fb0 00000058 80200fb0 0 UnknownMainFunc18(r3/r31=TGiScoreDisplay, r29=TGameInfomation)_80200fb0_
 80201008 00000008 80201008 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 80201010 00000068 80201010 0 zz_80201010_
 80201078 0000004c 80201078 0 zz_80201078_
@@ -21955,7 +21955,7 @@
 8029773c 0000005c 8029773c 0 zz_8029773c_
 80297798 00000238 80297798 0 zz_80297798_
 802979d0 00000068 802979d0 0 zz_802979d0_
-80297a38 00000020 80297a38 0 cPlayer::PostPhysicsUpdate(void)
+80297a38 00000020 80297a38 0 UnknownMainFunc11(r3/r31=PlayerPostManager, r29=PostManager)__cPlayer::PostPhysicsUpdate(void)
 80297a58 00000058 80297a58 0 zz_80297a58_
 80297ab0 00000368 80297ab0 0 zz_80297ab0_
 80297e18 00000154 80297e18 0 zz_80297e18_
@@ -23526,10 +23526,10 @@
 802d3828 0000009c 802d3828 0 zz_802d3828_
 802d38c4 0000003c 802d38c4 0 zz_802d38c4_
 802d3900 00000034 802d3900 0 zz_802d3900_
-802d3934 000001a0 802d3934 0 zz_802d3934_
+802d3934 000001a0 802d3934 0 ??BossDiablon_WarpPlayerToCoordinatesOnPhaseChangeAndIntro_802d3934_
 802d3ad4 00000008 802d3ad4 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 802d3adc 00000090 802d3adc 0 zz_802d3adc_
-802d3b6c 00000040 802d3b6c 0 zz_802d3b6c_
+802d3b6c 00000040 802d3b6c 0 ??BossDiabonPositionWeird_802d3b6c_
 802d3bac 00000020 802d3bac 0 cPlayer::PostPhysicsUpdate(void)
 802d3bcc 00000020 802d3bcc 0 cPlayer::PostPhysicsUpdate(void)
 802d3bec 00000088 802d3bec 0 zz_802d3bec_
@@ -23565,7 +23565,7 @@
 802d4944 00000048 802d4944 0 cHeadTrack::__dt(void)
 802d498c 00000044 802d498c 0 zz_802d498c_
 802d49d0 00000034 802d49d0 0 zz_802d49d0_
-802d4a04 00000200 802d4a04 0 zz_802d4a04_
+802d4a04 00000200 802d4a04 0 ??EndBossExternCamPhaseIntroEvent_802d4a04_
 802d4c04 00000048 802d4c04 0 cHeadTrack::__dt(void)
 802d4c4c 00000074 802d4c4c 0 zz_802d4c4c_
 802d4cc0 00000084 802d4cc0 0 zz_802d4cc0_
@@ -24039,7 +24039,7 @@
 802e0e84 000000b8 802e0e84 0 zz_802e0e84_
 802e0f3c 00000024 802e0f3c 0 cNet::GetGoalLineX( (void))
 802e0f60 0000015c 802e0f60 0 zz_802e0f60_
-802e10bc 0000019c 802e10bc 0 zz_802e10bc_
+802e10bc 0000019c 802e10bc 0 WorkingDebugCode(r3/r31=DebugDispDeleteList, r29=System)_802e10bc_
 802e1258 00000018 802e1258 0 zz_802e1258_
 802e1270 0000003c 802e1270 0 zz_802e1270_
 802e12ac 0000000c 802e12ac 0 GXInitLightColor
@@ -24185,7 +24185,7 @@
 802e5b2c 00000048 802e5b2c 0 zz_802e5b2c_
 802e5b74 00000068 802e5b74 0 zz_802e5b74_
 802e5bdc 00000058 802e5bdc 0 zz_802e5bdc_
-802e5c34 0000002c 802e5c34 0 btu_init_core 	bte.a btu_init.o
+802e5c34 0000002c 802e5c34 0 UnknownMainFunc37(r3/r31=SaveMessageDrawTask)__btu_init_core 	bte.a btu_init.o
 802e5c60 000000f0 802e5c60 0 zz_802e5c60_
 802e5d50 00000048 802e5d50 0 cHeadTrack::__dt(void)
 802e5d98 00000074 802e5d98 0 zz_802e5d98_
@@ -27096,7 +27096,7 @@
 80345454 00000040 80345454 0 JUTTexture::JUTTexture(void) 	J3DU.a J3DUShadow.o
 80345494 00000030 80345494 0 TRK_memset
 803454c4 00000008 803454c4 0 GXInitTexObjUserData 	gx.a GXTexture.o
-803454cc 00000034 803454cc 0 zz_803454cc_
+803454cc 00000034 803454cc 0 UnknownMainFunc13(r3/r31=ItemIconManager, r29=PostManager)_803454cc_
 80345500 00000064 80345500 0 zz_80345500_
 80345564 00000038 80345564 0 zz_80345564_
 8034559c 00000020 8034559c 0 cPlayer::PostPhysicsUpdate(void)
@@ -27265,7 +27265,7 @@
 8034964c 0000007c 8034964c 0 zz_8034964c_
 803496c8 00000050 803496c8 0 zz_803496c8_
 80349718 00000014 80349718 0 zz_80349718_
-8034972c 0000002c 8034972c 0 btu_init_core 	bte.a btu_init.o
+8034972c 0000002c 8034972c 0 UnknownMainFunc39(r3/r31=GamePeripheralTask, r29=System)_btu_init_core 	bte.a btu_init.o
 80349758 00000058 80349758 0 zz_80349758_
 803497b0 00000050 803497b0 0 zz_803497b0_
 80349800 0000017c 80349800 0 zz_80349800_
@@ -27807,7 +27807,7 @@
 80356b94 00000078 80356b94 0 Kage_Layer3_80356b94_
 80356c0c 00000004 80356c0c 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 80356c10 00000008 80356c10 0 OSGetStackPointer 	os.a OSContext.o
-80356c18 00000154 80356c18 0 zz_80356c18_
+80356c18 00000154 80356c18 0 UnknownMainFunc5(r3/r31=Kage, r6=HandleUser, r29=Manager)_80356c18_
 80356d6c 00000054 80356d6c 0 zz_80356d6c_
 80356dc0 00000074 80356dc0 0 zz_80356dc0_
 80356e34 0000005c 80356e34 0 zz_80356e34_

@@ -4768,3 +4768,15 @@ Guess: Physics type to compare
 
 
 800841e0 : BlackKnight mode | Physics friction reset for melee | 
+
+
+2019-07-04
+BossDiablon phase change player warp: (check later if global for all bosses or boss specific)
+call 1 @ 802d3a48
+call 2 @ 802d3a94
+
+Diablon Initialize/PhaseChange PlayerNoWarp EXPERIMENTAL
+C22D3A48 00000001
+60000000 00000000
+C22D3A94 00000001
+60000000 00000000
