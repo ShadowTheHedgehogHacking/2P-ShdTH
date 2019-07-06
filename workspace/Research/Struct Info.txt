@@ -20,16 +20,30 @@ Shadow Player Struct:
 Behavior:
 	0x10 - int behaviorType
 
+ExternalCamera:
+	0x0 - 
+	0x4 -
+	0x8 -
+	0x1c - 
+	0x20 - float xScale
+	0x24 - float xRot  0-35 degree?
+	0x28 - float yFlip
+	0x2C - float xRot  45-90 degrees?
+
 CharCommand:
 	0x8 - void fpConstructor
 
 Coaster:
+	0x4 - active/visible/collision
+	0x50 - something?
+		0x24 - CharaColliBody***
 	0x60 - int state
 			-0x0 inactive
 			-0x1 playerRiding
 			-0x2 ridingWithoutPlayer
 			-0x3 breaking
 			
+	0xBC - float xTilt maybe
 	0xE8 - float xPos Maybe
 	0xF4 - float hangAngle
 
@@ -108,6 +122,12 @@ ShadowWeapon:
 	0x0 - char* pName
 	0x4 - int size?
 	0x28 - my player pointer
+
+StageCameraManager:
+	0x0 - char* pName
+	0x4 - int size?
+	0x10 - PJSCameraPreTask* ?
+	
 	
 Super:
 	0x0 - char* pName
