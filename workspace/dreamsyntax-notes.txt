@@ -4725,7 +4725,7 @@ IDENTIFIED BUG: WeaponUI Maintain is corrupting select mode available stages
 2019-07-03
 Due date of 2.0 has been moved back another month, now planned for 9-9-2019
 
-IDENTIFIED BUG2: FadeToBlack attempted fix causes exceptions at game initial initialize
+IDENTIFIED BUG2: FadeToBlack attempted fix causes exceptions at game initial initialize [RESOLVED]
 
 Mapping Mission/Goal functions for attempt POC:
 
@@ -4779,4 +4779,81 @@ Diablon Initialize/PhaseChange PlayerNoWarp EXPERIMENTAL
 C22D3A48 00000001
 60000000 00000000
 C22D3A94 00000001
+60000000 00000000
+
+---
+FadeToBlack disable for deaths only, with both null check now for gameInitialize (main menu):
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x3C
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+beq 0x28
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x18
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+C20448A0 0000000A
+3E00807D 621071A0
+82100000 2C100000
+41820030 82100000
+8A1000AE 2C100044
+41820020 3E00807D
+621071A8 82100000
+82100000 8A1000AE
+2C100044 40820008
+4E800020 9421FFD0
+60000000 00000000
+
+
+Safer checker:
+FadeToBlack disable for deaths only
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x40
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+beq 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x20
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x14
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+Still has junk failure on boss stage complete
+
+--------------------
+2019-07-06
+Identified Vehicle Logic bctrl
+Found GUNMech logic
+Found GroundCheck for GUNMech logic @ 801ae7b0
+
+nop 801ae7b0
+
+$Dismount GUNMech in Air [dreamsyntax]
+C21AE7B0 00000001
 60000000 00000000
