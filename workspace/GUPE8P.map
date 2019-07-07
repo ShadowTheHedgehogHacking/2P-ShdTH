@@ -3969,7 +3969,7 @@
 8007d7a0 00000048 8007d7a0 0 dCreateGeom
 8007d7e8 000000c4 8007d7e8 0 deathCamsRespawnEtc_8007d7e8_
 8007d8ac 00000054 8007d8ac 0 zz_8007d8ac_
-8007d900 00000060 8007d900 0 zz_8007d900_
+8007d900 00000060 8007d900 0 ShadowExecuterFunc(r3=Player::Behavior::Dead)
 8007d960 0000018c 8007d960 0 zz_8007d960_
 8007daec 00000028 8007daec 0 zz_8007daec_
 8007db14 000000b4 8007db14 0 zz_8007db14_
@@ -4064,7 +4064,7 @@
 80080c80 00000050 80080c80 0 zz_80080c80_
 80080cd0 00000040 80080cd0 0 zz_80080cd0_
 80080d10 00000004 80080d10 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-80080d14 0000007c 80080d14 0 zz_80080d14_
+80080d14 0000007c 80080d14 0 ShadowExecuterFunc(r3=Player::Behavior::Fall)
 80080d90 0000017c 80080d90 0 ??DashToFallGroundTransition_80080d90_
 80080f0c 00000040 80080f0c 0 zz_80080f0c_
 80080f4c 00000008 80080f4c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
@@ -4242,7 +4242,7 @@
 80087128 000000b0 80087128 0 ??JumpBallColor_deeperLayerSomethingThatUsesCharacterId_80087128_
 800871d8 000004c4 800871d8 0 ??alsoSomethingThatUsesCharacterId_800871d8_
 8008769c 00000008 8008769c 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
-800876a4 0000011c 800876a4 0 zz_800876a4_
+800876a4 0000011c 800876a4 0 ShadowExecuterFunc(r3=Player::Behavior::Jump)
 800877c0 000007c4 800877c0 0 ??SomethingWithCharacterID_800877c0_
 80087f84 00000008 80087f84 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 80087f8c 00000008 80087f8c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
@@ -5254,7 +5254,7 @@
 800a7d38 00000040 800a7d38 0 zz_800a7d38_
 800a7d78 00000174 800a7d78 0 ?GeneralExec?_800a7d78_
 800a7eec 00000028 800a7eec 0 zz_800a7eec_
-800a7f14 00000124 800a7f14 0 func(ShadowExecuter*, InitializeArgs* args)_800a7f14_
+800a7f14 00000124 800a7f14 0 func(ShadowExecuter*, InitializeArgs* args)
 800a8038 00000040 800a8038 0 zz_800a8038_
 800a8078 00000024 800a8078 0 CommonDesireData::CalcBoolChance(float)
 800a809c 00000040 800a809c 0 zz_800a809c_
