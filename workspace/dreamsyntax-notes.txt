@@ -4862,13 +4862,13 @@ C21AE7B0 00000001
 2019-07-07
 Gravity Switchers
 
-Mapped out RingType and normal switchers (they are separate, but share some functions)
+Mapped out ChangeZone and ChangeSwitch switchers (they are separate, but share some functions)
 
-normal type no disable
+ChangeSwitch type no disable
 nop @ 802469dc (visual)
 nop @ 80246a4c (functional)
 
-ring type no disable
+ChangeZone type no disable
 nop @ 80247b84 (visual) 
 nop @ 80247be0 (functional)
 
@@ -4881,3 +4881,32 @@ C2247B84 00000001
 60000000 00000000
 C2247BE0 00000001
 60000000 00000000
+
+Sidetrack:
+SHARED_isPlayerMainPlayer potential overwrite fixup: 
+
+Assumptions: 
+1. No other function uses the mainPlayer = static address @ 805EE588 (word)
+2. Caller passes proper player acting on object that uses SHARED_isPlayerMainPlayer
+3. Death and other functions that rely on this static address being 0 call this prior to executing
+
+Approach:
+1. Validate player pointer caller sends exists and find the earliest point it is acted on
+2. Set static address to 1 or 0 depending on what caller's player pointer is
+
+-> RIP Assumption #2 does not happen, void
+
+Sidetrack:
+For Vehicles code, is the player pressing button an option for detecting which player is dismounting?
+-> at the very least this will greatly reduce the chance of overlap
+
+This still leaves open the case where P1 and P2 are driving, and free() occurs on wrong player because P1 presses X at the same time thus free happens to player1's Vehicle twice
+But it makes it impossible for non-driving to interfere anymore, even if an wrong malloc occured
+ 
+ -> Confirmed player pressing button is still in poll pool at dismount() and mount() so it can be added as an AND
+ to allow for P2 to get in/out while P1 is driving to properly malloc/free
+ However due to merge of all button press it is possible to mount/dismount with it being unique values each time
+ need to find method to determine only X press with OR case
+
+Task for later ^  
+ 

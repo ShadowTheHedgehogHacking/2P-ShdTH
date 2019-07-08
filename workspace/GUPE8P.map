@@ -5283,8 +5283,8 @@
 800a8984 00000040 800a8984 0 zz_800a8984_
 800a89c4 00000050 800a89c4 0 zz_800a89c4_
 800a8a14 00000040 800a8a14 0 zz_800a8a14_
-800a8a54 00000020 800a8a54 0 CallsGetPlayerPointerToR3__cPlayer::PostPhysicsUpdate(void)
-800a8a74 00000008 800a8a74 0 GetPlayerPointerToR3__CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
+800a8a54 00000020 800a8a54 0 CallsGetPlayer1PointerToR3__cPlayer::PostPhysicsUpdate(void)
+800a8a74 00000008 800a8a74 0 GetPlayer1PointerToR3__CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 800a8a7c 000000f8 800a8a7c 0 zz_800a8a7c_
 800a8b74 000000a0 800a8b74 0 SHARED_isPlayerMainPlayer()_800a8b74_
 800a8c14 00000040 800a8c14 0 zz_800a8c14_
@@ -19464,7 +19464,7 @@
 802465f4 00000098 802465f4 0 zz_802465f4_
 8024668c 000000c0 8024668c 0 zz_8024668c_
 8024674c 00000274 8024674c 0 zz_8024674c_
-802469c0 000000bc 802469c0 0 GravitySwitcher_HAS_RENDER_AndDisableIfAtCurrentGravity
+802469c0 000000bc 802469c0 0 GravityChangeSwitch_HAS_RENDER_AndDisableIfAtCurrentGravity
 80246a7c 0000006c 80246a7c 0 zz_80246a7c_
 80246ae8 0000008c 80246ae8 0 zz_80246ae8_
 80246b74 0000006c 80246b74 0 zz_80246b74_
@@ -19504,8 +19504,8 @@
 80247934 00000074 80247934 0 zz_80247934_
 802479a8 0000013c 802479a8 0 zz_802479a8_
 80247ae4 00000040 80247ae4 0 zz_80247ae4_
-80247b24 00000044 80247b24 0 GravitySwitchersRingTypeCollisionLogic
-80247b68 00000094 80247b68 0 GravitySwitcher_RingType_HAS_RENDER_AndDisableIfAtCurrentGravity
+80247b24 00000044 80247b24 0 GravityChangeZone_CollisionLogic
+80247b68 00000094 80247b68 0 GravityChangeZone_HAS_RENDER_AndDisableIfAtCurrentGravity
 80247bfc 0000006c 80247bfc 0 SubFunction_GravityChangeZone_Logic_80247bfc_
 80247c68 0000008c 80247c68 0 zz_80247c68_
 80247cf4 0000006c 80247cf4 0 zz_80247cf4_
