@@ -4857,3 +4857,27 @@ nop 801ae7b0
 $Dismount GUNMech in Air [dreamsyntax]
 C21AE7B0 00000001
 60000000 00000000
+--------------------
+
+2019-07-07
+Gravity Switchers
+
+Mapped out RingType and normal switchers (they are separate, but share some functions)
+
+normal type no disable
+nop @ 802469dc (visual)
+nop @ 80246a4c (functional)
+
+ring type no disable
+nop @ 80247b84 (visual) 
+nop @ 80247be0 (functional)
+
+$GravitySwitchers NoDisable [dreamsyntax]
+C22469DC 00000001
+60000000 00000000
+C2246A4C 00000001
+60000000 00000000
+C2247B84 00000001
+60000000 00000000
+C2247BE0 00000001
+60000000 00000000
