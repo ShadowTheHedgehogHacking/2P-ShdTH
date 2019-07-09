@@ -26474,7 +26474,7 @@
 80330dd0 0000005c 80330dd0 0 FormationOffensive::__dt(void)
 80330e2c 00000028 80330e2c 0 zz_80330e2c_
 80330e54 00000058 80330e54 0 zz_80330e54_
-80330eac 000000d4 80330eac 0 zz_80330eac_
+80330eac 000000d4 80330eac 0 CheckpointUI_LoopMain_80330eac_
 80330f80 0000002c 80330f80 0 zz_80330f80_
 80330fac 00000014 80330fac 0 GameInfoManager::GetResultsOfLastUserGame( (void))
 80330fc0 00000010 80330fc0 0 cFielder::IsStriker( (void))

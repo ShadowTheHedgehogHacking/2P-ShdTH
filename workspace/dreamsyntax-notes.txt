@@ -4909,4 +4909,215 @@ But it makes it impossible for non-driving to interfere anymore, even if an wron
  need to find method to determine only X press with OR case
 
 Task for later ^  
+----------------------
+2019-07-08
+
+!!Found checkpoint warp takes player tagged by mainPlayer static address!!
+
+Devised plan for Vehicle and Checkpoint for determining only X press with inclusive OR case:
+solution:
+Single byte right-side bit 8 or greater = X is held
+@ 8056ED4F [P1]
+@ 8056ED7B [P2]
+
+Vehicles:
+APPLY TO 801b924c // MOUNT [BAD, X check needs to be revised to be done earlier/different function in code]
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24 // jump to li r5, 1
+//P1 passed first check, now check X pressed state
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC //less than branch to P2 case
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
  
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v2.9 EXPERIMENTAL [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800002 00000000
+C21BA5D0 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800001 00000000
+*Disables SpecialCam & allows for P2 to drive CarType vehicles
+*Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
+*KNOWN PROBLEM: P1 MUST HOLD X while mounting vehicle otherwise controls will be mapped to P2
+
+Diverting to try this with checkpoint warp:
+
+Generic grab P1 control state and validate X is pressed:
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+
+Insert inject based on which player pressed X @ 80331114 [checkpoint UI execute initial]
+Main Player Special OBJ: 805EE588
+
+
+Checkpoint InitialUI MainPlayer Inject SOURCE
+80331114 origin: stwu	sp, -0x0010 (sp)
+
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r16, 0
+bge 0x8
+li r16, 1
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint InitialUI MainPlayer Inject
+C2331114 00000007
+3DE08056 61EFED4F
+89EF0000 71EF0008
+2C0F0008 3A000000
+40800008 3A000001
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+Checkpoint WarpSuccessful MainPlayer Cleanup SOURCE
+80129b50 origin: stwu	sp, -0x0020 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0020 (sp)
+
+Checkpoint WarpSuccessful MainPlayer Cleanup
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+
+Checkpoint WarpCancel MainPlayer Cleanup SOURCE
+80117614 origin: stwu	sp, -0x0010 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint WarpCancel MainPlayer Cleanup
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+
+Works, except P1 must HOLD X to warp self.
+This is similar to the vehicle issue, but its less frames compared to vehicle.
+There is no earlier func that I think can be checked (need to verify this), so should abort and do distance check only
+
+For distance check, need to identify SavePoint's floats
+FOUND @ r30 + 60 (X value) NOT offset
+mr r5, r30
+addi r5, r5, 0x60
+
+r5 in original function holds checkpoint value (e.g. 1 - 8)
+-> what else do we clobber if blrl?
+
+Grab KeyDoor code for example:
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
