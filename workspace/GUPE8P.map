@@ -9162,7 +9162,7 @@
 8011884c 00000030 8011884c 0 zz_8011884c_
 8011887c 00000054 8011887c 0 zz_8011887c_
 801188d0 00000058 801188d0 0 zz_801188d0_
-80118928 00000034 80118928 0 VirtualFunction::IsStandingOnCheckpoint:OpenCheckpointUI(r3=CharCommandUnit, r5=UseCommand)_80118928_
+80118928 00000034 80118928 0 VirtualFunction::AlsoCalledOnRespawn_IsStandingOnCheckpoint:OpenCheckpointUI(r3=CharCommandUnit, r5=UseCommand)_80118928_
 8011895c 00000040 8011895c 0 ??ActOnCheckpointLayer2_8011895c_
 8011899c 00000078 8011899c 0 ??ActOnCheckpointLayer3_8011899c_
 80118a14 00000004 80118a14 0 DBClose 	NdevExi2A.a DebuggerDriver.o
