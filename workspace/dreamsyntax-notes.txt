@@ -5436,3 +5436,168 @@ c2129b50 00000003
 *Credit to DonutStopGaming for initial distance check, it had a bug ;]
 *Warp will pick the player closest to the checkpoint X was pressed on
 *v1 will have UI control for P2, right now only P1 has UI control
+
+--------------------------------------------------------------------------
+2019-07-10
+
+Donut's Pulley Code src as of this date:
+    [8015bef0]
+original:
+addi r3, r31, 52
+
+    checkCoaster:
+lis r7, 0x805F
+ori r7, r7, 0x4230
+lwz r8, 0x0(r9)
+cmpw cr7, r8, r7
+bne notCoaster
+
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r7)
+lfs f19, 0x4(r7)
+lfs f20, 0x8(r7)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f15, f17
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f15, f17
+fcmpo cr0, f15, f21
+
+li r7, 0x1
+blt p2closer
+subi r7, r7, 0x1
+
+    p2closer:
+stb r7, 0x314C(r13)
+
+    notCoaster:
+
+
+
+    |
+    V
+    
+    [8015beb4]
+mr r9, r31
+mr r31, r3
+
+    |
+    V
+    
+    [8008e790]
+    original:
+lwz r3, 0x0004 (r31)
+
+    getPlayerPointers:
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+    checkP1Hang:
+lwz r7, 0xA2(r7)
+cmpwi r7, 0x82
+beq isHang
+
+    checkP2Hang:
+lwz r8, 0xA2(r8)
+cmpwi r8, 0x82
+beq isHang
+
+li r10, 0x0
+stw r10, 0x3148(r13)
+
+    isHang:
+
+    |
+    V
+
+    original:
+lwz r0, 0x0014 (sp)
+
+    new:
+li r7, 0
+stw r7, 0x3148(r13)
+
+------------------
+Moving on to controller struct searching for CheckpointUI controls
+
+80331388 <- seems promising, controller related or UI state change based on controls
+----------------
+2019-07-11
+Last find appears to possibly be UI animation transition, looking for other functions...
+No luck. Look back at P3 Struct code for Partners.
+
+
+Decoded:
+inject @ 800A85C4
+lwz r31,16(r3)
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x20
+lis r31,-32682
+ori r31,r31,60792
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x0C
+addi r18,r18,44
+stw r18,16(r3)
+lwz r18,16(r3)
+mr r31,r3
+
+OR use Donut's original source:
+lwz r31, 0x10(r3)
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x20
+lis r31, 0x8056
+ori r31, r31, 0xED78
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x0C
+la r18, 0x2C(r18)
+stw r18, 0x10(r3)
+
+lwz r18, 0x10(r3)
+mr r31, r3
+
+------------- ^ to be resumed...
+
+Sidetrack: checked if distance check can be used with Vehicle mount code, it is not clear.
+r31 does not contain Vehicle obj in current inject locations.
+
+Sidetrack: Boss stuff, mapped a lot of it , found master bctrl to Boss Logic for all boss types
+Mapped which ones read MainPlayerID for targeting (to later fix to support P2 for all bosses)

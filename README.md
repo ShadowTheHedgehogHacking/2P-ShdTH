@@ -18,8 +18,10 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
-* Checkpoint Warping/Backtracking separate warping
-* Individual death-to-checkpoint / Don't reload level for both players [PARTIAL]
+* Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
+* Individual death-to-checkpoint / Don't reload level for both players [PARTIAL / Can be improved]
+* Bosses / Worm Enemies / AlienShips should attack closest player
+* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 * **Buffer crash research / possible crash reductions if possible
 * -> Verified problematic stages will have TXD reductions [ISSUES FOUND / IN TESTING]
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
@@ -93,7 +95,7 @@ Overflowing for the types:
 * GLOBAL (Texture)
 
 ## Problems
-* Checkpoint Warping/Backtracking only moves P1, only P1 controls Checkpoint UI
+* Checkpoint Warp Menu only P1 controls Checkpoint UI
 * Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
@@ -102,6 +104,9 @@ Overflowing for the types:
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
 * Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
+* Worm Enemies and AlienShips will only target P1
+* Heavy Dog / Blue Falcon do not damage P2
+* Bosses (with the exception of Sonic & Diablon) only react to P1
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -125,15 +130,12 @@ Overflowing for the types:
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
+* Independent Warping/Backtracking via Checkpoints 
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
-* Worm Enemies and AlienShips will only target P1
-* Heavy Dog / Blue Falcon do not damage P2
-* Bosses (with the exception of Sonic & Diablon) only react to P1
-* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
 
 ## Bonus Roadmap
