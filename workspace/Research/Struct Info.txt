@@ -35,13 +35,20 @@ CharCommand:
 
 Coaster:
 	0x4 - active/visible/collision
+	0x18 - vTable
+		0x8 - ~Coaster()
+		0x1C - nullsub()
+		0x20 - boost::detail::sp_counted_base
+	0x24 - 
 	0x50 - something?
-		0x24 - CharaColliBody***
+		0x24 - SonicteamUSA::System::CharaColli::CharaColliBody***
+			0x4 - SonicteamUSA::System::CharaColli::CharaColliBase***
 	0x60 - int state
 			-0x0 inactive
 			-0x1 playerRiding
 			-0x2 ridingWithoutPlayer
 			-0x3 breaking
+	0x64 - int indexID
 			
 	0xBC - float xTilt maybe
 	0xE8 - float xPos Maybe
@@ -75,6 +82,10 @@ GravityChangeZone:
 	0x70 - float X
 	0x74 - float Y
 	0x78 - float Z
+
+Motion:
+	0x58 - pParent maybe
+	0x42C - int motionOrAnimID
 
 Player:
 	0x0 - char* pName
@@ -133,6 +144,21 @@ Super:
 	0x0 - char* pName
 	0x4 - int size?
 	0x18 - Player::Shadow::Super** ?
+
+Player::InternalOption:
+	-
+
+
+UpDownReel:
+	0x44 - float startYOffset
+	0x48 - float finishYOffset
+	0x4C - float launchAngle
+	0x50 - float launchHSpeed
+	0x54 - int state
+	0x58 - float currentYOffset
+	0X64 - vector3* xyzSetCollison Maybe
+	0x90 - Player* Player
+	0x98 - int collisionOrStatusRelated Maybe
 	
 	
 		(*Struct Sizes*)
