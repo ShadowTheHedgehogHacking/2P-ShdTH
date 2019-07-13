@@ -5601,3 +5601,59 @@ r31 does not contain Vehicle obj in current inject locations.
 
 Sidetrack: Boss stuff, mapped a lot of it , found master bctrl to Boss Logic for all boss types
 Mapped which ones read MainPlayerID for targeting (to later fix to support P2 for all bosses)
+-------------------------------
+2019-07-13
+Worked with Donut to find remaining bugs in Coaster code, then I fixed camera issue.
+Identified for future use all ExternalCams use: ??GetStageCameraManagerToR3_or_0_if_not_found_PutExternalCamInList(r4 = externalCamID)_801ce644_
+if going to append to externcam stack, much cleaner than finding the malloc/free and destroying those
+
+$2P Essentials Zipline/Pulley/Coaster Fix [DonutStopGaming & dreamsyntax]
+C21316D0 00000001
+80BF0070 00000000
+C2132128 00000001
+80BF0070 00000000
+C21323C4 00000001
+80BF0070 00000000
+C215BEB4 00000002
+7FE9FB78 7C7F1B78
+60000000 00000000
+C215BEF0 0000001A
+387F0034 3CE0805F
+60E74230 81090000
+7C083840 408200B8
+3CE0807D 60E771A0
+80E70000 80E70000
+3D00807D 610871A8
+81080000 81080000
+C1E900E8 C20900EC
+C22900F0 C2470000
+C2670004 C2870008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEAF882A
+C1E900E8 C20900EC
+C22900F0 C2480000
+C2680004 C2880008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDEF882A
+FC0FA840 38E00001
+41800008 38E7FFFF
+90E90070 390D314C
+1CE70004 7D083A14
+91280000 00000000
+C21313F8 00000001
+60000000 00000000
+*Main code by DonutStopGaming
+*Cam fix by dreamsyntax
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	WE HAVE REACHED THE GECKO CODE LIMIT
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+It is now necessary to refactor all the one liner C2 codes (nop/blr/simple one-line change) types 
+to be 04 writes OR modify the .dol directly.
+
+First attempt will be to rewrite to be 04 for all eligible code.

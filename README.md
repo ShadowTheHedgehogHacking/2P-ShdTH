@@ -14,7 +14,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Fix "Air bug" - (player state pointer overlap issue)
 * Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
 * Devil Doom [WIP / DonutStopGaming Task]
-* Coasters (aka Pulley/Ziplines) fixed [WIP / DonutStopGaming Task]
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
 * Flyables attach to correct player's camera
 * Turrets attach to correct player's camera
@@ -38,6 +37,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Android characters have unique JumpBall colors
+* Coaster/Pulley/Ziplines fixed
 
 ## Buffer(s) Issue Identification
 
@@ -96,7 +96,6 @@ Overflowing for the types:
 
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
-* Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) leaves other player behind, only activates on P1
 * Gravity switches on Space Gadget only alter P1's gravity
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Turrets alter P1's camera if P2 uses it
@@ -131,6 +130,7 @@ Overflowing for the types:
 * Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Independent Warping/Backtracking via Checkpoints 
+* Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) activate on correct player
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
