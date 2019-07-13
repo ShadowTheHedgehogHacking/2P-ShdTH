@@ -4857,3 +4857,747 @@ nop 801ae7b0
 $Dismount GUNMech in Air [dreamsyntax]
 C21AE7B0 00000001
 60000000 00000000
+--------------------
+
+2019-07-07
+Gravity Switchers
+
+Mapped out ChangeZone and ChangeSwitch switchers (they are separate, but share some functions)
+
+ChangeSwitch type no disable
+nop @ 802469dc (visual)
+nop @ 80246a4c (functional)
+
+ChangeZone type no disable
+nop @ 80247b84 (visual) 
+nop @ 80247be0 (functional)
+
+$GravitySwitchers NoDisable [dreamsyntax]
+C22469DC 00000001
+60000000 00000000
+C2246A4C 00000001
+60000000 00000000
+C2247B84 00000001
+60000000 00000000
+C2247BE0 00000001
+60000000 00000000
+
+Sidetrack:
+SHARED_isPlayerMainPlayer potential overwrite fixup: 
+
+Assumptions: 
+1. No other function uses the mainPlayer = static address @ 805EE588 (word)
+2. Caller passes proper player acting on object that uses SHARED_isPlayerMainPlayer
+3. Death and other functions that rely on this static address being 0 call this prior to executing
+
+Approach:
+1. Validate player pointer caller sends exists and find the earliest point it is acted on
+2. Set static address to 1 or 0 depending on what caller's player pointer is
+
+-> RIP Assumption #2 does not happen, void
+
+Sidetrack:
+For Vehicles code, is the player pressing button an option for detecting which player is dismounting?
+-> at the very least this will greatly reduce the chance of overlap
+
+This still leaves open the case where P1 and P2 are driving, and free() occurs on wrong player because P1 presses X at the same time thus free happens to player1's Vehicle twice
+But it makes it impossible for non-driving to interfere anymore, even if an wrong malloc occured
+ 
+ -> Confirmed player pressing button is still in poll pool at dismount() and mount() so it can be added as an AND
+ to allow for P2 to get in/out while P1 is driving to properly malloc/free
+ However due to merge of all button press it is possible to mount/dismount with it being unique values each time
+ need to find method to determine only X press with OR case
+
+Task for later ^  
+----------------------
+2019-07-08
+
+!!Found checkpoint warp takes player tagged by mainPlayer static address!!
+
+Devised plan for Vehicle and Checkpoint for determining only X press with inclusive OR case:
+solution:
+Single byte right-side bit 8 or greater = X is held
+@ 8056ED4F [P1]
+@ 8056ED7B [P2]
+
+Vehicles:
+APPLY TO 801b924c // MOUNT [BAD, X check needs to be revised to be done earlier/different function in code]
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24 // jump to li r5, 1
+//P1 passed first check, now check X pressed state
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC //less than branch to P2 case
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+ 
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v2.9 EXPERIMENTAL [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800002 00000000
+C21BA5D0 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800001 00000000
+*Disables SpecialCam & allows for P2 to drive CarType vehicles
+*Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
+*KNOWN PROBLEM: P1 MUST HOLD X while mounting vehicle otherwise controls will be mapped to P2
+
+Diverting to try this with checkpoint warp:
+
+Generic grab P1 control state and validate X is pressed:
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+
+Insert inject based on which player pressed X @ 80331114 [checkpoint UI execute initial]
+Main Player Special OBJ: 805EE588
+
+
+Checkpoint InitialUI MainPlayer Inject (attempt1) SOURCE
+80331114 origin: stwu	sp, -0x0010 (sp)
+
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r16, 0
+bge 0x8
+li r16, 1
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint InitialUI MainPlayer Inject (attempt1)
+C2331114 00000007
+3DE08056 61EFED4F
+89EF0000 71EF0008
+2C0F0008 3A000000
+40800008 3A000001
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+Checkpoint WarpSuccessful MainPlayer Cleanup SOURCE
+80129b50 origin: stwu	sp, -0x0020 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0020 (sp)
+
+Checkpoint WarpSuccessful MainPlayer Cleanup
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+
+Checkpoint WarpCancel MainPlayer Cleanup SOURCE
+80117614 origin: stwu	sp, -0x0010 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint WarpCancel MainPlayer Cleanup
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+
+Works, except P1 must HOLD X to warp self.
+This is similar to the vehicle issue, but its less frames compared to vehicle.
+There is no earlier func that I think can be checked (need to verify this), so should abort and do distance check only
+
+For distance check, need to identify SavePoint's floats
+FOUND @ r30 + 0x60 (X value) NOT offset
+mr r4, r30
+addi r4, r4, 0x60
+
+r5 in original function holds checkpoint value (e.g. 1 - 8)
+-> what else do we clobber if blrl?
+
+Grab KeyDoor code for example:
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
+----------------
+2019-07-09
+
+Found earlier inject position @ 80118928	// VirtualFunction::IsStandingOnCheckpoint:OpenCheckpointUI(r3=CharCommandUnit, r5=UseCommand)_80118928_
+original code: stwu	sp, -0x0010 (sp)
+
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r16, 0
+bge 0x8
+li r16, 1
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+-> code is identical to original, just change inject address
+
+Checkpoint InitialUI MainPlayer Inject (attempt2) / BAD
+C2118928 00000007
+3DE08056 61EFED4F
+89EF0000 71EF0008
+2C0F0008 3A000000
+40800008 3A000001
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+-> This still has the frame issue / not early enough
+However it is smaller window of missing it (less frames rendered between checks)
+BUT this is used on Respawn(), unlike the other one so it cannot be used!
+
+Use Donut's Object distance compare check:
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+lfs f15, 0x34(r31)
+lfs f16, 0x38(r31)
+lfs f17, 0x3C(r31)
+lfs f18, 0(r7)
+lfs f19, 0x4(r7)
+lfs f20, 0x8(r7)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f17
+
+lfs f15, 0x34(r31)
+lfs f16, 0x38(r31)
+lfs f17, 0x3C(r31)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f17
+fcmpo cr0, f15, f21
+
+------------------------
+Why add r17, r17, r17?
+--------
+Use:
+r15 = P1
+r16 = P2
+r17 = SavePosX
+Inject @ 80331114
+
+f21 = distance of Player1 to Object
+f15 = distance of Player2 to Object
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f17
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f17
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+C2331114 00000017
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1FE0060 C21E0064
+C23E0068 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1882A
+C1FE0060 C21E0064
+C23E0068 C2480000
+C2680004 C2880008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1882A
+FC0FA840 3A000001
+41800008 3A000000
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+Remove extra add, swap sub step
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f18, f15
+fmuls f15, f15, f15
+fsubs f16, f19, f16
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f20, f17
+fmuls f17, f17, f17
+fadds f21, f17, f15 ! flag for donut
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f18, f15
+fmuls f15, f15, f15
+fsubs f16, f19, f16
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f20, f17
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+----
+Math is still wrong
+DISTANCE CHECK MANUALLY FROM CHECKPOINT 3
+EXPECTED RESULT = P2 is CLOSER, WARP P2
+
+Checkpoint3 X - P1X = [] *SELF == 604,623
+Checkpoint3 Y - P1Y = [] *SELF == 1,881,650
+stick in f15 = n-1 + n-2 [prior instr] 2,486,273
+Checkpoint3 Z - P1Z = [] *SELF == 282,527,443
+finally add n-1 + n-2
+p1's line distance == 285,013,716‬
+
+Checkpoint3 X - P2X = [] *SELF == 0
+Checkpoint3 Y - P2Y = [] *SELF == 64.336441‬
+stick in f15 = n-1 + n-2 [prior instr] == 64.336441‬
+Checkpoint3 Z - P2Z = [] *SELF == 0.00074529‬
+finally add n-1 + n-2
+p2's line distance == 64 
+
+
+R8 was never changed to r16!!!!!!!!!
+
+
+Actually fixed code, no subtraction swap:
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+
+IT WORKS
+
+Final Checkpoint Code:
+
+$2P Essentials P2 CheckpointWarp v0.9 [dreamsyntax & DonutStopGaming]
+c2331114 00000017
+3de0807d 61ef71a0
+81ef0000 81ef0000
+3e00807d 621071a8
+82100000 82100000
+c1fe0060 c21e0064
+c23e0068 c24f0000
+c26f0004 c28f0008
+edef9028 edef03f2
+ee109828 ee100432
+edef802a ee31a028
+ee310472 eeb1782a
+c1fe0060 c21e0064
+c23e0068 c2500000
+c2700004 c2900008
+edef9028 edef03f2
+ee109828 ee100432
+edef802a ee31a028
+ee310472 edf1782a
+fc0fa840 3a000001
+41800008 3a000000
+3de0805e 61efe588
+920f0000 9421fff0
+60000000 00000000
+c2117614 00000003
+3a000000 3de0805e
+61efe588 920f0000
+9421fff0 00000000
+c2129b50 00000003
+3a000000 3de0805e
+61efe588 920f0000
+9421ffe0 00000000
+*Credit to DonutStopGaming for initial distance check, it had a bug ;]
+*Warp will pick the player closest to the checkpoint X was pressed on
+*v1 will have UI control for P2, right now only P1 has UI control
+
+--------------------------------------------------------------------------
+2019-07-10
+
+Donut's Pulley Code src as of this date:
+    [8015bef0]
+original:
+addi r3, r31, 52
+
+    checkCoaster:
+lis r7, 0x805F
+ori r7, r7, 0x4230
+lwz r8, 0x0(r9)
+cmpw cr7, r8, r7
+bne notCoaster
+
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r7)
+lfs f19, 0x4(r7)
+lfs f20, 0x8(r7)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f15, f17
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f15, f17
+fcmpo cr0, f15, f21
+
+li r7, 0x1
+blt p2closer
+subi r7, r7, 0x1
+
+    p2closer:
+stb r7, 0x314C(r13)
+
+    notCoaster:
+
+
+
+    |
+    V
+    
+    [8015beb4]
+mr r9, r31
+mr r31, r3
+
+    |
+    V
+    
+    [8008e790]
+    original:
+lwz r3, 0x0004 (r31)
+
+    getPlayerPointers:
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+    checkP1Hang:
+lwz r7, 0xA2(r7)
+cmpwi r7, 0x82
+beq isHang
+
+    checkP2Hang:
+lwz r8, 0xA2(r8)
+cmpwi r8, 0x82
+beq isHang
+
+li r10, 0x0
+stw r10, 0x3148(r13)
+
+    isHang:
+
+    |
+    V
+
+    original:
+lwz r0, 0x0014 (sp)
+
+    new:
+li r7, 0
+stw r7, 0x3148(r13)
+
+------------------
+Moving on to controller struct searching for CheckpointUI controls
+
+80331388 <- seems promising, controller related or UI state change based on controls
+----------------
+2019-07-11
+Last find appears to possibly be UI animation transition, looking for other functions...
+No luck. Look back at P3 Struct code for Partners.
+
+
+Decoded:
+inject @ 800A85C4
+lwz r31,16(r3)
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x20
+lis r31,-32682
+ori r31,r31,60792
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x0C
+addi r18,r18,44
+stw r18,16(r3)
+lwz r18,16(r3)
+mr r31,r3
+
+OR use Donut's original source:
+lwz r31, 0x10(r3)
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x20
+lis r31, 0x8056
+ori r31, r31, 0xED78
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x0C
+la r18, 0x2C(r18)
+stw r18, 0x10(r3)
+
+lwz r18, 0x10(r3)
+mr r31, r3
+
+------------- ^ to be resumed...
+
+Sidetrack: checked if distance check can be used with Vehicle mount code, it is not clear.
+r31 does not contain Vehicle obj in current inject locations.
+
+Sidetrack: Boss stuff, mapped a lot of it , found master bctrl to Boss Logic for all boss types
+Mapped which ones read MainPlayerID for targeting (to later fix to support P2 for all bosses)
