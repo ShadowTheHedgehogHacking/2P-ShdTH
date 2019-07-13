@@ -5657,3 +5657,17 @@ It is now necessary to refactor all the one liner C2 codes (nop/blr/simple one-l
 to be 04 writes OR modify the .dol directly.
 
 First attempt will be to rewrite to be 04 for all eligible code.
+
+----NOTE AT THIS POINT ANY CODES ABOVE MAY HAVE INACCURATE REPRESENTATION OF WHATS IN GUPE8P.ini!----
+THE LOGIC IS THE SAME BUT SOME SECTION WILL BE WRITTEN IN 04 FORMAT
+---------------------------------------------------------------------------------------------------------
+Refactor done.
+
+BEFORE: Using up to : 80002ee4
+AFTER: Using up to : 80002e74
+
+Non-junk memory is @ 80003100
+
+Saved: 0x70
+
+= 28 lines of code left
