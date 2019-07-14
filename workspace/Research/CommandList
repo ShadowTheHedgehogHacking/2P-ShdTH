@@ -1,0 +1,14 @@
+Command List
+1 - AccelerateInputCommand
+2 - SetPositionCommand
+3 - SetAngleCommand
+4 - ClrVelocityCommand
+7 - DamageCommand
+103 - Player::EndAttackCommand
+108 - Player::JumpDashCommand
+115 - Player::StartUseWeaponCommand
+117 - Player::EndUseWeaponCommand
+12D - Player::SetGravityCommand
+12F - Player::ToSuperCommand
+135 - Player::CancelActingCommand
+136 - Player::ResetCameraCommand
