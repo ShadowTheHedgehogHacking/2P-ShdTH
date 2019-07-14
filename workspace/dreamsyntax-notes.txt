@@ -5671,3 +5671,36 @@ Non-junk memory is @ 80003100
 Saved: 0x70
 
 = 28 lines of code left
+-------------------
+
+Working on Gravity Switchers w Donut:
+$GravitySwitchers NoDisable [dreamsyntax]
+C22469DC 00000001
+60000000 00000000
+C2246A4C 00000001
+60000000 00000000
+C2247B84 00000001
+60000000 00000000
+C2247BE0 00000001
+60000000 00000000
+
+Refactor -> 
+$GravitySwitchers NoDisable [dreamsyntax]
+042469DC 60000000
+04246A4C 60000000
+04247B84 60000000
+04247BE0 60000000
+
+---------
+ExternalCam "Camera @ r29" in ExternalCamPos2
+@ mem 807d4300
+
+---- Still nothing on cameras.
+Temp FreeCam for SOME* Turrets:
+ARK :
+80317230
+8031723c
+^ Check if free() issue
+
+
+

@@ -11,16 +11,11 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ![Current Level Map](./res/level_status.png)
 
 ## Road to 2.0 (WIP) | Release ETA: 9/9/2019
+* Turrets attach to correct player's camera
+* Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
 * Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
 * Devil Doom [WIP / DonutStopGaming Task]
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
-* Flyables attach to correct player's camera
-* Turrets attach to correct player's camera
-* Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
-* Individual death-to-checkpoint / Don't reload level for both players [PARTIAL / Can be improved]
-* Bosses / Worm Enemies / AlienShips should attack closest player
-* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 * **Buffer crash research / possible crash reductions if possible
 * -> Verified problematic stages will have TXD reductions [ISSUES FOUND / IN TESTING]
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
@@ -38,6 +33,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Android characters have unique JumpBall colors
 * Coaster/Pulley/Ziplines fixed
+* Individual death-to-checkpoint (Basic)
+
 
 ## Buffer(s) Issue Identification
 
@@ -131,6 +128,12 @@ Overflowing for the types:
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Independent Warping/Backtracking via Checkpoints 
 * Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) activate on correct player
+
+## Other Knows Issues (Planned to be fixed IF Gecko Limit can be exceeded)
+* Bosses / Worm Enemies / AlienShips should attack closest player
+* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Flyables attach to correct player's camera
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
