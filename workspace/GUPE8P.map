@@ -3350,7 +3350,7 @@
 8006ffa4 00000124 8006ffa4 0 zz_8006ffa4_
 800700c8 000001e8 800700c8 0 zz_800700c8_
 800702b0 00000074 800702b0 0 zz_800702b0_
-80070324 000000a0 80070324 0 zz_80070324_
+80070324 000000a0 80070324 0 CosmicFall_ExceptionThrown_UNKNOWN@80070388
 800703c4 00000040 800703c4 0 zz_800703c4_
 80070404 0000005c 80070404 0 EndJumpCommand::Exec()_80070404_
 80070460 00000034 80070460 0 cCharacter::IsPlayingEffect( (EffectsGroup *))
@@ -3976,7 +3976,7 @@
 8007dbc8 0000004c 8007dbc8 0 zz_8007dbc8_
 8007dc14 00000004 8007dc14 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8007dc18 00000048 8007dc18 0 dCreateGeom
-8007dc60 00000144 8007dc60 0 zz_8007dc60_
+8007dc60 00000144 8007dc60 0 MountVehicleOrTurret(r3=Player::Behavior::DriveVehicle, r5=boost::detail::sp_counted_base_impl<Vehicle::TVehicleBase *, boost::checked_deleter<Vehicle::TVehicleBase>>, r6=Player::PlayerBase, r31=ShadowExecuter)
 8007dda4 00000168 8007dda4 0 bctrlToDismountVehiclesAndTurrets_8007dda4_
 8007df0c 00000048 8007df0c 0 !!RELEASE_CAMERA_GUNMech_WORKSFORP2_8007df0c_
 8007df54 00000024 8007df54 0 zz_8007df54_
@@ -3991,9 +3991,9 @@
 8007e28c 0000025c 8007e28c 0 zz_8007e28c_
 8007e4e8 0000002c 8007e4e8 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 8007e514 00000008 8007e514 0 nw4hbm::ut::TextWriterBase<w>::GetCharSpace(void) const 	homebuttonLib.a ut_TextWriterBase.o
-8007e51c 00000070 8007e51c 0 ??MapPlayerModel_and_UpdatePosition_To_GUNMech_8007e51c_
+8007e51c 00000070 8007e51c 0 MapPlayerModel_and_UpdatePosition_To_VehicleorTurret
 8007e588 00000004 8007e588 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-8007e58c 000001e8 8007e58c 0 ??AnimationToMountMech_8007e58c_
+8007e58c 000001e8 8007e58c 0 MountTurretORVehicleParentFromGeneralExec
 8007e774 00000164 8007e774 0 ??MountGUNMech_Controls_8007e774_
 8007e8d8 000000f0 8007e8d8 0 zz_8007e8d8_
 8007e9c8 000003a4 8007e9c8 0 zz_8007e9c8_
@@ -5713,7 +5713,7 @@
 800b5034 000000ac 800b5034 0 zz_800b5034_
 800b50e0 000000ac 800b50e0 0 zz_800b50e0_
 800b518c 00000084 800b518c 0 zz_800b518c_
-800b5210 00000110 800b5210 0 zz_800b5210_
+800b5210 00000110 800b5210 0 SetPlayerAnimationAfterMountingARKTurret_(r3=Motion)
 800b5320 000000c4 800b5320 0 zz_800b5320_
 800b53e4 00000078 800b53e4 0 zz_800b53e4_
 800b545c 000000c8 800b545c 0 zz_800b545c_
@@ -7315,7 +7315,7 @@
 800e3f78 00000060 800e3f78 0 zz_800e3f78_
 800e3fd8 00000004 800e3fd8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800e3fdc 0000002c 800e3fdc 0 MoviePlayerScene::PlayScreenBackSFX(void)
-800e4008 000000c0 800e4008 0 zz_800e4008_
+800e4008 000000c0 800e4008 0 tire::Exec() and sign::Exec() and scaffold::Exec() and concpillarlg::Exec() and concwalllg::Exec()
 800e40c8 0000025c 800e40c8 0 zz_800e40c8_
 800e4324 00000040 800e4324 0 zz_800e4324_
 800e4364 00000040 800e4364 0 zz_800e4364_
@@ -7337,7 +7337,7 @@
 800e4e1c 00000048 800e4e1c 0 zz_800e4e1c_
 800e4e64 00000024 800e4e64 0 zz_800e4e64_
 800e4e88 00000010 800e4e88 0 nlListContainer<P8SaveData>::__ct(void)
-800e4e98 0000042c 800e4e98 0 boxhall::Exec()_Maybe
+800e4e98 0000042c 800e4e98 0 boxhall::Exec() and window::Exec() and metalbox::Exec() and woodbox::Exec()
 800e52c4 00000094 800e52c4 0 BreakableOrnament::BreakableOrnament()_800e52c4_
 800e5358 00000088 800e5358 0 zz_800e5358_
 800e53e0 00000074 800e53e0 0 zz_800e53e0_
@@ -7362,7 +7362,7 @@
 800e5bb8 00000060 800e5bb8 0 zz_800e5bb8_
 800e5c18 000001a4 800e5c18 0 zz_800e5c18_
 800e5dbc 00000040 800e5dbc 0 zz_800e5dbc_
-800e5dfc 0000023c 800e5dfc 0 zz_800e5dfc_
+800e5dfc 0000023c 800e5dfc 0 floorcylinder::Exec() and cloud::Exec()
 800e6038 00000040 800e6038 0 zz_800e6038_
 800e6078 0000009c 800e6078 0 Ornament::Ornament()_800e6078_
 800e6114 0000026c 800e6114 0 zz_800e6114_
@@ -8981,7 +8981,7 @@
 80113ae8 00000048 80113ae8 0 zz_80113ae8_
 80113b30 00000074 80113b30 0 zz_80113b30_
 80113ba4 00000098 80113ba4 0 zz_80113ba4_
-80113c3c 000001b4 80113c3c 0 zz_80113c3c_
+80113c3c 000001b4 80113c3c 0 Ring:Exec2()
 80113df0 000000bc 80113df0 0 Ring::Ring()_80113df0_
 80113eac 00000088 80113eac 0 zz_80113eac_
 80113f34 00000074 80113f34 0 zz_80113f34_
@@ -9217,7 +9217,7 @@
 80119a8c 00000150 80119a8c 0 OnCreatePartner()_HAS_Player::Npc::ShowCommand_80119a8c_
 80119bdc 00000164 80119bdc 0 ??executeShowPlayer_80119bdc_
 80119d40 00000004 80119d40 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-80119d44 00000050 80119d44 0 zz_80119d44_
+80119d44 00000050 80119d44 0 Gadget -> ShowPartner
 80119d94 0000006c 80119d94 0 zz_80119d94_
 80119e00 00000080 80119e00 0 zz_80119e00_
 80119e80 000000d0 80119e80 0 zz_80119e80_
@@ -9353,7 +9353,7 @@
 8011dc94 00000004 8011dc94 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8011dc98 000000b0 8011dc98 0 zz_8011dc98_
 8011dd48 00000140 8011dd48 0 zz_8011dd48_
-8011de88 00000004 8011de88 0 DBClose 	NdevExi2A.a DebuggerDriver.o
+8011de88 00000004 8011de88 0 SetParticle::Exec() DBClose 	NdevExi2A.a DebuggerDriver.o
 8011de8c 000000dc 8011de8c 0 zz_8011de8c_
 8011df68 00000138 8011df68 0 zz_8011df68_
 8011e0a0 00000080 8011e0a0 0 zz_8011e0a0_
@@ -11333,7 +11333,7 @@
 8015a7ec 0000002c 8015a7ec 0 cCharacter::UpdateBlinking(float)
 8015a818 00000040 8015a818 0 zz_8015a818_
 8015a858 00000040 8015a858 0 zz_8015a858_
-8015a898 000000ac 8015a898 0 zz_8015a898_
+8015a898 000000ac 8015a898 0 hwylamp::Exec() and Ring::Exec() and SetPickupBaseTask and BreakObj
 8015a944 00000064 8015a944 0 SETObj_Iteration_?HAS_SetWeaponTask_SetDoor_cone_Gadget_SetParticle_SetHintRing_bollister_dumpster_debris_concpillarsm_RocketBase__8015a944_
 8015a9a8 00000074 8015a9a8 0 Gadget::Gadget()_8015a9a8_
 8015aa1c 00000068 8015aa1c 0 zz_8015aa1c_
@@ -15249,7 +15249,7 @@
 801c9304 00000048 801c9304 0 zz_801c9304_
 801c934c 00000068 801c934c 0 zz_801c934c_
 801c93b4 00000048 801c93b4 0 ??DontDetachFromExternCam_801c93b4_
-801c93fc 00000050 801c93fc 0 ??StoreForDetatchLater?_801c93fc_
+801c93fc 00000050 801c93fc 0 ??StoreForDetachLater?_801c93fc_
 801c944c 00000040 801c944c 0 ??SomethingSpecialCamCalled_801c944c_
 801c948c 00000048 801c948c 0 ??UnknownCreateSpecialCameraEvent[r8=boost::detail::sp_counted_base, r31=StageCameraManager]
 801c94d4 0000000c 801c94d4 0 DrawableCharacter::GetAnimController( (void))
@@ -15327,7 +15327,7 @@
 801cbeb8 00000008 801cbeb8 0 J3DTexGenBlock4::getNBTScale(void) 	J3DGraphBase.a J3DMatBlock.o
 801cbec0 00000028 801cbec0 0 zz_801cbec0_
 801cbee8 00000004 801cbee8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-801cbeec 000000dc 801cbeec 0 ExternalCamDeepLayer_HasAnotherAttachAndDetatch
+801cbeec 000000dc 801cbeec 0 ExternalCamDeepLayer_HasAnotherAttachAndDetach
 801cbfc8 00000034 801cbfc8 0 zz_801cbfc8_
 801cbffc 00000008 801cbffc 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 801cc004 00000030 801cc004 0 zz_801cc004_
@@ -15342,7 +15342,7 @@
 801cc188 0000003c 801cc188 0 ExternalCam__ATTACH?Turrets_AndReticule
 801cc1c4 0000000c 801cc1c4 0 GXInitLightColor
 801cc1d0 00000010 801cc1d0 0 zz_801cc1d0_
-801cc1e0 00000058 801cc1e0 0 ExternalCam__DETATCH?Turret
+801cc1e0 00000058 801cc1e0 0 ExternalCam__DETACH?Turret
 801cc238 00000058 801cc238 0 zz_801cc238_
 801cc290 00000030 801cc290 0 TRK_memset
 801cc2c0 00000004 801cc2c0 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -15471,7 +15471,7 @@
 801ce9d4 00000020 801ce9d4 0 cPlayer::PostPhysicsUpdate(void)
 801ce9f4 00000060 801ce9f4 0 RESEARCHME__PossibleRegularWorkingExternalCams?_OnGetOffCoaster
 801cea54 00000080 801cea54 0 Coaster_AddExternalCamToList
-801cead4 000000c8 801cead4 0 DetatchFromExternalCamSHARED__TheArkCRASH2_FreeCamV1
+801cead4 000000c8 801cead4 0 DetachFromExternalCamSHARED__TheArkCRASH2_FreeCamV1
 801ceb9c 00000048 801ceb9c 0 zz_801ceb9c_
 801cebe4 00000024 801cebe4 0 zz_801cebe4_
 801cec08 0000009c 801cec08 0 zz_801cec08_
@@ -15481,7 +15481,7 @@
 801ced24 00000128 801ced24 0 createExternalCameraSpecialP1Only
 801cee4c 00000048 801cee4c 0 zz_801cee4c_
 801cee94 00000024 801cee94 0 zz_801cee94_
-801ceeb8 00000040 801ceeb8 0 ??OtherDetatch?_801ceeb8_
+801ceeb8 00000040 801ceeb8 0 ??OtherDetach?_801ceeb8_
 801ceef8 0000005c 801ceef8 0 ??ExclusiveSpecialCameraEventCALLS_SHAREDINCLUDES_801ceef8_
 801cef54 0000009c 801cef54 0 ?SHARED_INCLUDES_FLYABLES_LostImpactTurrets_CallWith_ConstantlyCalledCallToMalloc_801cef54_
 801ceff0 00000028 801ceff0 0 zz_801ceff0_
@@ -16798,7 +16798,7 @@
 801eeff4 00000040 801eeff4 0 zz_801eeff4_
 801ef034 00000078 801ef034 0 zz_801ef034_
 801ef0ac 00000004 801ef0ac 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-801ef0b0 000000a0 801ef0b0 0 zz_801ef0b0_
+801ef0b0 000000a0 801ef0b0 0 LightColli::Exec()
 801ef150 00000020 801ef150 0 cPlayer::PostPhysicsUpdate(void)
 801ef170 00000024 801ef170 0 zz_801ef170_
 801ef194 00000004 801ef194 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -18770,7 +18770,7 @@
 8022cbc8 0000011c 8022cbc8 0 zz_8022cbc8_
 8022cce4 000001a0 8022cce4 0 zz_8022cce4_
 8022ce84 00000040 8022ce84 0 zz_8022ce84_
-8022cec4 00000080 8022cec4 0 zz_8022cec4_
+8022cec4 00000080 8022cec4 0 SetSecurityLaser
 8022cf44 0000012c 8022cf44 0 zz_8022cf44_
 8022d070 00000088 8022d070 0 zz_8022d070_
 8022d0f8 00000074 8022d0f8 0 zz_8022d0f8_
@@ -19843,7 +19843,7 @@
 80256a90 00000084 80256a90 0 zz_80256a90_
 80256b14 00000074 80256b14 0 zz_80256b14_
 80256b88 00000108 80256b88 0 zz_80256b88_
-80256c90 00000474 80256c90 0 zz_80256c90_
+80256c90 00000474 80256c90 0 SetBaseDoor
 80257104 00000040 80257104 0 zz_80257104_
 80257144 000000b0 80257144 0 zz_80257144_
 802571f4 00000088 802571f4 0 zz_802571f4_
@@ -20206,7 +20206,7 @@
 802600e8 00000074 802600e8 0 zz_802600e8_
 8026015c 00000064 8026015c 0 zz_8026015c_
 802601c0 0000002c 802601c0 0 cCharacter::UpdateBlinking(float)
-802601ec 000000cc 802601ec 0 zz_802601ec_
+802601ec 000000cc 802601ec 0 CommandCollision
 802602b8 00000080 802602b8 0 zz_802602b8_
 80260338 0000004c 80260338 0 zz_80260338_
 80260384 00000088 80260384 0 zz_80260384_
@@ -21736,7 +21736,7 @@
 802916cc 00000060 802916cc 0 zz_802916cc_
 8029172c 00000040 8029172c 0 zz_8029172c_
 8029176c 00000068 8029176c 0 zz_8029176c_
-802917d4 00000084 802917d4 0 ExternalCam_TRUEDetatchMaster?_BossCtrlUnit_PlayCameraMotion
+802917d4 00000084 802917d4 0 ExternalCam_TRUEDetachMaster?_BossCtrlUnit_PlayCameraMotion
 80291858 00000088 80291858 0 zz_80291858_
 802918e0 00000074 802918e0 0 zz_802918e0_
 80291954 00000030 80291954 0 zz_80291954_
@@ -28634,7 +28634,7 @@
 8036def8 00000020 8036def8 0 cPlayer::PostPhysicsUpdate(void)
 8036df18 000001cc 8036df18 0 zz_8036df18_
 8036e0e4 00000030 8036e0e4 0 zz_8036e0e4_
-8036e114 00000288 8036e114 0 zz_8036e114_
+8036e114 00000288 8036e114 0 GNCP_Function(r29=Path to .GNCP being operated on)
 8036e39c 0000000c 8036e39c 0 cAIPad::__ct(void)
 8036e3a8 000000b0 8036e3a8 0 zz_8036e3a8_
 8036e458 00000134 8036e458 0 zz_8036e458_
@@ -32847,7 +32847,7 @@
 8048ca00 00000064 8048ca00 0 zz_8048ca00_
 8048ca64 000000d4 8048ca64 0 zz_8048ca64_
 8048cb38 000000a8 8048cb38 0 zz_8048cb38_
-8048cbe0 00000074 8048cbe0 0 ??ReadingInsideTXD_8048cbe0_
+8048cbe0 00000074 8048cbe0 0 ReadingInsideTXD(r26=.txd being operated on, r9=texture data?)
 8048cc54 00000088 8048cc54 0 zz_8048cc54_
 8048ccdc 000000b0 8048ccdc 0 zz_8048ccdc_
 8048cd8c 000000c8 8048cd8c 0 zz_8048cd8c_

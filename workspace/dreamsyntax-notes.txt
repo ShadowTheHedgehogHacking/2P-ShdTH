@@ -5699,8 +5699,10 @@ ExternalCam "Camera @ r29" in ExternalCamPos2
 Temp FreeCam for SOME* Turrets:
 ARK :
 80317230
-8031723c
+8031723C
 ^ Check if free() issue
+-> seems fine
 
-
-
+$Lost Impact Turret Freecam [dreamsyntax]
+04317230 60000000
+0431723C 60000000
