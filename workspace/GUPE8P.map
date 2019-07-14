@@ -19472,7 +19472,7 @@
 80246c8c 000000f4 80246c8c 0 GravityChangeSwitch::Exec()_80246c8c_
 80246d80 00000054 80246d80 0 zz_80246d80_
 80246dd4 00000020 80246dd4 0 cPlayer::PostPhysicsUpdate(void)
-80246df4 00000030 80246df4 0 zz_80246df4_
+80246df4 00000030 80246df4 0 GravityChangeSwitch::LoadBIN()
 80246e24 000000f4 80246e24 0 zz_80246e24_
 80246f18 00000088 80246f18 0 zz_80246f18_
 80246fa0 00000074 80246fa0 0 zz_80246fa0_
@@ -21812,7 +21812,7 @@
 80293928 000001a0 80293928 0 changeGravityDirection()_80293928_
 80293ac8 0000001c 80293ac8 0 getGravityStatePointer_80293ac8_
 80293ae4 00000038 80293ae4 0 zz_80293ae4_
-80293b1c 00000044 80293b1c 0 zz_80293b1c_
+80293b1c 00000044 80293b1c 0 loadCurrentGravitySwitch()
 80293b60 00000014 80293b60 0 GetCommonDesireData(eFielderDesireState)
 80293b74 0000010c 80293b74 0 zz_80293b74_
 80293c80 00000008 80293c80 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
