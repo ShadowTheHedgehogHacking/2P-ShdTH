@@ -5703,6 +5703,8 @@ ARK :
 ^ Check if free() issue
 -> seems fine
 
-$Lost Impact Turret Freecam [dreamsyntax]
+$Lost Impact Turret Freecam BAD DO NOT USE THROWS EXCEPTIONS [dreamsyntax]
 04317230 60000000
 0431723C 60000000
+------------------------------------
+2019-07-14
