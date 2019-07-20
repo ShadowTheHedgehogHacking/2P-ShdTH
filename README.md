@@ -65,12 +65,14 @@ Overflowing for the types:
 * EVENT (StoryMode Intro & GoalEvent)
 #### The Doom
 * Solution: 32x32 for non-anim, 1/2 for screens
+-> Attempt 1 FAILED
 * ETC (Effects)
 #### Sky Troops
 * Solution: NOT NEEDED
 * AUDIO
 #### Lost Impact
 * Solution: 32x32 for non-anims, 1/2 for screens, skybox
+-> Attempt 1 FAILED (need more reduction)
 * GLOBAL (Texture)
 * AUDIO
 #### GUN Fortress
