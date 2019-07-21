@@ -57,6 +57,10 @@ Coaster:
 GravityChangeCollision:
 	0x0 - char* pName
 	0x4 - size ?
+	0x40 - float*[3] position
+	0x60 - float xPos
+	0x64 - float yPos
+	0x68 - float zPos
 
 GravityChangeSwitch:
 	0x0 - char* pName
@@ -66,7 +70,7 @@ GravityChangeSwitch:
 	0x18 - GravityChangeSwitch** ?
 	0x28 - pXYZ?
 	0x30 - direction?
-	0x34 - pXYZ real?
+	0x34 - flost*[3] position
 	0x3C - GadgetModelInfo**** ?
 	0x50 - ?
 	0x54 - Effect::PJS::EffectArrangerPJS* ?
@@ -77,11 +81,10 @@ GravityChangeSwitch:
 GravityChangeZone:
 	0x0 - char* pName
 	0x4 - size ?
+	0x34 - float*[3] position
 	0x28 - float[3]** pXYZ?
 	0x34 - float[3]* pRealXYZ?
-	0x70 - float X
-	0x74 - float Y
-	0x78 - float Z
+
 
 Motion:
 	0x58 - pParent maybe
