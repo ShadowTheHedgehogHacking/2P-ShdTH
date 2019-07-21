@@ -5735,3 +5735,49 @@ Vehicle Speed/Control Overhaul:
 801bd9dc = apply reverse
 
 end of 'controls' function for this vehicle type, searching elsewhere for air friction etc
+
+Open Car Type Testing:
+041BD8C0 60000000
+041BD88C 60000000
+041bd954 60000000
+041bd988 60000000
+-----------------
+
+GUNMech Goal : Alter Physics for Hover 
+nop @ 801accfc fdivs for very tight controls (no animation rotation dependent blocker)
+
+Hover speed reductions happen here:
+nop @ 801acf70
+nop @ 801acf74
+
+regular movement @ 801acfc8
+
+$GUNMech Physics Revamp [dreamsyntax]
+041ACF70 60000000
+041ACF74 60000000
+041ACCFC 60000000
+041AE7B0 60000000
+*Makes hover useful (fast) 
+*Tight turns
+*Dismountable mid-air
+
+--------
+Open Car Type found another physics func
+nop @ 801bbaf8
+nop @ 801bbb00
+for vehicle and tip over and explode
+
+
+Airtime post bne-
+@ 801bbb80 
+Air friction might be in here?
+
+Slope handler @ 801bbc00
+drift physics @ 801bbc20
+turn/speed ratio @ 801bbcb8
+
+Maintain velocity @ 801bbd60
+
+strange behavior in air @ 801bbb30 / 1c
+
+another possible function @ 801bd5c4
