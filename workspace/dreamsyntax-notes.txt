@@ -5781,3 +5781,19 @@ Maintain velocity @ 801bbd60
 strange behavior in air @ 801bbb30 / 1c
 
 another possible function @ 801bd5c4
+-------
+2019-07-21
+Rocket Launcher physics
+momentum reset @ 8023d3b0
+
+Melee Weapon Overhaul
+ammo subtract per hit @ 8023d60c
+
+look @ Player::Behavior::GroundAttack @ 800841e4
+->
+800841e0 = momentum maintain AFTER halt
+80084108 = Player Behavior GroundAttack 2
+
+80084938 = Caller to damage and animation, slowdown still happens if blr'd
+-----
+Found air friction or air gravity value responder for vehicles @ 801b9b18
