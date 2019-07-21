@@ -5708,3 +5708,30 @@ $Lost Impact Turret Freecam BAD DO NOT USE THROWS EXCEPTIONS [dreamsyntax]
 0431723C 60000000
 ------------------------------------
 2019-07-14
+Lots of pair work with Donut on controller UI.
+
+2019-07-15
+Air bug fix:
+For height lock issue BLR @ 801dbae4 -> BAD
+Still need to sort the endless flying state issue
+
+-> AIRBUG2 seems promising
+
+labeled more more potential funcs
+
+Found that BLR for height lock is bad as ramps, springs, balloons all use it to modify velocity
+Need different method.
+
+-------------
+2019-07-20
+Vehicle Speed/Control Overhaul:
+"Open Car" = Motorcycle:
+801bd8c8 = acceleration boost? nop @ fdivs 801bd8c0 for double tap to continuously accelerate
+801bd848 = steering angle
+801bd894 = apply gas / speed add and speed cap?
+801bd95c = apply brake / decrease speed
+801bd990 = deceleration (brake damper?)
+801bda24 = UNKNOWN
+801bd9dc = apply reverse
+
+end of 'controls' function for this vehicle type, searching elsewhere for air friction etc
