@@ -5797,3 +5797,34 @@ look @ Player::Behavior::GroundAttack @ 800841e4
 80084938 = Caller to damage and animation, slowdown still happens if blr'd
 -----
 Found air friction or air gravity value responder for vehicles @ 801b9b18
+
+Check all callers to get desired behavior:
+801bd3ec = allows for gas while in-air
+801bd59c =
+801bd4a8 = allows for turning while in-air
+801bccc0 =
+801bcd00 =
+801bd138 =
+801bc13c = gravity/downward Y axis while in air
+801bba70 =
+801bbaa0 =
+801bbb5c =
+801bb44c =
+
+----------------
+2019-07-22
+Misc physics searching
+spindash pinball / no stop | blr @ 8008ed8c
+
+$Pinball Spindash [dreamsyntax]
+0408ED8C 4E800020
+---
+Non-Lockon type rocket weapon logic:
+8023bb90 = no shoot
+8023bc50 = no knockback/momentum reset
+
+$CannonWeapons  No Knockback [dreamsyntax]
+0423D3B0 60000000
+0423BC50 60000000
+
+Found weapon/bullet stuff etc, mapped
