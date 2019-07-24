@@ -1661,6 +1661,24 @@
                     "unsigned": true
                 },
                 {
+                    "address": "80573B78",
+                    "baseIndex": 0,
+                    "label": "BufferReferenceOffset",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "807D4AE0",
+                    "baseIndex": 0,
+                    "label": "TheBufferBctrlParent",
+                    "length": 55,
+                    "pointerOffsets": [
+                        "0"
+                    ],
+                    "typeIndex": 5,
+                    "unsigned": false
+                },
+                {
                     "address": "80A0DD28",
                     "baseIndex": 0,
                     "label": "TextureBeingRead",

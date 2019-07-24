@@ -5828,3 +5828,23 @@ $CannonWeapons  No Knockback [dreamsyntax]
 0423BC50 60000000
 
 Found weapon/bullet stuff etc, mapped
+---------------------
+2019-07-23
+Full trace for level import failure (current theory is collision related)
+804418e8
+804418f0
+804418f8
+80441908
+8044190c
+80441910
+80441918
+80441920
+80441928
+80441938
+80441940
+80441948
+
+If recovers from crash no chunk has collision but the geometry is visible, also running at 60fps
+
+$No CameraFile Read [dreamsyntax]
+041c825c 60000000
