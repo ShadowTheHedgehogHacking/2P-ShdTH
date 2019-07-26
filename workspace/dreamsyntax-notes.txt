@@ -5848,3 +5848,41 @@ If recovers from crash no chunk has collision but the geometry is visible, also 
 
 $No CameraFile Read [dreamsyntax]
 041c825c 60000000
+--------------
+2019-07-24
+nop @ 800440e4
+nop @ 8048cc34
+
+To abort loading TXD in stage (resume even if 10MB loop)
+-----------
+2019-07-25
+Looking into mainPlayerID mitigations for bosses // objects that use it 
+Found existing optimal write to mainPlayerID: stw registerwithval, 0x3148(r13)
+^r13 is unchanging static ref
+Is written to once @ 800ad324
+
+KNOWN REGULAR READS (tested on stg0201):
+80176f00 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f0c = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f20 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+801d9af0 = ??UnknownCheckingGameMode_and_MainPlayerID (constantly being read)
+80192408 = BlackArmWorm_AboutToFireAtMainPlayerID@80192408 (2x calculations read)
+80189930 = BkLarvaGenerator_SBkLarvaStateData_ReadsMainPlayerID@80189930
+----------
+KNOWN BOSS SPECIFIC READS (tested on stg0210):
+80242e78 = BlackBull_BossRootTask_Initialize_ReadsMainPlayerID
+80242b10 = BlackBull ?MainLogicLoop? r3=BlackBull0210VarParam OR BlackBullCtrlUnit_GetStatus OR __ReadsMainPlayerID_2
+80290e18 = ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+cycles between b10 and e18, nop both to reveal no other checks.
+----------
+EggBreaker (310):
+802a7090 = EggBreaker_ReadsMainPlayerID_1
+802a6da8 = EggMecaCtrlUnit_GetStatus_EggBreaker_ReadsMainPlayerID_2
+802a95ac = EggBreaker_ReadsMainPlayerID_3
+----------
+EggDealer (Lava Shelter)
+802fd844
+801d9af0 = Missile Check ?
+-------------------------
+2019-07-26
+SuperShadow searching
