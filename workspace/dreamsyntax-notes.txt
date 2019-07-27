@@ -5885,4 +5885,11 @@ EggDealer (Lava Shelter)
 801d9af0 = Missile Check ?
 -------------------------
 2019-07-26
-SuperShadow searching
+SuperShadow/ChaosPhys searching
+found v0.2 crash on shooting while dying occurs @ 80499c84
+
+Blackknight:
+8008415c (3rd attack cycle momentum reset?)
+800841c8 -> regular position movement while swinging
+
+maintain momentum after swing by nop @ 800841d8 800841e0
