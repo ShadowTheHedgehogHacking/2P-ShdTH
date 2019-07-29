@@ -3784,7 +3784,7 @@
 80078b54 000000d8 80078b54 0 zz_80078b54_
 80078c2c 00000020 80078c2c 0 cPlayer::PostPhysicsUpdate(void)
 80078c4c 0000003c 80078c4c 0 zz_80078c4c_
-80078c88 00000064 80078c88 0 zz_80078c88_
+80078c88 00000064 80078c88 0 ColorizeStrange_SuperShadow
 80078cec 00000024 80078cec 0 cFielder::UpdatePlay(float)
 80078d10 00000024 80078d10 0 cFielder::UpdatePlay(float)
 80078d34 00000024 80078d34 0 cFielder::UpdatePlay(float)
@@ -4255,7 +4255,7 @@
 800880f8 000000d8 800880f8 0 zz_800880f8_
 800881d0 00000070 800881d0 0 zz_800881d0_
 80088240 00000064 80088240 0 zz_80088240_
-800882a4 000001f0 800882a4 0 zz_800882a4_
+800882a4 000001f0 800882a4 0 SuperFly_AndNonSuperDash_ActionsStateUpdater
 80088494 0000008c 80088494 0 zz_80088494_
 80088520 00000088 80088520 0 zz_80088520_
 800885a8 00000074 800885a8 0 zz_800885a8_
@@ -21131,7 +21131,7 @@
 8027a9f4 0000002c 8027a9f4 0 zz_8027a9f4_
 8027aa20 0000002c 8027aa20 0 zz_8027aa20_
 8027aa4c 0000002c 8027aa4c 0 zz_8027aa4c_
-8027aa78 0000002c 8027aa78 0 zz_8027aa78_
+8027aa78 0000002c 8027aa78 0 Colorize_StrangeSuperShadow2_CallToEndOfBuffer
 8027aaa4 00000078 8027aaa4 0 zz_8027aaa4_
 8027ab1c 00000038 8027ab1c 0 zz_8027ab1c_
 8027ab54 00000008 8027ab54 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
@@ -24357,7 +24357,7 @@
 802eb3f4 00000044 802eb3f4 0 Player::Behavior::Super__TopLevel
 802eb438 0000001c 802eb438 0 zz_802eb438_
 802eb454 00000064 802eb454 0 zz_802eb454_
-802eb4b8 00000078 802eb4b8 0 SuperFly_MoveRelated5?
+802eb4b8 00000078 802eb4b8 0 SuperFly_AvailableActions__Dash_and_Shoot
 802eb530 00000008 802eb530 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 802eb538 00000058 802eb538 0 zz_802eb538_
 802eb590 00000044 802eb590 0 zz_802eb590_

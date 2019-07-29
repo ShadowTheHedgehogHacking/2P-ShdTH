@@ -5929,3 +5929,230 @@ starting @ 802eb1f0
 nop @ 802eb218 results in XYZ oscillation instead of just Y
 r3 contains the copy of P1 + Y axis set relative position
 ^ continue tomorrow
+------------
+2019-07-29
+SuperShadow fly toggle base if:
+2856ed4C 00000030
+XXXXXXXXXXXXXXXXX
+e2000001 80008000
+
+
+Attempt C0 inject:
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+beq 0x8
+stb r17,0xAF(r16)
+blr
+
+2856ed4e 00000030
+C0000000 00000005
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+9A3000AF 60000000
+4E800020 00000000
+e2000001 80008000
+
+FAILURE ^ 
+
+Instead compare @ 800a860c (original li r6, 1)
+r4 contains base controll address, r3 contains current word at r4
+0x30 = Z + Y
+cmpwi r3, 0x30
+bne- 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+bne 0x8
+stb r17,0xAF(r16)
+li r6, 1
+
+
+Good enough for testing
+SuperShadow Fly Toggle v0.1 (Z+Y) [dreamsyntax]
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+*SuperShadow Fly Toggle code
+*Has no 'last pressed' rule so may appear inconsistent
+
+----
+@ 802eb214 r5 will contain X axis and subsequent YZ clone of P1 position
+r3 contains just '1' at this point, but it is probably just stack junk
+
+In theory should be able to plop out 
+802eb21c
+addi r4, r5, 220 to be a reference to p2 XYZ
+
+@ 802eb21c
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r4, 0x0(r16)
+
+^ Proof of concept was a success, P2 is new oscillation target
+
+SuperShadow TestVer v0.3
+0417711c 60000000
+c60af2e4 800af3bc
+c20a860c 00000008
+2c030030 40820030
+3e00807d 621071a0
+82100000 82100000
+89f000af 3a200020
+7c117800 9a3000af
+3a200000 40820008
+9a3000af 38c00001
+60000000 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Does not deplete rings atm
+*Shooting a chaos spear while dying will result in a crash
+
+1. Distance to oscillate default 10, we want it set to 0 for always Y axis  control
+2. Speed of oscillation (we want it to be much faster than it is) default 25, not sure on what we want but its too slow as is
+3. Targeted Y axis
+4. Toggle fly on/off
+
+We will use self -> located in r5 
+and modify directly r4's stored location
+
+Target @ 802eb21c
+original: addi r4, r5, 220 (this is location we wish to overwrite)
+
+addi r4, r5, 220
+r4 now contains relevant area, we need to overwrite stored data
+safe areas:
+f0, f1, f2 (loaded immediately upon next BL)
+
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc) // rtoc should be persistent in this case, grabbing 25
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+^ this clones p1 position into r4 but r4y+25
+
+inject test #1 @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+for testing no inject, just modify static address @ 805F077C to be 0
+
+Player endless positive 25 Y axis oscillation test 
+C22EB21C 00000005
+388500DC C0050000
+D0040000 C0050004
+C022FC8C EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+// Success
+
+Now need to add per-control binds
+P1 controller grab (no axis): 8056ed4c
+lwz (reg), 0(reg containing above address)
+Simple version no XOR case, just direct press only:
+0x20 = UP 
+0x08 = DOWN
+
+inject test #2 [basic up/down controller response] @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+lis r16, 0x8056
+ori r16, r16, 0xED4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x08
+bne- 0x8
+fsubs f0, f0, f1
+cmpwi r16, 0x20
+bne- 0x8
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+Good enough for next test version::
+
+
+force float @ 805F077C to 0
+force float @ 805F936C to 200
+
+Y Axis Control for Super v0.1 (integrated w TestVer code v0.4)
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+SuperShadow TestVer v0.4 [dreamsyntax]
+0417711C 60000000
+C60AF2E4 800AF3BC
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Press X to descend
+*Press Z to ascend 
+*Does not deplete rings
+*Shooting a chaos spear while dying will result in a crash
+
+
