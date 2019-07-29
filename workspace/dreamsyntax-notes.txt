@@ -5893,3 +5893,39 @@ Blackknight:
 800841c8 -> regular position movement while swinging
 
 maintain momentum after swing by nop @ 800841d8 800841e0
+----------
+2019-07-27
+- Identified potential bug:
+sometimes vehicles will not be driveable later on in the level if a similar vehicle was already activated
+--------
+2019-07-28
+nop @ 802eb1f0 -> Control Stick has no velocity influence only rot
+found affecting oscillator @ 802eb220
+^ This is likely preparing distance check on Y axis for 
+later compare statement, which is what we actually want
+confirming this, subsequent functions affecting it:
+802eb22c
+X^2+Y^2 called just like later SETObj distance compares
+@ 802eb24c
+
+probable compare for Y-axis @ 802eb258
+0x533C(805eb440) == Address of Y axis oscillator value
+(ITS STATIC WTF)
+-> This may be a damper value
+^ Donut thinks this is friction controller for Y axis
+
+Starting @ 802eb260 (not taking branch)
+likely contains oscillation apply
+^ confirmed by reaching oscillation value results in no trigger
+difference ends @ 802eb290, will be before it
+
+rate of reaching oscillate val @ 802eb26c? (on the stack)
+
+40b3880000000000
+
+The compare must be with Y axis value to oscillate over:
+starting @ 802eb1f0
+
+nop @ 802eb218 results in XYZ oscillation instead of just Y
+r3 contains the copy of P1 + Y axis set relative position
+^ continue tomorrow
