@@ -15,7 +15,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
 * Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
-* Devil Doom [WIP / DonutStopGaming Task]
+* Devil Doom [WIP / -> Identified mainPlayerID is controller]
+* Bosses / Worm Enemies / AlienShips should attack closest player [PARTIAL / Black Doom done]
+* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Flyables attach to correct player's camera
+* Coaster/Pulley/Ziplines Fix v2 (Some do not work) [WIP]
 * **Buffer crash research / possible crash reductions if possible
 * -> Verified problematic stages will have TXD reductions [ISSUES FOUND / IN TESTING]
 * -> Reductions planned: See `Buffer(s) Issue Identication` section below
@@ -32,9 +37,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Android characters have unique JumpBall colors
-* Coaster/Pulley/Ziplines fixed
+* Coaster/Pulley/Ziplines fixed (v1)
 * Individual death-to-checkpoint (Basic)
-
+* Physics Rewrite for GUNMech Jumpers
 
 ## Buffer(s) Issue Identification
 
@@ -131,12 +136,6 @@ Overflowing for the types:
 * Independent Warping/Backtracking via Checkpoints 
 * Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) activate on correct player
 
-## Other Knows Issues (Planned to be fixed IF Gecko Limit can be exceeded)
-* Bosses / Worm Enemies / AlienShips should attack closest player
-* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
-* Flyables attach to correct player's camera
-
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
@@ -147,6 +146,7 @@ Overflowing for the types:
 * Static weapon swaps for Metal Androids
 * Optional BlackKnight style melee replacement
 * Both players required to reach GoalRing for stage complete
+* Physics Rewrite for GUNMech Jumpers [DONE]
 
 ## Dev
 * dreamsyntax

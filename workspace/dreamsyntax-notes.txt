@@ -6155,4 +6155,203 @@ D0040008 00000000
 *Does not deplete rings
 *Shooting a chaos spear while dying will result in a crash
 
+------------
+2019-08-01
+Checkpoint UI control mapping part 2...
+80331388 <- func with input eval calls
+eval @ 803313a8 | r3 = 1, r4 = 4 == Instant close on open
+eval @ 80331428 | r3 = 2, r4 = 4 == SAA
+eval @ 80331464 | r3 = 6, r4 = 4 == Nop results in spam pressing left/right; you can hear sound
+eval @ 803314dc | r3 = 5, r4 = 4 == SAA
 
+--- Sidetrack: 
+Independent Player Targeting for Bosses
+
+Known information:
+- mainPlayerID is used to control which player a boss targets, 
+  behavior interacts on, and collision information for attacks (for heavydog type and black doom)
+- Sonic & Diablon are coded to already attack nearest Player::Shadow type object
+  unlike any other boss object in the game. This boss type does not use mainPlayerID at all
+- Devil Doom warp ratio is based on mainPlayerID, NOT hardcoded to P1 Position
+
+-> Starting with Black Doom boss object
+
+---Black Doom Object---
+- Red swipe and Swift Strike attack only harms player being targeted
+-- SwiftStrike splash can harm both players
+- Meteor attack can harm both players
+- Looks towards player targeting
+- Can change mid-attack? -> YES
+- Pillar transparency occurs if Cam0 (or in theory cam with BossExternalCam) and mainPlayerID player is behind a pillar
+
+Sidenode: It appears in SetPlayerPosition the unregistration process when Shadow becomes a dead object and respawns occurs
+
+Implement Targeting Switching::
+Potential BlackDoom (or shared boss reads)
+@ 80282514 || ??ReadsMainPlayerID_Unknown1_802824e8_
+@ 80290e18 || ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+@ 80290590 || ??ReadsMainPlayerID_SHARED_2_Bosses
+@ 801d99a8 || ??UnknownCheckingGameMode_and_MainPlayerID (SoundListener? Unrelated?)
+Going to calculate closest player (similar to Checkpoint method if BossSetObj is accessible)
+
+80290e18 == ??? Unknown, no apparent behavior change
+80290590 == ??? Unknown, SAA 
+^ Determined the above do not affect targeting behavior
+
+80282514 == All of Black Doom's Targeting Rules
+
+Inject @ 80282514
+-> No possible SETObj positional values to compare?
+For test, rapidly switch between 0/1
+
+lwz r5, 0x3148 (r13)
+cmpwi r5, 0
+li r5, 0
+bne- 0x8
+li r5, 1
+stw r5, 0x3148 (r13)
+
+Rapid Swap BlackDoom MainPlayerID Test
+C2282514 00000004
+80AD3148 2C050000
+38A00000 40820008
+38A00001 90AD3148
+60000000 00000000
+
+Technically works, but behavior is not very interesting. Mostly still goes for P1.
+For some attacks like Meteor, goes for distance between P1 and P2
+
+
+Other solutions?
+- Find where onCollision or onDamage for Black Doom, and somehow fetch which player did the collision
+Then take player and set to mainPlayerID (next attack is last player that attacked)
+   -> Problem: Cleanup must be done for restart, death, and stageComplete / boss defeated
+
+- How is boss object turning towards player? 
+Find this area in code and reuse to calculate distance
+
+Potential calculation occurring @ 802825b4
+- Only tripped when player Y Axis changes
+^ Is this used to determine if Black Doom spawns high/low?
+--Verify by checking r3, r4, and r5
+r3 = string ref -> BlackDoomVarParam [used to store something prior to calc]
+
+by 802825cc, r4 holds float values XYZ of Player instance 
+			 r5 holds float values XYZ of BlackDoom instance? <- No, appears to also be a copy of player position 
+^ this was wrong, r4 = BlackDoom instance r5 is Player instance
+
+-> Another lead if the above fails Distance check calculation 2 occuring @ 80282668
+
+Seems Player copy floats are stored @ 0x8 (r31) + addi 304
+Black doom floats should be stored at same but addi 292 instead of 304
+^ WRONG It seems both are copies of player instance 
+
+-> Validate this holds true @ 80282514 == YES confirmed
+
+
+We can now use distance compare we did for Checkpoints for bosses:
+
+NOTE: This is just the main distance check for boss, need proper cleanup
+
+IDEA: Instead of storing to memory region for mainPlayerID, only overwrite r5 for boss behavior in this one function
+This way no cleanup is needed, and potentially no issues if this is truly the only instance boss targeting uses
+
+Copy compare code from checkpoints, modify to use Black Doom boss data
+
+Checking distance check params @  80282668
+^ This holds the true BlackDoom position value 
+
+Black Doom true writeable position floats are stored @ 0x8 (r31), then offset 1C of that address
+
+
+MainBoss Target Closest Player Inject @ 80282514 || ORIGINAL: lwz  r5, 0x3148 (r13)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lwz r17, 0x8(r31)
+lwz r17, 0x1C(r17)
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r5, 1
+blt 0x8
+li r5, 0
+
+2P Essentials Black Doom Targets Closest Player [dreamsyntax]
+C2282514 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+// Success 
+
+NextSteps: 
+- Validate this controls CollisionDamage playerpointer controller
+  -> Appears to be the case, though this is hard to test 
+  ->>> Better boss to test this on will be HeavyDog type bossclass, 
+       with particle beam cannon collision rules
+
+- Verify if this affects all SubBoss class type bosses or if they have individual functions 
+  -> No, confirmed that every class of boss has its own mainPlayerID checker
+  -> EggDealer type, EggBreaker type, BlackBull type, DevilDoom type, and HeavyDog type are not affected by BlackDoom fix
+  
+Using the above example from BlackDoom it is likely all other boss classes follow the same model
+0x8 of BossRoot + 0x1C to get boss float data,
+then we can use it to soft-set the compare of mainPlayerID instead of storing it in memory (and thus requiring cleanup code as well)
+
+To be continued later
+  
+Accidental find:
+ToSuper() is controlled by mainPlayerID!!!!!!!!
+No need for hacky method for ShadowExecutor initializer
+----------------------
