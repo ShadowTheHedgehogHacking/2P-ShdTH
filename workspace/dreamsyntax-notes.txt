@@ -5663,6 +5663,7 @@ THE LOGIC IS THE SAME BUT SOME SECTION WILL BE WRITTEN IN 04 FORMAT
 ---------------------------------------------------------------------------------------------------------
 Refactor done.
 
+Starting point appears to be 80002348
 BEFORE: Using up to : 80002ee4
 AFTER: Using up to : 80002e74
 
@@ -6308,7 +6309,7 @@ li r5, 1
 blt 0x8
 li r5, 0
 
-2P Essentials Black Doom Targets Closest Player [dreamsyntax]
+2P Essentials Black Doom Type Boss Targets Closest Player [dreamsyntax]
 C2282514 00000016
 3DE0807D 61EF71A0
 81EF0000 81EF0000
@@ -6355,3 +6356,166 @@ Accidental find:
 ToSuper() is controlled by mainPlayerID!!!!!!!!
 No need for hacky method for ShadowExecutor initializer
 ----------------------
+2019-08-02
+HeavyDog type bosses same implementation: 
+Possible targets: 
+801d99a8 ??UnknownCheckingGameMode_and_MainPlayerID [Sound related, common checker]
+80290e18 ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+80290590 [has X^2, Y^2, Z^2 call, probable candidate] ??ReadsMainPlayerID_SHARED_2_Bosses -> Was present in BlackDoom boss logic as well, didnt affect Boss Logic
+8024d6d8 [has X^2, Y^2, Z^2 call, probable candidate] HeavyDog/BlueFalcon_HeavyDogCtrlUnit_GetStatus__ReadsMainPlayerID
+
+Likely target is 8024d6d8
+verifying... YES / Confirmed
+
+Parent class always does same step, so can reuse code for black doom but injected at above location.
+
+2P Essentials HeavyDog Type Boss Targets Closest Player [dreamsyntax]
+C224D6D8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+
+EggBreaker Type Reads @ 802a6da8
+BlackBull Type Reads @ 80242b10
+DevilDoom Type Reads @ 8030ad74
+EGG DEALER DOES NOT USE mainPlayerID! Hardcoded to P1
+
+2P Essentials BlackBull Type Boss Targets Closest Player [dreamsyntax]
+C2242B10 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials DevilDoom Type Boss Targets Closest Player [dreamsyntax]
+C230AD74 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials EggBreaker Type Boss Targets Closest Player [dreamsyntax]
+C22A6DA8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+Success, all the above codes work
+
+TODO: Once DOL inject method is finalized:
+All of these injects are identical, so for optimization inject once and branch to new code
+
+Bonus? -> BlackDoom Decorative Object based on closest player?
+
+Worm PlayerID check @ 80192408 -> floats not in same place as bosses, need to find parent class's floats...
+
+----------------
+2019-08-03
+DOL Injection method
+
+Testing if string space is safe to be overwritten:
+0x8051A550 // 0x0051797C
+to 0x8051BCA0 // 0x005190CC
+               = Space 0x1750
+			   
+		   End 0x51897C 0x1000 for codehandler 
+		       0x5190CC 0x750 for other codes (not big enough)
+
+Original gecko was using 0xB9C prior to limit being reached
+
+Starting region one @ 0x515FC5 / 80518B99 
+Ending region one @ 0x5190CB / 8051BC9F
+
+Total range : 0x3106
+
+Gecko Handler region 0x515FC5 - 0x516FC5
+Aux Region
+TA
+
+-> Determined Using large chunks of String areas still results in lost features and crashes
+Need to isolate ONLY safe areas OR Extend the DOL
+
+Due to how Shadow is laid out (with no REL files), first going to attempt to extend the dol.
+
+Original dol ends at 0x580700 (GCR Start.dol)
+extended to 0x583000
+
+Used mapper and found need to modify header to ensure no overwrite at extended areas
+Will continue this process once other features are implemented in gecko, proof of concept was a success.
+------------------------
+

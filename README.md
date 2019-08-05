@@ -10,20 +10,20 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 ![Current Level Map](./res/level_status.png)
 
-## Road to 2.0 (WIP) | Release ETA: 9/9/2019
-* Turrets attach to correct player's camera
+## Road to 2.0 (WIP) | Release Date: 9/9/2019
+High Priority:
+* Proper CameraHook for Turrets/Flyables
 * Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
-* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
 * Devil Doom [WIP / -> Identified mainPlayerID is controller]
-* Bosses / Worm Enemies / AlienShips should attack closest player [PARTIAL / Black Doom done]
-* If P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
+* Downscale all enemy, level, gdt textures to reduce crashing
+* Coaster/Pulley/Ziplines Fix v2 (Some do not work in v1) [WIP]
+
+Normal Priority:
+* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
+* Bosses / Worm Enemies / AlienShips should attack closest player [PARTIAL / Applicable Bosses done]
+* Fix the case where if P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
-* Flyables attach to correct player's camera
-* Coaster/Pulley/Ziplines Fix v2 (Some do not work) [WIP]
-* **Buffer crash research / possible crash reductions if possible
-* -> Verified problematic stages will have TXD reductions [ISSUES FOUND / IN TESTING]
-* -> Reductions planned: See `Buffer(s) Issue Identication` section below
 
 #### Completed for 2.0
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6+
@@ -41,63 +41,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Individual death-to-checkpoint (Basic)
 * Physics Rewrite for GUNMech Jumpers
 
-## Buffer(s) Issue Identification
-
-So far three buffers have been confirmed via the PS2 executable :
-* GLOBAL
-* EVENT
-* ETC
-
-
-Overflowing for the types:
-
-* GLOBAL (Texture) = May crash during play or if level completes successfully RankUI will not draw. After this occurs the game is unstable. Next levels may crash at any time
-* AUDIO = Just causes distorted audio while too many sound sources are playing. No adverse effect. Unknown if related to 3 buffers
-* EVENT = May crash during EVENT cutscene or after reaching a Goal (after Fade to white on mission completion)
-* ETC (Effects) = Same crash type as GLOBAL (Texture)
-#### Glyphic Canyon
-* Solution: NOT NEEDED
-* AUDIO
-#### Lethal Highway
-* Solution: 32x32 for tile, 1/2 for all other
-* GLOBAL (Texture)
-#### Circus Park
-* Solution: 32x32 for tile, 1/2 for all others
-* GLOBAL (Texture)
-#### Central City
-* Solution: 32x32 DXT1 (XBOX TEX)
-* GLOBAL (Texture)
-* EVENT (StoryMode Intro & GoalEvent)
-#### The Doom
-* Solution: 32x32 for non-anim, 1/2 for screens
--> Attempt 1 FAILED
-* ETC (Effects)
-#### Sky Troops
-* Solution: NOT NEEDED
-* AUDIO
-#### Lost Impact
-* Solution: 32x32 for non-anims, 1/2 for screens, skybox
--> Attempt 1 FAILED (need more reduction)
-* GLOBAL (Texture)
-* AUDIO
-#### GUN Fortress
-* Solution: 32x32 stage GDT, reduce textures over 64x64, w Attempt 1 changes
--> Attempt 1 FAILED / Attempted: 32x32, Divide by 2 for same-ratio, reduce textures over 64x64
-* GLOBAL (Texture)
-* EVENT (GoalEvent)
-#### Black Comet
-* Solution: 32x32, reduce textures over 64x64
-* EVENT (GoalEvent)
-#### Cosmic Fall
-* Solution : 32x32, half large except earth, and 32x32 GDT
-* GLOBAL (Texture)
-#### Final Haunt
-* Solution: 32x32, reduce textures over 64x64
-* EVENT (GoalEvent)
-#### Last Way
-* Solution: 32x32, reduce textures over 64x64
-* GLOBAL (Texture)
-
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
 * Gravity switches on Space Gadget only alter P1's gravity
@@ -108,8 +51,6 @@ Overflowing for the types:
 * Phase 2 Warp for P2 in Diablon Boss
 * Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
 * Worm Enemies and AlienShips will only target P1
-* Heavy Dog / Blue Falcon do not damage P2
-* Bosses (with the exception of Sonic & Diablon) only react to P1
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -133,8 +74,9 @@ Overflowing for the types:
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
-* Independent Warping/Backtracking via Checkpoints 
-* Coasters / Segments with automated spline sections (e.g. hang-rail in Circus Park) activate on correct player
+* Independent Warping/Backtracking via Checkpoints* (No independent UI yet)
+* Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player* (some are disabled)
+* Bosses (with the exception of Egg Dealer) will attack closest player
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
