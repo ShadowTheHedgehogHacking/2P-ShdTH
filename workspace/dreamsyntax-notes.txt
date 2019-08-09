@@ -6519,3 +6519,6 @@ Used mapper and found need to modify header to ensure no overwrite at extended a
 Will continue this process once other features are implemented in gecko, proof of concept was a success.
 ------------------------
 
+2019-08-05
+--Air bug attempts--
+mapped symbol

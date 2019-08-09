@@ -15990,7 +15990,7 @@
 801db9dc 00000074 801db9dc 0 zz_801db9dc_
 801dba50 00000088 801dba50 0 zz_801dba50_
 801dbad8 0000000c 801dbad8 0 GetOneTimerLeadGroundContactAnims(void)
-801dbae4 00000080 801dbae4 0 AIRBUG_DISTANCE_CHECK__HEIGHT_LOCK
+801dbae4 00000080 801dbae4 0 AIRBUG_DISTANCE_CHECK__HEIGHT_LOCK(r27=Player::StreamCommand, r28/r30=ShadowExecuter, r3/r6/r26/r31=ClrVelocityCommand, r5=boost::detail::sp_counted_base_impl<Player::PlayerShadow *, boost::checked_deleter<Player::PlayerShadow>>)
 801dbb64 0000000c 801dbb64 0 GetOneTimerLeadGroundContactAnims(void)
 801dbb70 0000008c 801dbb70 0 zz_801dbb70_
 801dbbfc 00000104 801dbbfc 0 zz_801dbbfc_
@@ -25407,7 +25407,7 @@
 8030ab70 000001c0 8030ab70 0 zz_8030ab70_
 8030ad30 00000424 8030ad30 0 zz_8030ad30_
 8030b154 00000090 8030b154 0 zz_8030b154_
-8030b1e4 00000114 8030b1e4 0 zz_8030b1e4_
+8030b1e4 00000114 8030b1e4 0 DevilDoomCtrlUnit_GetStatus
 8030b2f8 0000014c 8030b2f8 0 zz_8030b2f8_
 8030b444 00000008 8030b444 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 8030b44c 00000098 8030b44c 0 zz_8030b44c_
