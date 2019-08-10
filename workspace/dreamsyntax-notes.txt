@@ -6522,3 +6522,12 @@ Will continue this process once other features are implemented in gecko, proof o
 2019-08-05
 --Air bug attempts--
 mapped symbol
+------------------------
+2019-08-10
+Standalone functions for DOL injection are working
+MagicTXD resize automation task complete, ALL stages where P2 spawns in have been run through ruleset R1
+Problematic stages had their existing changed re-ran through the automator, crunching them further. Exceptions are stg900+ (due to Spawn code isolating them), stg800-802, stg0-5
+----
+Goal: Get CarType Vehicle properly alloc/free based on CLOSEST player instead of X press held or order of player mount.
+Revisiting V3 and V2 Vehicle codes...
+ 
