@@ -5663,6 +5663,7 @@ THE LOGIC IS THE SAME BUT SOME SECTION WILL BE WRITTEN IN 04 FORMAT
 ---------------------------------------------------------------------------------------------------------
 Refactor done.
 
+Starting point appears to be 80002348
 BEFORE: Using up to : 80002ee4
 AFTER: Using up to : 80002e74
 
@@ -5708,3 +5709,839 @@ $Lost Impact Turret Freecam BAD DO NOT USE THROWS EXCEPTIONS [dreamsyntax]
 0431723C 60000000
 ------------------------------------
 2019-07-14
+Lots of pair work with Donut on controller UI.
+
+2019-07-15
+Air bug fix:
+For height lock issue BLR @ 801dbae4 -> BAD
+Still need to sort the endless flying state issue
+
+-> AIRBUG2 seems promising
+
+labeled more more potential funcs
+
+Found that BLR for height lock is bad as ramps, springs, balloons all use it to modify velocity
+Need different method.
+
+-------------
+2019-07-20
+Vehicle Speed/Control Overhaul:
+"Open Car" = Motorcycle:
+801bd8c8 = acceleration boost? nop @ fdivs 801bd8c0 for double tap to continuously accelerate
+801bd848 = steering angle
+801bd894 = apply gas / speed add and speed cap?
+801bd95c = apply brake / decrease speed
+801bd990 = deceleration (brake damper?)
+801bda24 = UNKNOWN
+801bd9dc = apply reverse
+
+end of 'controls' function for this vehicle type, searching elsewhere for air friction etc
+
+Open Car Type Testing:
+041BD8C0 60000000
+041BD88C 60000000
+041bd954 60000000
+041bd988 60000000
+-----------------
+
+GUNMech Goal : Alter Physics for Hover 
+nop @ 801accfc fdivs for very tight controls (no animation rotation dependent blocker)
+
+Hover speed reductions happen here:
+nop @ 801acf70
+nop @ 801acf74
+
+regular movement @ 801acfc8
+
+$GUNMech Physics Revamp [dreamsyntax]
+041ACF70 60000000
+041ACF74 60000000
+041ACCFC 60000000
+041AE7B0 60000000
+*Makes hover useful (fast) 
+*Tight turns
+*Dismountable mid-air
+
+--------
+Open Car Type found another physics func
+nop @ 801bbaf8
+nop @ 801bbb00
+for vehicle and tip over and explode
+
+
+Airtime post bne-
+@ 801bbb80 
+Air friction might be in here?
+
+Slope handler @ 801bbc00
+drift physics @ 801bbc20
+turn/speed ratio @ 801bbcb8
+
+Maintain velocity @ 801bbd60
+
+strange behavior in air @ 801bbb30 / 1c
+
+another possible function @ 801bd5c4
+-------
+2019-07-21
+Rocket Launcher physics
+momentum reset @ 8023d3b0
+
+Melee Weapon Overhaul
+ammo subtract per hit @ 8023d60c
+
+look @ Player::Behavior::GroundAttack @ 800841e4
+->
+800841e0 = momentum maintain AFTER halt
+80084108 = Player Behavior GroundAttack 2
+
+80084938 = Caller to damage and animation, slowdown still happens if blr'd
+-----
+Found air friction or air gravity value responder for vehicles @ 801b9b18
+
+Check all callers to get desired behavior:
+801bd3ec = allows for gas while in-air
+801bd59c =
+801bd4a8 = allows for turning while in-air
+801bccc0 =
+801bcd00 =
+801bd138 =
+801bc13c = gravity/downward Y axis while in air
+801bba70 =
+801bbaa0 =
+801bbb5c =
+801bb44c =
+
+----------------
+2019-07-22
+Misc physics searching
+spindash pinball / no stop | blr @ 8008ed8c
+
+$Pinball Spindash [dreamsyntax]
+0408ED8C 4E800020
+---
+Non-Lockon type rocket weapon logic:
+8023bb90 = no shoot
+8023bc50 = no knockback/momentum reset
+
+$CannonWeapons  No Knockback [dreamsyntax]
+0423D3B0 60000000
+0423BC50 60000000
+
+Found weapon/bullet stuff etc, mapped
+---------------------
+2019-07-23
+Full trace for level import failure (current theory is collision related)
+804418e8
+804418f0
+804418f8
+80441908
+8044190c
+80441910
+80441918
+80441920
+80441928
+80441938
+80441940
+80441948
+
+If recovers from crash no chunk has collision but the geometry is visible, also running at 60fps
+
+$No CameraFile Read [dreamsyntax]
+041c825c 60000000
+--------------
+2019-07-24
+nop @ 800440e4
+nop @ 8048cc34
+
+To abort loading TXD in stage (resume even if 10MB loop)
+-----------
+2019-07-25
+Looking into mainPlayerID mitigations for bosses // objects that use it 
+Found existing optimal write to mainPlayerID: stw registerwithval, 0x3148(r13)
+^r13 is unchanging static ref
+Is written to once @ 800ad324
+
+KNOWN REGULAR READS (tested on stg0201):
+80176f00 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f0c = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f20 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+801d9af0 = ??UnknownCheckingGameMode_and_MainPlayerID (constantly being read)
+80192408 = BlackArmWorm_AboutToFireAtMainPlayerID@80192408 (2x calculations read)
+80189930 = BkLarvaGenerator_SBkLarvaStateData_ReadsMainPlayerID@80189930
+----------
+KNOWN BOSS SPECIFIC READS (tested on stg0210):
+80242e78 = BlackBull_BossRootTask_Initialize_ReadsMainPlayerID
+80242b10 = BlackBull ?MainLogicLoop? r3=BlackBull0210VarParam OR BlackBullCtrlUnit_GetStatus OR __ReadsMainPlayerID_2
+80290e18 = ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+cycles between b10 and e18, nop both to reveal no other checks.
+----------
+EggBreaker (310):
+802a7090 = EggBreaker_ReadsMainPlayerID_1
+802a6da8 = EggMecaCtrlUnit_GetStatus_EggBreaker_ReadsMainPlayerID_2
+802a95ac = EggBreaker_ReadsMainPlayerID_3
+----------
+EggDealer (Lava Shelter)
+802fd844
+801d9af0 = Missile Check ?
+-------------------------
+2019-07-26
+SuperShadow/ChaosPhys searching
+found v0.2 crash on shooting while dying occurs @ 80499c84
+
+Blackknight:
+8008415c (3rd attack cycle momentum reset?)
+800841c8 -> regular position movement while swinging
+
+maintain momentum after swing by nop @ 800841d8 800841e0
+----------
+2019-07-27
+- Identified potential bug:
+sometimes vehicles will not be driveable later on in the level if a similar vehicle was already activated
+--------
+2019-07-28
+nop @ 802eb1f0 -> Control Stick has no velocity influence only rot
+found affecting oscillator @ 802eb220
+^ This is likely preparing distance check on Y axis for 
+later compare statement, which is what we actually want
+confirming this, subsequent functions affecting it:
+802eb22c
+X^2+Y^2 called just like later SETObj distance compares
+@ 802eb24c
+
+probable compare for Y-axis @ 802eb258
+0x533C(805eb440) == Address of Y axis oscillator value
+(ITS STATIC WTF)
+-> This may be a damper value
+^ Donut thinks this is friction controller for Y axis
+
+Starting @ 802eb260 (not taking branch)
+likely contains oscillation apply
+^ confirmed by reaching oscillation value results in no trigger
+difference ends @ 802eb290, will be before it
+
+rate of reaching oscillate val @ 802eb26c? (on the stack)
+
+40b3880000000000
+
+The compare must be with Y axis value to oscillate over:
+starting @ 802eb1f0
+
+nop @ 802eb218 results in XYZ oscillation instead of just Y
+r3 contains the copy of P1 + Y axis set relative position
+^ continue tomorrow
+------------
+2019-07-29
+SuperShadow fly toggle base if:
+2856ed4C 00000030
+XXXXXXXXXXXXXXXXX
+e2000001 80008000
+
+
+Attempt C0 inject:
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+beq 0x8
+stb r17,0xAF(r16)
+blr
+
+2856ed4e 00000030
+C0000000 00000005
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+9A3000AF 60000000
+4E800020 00000000
+e2000001 80008000
+
+FAILURE ^ 
+
+Instead compare @ 800a860c (original li r6, 1)
+r4 contains base controll address, r3 contains current word at r4
+0x30 = Z + Y
+cmpwi r3, 0x30
+bne- 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+bne 0x8
+stb r17,0xAF(r16)
+li r6, 1
+
+
+Good enough for testing
+SuperShadow Fly Toggle v0.1 (Z+Y) [dreamsyntax]
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+*SuperShadow Fly Toggle code
+*Has no 'last pressed' rule so may appear inconsistent
+
+----
+@ 802eb214 r5 will contain X axis and subsequent YZ clone of P1 position
+r3 contains just '1' at this point, but it is probably just stack junk
+
+In theory should be able to plop out 
+802eb21c
+addi r4, r5, 220 to be a reference to p2 XYZ
+
+@ 802eb21c
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r4, 0x0(r16)
+
+^ Proof of concept was a success, P2 is new oscillation target
+
+SuperShadow TestVer v0.3
+0417711c 60000000
+c60af2e4 800af3bc
+c20a860c 00000008
+2c030030 40820030
+3e00807d 621071a0
+82100000 82100000
+89f000af 3a200020
+7c117800 9a3000af
+3a200000 40820008
+9a3000af 38c00001
+60000000 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Does not deplete rings atm
+*Shooting a chaos spear while dying will result in a crash
+
+1. Distance to oscillate default 10, we want it set to 0 for always Y axis  control
+2. Speed of oscillation (we want it to be much faster than it is) default 25, not sure on what we want but its too slow as is
+3. Targeted Y axis
+4. Toggle fly on/off
+
+We will use self -> located in r5 
+and modify directly r4's stored location
+
+Target @ 802eb21c
+original: addi r4, r5, 220 (this is location we wish to overwrite)
+
+addi r4, r5, 220
+r4 now contains relevant area, we need to overwrite stored data
+safe areas:
+f0, f1, f2 (loaded immediately upon next BL)
+
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc) // rtoc should be persistent in this case, grabbing 25
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+^ this clones p1 position into r4 but r4y+25
+
+inject test #1 @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+for testing no inject, just modify static address @ 805F077C to be 0
+
+Player endless positive 25 Y axis oscillation test 
+C22EB21C 00000005
+388500DC C0050000
+D0040000 C0050004
+C022FC8C EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+// Success
+
+Now need to add per-control binds
+P1 controller grab (no axis): 8056ed4c
+lwz (reg), 0(reg containing above address)
+Simple version no XOR case, just direct press only:
+0x20 = UP 
+0x08 = DOWN
+
+inject test #2 [basic up/down controller response] @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+lis r16, 0x8056
+ori r16, r16, 0xED4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x08
+bne- 0x8
+fsubs f0, f0, f1
+cmpwi r16, 0x20
+bne- 0x8
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+Good enough for next test version::
+
+
+force float @ 805F077C to 0
+force float @ 805F936C to 200
+
+Y Axis Control for Super v0.1 (integrated w TestVer code v0.4)
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+SuperShadow TestVer v0.4 [dreamsyntax]
+0417711C 60000000
+C60AF2E4 800AF3BC
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Press X to descend
+*Press Z to ascend 
+*Does not deplete rings
+*Shooting a chaos spear while dying will result in a crash
+
+------------
+2019-08-01
+Checkpoint UI control mapping part 2...
+80331388 <- func with input eval calls
+eval @ 803313a8 | r3 = 1, r4 = 4 == Instant close on open
+eval @ 80331428 | r3 = 2, r4 = 4 == SAA
+eval @ 80331464 | r3 = 6, r4 = 4 == Nop results in spam pressing left/right; you can hear sound
+eval @ 803314dc | r3 = 5, r4 = 4 == SAA
+
+--- Sidetrack: 
+Independent Player Targeting for Bosses
+
+Known information:
+- mainPlayerID is used to control which player a boss targets, 
+  behavior interacts on, and collision information for attacks (for heavydog type and black doom)
+- Sonic & Diablon are coded to already attack nearest Player::Shadow type object
+  unlike any other boss object in the game. This boss type does not use mainPlayerID at all
+- Devil Doom warp ratio is based on mainPlayerID, NOT hardcoded to P1 Position
+
+-> Starting with Black Doom boss object
+
+---Black Doom Object---
+- Red swipe and Swift Strike attack only harms player being targeted
+-- SwiftStrike splash can harm both players
+- Meteor attack can harm both players
+- Looks towards player targeting
+- Can change mid-attack? -> YES
+- Pillar transparency occurs if Cam0 (or in theory cam with BossExternalCam) and mainPlayerID player is behind a pillar
+
+Sidenode: It appears in SetPlayerPosition the unregistration process when Shadow becomes a dead object and respawns occurs
+
+Implement Targeting Switching::
+Potential BlackDoom (or shared boss reads)
+@ 80282514 || ??ReadsMainPlayerID_Unknown1_802824e8_
+@ 80290e18 || ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+@ 80290590 || ??ReadsMainPlayerID_SHARED_2_Bosses
+@ 801d99a8 || ??UnknownCheckingGameMode_and_MainPlayerID (SoundListener? Unrelated?)
+Going to calculate closest player (similar to Checkpoint method if BossSetObj is accessible)
+
+80290e18 == ??? Unknown, no apparent behavior change
+80290590 == ??? Unknown, SAA 
+^ Determined the above do not affect targeting behavior
+
+80282514 == All of Black Doom's Targeting Rules
+
+Inject @ 80282514
+-> No possible SETObj positional values to compare?
+For test, rapidly switch between 0/1
+
+lwz r5, 0x3148 (r13)
+cmpwi r5, 0
+li r5, 0
+bne- 0x8
+li r5, 1
+stw r5, 0x3148 (r13)
+
+Rapid Swap BlackDoom MainPlayerID Test
+C2282514 00000004
+80AD3148 2C050000
+38A00000 40820008
+38A00001 90AD3148
+60000000 00000000
+
+Technically works, but behavior is not very interesting. Mostly still goes for P1.
+For some attacks like Meteor, goes for distance between P1 and P2
+
+
+Other solutions?
+- Find where onCollision or onDamage for Black Doom, and somehow fetch which player did the collision
+Then take player and set to mainPlayerID (next attack is last player that attacked)
+   -> Problem: Cleanup must be done for restart, death, and stageComplete / boss defeated
+
+- How is boss object turning towards player? 
+Find this area in code and reuse to calculate distance
+
+Potential calculation occurring @ 802825b4
+- Only tripped when player Y Axis changes
+^ Is this used to determine if Black Doom spawns high/low?
+--Verify by checking r3, r4, and r5
+r3 = string ref -> BlackDoomVarParam [used to store something prior to calc]
+
+by 802825cc, r4 holds float values XYZ of Player instance 
+			 r5 holds float values XYZ of BlackDoom instance? <- No, appears to also be a copy of player position 
+^ this was wrong, r4 = BlackDoom instance r5 is Player instance
+
+-> Another lead if the above fails Distance check calculation 2 occuring @ 80282668
+
+Seems Player copy floats are stored @ 0x8 (r31) + addi 304
+Black doom floats should be stored at same but addi 292 instead of 304
+^ WRONG It seems both are copies of player instance 
+
+-> Validate this holds true @ 80282514 == YES confirmed
+
+
+We can now use distance compare we did for Checkpoints for bosses:
+
+NOTE: This is just the main distance check for boss, need proper cleanup
+
+IDEA: Instead of storing to memory region for mainPlayerID, only overwrite r5 for boss behavior in this one function
+This way no cleanup is needed, and potentially no issues if this is truly the only instance boss targeting uses
+
+Copy compare code from checkpoints, modify to use Black Doom boss data
+
+Checking distance check params @  80282668
+^ This holds the true BlackDoom position value 
+
+Black Doom true writeable position floats are stored @ 0x8 (r31), then offset 1C of that address
+
+
+MainBoss Target Closest Player Inject @ 80282514 || ORIGINAL: lwz  r5, 0x3148 (r13)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lwz r17, 0x8(r31)
+lwz r17, 0x1C(r17)
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r5, 1
+blt 0x8
+li r5, 0
+
+2P Essentials Black Doom Type Boss Targets Closest Player [dreamsyntax]
+C2282514 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+// Success 
+
+NextSteps: 
+- Validate this controls CollisionDamage playerpointer controller
+  -> Appears to be the case, though this is hard to test 
+  ->>> Better boss to test this on will be HeavyDog type bossclass, 
+       with particle beam cannon collision rules
+
+- Verify if this affects all SubBoss class type bosses or if they have individual functions 
+  -> No, confirmed that every class of boss has its own mainPlayerID checker
+  -> EggDealer type, EggBreaker type, BlackBull type, DevilDoom type, and HeavyDog type are not affected by BlackDoom fix
+  
+Using the above example from BlackDoom it is likely all other boss classes follow the same model
+0x8 of BossRoot + 0x1C to get boss float data,
+then we can use it to soft-set the compare of mainPlayerID instead of storing it in memory (and thus requiring cleanup code as well)
+
+To be continued later
+  
+Accidental find:
+ToSuper() is controlled by mainPlayerID!!!!!!!!
+No need for hacky method for ShadowExecutor initializer
+----------------------
+2019-08-02
+HeavyDog type bosses same implementation: 
+Possible targets: 
+801d99a8 ??UnknownCheckingGameMode_and_MainPlayerID [Sound related, common checker]
+80290e18 ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+80290590 [has X^2, Y^2, Z^2 call, probable candidate] ??ReadsMainPlayerID_SHARED_2_Bosses -> Was present in BlackDoom boss logic as well, didnt affect Boss Logic
+8024d6d8 [has X^2, Y^2, Z^2 call, probable candidate] HeavyDog/BlueFalcon_HeavyDogCtrlUnit_GetStatus__ReadsMainPlayerID
+
+Likely target is 8024d6d8
+verifying... YES / Confirmed
+
+Parent class always does same step, so can reuse code for black doom but injected at above location.
+
+2P Essentials HeavyDog Type Boss Targets Closest Player [dreamsyntax]
+C224D6D8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+
+EggBreaker Type Reads @ 802a6da8
+BlackBull Type Reads @ 80242b10
+DevilDoom Type Reads @ 8030ad74
+EGG DEALER DOES NOT USE mainPlayerID! Hardcoded to P1
+
+2P Essentials BlackBull Type Boss Targets Closest Player [dreamsyntax]
+C2242B10 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials DevilDoom Type Boss Targets Closest Player [dreamsyntax]
+C230AD74 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials EggBreaker Type Boss Targets Closest Player [dreamsyntax]
+C22A6DA8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+Success, all the above codes work
+
+TODO: Once DOL inject method is finalized:
+All of these injects are identical, so for optimization inject once and branch to new code
+
+Bonus? -> BlackDoom Decorative Object based on closest player?
+
+Worm PlayerID check @ 80192408 -> floats not in same place as bosses, need to find parent class's floats...
+
+----------------
+2019-08-03
+DOL Injection method
+
+Testing if string space is safe to be overwritten:
+0x8051A550 // 0x0051797C
+to 0x8051BCA0 // 0x005190CC
+               = Space 0x1750
+			   
+		   End 0x51897C 0x1000 for codehandler 
+		       0x5190CC 0x750 for other codes (not big enough)
+
+Original gecko was using 0xB9C prior to limit being reached
+
+Starting region one @ 0x515FC5 / 80518B99 
+Ending region one @ 0x5190CB / 8051BC9F
+
+Total range : 0x3106
+
+Gecko Handler region 0x515FC5 - 0x516FC5
+Aux Region
+TA
+
+-> Determined Using large chunks of String areas still results in lost features and crashes
+Need to isolate ONLY safe areas OR Extend the DOL
+
+Due to how Shadow is laid out (with no REL files), first going to attempt to extend the dol.
+
+Original dol ends at 0x580700 (GCR Start.dol)
+extended to 0x583000
+
+Used mapper and found need to modify header to ensure no overwrite at extended areas
+Will continue this process once other features are implemented in gecko, proof of concept was a success.
+------------------------
+
+2019-08-05
+--Air bug attempts--
+mapped symbol
+------------------------
+2019-08-10
+Standalone functions for DOL injection are working
+MagicTXD resize automation task complete, ALL stages where P2 spawns in have been run through ruleset R1
+Problematic stages had their existing changed re-ran through the automator, crunching them further. Exceptions are stg900+ (due to Spawn code isolating them), stg800-802, stg0-5
+
+TheHatedGravity has started on HD texture replacements via Dolphin as a mitigation to the low res textures
+----
+Goal: Get CarType Vehicle properly alloc/free based on CLOSEST player instead of X press held or order of player mount.
+Revisiting V3 and V2 Vehicle codes...
+
+Todo: Computer Room stage exception do not reset setobjs for v4 code check stageID = 0603
+
+Super: 
+1. find read of mainPlayerID for Super
+2. find last relevant call
+add if mainplayerID=0 jump back to the start of that read and set to mainPlayerID=1
+else mainPlayerID=0
+
+^ StageInitialize DOES NOT use mainPlayerID for initial super. The above only works for restart/onDeath
+-------------------------
+2019-08-13
+Mapped one animation function, determined MTP tool can work if we find suitable way to trick it into loading separate .BON and .MTP per player.
