@@ -3837,7 +3837,7 @@
 80079e00 00000064 80079e00 0 zz_80079e00_
 80079e64 00000050 80079e64 0 zz_80079e64_
 80079eb4 00000050 80079eb4 0 zz_80079eb4_
-80079f04 000002a0 80079f04 0 HAS_Player::PlayerObject_PlayerSpawnLoadCharacterModelAndWeapon?_80079f04_
+80079f04 000002a0 80079f04 0 HAS_Player::PlayerObject_PlayerSpawnLoadCharacterModelAndWeapon?AndLoadsPartner
 8007a1a4 00000040 8007a1a4 0 zz_8007a1a4_
 8007a1e4 0000005c 8007a1e4 0 zz_8007a1e4_
 8007a240 0000009c 8007a240 0 zz_8007a240_
@@ -4841,7 +4841,7 @@
 8009a184 0000005c 8009a184 0 PressGroudCommand::PressGroudCommand()_8009a184_
 8009a1e0 00000044 8009a1e0 0 zz_8009a1e0_
 8009a224 00000074 8009a224 0 zz_8009a224_
-8009a298 00000074 8009a298 0 changePlayerGravityDirection_8009a298_
+8009a298 00000074 8009a298 0 SetGravityCommand::Exec()_Maybe
 8009a30c 0000005c 8009a30c 0 zz_8009a30c_
 8009a368 000000ac 8009a368 0 SetGravityCommand::SetGravityCommand()_8009a368_
 8009a414 000000f4 8009a414 0 zz_8009a414_
@@ -11335,8 +11335,8 @@
 8015a858 00000040 8015a858 0 zz_8015a858_
 8015a898 000000ac 8015a898 0 hwylamp::Exec() and Ring::Exec() and SetPickupBaseTask and BreakObj
 8015a944 00000064 8015a944 0 SETObj_Iteration_?HAS_SetWeaponTask_SetDoor_cone_Gadget_SetParticle_SetHintRing_bollister_dumpster_debris_concpillarsm_RocketBase__8015a944_
-8015a9a8 00000074 8015a9a8 0 Gadget::Gadget()_8015a9a8_
-8015aa1c 00000068 8015aa1c 0 zz_8015aa1c_
+8015a9a8 00000074 8015a9a8 0 Gadget::~Gadget()_Maybe
+8015aa1c 00000068 8015aa1c 0 Gadget::Gadget()_Maybe
 8015aa84 000001c0 8015aa84 0 ??TouchObjectAndCollect_PickupChaosOrbSetChaosPower_8015aa84_
 8015ac44 00000040 8015ac44 0 zz_8015ac44_
 8015ac84 000001c0 8015ac84 0 zz_8015ac84_
@@ -12187,7 +12187,7 @@
 8016f360 00000020 8016f360 0 zz_8016f360_
 8016f380 00000020 8016f380 0 ?WarpRelatedOnDeathOrInit_8016f380_
 8016f3a0 00000034 8016f3a0 0 zz_8016f3a0_
-8016f3d4 00000114 8016f3d4 0 zz_8016f3d4_
+8016f3d4 00000114 8016f3d4 0 updateCheckPointSomething(int* highestCheckPoint, float* checkpointPosition[3], ?, int touchedCheckPointID)
 8016f4e8 000000d0 8016f4e8 0 zz_8016f4e8_
 8016f5b8 00000074 8016f5b8 0 zz_8016f5b8_
 8016f62c 00000040 8016f62c 0 zz_8016f62c_
@@ -19502,7 +19502,7 @@
 802478f4 00000020 802478f4 0 cPlayer::PostPhysicsUpdate(void)
 80247914 00000020 80247914 0 cPlayer::PostPhysicsUpdate(void)
 80247934 00000074 80247934 0 zz_80247934_
-802479a8 0000013c 802479a8 0 zz_802479a8_
+802479a8 0000013c 802479a8 0 GravityChangeCollision::GravityChangeCollision()
 80247ae4 00000040 80247ae4 0 zz_80247ae4_
 80247b24 00000044 80247b24 0 GravityChangeZone_CollisionLogic
 80247b68 00000094 80247b68 0 GravityChangeZone_HAS_RENDER_AndDisableIfAtCurrentGravity
