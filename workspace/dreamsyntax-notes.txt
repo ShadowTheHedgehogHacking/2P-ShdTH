@@ -6527,7 +6527,21 @@ mapped symbol
 Standalone functions for DOL injection are working
 MagicTXD resize automation task complete, ALL stages where P2 spawns in have been run through ruleset R1
 Problematic stages had their existing changed re-ran through the automator, crunching them further. Exceptions are stg900+ (due to Spawn code isolating them), stg800-802, stg0-5
+
+TheHatedGravity has started on HD texture replacements via Dolphin as a mitigation to the low res textures
 ----
 Goal: Get CarType Vehicle properly alloc/free based on CLOSEST player instead of X press held or order of player mount.
 Revisiting V3 and V2 Vehicle codes...
- 
+
+Todo: Computer Room stage exception do not reset setobjs for v4 code check stageID = 0603
+
+Super: 
+1. find read of mainPlayerID for Super
+2. find last relevant call
+add if mainplayerID=0 jump back to the start of that read and set to mainPlayerID=1
+else mainPlayerID=0
+
+^ StageInitialize DOES NOT use mainPlayerID for initial super. The above only works for restart/onDeath
+-------------------------
+2019-08-13
+Mapped one animation function, determined MTP tool can work if we find suitable way to trick it into loading separate .BON and .MTP per player.
