@@ -172,12 +172,12 @@ c216f32c 00000001
 *and will maintain rings across succeeding stages
 
 $Jump Ball Color Switch [dreamsyntax]
-c20a5ab0 00000001
-03880001 00000000
-c2087190 00000001
-03800001 00000000
-c2080734 00000001
-03800001 00000000
+C20A5AB0 00000001
+3880000X 00000000
+C2087190 00000001
+3800000X 00000000
+C2080734 00000001
+3800000X 00000000
 *Applies to every object with jump ball. v2 will be player specific.
 *Change all 3 X to valid values:
 *1 = Sonic (Blue)
