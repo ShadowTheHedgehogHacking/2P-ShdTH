@@ -87,7 +87,7 @@
 122: <?>
 123: <?> Jump Holding Box
 124: <?>
-125: <?>
+125: <?> Holding Box No Breathing
 126: <?>
 127: Trick
 128: Trick
@@ -95,7 +95,7 @@
 130: Dying On Ground
 131: Dying In Air
 132: <?> Lift Box
-133: <?> Holding Box
+133: <?> Holding Box While Breathing
 134: Throw Box
 135: <?> Walk Holding Box
 136: Slow Run Holding Box
