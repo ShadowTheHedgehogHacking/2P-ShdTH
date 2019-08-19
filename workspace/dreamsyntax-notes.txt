@@ -6545,3 +6545,109 @@ else mainPlayerID=0
 -------------------------
 2019-08-13
 Mapped one animation function, determined MTP tool can work if we find suitable way to trick it into loading separate .BON and .MTP per player.
+---------------------------------------
+2019-08-17
+Plans:
+- Airbug Fix
+- Checkpoint Warping has a bug (sometimes warps wrong player)
+- Only set locked state for player that jumped in warp hole / is using checkpoint (possible?)
+- Diablon Boss Warp Fix
+- Bosses and Cosmic Fall are EXCLUDED from independent series codes (rings, setobj load/unload, etc)
+- Hero / Normal /Dark Score added at the end
+----------------
+2019-08-18
+Messing with scale per HHC
+Defined 80016390 glxcopyMatrix r3, where r3 is any model:
+0x0 - X-Axis prime
+0x4
+0x8
+0x10
+0x14 - Y-Axis prime
+0x18
+0x20 - Rot?
+0x24 - Rot?
+0x28 - Z-Axis prime
+0x30 - ModelPosition X-Axis
+0x34 - ModelPosition Y-Axis
+0x38 - ModelPosition Z-Axis
+
+80015774 @ bl to glxCopyMatrix (0x80016390)
+replace with 805E4580 (air friction) = 3 is float
+
+X PRIME AND Y PRIME AND Z PRIME ONLY
+lis r15, 0x805E
+ori r15, r15, 0x4580 
+lfs f0, 0x0(r15)
+lfs	f1, 0x0(r4)
+fmuls f1, f1, f0
+stfs f1, 0x0(r4)
+lfs	f1, 0x0014 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0014(r4)
+lfs	f1, 0x0028 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0028(r4)
+lis r15, 0x8001
+ori r15, r15, 0x6390
+mtlr r15
+blrl
+
+ALL 
+lis r15, 0x805E
+ori r15, r15, 0x4580 
+lfs f0, 0x0(r15)
+lfs	f1, 0x0(r4)
+fmuls f1, f1, f0
+stfs f1, 0x0(r4)
+lfs	f1, 0x4(r4)
+fmuls f1, f1, f0
+stfs f1, 0x4(r4)
+lfs	f1, 0x8(r4)
+fmuls f1, f1, f0
+stfs f1, 0x8(r4)
+lfs	f1, 0x10(r4)
+fmuls f1, f1, f0
+stfs f1, 0x10(r4)
+lfs	f1, 0x0014 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0014(r4)
+lfs	f1, 0x18(r4)
+fmuls f1, f1, f0
+stfs f1, 0x18(r4)
+lfs	f1, 0x20(r4)
+fmuls f1, f1, f0
+stfs f1, 0x20(r4)
+lfs	f1, 0x24(r4)
+fmuls f1, f1, f0
+stfs f1, 0x24(r4)
+lfs	f1, 0x0028 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0028(r4)
+lis r15, 0x8001
+ori r15, r15, 0x6390
+mtlr r15
+blrl
+
+Scale for ALL [dreamsyntax]
+c2015774 00000012
+3de0805e 61ef4580
+c00f0000 c0240000
+ec210032 d0240000
+c0240004 ec210032
+d0240004 c0240008
+ec210032 d0240008
+c0240010 ec210032
+d0240010 c0240014
+ec210032 d0240014
+c0240018 ec210032
+d0240018 c0240020
+ec210032 d0240020
+c0240024 ec210032
+d0240024 c0240028
+ec210032 d0240028
+3de08001 61ef6390
+7de803a6 4e800021
+60000000 00000000
+*Edit AIR FRICTION float to control size
+*(Default = 3)
+*its at 805E4580
