@@ -97,6 +97,213 @@ $WTF
 02f69482 0000004c
 e2000000 80008000
 
-$SpindashNOP
-C20A0174 00000001
+$Unlimited Spindash [dreamsyntax]
+c20a0174 00000001
 60000000 00000000
+
+$BOSS FREEcam
+C229120C 00000001
+4E800020 00000000
+C231AAF4 00000001
+4E800020 00000000
+*
+$Unstable/Untested Experimental Prevent Crash Buffer v0.001
+C203A1F8 00000001
+60000000 00000000
+*
+$TRK_BBA Debug Mode
+c2330cb8 00000001
+38000001 00000000
+c232c594 00000001
+38000001 00000000
+c232863c 00000001
+38000001 00000000
+c21eb358 00000001
+38000001 00000000
+
+$Disable Unarmed Melee (Allow B = Slide Only) [dreamsyntax]
+0409ca60 408200a0
+*8009ca60
+*beq should become bne-
+*408200a0
+
+$1.5P Z+Dpad-R to activate (SplitCam only)[dreamsyntax]
+2856ED4E 000000100
+0457d703 00000000
+E2000001 80008000
+2856ED4E 00000080
+0457d703 00000000
+E2000001 80008000
+2856ED4E 00000220
+0457d703 00000002
+E2000001 80008000
+
+$TrailBlaze Shadow
+c208580c  00000001
+4e800020  00000000
+
+2P Experimental Crash Prevention on Goal Event v1 [dreamsyntax]
+c216b2b0  0000000b
+3e004974  621023f0
+3de0807d  61ef71a0
+81ef0000  81ef0000
+920f0000  39ef0004
+920f0000  39ef0004
+920f0000  3de0807d
+61ef71a8  81ef0000
+81ef0000  920f0000
+39ef0004  920f0000
+39ef0004  920f0000
+38000001  00000000
+*Experimental version, sometimes fails to warp correctly
+
+$2P Optionals GUN Soldier Textures Identical Special Cases [dreamsyntax]
+C21A206C 00000001
+38000320 00000000
+*This is not needed to spawn P2. This was prior known as 2P Unknowns Spawn Special Cases, it has been identified:
+*Overrides textures for some? (GUN Soldiers have been confirmed)
+*Removed from codelist as it makes GUN Soldiers not match their stage environment.
+
+$Ring Carry Code [dreamsyntax]
+c216f32c 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
+
+$Jump Ball Color Switch [dreamsyntax]
+C20A5AB0 00000001
+3880000X 00000000
+C2087190 00000001
+3800000X 00000000
+C2080734 00000001
+3800000X 00000000
+*Applies to every object with jump ball. v2 will be player specific.
+*Change all 3 X to valid values:
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink)
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
+
+$2P Optionals Temporary Pulley/Zipline Disable [dreamsyntax]
+c2132f70 00000001
+4e800020 00000000	
+*Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
+*If you intend to play Cryptic Castle this should be left off
+
+$2P Optionals Replace Air Blower with High Jump [dreamsyntax]
+c2103c4c 00000001
+4e800020 00000000
+*Replaces any Air Blowers with boost to vertical height if in jump/falling animation.
+*Prevents Air Bug but replaces original game behavior.
+*Will cause some stages to be unplayable (The Doom)
+**Does not include Mad Matrix
+
+$Vehicles are Unholy Weapons of War [dreamsyntax]
+041BD8C0 60000000
+041BD88C 60000000
+041bd954 60000000
+041bd988 60000000
+041bd4a8 60000000
+041bd3ec 60000000
+$Moonjump
+c20a7840 00000007
+3e808056 3a9476a6
+3a9476a6 82940000
+2c141000 3e80805f
+3a942bd8 4082000c
+3ea043a0 41820008
+3ea0c3a0 92b40000
+c3e294f8 00000000
+$No CameraFile Read
+041c825c 60000000
+$SuperShadow Fly Toggle v0.1 (Z+Y) [dreamsyntax]
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+*SuperShadow Fly Toggle code
+*Has no 'last pressed' rule so may appear inconsistent
+$SuperPlayer Basic Y Axis Control
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+$2P Essentials Airbug Height Fix [dreamsyntax]
+041dbae4 4e800020
+** BREAKS PHYSICS ON LOTS OF OBJECTS / BAD CODE
+
+$DisableFadeToBlackForDeath EXPERIMENTAL
+C20448A0 0000000D
+3E00807D 621071A0
+82100000 2C100000
+4182004C 82100000
+2C100000 41820040
+8A1000AE 2C100044
+41820030 3E00807D
+621071A8 82100000
+2C100000 41820020
+82100000 2C100000
+41820014 8A1000AE
+2C100044 40820008
+4E800020 9421FFD0
+60000000 00000000
+*Still has 2 frames when ?stateReset happens
+
+$2P Essentials Independent Checkpoint Warping v0.9 [dreamsyntax & DonutStopGaming]
+C2331114 00000017
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1FE0060 C21E0064
+C23E0068 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1FE0060 C21E0064
+C23E0068 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 3A000001
+41800008 3A000000
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+*Credit to DonutStopGaming for distance check
+*Warp will pick the player closest to the checkpoint X was pressed on
+*v1 will have UI control for P2, right now only P1 has UI control
+*OLD Has issues with some cases of warping wrong player, succeeded by v0.95

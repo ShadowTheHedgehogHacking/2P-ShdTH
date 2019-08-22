@@ -1,0 +1,6885 @@
+802cele8-- ??
+
+
+801777c4 (reads stgid) - changing to 800 here leads to load
+8017707c lwz reads stgid
+800b7464 readsstgid
+
+
+----
+801a206c is bge for stgID (looks for various cases, sets special r3) - necessary
+to trigger
+need to patch 801a206c to always for instead of lwz r0, 0x00A8 (r3) needs to
+ldi r0, 800
+->
+C21A206C 00000001
+38000320 00000000
+
+next need to patch camera to lock on to 2P, simply by making it think its stg800
+80178380 lwz r4, 0x00A8(r29) becomes
+ldi r4, 800
+->
+C2178380 00000001
+38800320 00000000
+----------------
+Camera might be at 80176c4c
+
+
+---------
+
+8017707c controls 2p partner spawn
+so lwz r4, 0x00A8(r4)
+becomes
+C217707c 00000001
+38800320 00000000
+--------------------
+***CAMERA CALLs checked up to 801ce93c beq- call
+
+-------
+possible ones within that small area:
+80176c4c lwz r4 (but thats in pausefunc)
+--
+true value is in 801ce8f4 jumps to 80176C3C which is in PAUSEFUNC
+original instruction:
+808300a8
+
+80176c4c becomes:
+38800320
+
+----
+I want to overwrite at 801c38f4 which is bl to 0x80176C3C
+machine code: 4bfa8349
+
+I need to:
+mr r25, r30 #backup real data
+li r26, 800 #load new data
+lis r24, 0x8058
+subi r24, r24, 10592
+lwz r26, 0x00A8 (r24) # load data from mem
+stw r26, 0x00A8 (r24)
+
+
+###WIP
+
+li r26, 800
+lis r24, 0x8058
+subi r24, r24, 10592
+stw r26, 0x00A8 (r24)
+bl 0x176C3C
+
+###
+li r26, 800
+lis r24, 0x8058
+subi r24, r24, 10592
+stw r26, 0x00A8 (r24)
+bl 0x176C3C
+stw r30, 0x00A8 (r24)
+---
+simplier way:
+replacing the -1 and leaving the branch alone
+C21CE8F0 00000003
+3B400320 3F008058
+3B18D6A0 935800A8
+3880FFFF 00000000
+
+and also needed:
+after the branch:
+C21CE8F8 00000002
+93D800A8 80030008
+60000000 00000000
+
+-----------------------------------
+STGID memory address: 8057d748
+
+2018-10-23
+layout object load distance:
+38A00320 li r5, 800
+80168e88
+--------------
+normal westopolis:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ???
+80176c4c ??? x2
+80178104 reads StageID to load relative music file
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+================
+westopolis but change stageid to 800 at first read of stgid:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ???
+80176c4c ??? x1*******
+X doesnt read music
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+
+2018-10-24
+apparently different for some reason:
+--------------
+normal westopolis:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ??? x2
+80176c4c ???
+80178104 reads StageID to load relative music file
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+================
+westopolis but change stageid to 800 at first read of stgid:
+802038d0 reads StageID to determine for BattleMode / 2P <- occurs twice look into later for pulling 2P's UI out
+80178930 reads StageID to edit UI on loading
+8016f518 ??? x1 [load starting positions?]
+80176c4c ???
+X doesnt read music
+80178278 ???
+801782c0 reads StageID to set missionID bits (controls missions/triggers)
+80178360 ???
+80168e88 ???
+80168eec ???
+801a2064 2P special bit cases (end here)
+
+new strategy:
+8057D752 (gamemode flag) is being checked and that is what determines if objects render when P2 is in distance
+---
+list of reads (while in level):
+801e3ad4 -replace test: no apparent change
+800cb5e4 LOAD ON DISTANCE
+801fec38 //occurs many many times during load [halt]
+801fe994 -replace test : failed
+80201350 -[halt]
+801ffe0c - on change removed P1's ring counter
+(loop)
+instruction for r0 38000001
+801d9990 - tested : 
+801d9258 - tested: negative
+8041939c - tested: result: negative
+80169c08 - I found you FAKER!
+
+---
+801fec38 replaced with 1
+----
+800cb5e4 (load on distance)
+becomes:
+C20CB5E4 00000001
+38000001 00000000
+
+and
+80169c08 (unload on distance)
+C2169C08 00000001
+38000001 00000000
+
+----------------------------------
+2018-10-25 | Looking for UI change on gamemode flag
+38000001 r0 to 1
+list of reads:
+8033ad54 ???
+800bf268 ???
+801fe94c ???
+80201334 ???
+800b8700 | P1/P2 Pause Mode (Restart etc, shows no UI in P2 if set to 0)
+801ffde8
+loop back to 8033ad54 [frame update]
+------------
+80201350 Hides SinglePlayer Timer/ChaosMeter, Score
+801ffe0c ShowHide P2 Ring Count (in 2P mode hmm)
+801e3ad4
+
+801d9990 - P2 Sound Listener ON/OFF
+Patch to
+li r0, 1
+C21D9990 00000001
+38000001 00000000
+========================================================
+2018-10-26 | Looking for Pulley ?function? - maybe also related to air bug
+========================================================
+2018-10-29
+looking for hurt call
+807D7838 (word) - anim state?
+8060B6400 (references)
+=======================
+2018-11-01
+- looking for hurt activator, found updater for anim (same as above, still having crashing issues when looking for other reads)
+looking for ss activator, within stageid
+checking here first:
+8027f098 checks for stgid 710, promising - locks ?gravity? (superstate seems to not depend on this)
+-- superstate occurs after 801783ac, but before 8027f098
+HELPFUL ADDRESS : 801783ac (after layout, before level)
+800b7464 - after this controls to set SuperShadow on or off (later on)
+suspect:
+80176c4c in PAUSEFUNC
+-> 8017710c cmpwi r3,0 
+8000942c beq -> zz jump r3,0 (unrelated, loading func?)
+....
+this suggests PAUSEFUNC might be more important for other things...
+just like the 2P check, 80177108 is caller, same spot ....
+When the stage is 'non-super' [e.g. 201] -> the rlwinm. results in CR register updating, r0 not updating.
+When 'super' (710) -> rlwinm. results in r0 updating, CR not updating
+the rlwinm. occuring at 80177118 is the key
+noping the beq-:
+SuperShadow testing version no flying - (no mission overwrite fixed)
+0457670c 000003e7
+C217711C 00000001
+60000000 00000000
+
+breakpoints:
+8027f098
+800b7464
+8017710c
+mbreakpoint: 8057d748
+==============
+2018-11-02
+looking for ring decrement (for onhurt call and activator for SS)
+backtrack on decrement:
+800af354
+
+800af364 -> jumps to 800af3bc if maintain superstate
+800af368 if rings are 0 and super state active (this is supercheck?)
+does beq- at 800af37c -> goes to 0x800AF3B0
+
+If 800af370 is nop'd shadow dies on ring loss
+If 800af234 is nop'd, Ring Loss Count continues forever 
+(800af2dc bl is called in both situations)
+
+onHurt():
+promising:
+80178b20
+two callers, has two calls
+
+--
+800af2fc does not take the beq-
+its 800af324 cror 2, 1, 2 -> check for 1 second has passed (not here either...)
+bne- at 328 -> takes jump when not deactivating, 
+
+: Turn 800af2e4 into bne (never disable supershadow) ... suggests the turnoff is within
+the explored func
+C60AF2E4 800AF3BC
+SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
+c217711c 00000001
+60000000 00000000
+c60af2e4 800af3bc
+
+--
+onhurt():
+800b7e28: noping results in ring count not diminishing, so assume:
+80178B20 is func that calls ring count loss, dropped rings and hurt anim still occurs but count remains same.
+
+------------
+2018-11-03
+after playtesting, realized Chaos Blasts breaks out of air glitch, so using that instead.
+Chaos Control is easier to do than originally thought:
+Chaos Control diminish rate:
+800a49e8 lwz r5, 0x002C(sp)
+need to half it
+original is : ffffffe8 (-24)
+needs to be:
+FFFFFFF4 -> just addi 12
+for simplicity, only altering iwthin the same func (8016f0cc)
+so 8016f0d4 cmpwi r5, 0 becomes:
+
+cmpwi r5, 0
+addi r5, r5, 12
+->
+C216F0D4 00000002
+2C050000 38A5000C
+60000000 00000000
+
+fixing splitscreen with CC (my understanding of gecko if must be wrong):
+0457d70b 00000001
+2A57D768 00000001
+0457D703 00000001
+
+2A57D768 00000000
+0457D703 00000000
+
+---
+Getting UI to work (and not break bosses)
+This way will probably break 2P VS:
+801fec3c cmplwi r0, 0 (is story game mode)
+I want 2 UI to show (realtime check), so nop the beq-
+at: 801fec40 -> controls to show WeaponUI / DashPickupsEtc
+->
+801d9258 | ?? repeats many times
+---
+801fe994 ?? (fe99c) controls ammo
+80201350 | hides/shows Dark/Hero Scores
+801ffe0c | hides/shows P2 ring counter (numbers)
+801e3ad4 | ???
+-----------------
+On stage initialize [looking for load rings UI instead of chaos bars, causes crash if they are not loaded in]
+802bebf4 | x2
+<loads>
+800c0508 | turn bne to beq (controls load/unload chaos bars)
+801ff654 | (nop 801ff65c)
+80201f10 | (nop 80201f18)
+8020075c | *for rings icon (nop 80200764)
+<loads>
+801fec38 (controls to show WeaponUI / DashPickups Etc)
+
+
+final codechanges:
+nop 801ffe0c (ringcounter)
+nop 801fec40 (UI indicators, weapon ammo for P2)
+nop 801ff65c (loading prereq)
+nop 80201f18 (loading prereq2)
+nop 80200764 (load ring icons)
+maybe nop 80201358 (hide scores)
+nop 801fe99c
+
+
+:
+C21FFE0C 00000001
+60000000 00000000
+C21FEC40 00000001
+60000000 00000000
+C21FF65C 00000001
+60000000 00000000
+C2201F18 00000001
+60000000 00000000
+C2200764 00000001
+60000000 00000000
+
+hide scores: (incase I want to shift ringUIlater)
+C2201358 00000001
+60000000 00000000
+
+enable ammo counter:
+C21FE99C 00000001
+60000000 00000000
+
+
+2P UI code v1 [dreamsyntax]
+C21FFE0C 00000001
+60000000 00000000
+C21FEC40 00000001
+60000000 00000000
+C21FF65C 00000001
+60000000 00000000
+C2201F18 00000001
+60000000 00000000
+C2200764 00000001
+60000000 00000000
+C2201358 00000001
+60000000 00000000
+C21FE99C 00000001
+60000000 00000000
+
+
+2018-11-09
+Chunk Hunting
+- There are cam0-cam4, cam0 can move, (if P2 uses turret/CC, cam0 moves to P2)
+- cam0-4 is always active, just might not be attached to objects
+- cam0 position is responsible for chunk load/unload
+
+There are two splitscreens: 0, 1 that attach to the available cams, they have their own render separate from cam
+
+Break on splitscreen type
+mem: 8057D703
+-> 801e4c28 is branch for case 0, should hook splitscreen to cam0
+
+805F0174 || refresh render for current split, can cause artifact tears/noflush by changing from r31 (current split)
+membreak on 8057d70c
+801e4b5c stw r0, 0x006C (puts cam0 into current selected cam)
+-----------
+New attempt:
+8057D700 || SS Type
+
+When SS Type = 1
+8057D704 || Split 1 -> Removing two calls (bl to 80271BA8) unhooks splitscreen from cam
+8057D708 || Split 2 -> Removing one call  (bl to 80271BA8) unhooks splitscreen from cam
+(for split mode)
+
+When SS Type = 2
+8057D704 || Split 1 -> (same as SS=1, but needs to be nop'd separate as this is a unique branch)
+-- one of the bl was already nopped. non-nop was: 801e4d00 to 80271BA8
+                                     shared (already nop) was 801e4b80
+8057D708 || Split 2 -> (same as SS=1)
+
+When SS Type = 0
+8057D704 || Split 1 -> (also calls already nopd)
+            new bl at : 801e4c48, goes to same address
+			
+The above only unhooks splitscreen from existing cam (cam still follows respective players, we don't see it updated on the screens)
+However 80271BA8 function somehow is knowing what cam to hook to, so next search within this func
+
+break 80271BA8
+
+nop at 80271c68 -> seems to move cams back to start? Or split cannot hook to cam
+-> nop at 80487700 causes same behavior, check this one deeper
+80271c64 li r5, 2
+-------
+changing 801634a0 to r5, 1 instead of 0 seems to make _ds1.dat objects not load for p1
+               b4 as well
+
+at 8047f88c			 
+-> is reading cam values!!!! 
+Cam values are changed based on SS Type and SS Split bits!!
+Done for today, but this should be on the right track
+
+---
+2018-11-10
+Chaos Control Music Searching
+800a4ebc bl to 8027AB1C, noping this results in blue/red effect going away, no other side effects
+800a4f0c bl to 8007939C, noping this results in no invulnerability while in chaos states
+800a4f80 bl to 800A2854, noping this results in no particle emit for initial activation of chaos state
+800a4fcc bl to 80076CA8, noping this results in no chaos power activation
+                         -> intro sound (RRRRR etc) still plays, music does not
+800a4ff0 bl to 801D3888, noping this results in no introsound, no chaos powers idle music
+ 
+8004ed6c 
+    ed48
+	f470
+-------
+PlayerBasedLoading
+
+14 = RedShadow
+15 = YellowShadow
+16 = PinkGunShadow
+17 = BlueGunShadow
+18 = OrangeLauncherShadow
+19 = GreenLauncherShadow
+
+801770ac lwz r3, 0x013C (r4) , r3 holds P1 selected char
+      b0 r30 holds p2 selected char
+	  
+string for shadow.one : 804f7d40 
+^ deadend, files loaded once at initialize game.
+2P mod appears to reload 2P models but halts on change. Memallocated earlier?
+---
+Checkpoint Hunting
+80575FE4 = X Trans of CP #1
+80117738 = GLTranslateMatrix, noping results in no fadeout, no warp, control lock (due to trigger wait)
+-> 80129628 ^ same as above
+80129de4 -> update player position()?
+---
+2018-11-14
+8047f88c
+---
+2018-11-19
+searching for 2P android weapon mode / ?supershadow weapon mode?
+possible related memaddresses:
+805766F0 | obj data?
+805766F4 || ! -> instruction 801fe898
+805766F8
+and
+80B3AD68
+80B3ADA8
+------------
+abort,
+new strategy:
+load p1 = 15 (yellow)
+-> observe if any calls differ for 17 (bluegun)
+8057D7DC :: readmem
+
+noping results in :
+801770e4 | No player1 spawn. P2 is still spawned. Cam spawns in middle of map and fully renders (cam0) - USE FOR CHUNKS LATER!
+801770f4 | No player2 spawn??
+801770fc | T-pose no control, blinking still occurs  -> try here
+80177100 | ??
+80177108 | ??
+
+-> Allows me to combine 2P Spawn Enabled and 801770f4 to create:
+$Play as Chosen Character in 1P Mode [dreamsyntax] 
+C217707C 00000001
+38800320 00000000
+C21770F4 00000001
+60000000 00000000
+*Select P1's character in 2P VS, back out at P2's selection. P1 will retain the character for use in 1P modes
+
+next step:
+801770fc
+80176f28 | nop -> endless fall no respawn / blackout
+STG504|| EXP
+
+
+---
+Super Shadow in devil doom stage no flying
+C227F098 00000001
+2C0002C7 00000000
+
+-------------------------------
+Shadow The Hedgehog US | GC
+```$Play as Chosen Character in 1P Mode v2 [dreamsyntax] 
+C217707C 00000001
+38800320 00000000
+C21770F4 00000001
+60000000 00000000
+C240DB30 00000001
+38000000 00000000
+*Select P1's character in 2P VS, back out at P2's selection. P1 will retain the character for use in 1P modes. No controller needed in slot 2 to choose character.
+```
+From above, 
+8040db30 loads status if controller 2 is in. Set to 0 if plugged in, 1 otherwise.
+Force li r0, 0
+C240DB30 00000001
+38000000 00000000
+----------------------------
+2018-11-21
+Back to 2P stuff
+memaddress:
+8056ed78 || P2 Inputs
+8056ed88 || P2 X-Axis ControlStick
+8056ed8C || P2 Y-Axis ControlStick
+----------
+800a8608 || reads Slot 1 / 2 input for buttons
+
+-> Player 3
+mem 8056eda4 ||P3 Inputs
+2P to 3P offset is 0x2C
+conveniently the lwz checks already are set with offset 0, so:
+lwz r3, 0(r4) -> lwz r5, 2C(r4).... 44(r4) (decimal)
+-> 8064002C
+C20A8608 00000001
+8064002C 00000000
+
+^ affects ALL controllers, need different strategy (oncall?)
+-------------
+2018-11-22
+800a85f4 | lwz r4, 0x0010 (r31)
+
+
+r3 moves to r31, = 80f4c558 when checking 8056ed4c (Player 1 Input Buttons)
+                   812f4130 when checking 8056ed78 (Player 2 Input Buttons)
+target 800a85c4 mr r31, r3
+::
+perform a check if r3 = 80f4c558, continue as normal, else add 0x2C?
+No, this is the input polling not specific to parner object.
+-> search for partner
+8040da78 || ???
+803499c8 || ???
+800a8608 || In-game actions check for button press (all controllers, doesn't affect menus)
+---------------
+8009f76c || noping results in same behavior as 800a8608
+^ bctrl -> 8006f7c0 and 800a19a4
+
+in 800a19a4 -> deeper : 800a1df4 -> nop same behavior
+-> bl to 8009fd64, only caller
+---------
+BP list :
+8009f76c
+800a1d9c
+800a1df4
+--------------
+begin 8009fd64:
+prior to 8009ff58, noping results in no button input
+8009ff58 | ??
+8009ff94 | noping results in short burst chaos control (no checking bar?)
+800a0038 | near box to grab UI indicator check
+800a00ec | noping results in unable to spindash, sort of a super ring-dash
+8009ffe8 | ???
+800a0128 | noping results in spamable slide animation (X button)
+800a0174 | spamable spindash
+800a01ac | ???
+800a0234 | spamable slide animation (B button)
+800a0280 | spamable spin-kick mid air (B button)
+800a02b8 | noping -> A button does nothing (P1 and P2 controls) r3 cycles 801309268 and 80f0bd68
+800a0390 | ??
+800a03c8 | ??
+800a0430 | ??
+800a0680 | ??
+800a0d0c | ??
+800a0ee4 | noping -> X button does nothing
+^useful for dropdash later
+
+new approach:
+mem:805F2B04 partner player to AI timer
+800a19c4 bne (if control 2 input changes, activate AI timer)
+------------
+2018-11-27
+SuperShadow searching part 2
+flying mode:
+8027f0ac bl to 0x80076CA8, common function used in various places
+Try altering r3 and r4 values, maybe call this function myself on button press?
+changing addi r3 168 to 936 -> results in no fly
+                     to 424 -> same as above
+					 revert to 168 -> works 
+					 268 -> no flying
+changing r4 = 37 to 39
+-> Try from P1 Y in glyphic canyon reads, check earlier mem access
+------------
+2018-11-30	
+Checkpoint warping for p2
+break on write to freezeinput 8057D768
+-> occurs after position move
+set emu to 10%, pause frame on black screen for checkpoint warp
+save state and 'step out' < repeat until RO Xpos changed
+found
+function: 801d076c || 801d0788 nop results in camera detach -> not split detach, true cam detach
+                      chunks are tied to cam0 100% confirmed
+falling back to checkpoint hunting method:
+80117684 is confirm click
+
+BP 801176a4
+   80117688
+   80117d3c
+memr 80575fe4
+----
+Gravity Switcher
+writemem:807D3970 (animation state of switches)
+80247eb0 | set gravity for floating switches (switch + restrict input)
+80247868 | set gravity on death/restart
+80246d00 | set gravity for ground switches (switch + no restrict input)
+inside gravity switcher func: 
+80293964 | controls setting player gravity
+attempt:
+
+replace 80293964 with: (copy of shared func)
+lfs f0, 0(r4)
+lfs f1, 0x0004(r4)
+stfs f0, 0(r3)
+lfs f0, 0x0008(r4)
+stfs f1, 0x0004(r3)
+stfs f0, 0x0008(r3)
+
+==
+C2293964 00000004
+C0040000 C0240004
+D0030000 C0040008
+D0230004 D0030008
+60000000 00000000
+^ working to change write to direction
+2018-12-01
+(confirmed direction type and relation to 3 set floats r3, r3+0x4, r3+0x8
+reads of floats:
+8034df98
+801d55f8
+80169cbc
+8040c154
+80169cbc < loop
+80163388
+800b617c
+800a41f8
+800a3bd4
+8033e57c
+800091d0
+800a3c8c
+
+---
+gravity testing (see gravity folder for images)
+Switcher's state:
+0: down(facing behind)
+1: up(facing forward)
+2: left(facing behind)
+3: right(facing behind)
+4: forward(facing down)
+5: backward(facing up)
+
+
+Level begins with value 0
+Switcher#  : State  | store that modifies
+1 : 2 | store1
+2 : 1 | store2
+3 : 0 |  ???? (no change) -> probably because it sets gravity to default game (down)
+4 : 3 | store1
+5 : 5 | store3
+6: 4 | store3
+7: 1 | store2
+8: 2 | store1
+
+floats of interest:
+store1 8060B3F0
+store2 8060B3F4
+store3 8060B3F8
+
+break at instruction 80293964 for future testing
+---------------
+2018-12-04
+Attempting to hook cam1 to partner // chunks research ::
+break at 801d077c let next function run, break at 801d0784
+p1/p2 no change:
+before:
+r0: 8004ed64
+r3: 80b48690
+after:
+r0: 801d0784
+r3: 8056ee14
+----------------
+targeting 0788 instead
+-> in function
+take the bne+ to d19c (same func)
+d1a8 never seems to jump (level specific?)
+d1b0:
+
+CameraBigUpdater:
+80270618 -> calls a lot of functions (master cam update?)
+nop to determine:
+638 -> ???
+640 -> ???
+64c -> halt
+660 -> halt
+66c -> halt
+678 -> (noping results in many issues, crashes too) controls CC camera event/partners/spawn/flyables
+6b0 -> snaps camera in certain areas (glyphic canyon start down slope)
+6b4 -> triggers on pause (halt if removed)
+6bc -> halt
+6c4 -> ???
+6d4 -> stops following player position (events only), doesnt detach
+6e4 -> ???
+6f4 -> halt
+700 -> halt on event trigger
+70c -> ???
+72c -> halt
+bctrl at 80270748 (not checked)
+754 -> ???
+760 -> ???
+770 -> freezes game when C stick is moved, but not halt (restoring instruction resumes game)
+77c -> render()? freeze (not halt) same as above, but no C-stick input
+7a8 -> breaks cams (red/fogbg color on change (event, cc, cb))
+7b4 -> unhooks cam from player on first event
+7c4 -> unhooks cam from player on C-stick
+7dc -> ???
+7e4 -> ??? (something with event, trigger on chaos blast? / certain triggers only?)
+7f4 -> ???
+800 -> don't update cam position at all
+818 -> ???
+824 -> don't render? (fog bg color)
+830 -> detach splits from cams
+83c -> ???
+848 -> ???
+854 -> ???
+860 -> ???
+870 -> ???
+87c -> ???
+884 -> ???
+89c -> ???
+8b0 -> halt on chaos control -> touch event
+8bc -> ???
+8d0 -> ???
+8dc -> ???
+8e8 -> camera warps somewhere for a moment on ?event end?
+8f4 -> ???
+900 -> no ccg/cb event cameras / camera warp issue on checkpoint (bingo highway)
+---
+Disable Cinematic CameraEvents (broken / bad)
+C2270678 00000001
+60000000 00000000
+*Disables ChaosBlast/Control, Partner Events, Flyables
+-> need to edit the function instead of NOPing it
+-> affecting hook altogether on level start in some cases
+
+---
+$Camera Updates for Events Only [dreamsyntax]
+C22706D4 00000001
+60000000 00000000
+*Disables normal player position update, cam is still tied to player its attached to
+*only updates camera for events based on attached player's position
+
+In search of onHook:
+checking 801ce8f0 (spawn hook to P2)
+
+On revisiting, changing things up:
+for instruction 801ce900:
+nop instead of adding stgid to the stack
+^ confirmed works
+Now I can update camera attach to p2 to be more efficient and remove the two 'camfix' codes
+Old camfix:
+c21ce8f0  00000003
+3b400320  3f008058
+3b18d6a0  935800a8
+3880ffff  00000000
+c21ce8f8  00000002
+93d800a8  80030008
+60000000  00000000
+becomes:
+C21CE900 00000001
+60000000 00000000
+-------------
+Searching within 2nd func for attach cam:
+Copy over:
+addi r3, sp, 8
+stwu sp, -0x0010(sp)
+mflr r0
+stw r0, 0x0014(sp)
+stw r31, 0x000C(sp)
+mr r31, r3
+addi r3,r4,4
+mr r4,r5
+
+C200D284 00000005
+38610008 9421FFF0
+7C0802A6 90010014
+93E1000C 7C7F1B78
+38640004 7CA42B78
+60000000 00000000
+
+overwrite actual call 8000d288
+--
+checking stuff after:
+801ce98c || same 'bingo highway' issue
+801ce99c || blt+ (loop for cams)
+-----------
+2018-12-07
+Camera initialize 
+80178384
+
+FOV crunch/blurr speed effect are done to the splits not the cams (makes sense)
+health and lock on counters are drawn on splits not cams
+
+r30 controls how many to loop cam hooks
+80178XXX
+388 | ???
+390 | Texture Lighting?
+394 | halt 
+398 | ???
+39c | ???
+3a0 | ???
+3a4 | Initialize pause menu UI
+3a8 | ???
+3b0 | ???
+3b8 | ???
+3c4 | halt
+3d0 | ???
+3d8 | halt
+3e4 | halt
+3f8 | return to menu after "quit"
+408 | ???
+414 | ???
+420 | ???
+42c | endless load (remove correct data?)
+434 | ???
+454 | ???
+--------
+Nothing of interest
+Stepping out to the call from 801786d4
+------
+Back inside hookCamToPlayerLoop:
+on loop of blt+ at
+801ce99c
+jump to 801ce960
+:
+calls same param to function 0x03A0330
+calls 801C97A8 at 801ce978 with param of current i in loop
+-------
+Within 801c97a8::
+nop 801c97c0 -> no cam attach (setting xyz values of cam?)
+d4 -> halt
+e4 -> halt
+0c -> halt
+18 -> halt
+2c -> halt
+44 -> ???
+4c -> halt
+54 -> Break C-Stick Camera Control
+60 -> Event cam issues
+70 -> ???
+90 -> halt on event trigger
+9c -> ???
+---------
+Exploring 801c97c0:
+nop first iteration, let run 2nd iteration::
+causes no p1 attach, p2 attach::
+this is the function!
+swap params as test
+------
+801ce970 to call 978::
+r3,r4,r5
+813216a0
+81321748
+00000000
+
+81321668
+81321748
+00000001
+-- attempt 2:
+809dc8c0
+809dc818
+0
+
+809dc8f8
+809dc818
+1
+
+args of interest:
+r3 and r5
+is r3 offset constant YES... except sign may be flipped -0x38 or + 0x38:
+1st try : 0x38
+2nd try : 0x38
+          
+3rd:
+80f6dff8
+80f6dfc0
+
+4th:
+80b43d10
+80b43d48
+
+80b454e8
+.......
+dead end, function not doing what I thought, only seems to move the 'point' the camera interacts with
+-------------------
+2018-12-08
+checking from layout obj render fix
+800cb5e4 (onload)
+if 2p:
+bl 80009548
+r4 = 0
+bl 80010244 | for p1
+mr r31, r3
+bl 80009548
+r4 = 1
+bl 80010244 | for p2
+mr r0, r3
+lwz  r3, 0 (r30)
+mr r5, r0
+mr r4, r31
+bl 800CA644
+jump to 800cb640
+----
+if 1p:
+r4 = 0
+bl 80010244 | count 3
+mr r0, r3
+lwz r3, 0 (r30)
+mr r4, r0
+bl 800CA820
+(shared path resumes)
+
+800cb3c8 (nop to remove set objects call)
+800cb3c0
+exiting out to 8004ed60
+----
+8004ecdc interesting behavior? Pre-load??
+---------
+2018-12-09
+8004ec68::
+random checks
+804628f8
+nop 804628fc
+-----
+801cf9dc | halt
+801cf9e4 | cam pop-in/out
+801cf9f8 | controlling camera zoom occasionally
+---------
+2018-12-17
+break mem for read cam X | 801cf9f8
+write from : 807d77f8 to camX
+(reading this)->
+blank screen || 801c1190 [called by 8000e940] -> [called by 802706d4] -> [called by 8000d1b0] -> called by [801d0788] -> [called by 8004ed60 and 6c SETObjectLoad]
+ || 801c7b64 [called by 801c70f4] -> [called by 801c1220]
+801c7b8c [called by 801c70f4] -> [called by 801c1220]
+802708e8
+(the above is continuous checking)
+
+801c4200 (only one caller, 801c41b0)
+801c412c
+-------
+2018-12-18
+Android players weapon searching
+801770e4 || r3 is argument of which character model (and others) to load in
+e = Normal Shadow 
+f = Yellow Android Shadow
+11 = BlueGun Android Shadow
+etc
+8017709c handles the standard 1P mode spawn call
+800ad2f4 | noping results in no controls on player (menus work)
+800ad300 | noping results in T-pose no animation in ground
+--
+other calls do not seem related to weapon mode
+deeper into 800ad2b4:
+800ae034 (changing this seems to change both player type and weapon)
+800adfbc bl to 0x80077304 (load model?)
+
+801e256c calls 800ad3a8 too
+----------------
+801770e4 | leave as RedShadow
+800adfd0 | change to BlueGun
+800ad3bc | leave as BlueGun
+800ad3e0 | leave as BlueGun
+-> results in RedShadow, no gun
+(confirmed)
+801770e4 | BlueGun
+800ae034 | OrangeCannon
+-> results in OrangeCannon
+::
+FOUND
+800adfbc (call to 80077304)
+80077328 bl to 80079F04 (has r0 and r5 set to ShadowChar)
+--- 80074314 also calls to 80079F04
+80079fd8 (store value of player to mem)
+-> not constant, changes
+readmem:
+8007a174
+8008769c
+80078c5c
+
+015 until 3rd cycle -> results in backwards shooting blueandroid
+--------------
+2018-12-26
+Menu:
+func of interest: 802bdb18
+store menu move and compare at 802bdce4
+^ jump to next image 3-5 etc
+-----
+AndroidWeapon New Attempt:
+break on memread of select,
+main compare is done:
+801770ac 
+->
+stepping through (no result, 800adfd0 only option)
+possible target:
+8027a998 (rlwinm with r3, where r3 is SelChar)
+8027aa84 (rlwinm with r4, where r4 is SelChar)
+-------------
+2018-12-27
+remove chaospowers glow:
+C20A4EBC 00000001
+60000000 00000000
+
+ChaosPowers writes:
+8016f154
+8016f160
+->
+Remove limiter caps (lower and upper) -> allows for P2 to get powers without activator holding
+C216F160 00000001
+60000000 00000000
+-----
+Checkpoint Hunting
+80117690 r4 is checkpoint to jump to (if not chosen value is not active, warps to nukkoro2.inf spawn)
+----
+2018-12-30
+Chunk Hunting
+only place that writes to "RO Cam0 X (turns out its not Cam0...)
+802708e8 is call to -> 800091d8 (write)
+800b4a10 | (inside has multifunc call, writes mem of 8132A13C (suspected v-jump but not actually v-jump) - nop results in hands separate position - all damage based on hands
+8040cd74 | readmem of 80F047A0 (possible cam0 X?) || promising (check back for zz__** list near NSNMessengerScene
+			->
+			different reads:
+			8040cff8
+			8040cd74
+			800091d0
+			8040cd78
+Approach::playerstate
+found at 8132A46C
+800b5268 (write)
+------
+Pos sub dynamic struct is being written:
+80093a6c (working with Donut, not logged)
+------
+SuperShadow searching:
+in common bl with rlwinms, at stwx, check what writes there:
+write breakmem
+813084e0
+writer: 8040c158
+
+-----
+2856ed4e 00003020
+02F69482 0000004C
+e2000000 80008000
+CC000000 00000000
+
+
+02F69482 0000004C
+---------------------
+2019-01-06
+Chunks | Actual progress (DonutStopGaming found:)
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+^ Copy player/cam0 position and are checked against chunks
+-----
+Values that read X
+called by a lot unless *
+8040ce08 | 50000 occurances
+8040cd74
+8040cd78
+800091d0
+8003a57c ** (two)
+8000a704 *
+8040cf98
+800091ec
+
+-> progress!
+8003a588 nop -> geo does not load
+callers to 8003a57c (chunk check):
+8003a958 (main render load/unload?)
+8003a3ec | unknown (no visisble effect, triggers on other type of boundry?) || check later for is ?VehicleCam0 Check?
+------------
+checking 8003a550 (full)
+8003a56c bne | (no change)
+8003a570 | halt
+8003a578 | no next geo/collision loads in
+8003a588 bge | immediately unloads geo + no next collision/geo 
+
+---
+X: 807D77E0
+Y: 807D77E4
+Z: 807D77E8
+Donut values found:
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+difference is 130h
+===
+
+807D79A8 (cam1 X RO) (might be wrong one)
+807D7990 (cam1 X RO) : has with offset 130h
+---
+
+Confirm!
+807D7860 || Cam1X equivalent for Donut's values
+807D76B0
+1B0h
+
+-> add 1B0h to all grabs of P1 positions as test
+(assume access of r3 only): occurs 8003a57c, 8003a5ac, 8003a5dc
+result:
+*expected to fail, something with r6 is also checking with offset 0x00,0x04,0x08
+didn't fail. r6 has to do with 8003a3ec call to func
+
+next step
+OR compare for both player situation:
+8003a57c
+
+p1 not in chunk but p2 in chunk case:
+8003a58c -> replaced with
+lfs f1, 1B0h (r3)
+fcmpo cr0, f1, f0
+bge 8003A594
+
+[gecko]
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+bge- 0x0C
+li r3, 0
+nop
+C203A58C 00000003
+C02301B0 FC010040
+4080000C 38600000
+60000000 00000000
+
+Then branch at nop
+C6002610 8003a6a0 (verify later)
+
+remove original b
+C203A590 00000001
+60000000 00000000
+
+
+-> (X axis check)
+c203a58c 00000003
+c02301b0 fc010040
+4080000c 38600000
+60000000 00000000
+c6002610 8003a6a0
+c203a590 00000001
+60000000 00000000
+
+Y Axis (overwrite li at 8003a5bc):
+lfs f1, 0x1B4(r3)
+fcmpo cr0, f1, f0
+bge- 0x0C
+li r3, 0
+nop
+
+C203A5BC 00000003
+C02301B4 FC010040
+4080000C 38600000
+60000000 00000000
+
+
+Then branch at nop
+C6002648 8003a6a0 (verify later)
+
+remove original b
+C203A5C0 00000001
+60000000 00000000
+
+-> Y
+C203A5BC 00000003
+C02301B4 FC010040
+4080000C 38600000
+60000000 00000000
+C6002648 8003a6a0
+C203A5C0 00000001
+60000000 00000000
+
+Z Axis (overwrite li at 8003a5ec):
+lfs f1, 0x1B8(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bge- 0x0C
+li r3, 0
+nop
+
+C203A5EC 00000003
+C02301B8 FC010040
+4080000C 38600000
+60000000 00000000
+
+Then branch at nop
+C6002680 8003a6a0 (verify later)
+
+remove original b
+C203A5F0 00000001
+60000000 00000000
+-> Z
+C203A5EC 00000003
+C02301B8 FC010040
+4080000C 38600000
+60000000 00000000
+C6002680 8003a6a0
+C203A5F0 00000001
+60000000 00000000
+
+----
+CROR must be considered, no offset change but both values should be checked against value.
+Attempted implementation fails because:
+P2 lfs f1 (take P2 cam pos) overwrites f1 w P0 pos -> fcmpo before cror
+
+add cror to all 2p cases:
+(Z axis) 8003a5ec
+lfs f1, 0x1B8(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bge- 0x0C
+li r3, 0
+nop
+| Then branch at nop C6002680 8003a6a0 (changed per code list change)
+C203A5EC 00000004
+C02301B8 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002694 8003a6a0 ***** (change warning)
+C203A5F0 00000001
+60000000 00000000
+
+
+Y axis update
+C203A5BC 00000004
+C02301B4 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002654 8003a6a0
+C203A5C0 00000001
+60000000 00000000
+
+X axis update
+C203A58C 00000004
+C02301B0 FC010040
+4C411382 4080000C
+38600000 60000000
+60000000 00000000
+C6002614 8003a6a0
+C203A590 00000001
+60000000 00000000
+
+----------
+Testing without cror in X Y Z check change::
+add catch for bne- (equal case) and check against p2
+
+Only case this will be reached is if P2 has not been loaded, so copy P2 position:
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x0C
+li r3, 0
+nop
+
+(X): (li r3, 0) and jump to return @ A6A0
+8003a5a4
+------------- injected to 800026bc
+C203A5A4 00000004
+C02301B0 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C60026bc 8003a6a0
+C203A5A8 00000001
+60000000 00000000
+-------------
+(Y):
+8003a5d4
+-------------
+C203A5D4 00000004
+C02301B4 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C60026fc 8003a6a0
+C203A5D8 00000001
+60000000 00000000
+-------------
+(Z):
+8003a604
+-------------
+C203A604 00000004
+C02301B8 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C600273C 8003a6a0
+C603A608 8003a69c
+special case for Z: at 277
+-------------
+
+WORKS! (initial test time)
+=====
+
+----Cases---- return 0 = don't render chunk ; return 1 = render chunk
+Initial thought:
+P1 (X) -> is in chunk? YES -> check P1 (Y) YES? -> check P1(Z) -> Return 1
+P1(X) -> is in chunk? NO? -> return 0
+P1(X) -> is in chunk? YES -> check P1 (Y) NO? -> return 0
+my codes does this:
+P1 (X) -> is in chunk? YES -> check P1 (Y) YES? -> check P1(Z) -> Return 1
+P1(X) -> is in chunk? NO? -> check P2(X) NO? -> return 0
+P1(X) -> is in chunk? NO? -> check P2(X) YES? -> check P1(Y) -> NO? -> check P2(Y) -> YES? 
+...(continues)
+Viewed Cases:
+P1 X -> YES -> Y -> YES -> Z YES
+P1 X -> YES -> cror X YES -> P1 Y -> YES -> cror Y NO return 0
+-------------
+
+CROR version:
+(X): (li r3, 0) and jump to return @ A6A0
+8003a5a4
+------------- injected to 800026bc
+C203A5A4 00000004
+C02301B0 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C60026d4 8003a6a0
+C203A5A8 00000001
+60000000 00000000
+-------------
+(Y):
+8003a5d4
+-------------
+C203A5D4 00000004
+C02301B4 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C6002714 8003a6a0
+C203A5D8 00000001
+60000000 00000000
+-------------
+(Z):
+8003a604
+-------------
+C203A604 00000004
+C02301B8 FC010040
+4C411382 4082000C
+38600000 60000000
+60000000 00000000
+C6002754 8003a6a0
+C603A608 8003a69c
+special case for Z: at 277
+
+-----------------------------
+2019-01-08
+
+Rewrite by using LR to fix C6 OPs being code-order dependent (should also work with Nintendont):
+8003a57c (op after last bl in chunks function)
+-> no need to save old LR, in stack, already restored at end of function
+-> r15 to LR for fail case jumps (per axis and CROR check)
+:
+===Save LR to r16===
+mflr r16
+(not needed)
+C203A57C 00000001
+7E0802A6 00000000
+(not needed)
+
+===New X-Axis Chunk Compare=== 8003A58C
+lfs f1,0x1B0(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+C203A58C 00000005
+C02301B0 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+
+(and nop outside branch) (not shown again, but applies for all)
+C203A590 00000001
+60000000 00000000
+
+===New X-Axis CROR step=== 8003A5A4
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3, 0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+C203A5A4 00000005
+C02301B0 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C203A5A8 00000001
+60000000 00000000
+
+===New Y-Axis Chunk Compare=== 8003A5BC
+lfs f1,0x1B4(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+C203A5BC 00000005
+C02301B4 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+C203A5C0 00000001
+60000000 00000000
+
+===New Y-Axis CROR step=== 8003A5D4
+C203A5D4 00000005
+C02301B4 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C203A5D8 00000001
+60000000 00000000
+
+===New Z-Axis Chunk Compare=== 8003A5EC
+lfs f1,0x1B8(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+C203A5EC 00000005
+C02301B8 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+C203A5F0 00000001
+60000000 00000000
+
+===New Z-Axis CROR step=== 8003A604
+lfs f1, 0x1B8(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3, 0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+C203A604 00000005
+C02301B8 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C603A608 8003a69c
+
+Borked Old bad Chunk Code:
+C203A58C 00000005
+C02301B0 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+C203A590 00000001
+60000000 00000000
+C203A5A4 00000005
+C02301B0 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C203A5A8 00000001
+60000000 00000000
+C203A5BC 00000005
+C02301B4 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+C203A5C0 00000001
+60000000 00000000
+C203A5D4 00000005
+C02301B4 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C203A5D8 00000001
+60000000 00000000
+C203A5EC 00000005
+C02301B8 FC010040
+40800018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+60000000 00000000
+C203A5F0 00000001
+60000000 00000000
+C203A604 00000005
+C02301B8 FC010040
+4C411382 40820018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 00000000
+C603A608 8003a69c
+
+--------------
+2019-01-10
+Current Chunk code does:
+P1X Greater than ChunkX > Yes > P1X LessThan ChunkX > No > P2X LessThanChunkX > Yes > P1Y GT -> ... continues without ever checking the GreatThan for P2X and is continuing to check P1 values when it should not be
+(because in the original code at this point P1 is considered done)P1X GT ChunkX > Yes > P1X LT ChunkX > Yes > P1Y GT ChunkY > No > P2Y GT ChunkY > Yes > continues without ever checking P2X
+When it should do:
+P1X GT ChunkX > Yes > P1X LT ChunkX > No > P2X GT ChunkX > Yes > P2X LT ChunkX > Yes > continues
+P1X GT ChunkX > Yes > P1X LT ChunkX > Yes > P1Y GT ChunkY > No > P2X GT ChunkX > Yes > P2X LT ChunkX > Yes continues without ever checking P2X
+
+Though I suspect there will be no change even if this is properly implemented due to removing .TEX files prevents the crash even with old cold, suggesting the issue is elsewhere.
+
+ChunkCode V2:
+80003a58c becomes main P2 check that P1Y and P1Z failcase will jump to
+r16 will store a 'in p2 failcase' to prevent loop
+
+===X-Axis BGE Fail=== 8003A58C
+cmpi cr0, r16, 1
+beq 0x14
+li r16, 1
+lfs f1,0x1B0(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+===X-Axis BNE Fail=== 8003A5A4
+lfs f1, 0x1B0(r3)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3, 0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+
+OR Other way:
+
+===P2 ChunksCheck === 8003A58C
+lfs f0, 0 (r30)
+lfs f1, 0x1B0(r3)
+fcmpo cr0,f1,f0
+blt+ 0x54
+lfs f0, 0 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+beq+ 0x44
+lfs f0, 0x4 (r30)
+lfs f1, 0x1B4(r3)
+fcmpo cr0,f1,f0
+blt+ 0x34
+lfs f0, 0x4 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+beq+ 0x24
+lfs f0, 0x8 (r30)
+lfs f1, 0x1B8(r3)
+fcmpo cr0,f1,f0
+blt+ 0x14
+lfs f0, 0x8 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lis r15, 0x8003
+ori r15, r15, 0xA69C
+mtlr r15
+blr
+
+===P2 ChunksCheck Redirection for Fail Cases===
+C603a5a4 8003A58C
+C603a5bc 8003A58C
+C603a5d4 8003A58C
+C603a5ec 8003A58C
+C603a604 8003A58C
+
+===P2 Chunks Check Same Branching Style === 8003A58C
+lfs f0, 0 (r30)
+lfs f1, 0x1B0(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lfs f0, 0 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lfs f0, 0x4 (r30)
+lfs f1, 0x1B4(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lfs f0, 0x4 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lfs f0, 0x8 (r30)
+lfs f1, 0x1B8(r3)
+fcmpo cr0,f1,f0
+bge- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lfs f0, 0x8 (r31)
+fcmpo cr0, f1, f0
+cror 2,1,2
+bne- 0x18
+li r3,0
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+mtlr r15
+blr
+lis r15, 0x8003
+ori r15, r15, 0xA69C
+mtlr r15
+blr
+
+$2P Essentials Chunk Fix [dreamsyntax & DonutStopGaming]
+C203A58C 0000001E
+C01E0000 C02301B0
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0000
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0004 C02301B4
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0004
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0008 C02301B8
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0008
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+3DE08003 61EFA69C
+7DE803A6 4E800020
+60000000 00000000
+C603a5a4 8003A58C
+C603a5bc 8003A58C
+C603a5d4 8003A58C
+C603a5ec 8003A58C
+C603a604 8003A58C
+-----------------------
+Checkpoint hunting
+802044e0 | nop flattens Shadow, cam doesn't follow
+801771c0 | 
+----
+Sidetrack: UI Mission Showing
+MissionSelect at: mem 80575F1C
+nop bne at 802b46cc	
+800b8a64 call to function: 800bc0c0 (Mission UI Draw hide/unhider function)
+membreaks at:
+800bc1e4
+800bc270
+-----
+Chunk more pain (looking for explanation for crashes with chunks, possibly VRAM?)
+8003ab4 called by one
+
+halts on 8004ec68 after a few loops
+
+->
+
+No codes on, returning 1 for all chunks, P1 only:
+LoadAllChunks
+c603a588 8003a69c
+Westopolis: No crash
+Digital Circuit: Missing collision at first area
+Glyphic Canyon: No crash
+Lethal Highway: Crash near Doom's Eye Intro
+Cryptic Castle: Freeze after downward slope
+Prison Island: No crash
+Circus Park: Crash after falling from balloons
+Central City: Missing geo/collision at multi-gun drop Dark Mission Bomb
+Sky Troops: No crash
+Mad Matrix : No collision, No geo at first area
+Death Ruins : No crash
+The Ark : No crash
+Air Fleet: Crash after first corner
+Iron Jungle: No crash
+Space Gadget: Crash after regain control
+Lost Impact: Crash after Maria intro
+Gun Fortress: Crash after dropping in-game
+Black Comet: Crash after moving towards next area (left by GUN robot)
+Lava Shelter: No crash
+Cosmic Fall: Crash after first mini-pulley
+Final Haunt: Crash after Giants drop in hallway
+Last Way: No Crash ???WTF???
+
+----
+Assuming chunk issues are VRAM related for now, works in most cases-> crashes for few scenarios
+2019-01-13
+ChaosControl EventCamera Searching
+---
+2019-01-17
+Checkpoint warping / Death call
+Using SuperShadow reset per checkpoint to try to find it:
+8017710c
+
+(go to top of function, its called every death):
+80176fe8
+called by 80177218 and 80177244
+(244 called on death) -> noping stops loading geo/chunks until death
+mem:80576707
+LifeCount, checking writes
+
+found
+80178bdc jump to 8016ef8c (updateLifeCount function)
+going up callstack:
+find function with lots of function calls
+802044c8 shows life/key count on death and decrements life count
+from callstack, was bctrl'd to:
+802044c4 and continues down, loops once
+
+nop:
+802044c4 | load timer's checkpoint-saved value
+802044c8 | reset timer (to whatever c8 if checkpoint), ring count, hero/dark points & meters, and scores 
+802044cc | halt on death
+802044d0 | no apparent change
+802044d4 | ..
+802044d8 | ..
+802044e0 | halt
+802044e8 | no apparent change
+802044f8 | halt
+80204504 | ..
+80204510 | no apparent change
+8020451c | halt
+80204528 | ..
+80204534 | no apparent change
+<beq- block> [compares to 0 @ 80204550] -> jumps to 80204658
+----
+aside:
+-> 802ce1c0 function:
+at 802ce1f0 (li r3, 0), changing to li r3, 1 will cause instant warp to Select Stage anywhere
+----
+nop:
+8020454c | no apparent change
+80204554 | ..
+80204560 | ..
+8020456c | ..
+80204578 | ..
+<blt+ block> [compares to 2 @ 80204584] -> jumps to 802044E8
+<b>
+<bge- block> [cmp 0 @ 802045a8] -> jumps to 80204644
+802045ac | halt -> perhaps loads SET object data for b0? (does not halt if b0 is nopped)
+802045b0 | does not load SET objects (at all)
+802045b8 | halt
+<beq- block> [mr. @ 802045c0] -> jumps to 802045E0
+802045c4 | fade screen is permanently on (no control)
+802045cc (cTeam::GetPlayer) | halts at fade screen
+802045dc | (stuck at fadeScreen) stuck in spawn fall, no timer etc triggered, but world is alive | is 'unreset' state after warping player
+802045e0 | halt
+802045ec | halt
+802045f0 | halt
+802045f4 (cCharacter::IsPlayingEffect)| no apparent change
+802045f8 | no apparent change
+802045fc | ..
+80204600 | ..
+80204610 (PAUSEFUNC_READ_STGID_zz_80176c3c) | no apparent change
+
+--> add symbol for actionsupdate / position setter found
+Other objects appear to use same function, will need further analysis (history list like in Heroes?)
+----------
+2019-01-22 | Little fix-ups
+Fix split type 'jumps' during pause / restart / onload:
+80205dbc
+80205ed4
+80204a4c
+
+2P Essentials Prevent SplitScreen Reset
+C2205DBC 00000001
+60000000 00000000
+C2205ED4 00000001
+60000000 00000000
+C2204A4C 00000001
+60000000 00000000
+
+Rewrite SplitScreen Codes / Fix improper gecko-if
+
+2P Essentials Vertical-SplitScreen v3
+2857D768 00000000
+0457D700 00000001
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+
+2P Essentials Horizontal-SplitScreen v3
+2857D768 00000000
+0457D700 00000002
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+
+Disable Partner Player Control [DonutStopGaming]
+C606F830 8006F870
+
+2019-01-23 | Continuing fix-ups & Chunk crash research
+Boss P2 ring start value will wait for HPP invalid byte fix | spawners
+For SuperShadow P2 start with 50 rings:
+8016f320 stw r0, 0 (r30)
+ 0 = 8057670C
+ 4C = 80576758
+stw r0, 0x0 (r30)
+stw r0, 0x4C (r30)
+
+2P Essentials SuperShadow RingCount
+C216F320 00000002
+901E0000 901E004C
+60000000 00000000
+---
+2019-02-02
+Searching for vehicle unload on P1 not close enough
+P1 cam values:
+X: 807D77E0
+Y: 807D77E4
+Z: 807D77E8
+DVF:
+807D76B0 (X)
+807D76B4 (Y)
+807D76B8 (Z)
+-------------
+-> BP on 807d76b0:
+8040ce08 60000 reads
+8003a57c (chunks) 1000 reads
+8040cd74 8000 reads
+chain -> 8000a704 -> 8040cf98 -> 8040cf98 -> 8040cf98 -> 800091d0 (setloadsfloats) -> 800091ec -> repeat
+            61                                              244                        122
+			
+			---
+			
+Using diff, potential check at 802de460
+-> Found Clear() for jump effect -> 802ddd10 nop (no clear on trails)
+80054c9c calls: 800545a8 (specialized, triggered on alien hit from homing attack) -> ?obj destroy?
+80054c6c (something with damage on homing attack)
+80077e6c | bounce up after homing attack
+80077ed0 | stop homing attack on one hit
+80077f40 | same result as 77e6c
+ -> multiple have same result, probably call in order.
+ skipping until finding vehicle affect
+80085098 | no target homing attack (goes straight if target within range)
+800852f0 (same as above, probably same func area)
+80078ac8 | do no damage to obj (homing attack)
+80085374 | do damage but do not reset state of attacking
+800856b4 | movement (no movement) for homing attack targeting
+800857f0 | no bounceback on hit enemy (more stable)
+8008580c | no cancel homing attack trail state if last homing attack targeted successfully (until action state effect reset)
+80085938 | halt (has compare to 2, check later)
+800859b4 | same as above
+800859fc | same as above
+80085a48 | halt (store/loads, no compares)
+80085a60 | halt (target handler? small function)
+80085ab4 | halt (on activate homing attack)
+80085acc | no bounceback on hit enemy
+80085b30 | same as above
+80085ba0 | same as above
+80085c1c | halt
+80085c98 | halt
+80085ce0 | halt
+80085d2c | halt
+80085d84 | halt (on activate homing attack)
+8008(5/6)f28 | cancel homing attack on target homing attacking
+800860fc | halt
+80086448 | ??? no change?
+800864d8 | saa
+80086510 | only occured once -> unable to homing attack after successful hit until out of range
+80086530 | ??? no change?
+800865b8 | halt
+80086644 | halt
+800866a0 | halt
+80086724 | halt
+80086780 | halt
+80086850 | hover after homing attack target hit (use for SS) -> can cancel with a second homing attack / other action
+80086b28 | proper damage parse, no knockback, continue into target until destroyed
+80086b48 | ??? unknown
+80086bd0 | halt
+80093d90 | improper target calculation (LavaShelter Shadow Android -spaz homing attack)
+8009c624 | completely block homing attack (when target is in range)
+8009c6a8 | ???
+8009c6fc | halt (prevent homing attack half time)
+800c6538 | no damage, continuous target attack
+800c658c | halt 
+800c6bb0 | unknown
+800c6c24 | move cam? or erase all drawn objs
+8017b8d4 | unknown
+8017cf18 | halt
+8017cf7c | halt
+
+sidetrack:
+__destroy_new_array calls free, may actually be symbol
+803a03bc
+--------------
+2019-02-03
+-> use diff for: vehicle disappear / partner despawn on P1 not close enough / chaospowers camera grab / gravity switches
+[vehicle disappear] || COMPLETE
+8000cf84 | halts on jump off vehicle, at point of spawn
+8004eea0 | halts immediately on P2 dismount
+8007de18 | camera not detach from vehicle / bones not detach from vehicle (state too)
+8007e994 | same as above, but UI not cleared too
+800809b0 | prevent falling (no gravity?)
+80080d90 | moveable no gravity / spin animation after dismounting/jumping
+80087778 | no clear jump ball effect
+80097f98 | strange warping after jumping
+800ab58c | block dismounting
+800c162c | do not allow remount/no collision for dismounted vehicle
+800c85c8 | do not destroy collision of erased (p2) vehicle on dismount
+800c8664 | do not allow remount/no collision for dismounted vehicle
+801b1324 | deal damage to craft on actions (dismount etc)
+801b1484 | prevent standing on craft when not mounted (TODO: check for crate carrying)
+801b5848 | same as above
+801b6060 | prevent dismount
+801b6274 | craft tilts when standing on in any direction (not mounted)
+801b643c | no collision when dismounted, still mountable
+801b64d8 | prevent standing on craft when not mounted (TODO: check for crate carrying)
+--------
+801b6764 | do not erase craft, but also prevents re-mounting any craft, erases when tied entity is destroyed
+->
+80094e40 | can board craft after knocking alien off, however craft is disabled/inactive
+8018cfc8 | alien not knocked off craft, when destroyed player can mount... if player dismounts still disappears
+8018d218 | saa
+8018d5ec | can't harm enemies, but can harm player | no damage, target still occurs and knockback
+801a8230 | saa
+801a8388 | knockback enemies, but don't reduce HP
+801b280c | do not despawn craft, but inactive and cannot mount
+801b4af0 | saa
+801b5d54 | *do not despawn craft / even if dismount. BAD: Keeps all spawned saucers permanently / shadow and animation bug when timed out or not near P1
+801b6274 | *do not despawn craft / even if dismount. BAD: Rider feet bones are messed up, and on dismount cannot stand on saucer, no timeout for existing saucers except restart/death
+801b6764 | do not despawn, not mountable
+803352b0 | do not despawn craft, but inactive
+-> picking one with all spawned saucers permanently
+801b5d54 -> halts for flyables sometimes in case of dying and two flyables in the way
+-> picking one with bone and no timeout
+
+2P Essentials Prevent Vehicle Despawn v0.1 [dreamsyntax] // BAD does not effect flyables / halt on spawners
+C21B6254 00000001
+4E800020 00000000
+
+-> found out regular 2P gamemode bit effects this, TODO: find this and patch
+/////////
+[chaospowers camera grab] || COMPLETE
+800099b8 | do not pan camera for chaos powers intro sequence
+80009a14 | same as above
+8000a184 | same as above
+8000a2f4 | break camera transform during chaos powers intro
+8000fa20 | blank camera during chaos powers intro
+8000fd64 | camera point down, no track during intro
+80011b4c | incorrect zoom value during intro (still tracks)
+80011c38 | *cancels chaospowers intro camera event (attempts for a few frames)
+80011d24 | saa
+80012124 | incorrect zoom value during intro (still tracks)
+8001253c | *cancels chaospowers intro camera event (attempts for a few frames)
+800146c8 | saa
+8007aed8 | no chaos blast explosion, stuck in animation at end
+8007b198 | explosion-less chaos blast (pre-explosion particle still present)
+8007b440 | 'rave mode'
+8007b4c8 | explosion-less
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+8009bd40 | prevent chaos blast use at all
+800a2d9c | ***cancels chaospowers intro camera event (perfect)
+
+->
+callers are:
+8007b400 (CB)
+8007c4b0 (CC)
+->
+2P Essentials Disable ChaosPowers CameraEvent [dreamsyntax]
+C207B400 00000001
+60000000 00000000
+C207C4B0 00000001
+60000000 00000000
+
+[chaospowers chaos control blur effects] || COMPLETE
+8000b298 | no smooth transition of camera distortion
+8000f35c | incorrect zoom (continuous)
+80017500 | stops chaos control at next object
+8007ba24 | no move / no effect chaos control
+8007c23c | saa
+8007c2a0 | saa
+8007c310 | saa
+800a339c | no blur / effects / wind (found)
+
+2P Essentials Disable ChaosControl CameraEffect [dreamsyntax]
+C20A2A64 00000001
+60000000 00000000
+
+[pulley patch] || FOUND POSSIBLE LEADS, NOT COMPLETE
+80017500 | pulley is destructible
+80019018 | warp coordinates are partially incorrect
+8001c964 | pulley is destructible
+8008e1e4 | does not warp player / follow spline. When pulley reaches end warps P1
+8008e304 | improper warp
+8008e4c4 | does not warp player (saa)
+8008e930 | pulley does not activate, P1 'raves' when P2/P1 attempt to activate
+8009bdbc | pulley does not activate, no rave
+801312c0 | pulley does not move
+80131704 | pulley does not activate, no rave
+801317e0 | saa
+80132efc | saa
+80132f60 | saa
+80132fd0 | saa
+801331cc | pulley does not move
+80133230 | saa
+8015c004 | pulley does not activate, no rave
+8015cb74 | saa
+8015d11c | pulley does not move
+801db678 | saa
+
+[Gravity Switchers] || NOT FOUND
+80293a90 | ?gravitySwitcher symbol (no change gravity on contact)
+8009a2c8 | no change gravity on contact
+801d5594 | no play gravity switcher noise on contact
+80247b40 | no activate gravity switcher
+802482d4 | saa
+80248338 | saa
+802483a8 | saa
+80482458 | no draw players / stop drawing objs
+
+[partner despawn searching] || DONE (search for v1, not v0.1)
+80073078 | partner does not spawn even if P1 is within range
+800743c0 | partner instantly hooks to nearest player on partnerspawn
+800c9af4 | Continuously warp partner to proper place even if P1 is not there
+80119a24 | parnter does not spawn
+80119bbc | saa
+80119c5c | saa
+80119d5c | saa
+80119dcc | Continuously warp partner to proper place even if P1 is not there | Also Breaks Exit Level
+
+2P Essentials Partner Despawn Fix v0.1 [dreamsyntax]
+C20C9AD4 00000001
+4E800020 00000000
+*Bad , has spawners (ARK meteors constantly bombarding)
+
+[key doors for both players] || NOT FOUND
+8011b78c | prevent 5 key unlock animation
+8011bc70 | saa
+80027ff0 | door opening particles continuous
+
+[flyable hawk cam disable] || COMPLETE
+800099b8 | do not track camera after initialize
+80009a14 | saa
+8000a184 | saa
+8000a304 | improper angle
+8000db78 | track direction, do not track position / no initialize
+8001c8dc | flyable does not move/activate from idle
+8007dd10 | player does not move onto flyable on mount, stuck in animation
+8007e190 | flyable does not move/activate from idle, player does not get flying animation
+8007e2c0 | black screen / player mount warp
+8007e774 | no control flyable when mounted
+8007ed34 | hop, does not mount
+8009aae4 | does not mount, no hop
+800a6794 | does not track, does initialize
+800a6800 | saa
+800a684c | saa
+801b316c | do not attach to split0 || halt on dismount || does not effect cutscene || flyable specific?
+801b3d14 | saa
+801b459c | break splines with rotation messed up
+801b4698 | travel to nukkoro2.inf spawn point
+801b47d4 | incorrect rotation, break split0
+801b483c | hook to enemy splines?
+801b6830 | prevent dismount until certain points in spline
+801c94b4 | **do not attach to split0 || no halts || effects cutscene || global?
+801cb820 | saa
+801cc004 | saa
+801cc1e0 | does not detach from split0 on dismount, halts shortly after
+---looking for true detach:
+8007de18 | does not detach from either split
+8007df28 | does not detach on split1 until obj destroyed
+8007e994 | does not detach on either split
+800871d8 | player stuck at dismount location
+8009c8d4 | prevent dismount
+801b1dd4 | player flips upsidedown and starts spinning
+801b30b0 | strange detach behavior for split0
+801b310c | saa
+801b34f0 | saa
+802cb628 | does not detach from split0
+-->
+combine: 801b316c (halts on dismount, probably stores prevcam->nextcam pointer, tries to go to it then halts) -> stick blr on 801b3148
+         802cb628 (does not detach split0) -> stick blr on 802cb5d0
+		  -> success, no more halt
+
+2P Essentials FlyablesCam Fix TestVer
+C21B3148 00000001
+4E800020 00000000
+C22CB5D0 00000001
+4E800020 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+*Halts on exit level
+
+-> possible stack to free @ 803a0300:
+803a02e4 80061c50 80061c20 80060d10 80060cc0 800605e4 cFielder
+----
+nop at 801b317c 
+nop at 802cb65c
+-> BEST RNG EVER
+this fixes the halt, *might leak, check here later if memory becomes an issue
+2P Essentials FlyablesCam Fix v1 [dreamsyntax]
+C21B317C 00000001
+60000000 00000000
+C22CB65C 00000001
+60000000 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+----
+2019-02-04
+P2 Pause/Vehicle Dismount based on GameMode Bit instead of other way:
+801e3adc | Lucky first try, allows P2 to pause
+801d9260 | ???
+801b5f4c | Flyer gamemode bit check
+
+2P Essentials P2 Can Pause [dreamsyntax]
+C21E3ADC 00000001
+60000000 00000000
+
+2P Essentials Prevent Vehicle Despawn [dreamsyntax]
+C21B5F4C 00000001
+60000000 00000000
+
+
+[Air Bug Fix] || INCOMPLETE
+80031548 | changes air blower behavior
+8008f858 | no move, no height increase, stuck in 'in air' animation
+8008f890 | both players do not get out of 'in-air' animation
+8008f970 | lock player control, start rising, but animation is stuck at current state
+8009ad4c | forces player to slow crawl, animation cycle continues but not in air animations
+800b7960 | does not activate blower
+800f3308 | no rise, weird animation on first entered player 
+8010252c | Player not stuck does not fall out of blower, slowly descends to ground
+80102aec | does not activate blower
+80102b50 | saa
+80102bc0 | saa
+801030e4 | saa
+80103210 | no rise, weird animation on first entered player
+80103c4c | **no rise unless slide/jump/fall , no animation
+80103d2c | both players stuck
+80103d44 | no rise, weird animation on first entered player
+8015aad4 | no activate, no exception case of jump
+8015bc7c | saa
+801db970 | no rise, proper animation/state
+
+-> Replace Air Blower with High-Jump
+blr @ 80103c4c
+
+Donut lead: 8015cb70 -> disables fan activation (backtrack to caller of bctrl)
+
+
+[Partner Despawn search, BMEM at 807d7720 (other camX)]
+-----------
+2019-02-06
+[Respawns/OnDeath] || INCOMPLETE
+800155ac | don't teleport models to objects, once loaded into nukkoro2.inf spawn point, stays there| Useful for testing memory issue?
+800c402c | cFielder::IsStriker(void) -> prevent all damage collision in world
+8000eb50 | deathCam event zoom has issue
+80044724 | respawn() and unhook death event is never called
+8004480c | permanent black screen
+80044994 | no fadeout
+8007726c | do not draw player object model/shadow
+80078ac8 | prevent all damage collision
+8007d840 | **Restart() including toggling death cam
+8007da1c | no player on player damage? odd behavior 
+80095e9c | no player damage at all
+8009685c | saa
+800968c0 | saa
+80096930 | saa
+800998c0 | no reset death cam
+800999ac | saa
+
+-> relevant area:
+8007d808-8007d834
+-----------
+2019-02-08
+[BlackKnight] || INCOMPLETE || SEE NEXT ITERATION
+80067458 | No melee wep effect markers / damage
+80016390 | glCopyMatrix (copy player model to animation data)
+8004f040 | No melee wep effect, yes damage
+800461d0 | saa
+8007b4c8 | disable no move on 3rd strike | throw away weapon = stuck
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+80084108 | disable no move on 3rd strike
+800841e4 | no move at all during/after melee
+8008452c | allow for one swing only
+800847d4 | disable no move on 3rd strike
+80084a18 | don't swing, slow walk
+80093b74 | permanent strafe in one direction/ walk 
+80093bd4 | saa
+8009ca20 | prevent all melee attack calls
+800c658c | deplete all ammo on hit
+802dea10 | no melee wep effect
+-----------
+2019-02-09
+-> exploring 8009ca20 area
+--nop to inspect--
+8009ca34 | bne -> can't attack melee specific
+8009ca40 | only perform in-air spin attack
+8009ca48 | saa
+8009ca78 bctrl to load weapon state??
+-----------
+2019-02-10
+minor camera fix runthrough:
+SCREENSHAKES
+[launch ramp] | COMPLETE
+800891a8 | move player on ramp
+80089610 | *disable 'slingshot' animation, no screenshake
+8009ae48 | saa
+800f08f0 | *?* do not move some loaded in objects (bombs, boxes) to positions after loading in model (in gronud)
+800f7704 | saa, but properly 'drop' to ground
+800f773c | saa, with collision detection against player
+800f83a4 | move p1 left (result of collision detection above?
+8010e5ec | do not activate boost panel at all (no collision)
+8010e634 | saa
+8010ebc4 | saa
+8010ec28 | saa
+8010ec98 | saa
+801fa2dc | **no screenshake, yes 'slingshot' animation
+801fa5ec | saa
+8042a640 | corrupts screenshake effect, makes strange 'film' over split
+8042a6e4 | no screenshake
+8042d9a0 | saa
+8042e058 | adds additional effect at end of screenshake
+80438e6c | no screenshake
+80439574 | saa
+->
+(and springs)
+Inspect these for possible 'master' screenshake that applies to CB, All shake types etc -> not the case
+801fa2dc
+801fa5ec | toplevel call
+8042a6e4
+8042d9a0
+80438e6c
+80439574
+add blr to 801fa5d4 OR nop 801d0d10 (call to it) -> causing halt occasionally
+try next layer
+blr @ 8042a6e4 -> 
+halting on death ruins jump area
+blr @ 801fa2dc -> no halts? (boost ramps / springs effect removed)
+[chaos blast / tornado / object shake] |
+8000d6c4 | no screenshake on CB
+8000d710 | saa
+8000ef84 | **saa (executed 230 times) -> includes tornado, shake activated objects (orbs in Glyphic canyon) | does not include boost ramps/ springs
+
+8000ef58
+
+2P Essentials Remove ScreenShake v1 [dreamsyntax]
+C21FA2DC 00000001
+4E800020 00000000
+C200EF58 00000001
+4E800020 00000000
+
+[turret cams]
+800099b8 | special camera does not track turret/incorrect placement
+80009a14 | saa
+8000a184 | saa
+8000db50 | sc (special camera) jumps to turret position, but barely adjusts, looking in one main direction
+8000db8c | saa (partial), different axis?
+8007dd10 | spin stuck trying to mount turret
+8007e190 | turret inactive, no cam call etc
+8007eb14 | jump-hop does not mount (similar to saucers)
+800999ac (register global obj) -> 801cedc0 is bl to it | *do not attach split to special camera
+The above includes boss camera event, chaos powers, flyables, vehicles, turrets etc (master special camera controller?)
+vehicles no crash: 801cedc0 and 801cedcc nop'd
+alternatively, same result can be achieved with just noping 801cedec
+-> this resulted into divert to figure out some symbols for SpecialCamera.
+found calls for subbosses/black doom, diablon and generic boss tracker (diablon, doom, egg dealer)
+
+[boss cam tracker]
+802913fc | main track after special cam is created
+
+2019-02-11
+[turret cams] 
+explore 8007e190
+-> DonutNotes
+
+2019-02-13
+[Death respawn searching]
+80018ce0-801a65e0
+8000eb50 | corrupt DeathCameraEvent
+802beb88 | faster logo disappear
+8023a1b0 | throw away weapon (overflow of dropping guns if only blr this func by itself)
+80205C70 | endless black screen
+80204928 | halt on death call
+80204794 | endless falling, no black screen / camera follow
+80204740 | halt after black screen
+802043ac | endless black screen
+801eb2e0 | inspect*
+801cf05c | do not detatch from deathCam / reattach to player?
+801cb8c0 | saa
+801cb3c8 | saa; do not move cam0/cam1 anymore after or to respawn location
+801c0b60 | do not track player on death
+801a3524 | endless black
+801772d0 | saa
+80177230 | saa
+80176f1c | do not warp players**
+80175f10 | endless falling, no cam etc or fadeout
+80175d04 | endless falling, eventcam, no fadeout
+
+-> exploring 80176f1c
+80176f28 | nop results in P1 deathcam stuck ON, P2 respawns, P1 does not.
+Restart still works fine (different branch)
+ 
+80176f74 | same but P2 and P1 roles reversed
+
+While digging in warpAndResetStatePlayers2 (2nd layer, see symbol map)
+Look at Pointer->805EE2E8 (always 4?)
+near where its pointing:
+found:
+Byte 80575F87
+takes a control param and sets to 0 after executing
+0 = reset/no execute state
+1 = menu state (1 = default when at menu)
+2 = freeze player models and timer
+3 = regular play
+4 = show camera view only, no input (debug?)
+5 = freeze timer, no input (player models are live)
+6 = clear a stage
+7 = restart stage
+8 = reset to checkpoint
+9 = trigger death camera / reset
+10 = exit and save (expert?)
+11 = Black out screen
+12 = Initialize 2P Intro Sequence (anywhere) -> triggers 2P vs Music
+13 = Regular exit (select mode?)
+14 = Time's up, Draw (restart's level)
+15 = Soft restart???
+16 = Regular exit (2P?)
+
+2019-02-14
+[pulley]
+From prior searching, found top-level function that has no behavior on contact.
+80132efc
+check 80131730 ->
+deeper:
+80131780 -> controls relative rotation to motion of pulley
+801317a0 -> P1 raves, no warp, no activate
+
+2019-02-15
+804823f0 | brighter stage? 
+8007da1c | no death animation / sfx
+800b2a18 | saa
+803c2e38 | death no sfx or reset
+600c6538 | no damage all
+800c6c24 | incorrect knockback relative rotation
+80119ec0 | no drop rings
+8011a254 | dropped rings dont activate or move
+8007da1c | lock up, no death call otherwise
+80097c88 | * homing attack targeting system all
+800b77c8 | keeps track of who dies in 2P VS *
+
+[supershadow]
+80009a14 | DevilDoom no track camera during intro
+8000a304/a5ac | no rotate cam
+
+2019-02-23
+[supershadow, no flyer stage checking]
+80015dd0 | break left hand, garbled mess on use chaosspear
+80016048 | saa, and make glow effect break large area
+80016104 | saa
+8005cff0 | do not create chaos spear bullets
+8005ec24 | no chaos spear weapon (cannot punch, cannot swap guns, enemies do not drop weapon on death)
+80065048 | chaos spears hurt self, halt a lot
+80099f4c | no supershadow **
+800a2bac | saa
+800aa5b4 | do not load in supershadow.one model. Load in effect, weapon, state
+800b0058 | detatch arms from model (on ground at nukkoro2 spawn)
+800b1e98 | break hand, make aim follow twisting messed up hand
+800b27a0 | missing hand
+800b4d88 | no chaos spear bullet, hands missing, box pickup disappears
+800b4df4 | saa
+800b5668 | hand missing
+800b66e8 | model aims lower
+800b6804 | chaos spears target odd things
+800b7254 | saa, no targeting on real enemies
+801ab804 | ** static weapon set function** setWeapon() do not give chaos spear
+801d2cc4 | do not draw chaos spear bullets and effects; damage/still exist (invisible bullets)
+801d2f2c | saa
+8023a74c | ** static weapon set function** setWeatpon(); saa
+8023aaa0 | hands, effects working; no visible bullets nor damage
+8023b278 | ** static weapon
+8023c7ac | prevent shooting
+8027e19c | transparent player model
+8027e314 | no super shadow
+8027e3c0 | transparent player model
+8027e560 | saa
+8027e980 | unhook player from model; transparent state but model at nukkoro2.inf start
+8027ecec | transparent player model
+8027ee34 | saa
+8027eefc | saa
+802f0ac8 | no charging effect chaos spear
+802f0f54 | entrail arms (hold and move for 2 hooks)
+802f1018 | no charge chaos spear (little ones only)
+8040f058 | no hand, polygon mess on charge
+8040ffbc | crazy warping, weirdness
+8044ce98 | polygon mess 24/7
+8045144c | 
+
+-> Inspect 804549dc - 80454aa0 symbol
+
+2019-02-26
+['Chunk crash' / TextureBuffer overflow]
+80162c74 [lwz]
+80043ff4 [stb]
+8036751c [stw]
+800091d8
+
+2019-03-01
+['Chunk crash']
+access to 805a5240 (master malloc list?)
+::
+write  | blocked all some minor errors but game runs fine, crashes still occur at same spots
+803a3f00 | allocate_from_var_pools
+803a3fdc | link new block
+803a3e1c | soft_allocate_from_var_pools
+read
+803a3eb0 | allocate_from_var_pools
+803a3f0c | allocate_from_var_pools
+803a3de8 | soft_allocate_from_var_pools
+------------------------------------------
+Abort;
+->
+[pulley]
+Found a game bug with pulley and camera:
+does not respawn pulley after use -> move camera out of range and jump off then return to pulley device
+
+rather than resuming previous searching, I will try from scratch but recording all shared state pulleys
+(record data for cosmic fall, cryptic castle, circus park, GUN fortress, etc)
+nop:
+801317e0
+80132f60
+80132efc
+80131704
+80132fd0
+-------- ^ prior knowns
+8008e1e4
+8008e304
+8008e4c4
+8008e560
+8008e6d8 | does not 'boost/eject' player forward at end of pulley
+8008e918 | 
+8008e930 | rave
+8008eac4 | can reattach to pulley after jumping off
+8008eb74 | halt
+8009bdfc | does not take pulley || also affects regular pulleys
+8009be80 | 
+8009bee0 | does not take pulley || saa
+8009d5e4
+800b3290 | Animation State Change on using Pulley
+80115ba0
+8015d350
+801c9088
+801c9394
+801cafe8
+801ceab4
+801d3e34 | Play Pulley Sound Effect while using
+
+--------------
+| Character Select Diff |
+80015dd0 | no arm when shooting, no bullets etc
+8005bd5c | corrupted weapon drops transparent overlay
+8005d0f4 | no shoot (half), halt on weapondrop
+8005ec24 | no shoot (half)
+800b1e98 | crazy shooting
+800b27a0 | shoot lower
+800b4df4 | gun wrong model position on shoot
+
+2019-03-02
+['Chunk crash']
+80162c74 [lwz]
+80043ff4 [stb]
+8036751c [stw]
+800091d8 [stfs]
+------^ prior search
+8016fe40 [lwz]
+80015a34 [lwz]
+--------------------
+nop 80171280 -> models not mapped in EV, warp to nukkoro2.inf spawn
+
+[CCG Crash]
+801a4b44 (failed but did not crash)
+---------------------------------
+2019-03-03
+Temp spline swap for pulley/ziplines:
+based on 80132fd0
+blr @ 80132f70
+
+2P Essentials Temporary Pulley/Zipline Disable [dreamsyntax]
+C2132f70 00000001
+4E800020 00000000
+*Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
+
+--------------------
+2019-03-14
+
+Byte 80575F87 || ExecuteStageAction
+
+Get StringName of lastState by:
+pointer(80575F78) deref 4x at offset 0 for each deref
+String-name verified ExecuteStageAction values:
+0 = maintain | no string name, maintains last executed action
+1 =  ???  | no string name, is maintain value while in the menus
+2 = InitAction | freezes player state, timer. Other object animations are alive.
+3 = PlayAction | Player has control, normal gameplay
+4 = EventAction | switches to nearest EventCamera, sets state to Event
+5 = PauseAction 
+6 = GoalAction
+7 = RestartAction | Restart level completely
+8 = ContinueAction | Restart to last checkpoint state
+9 = DeadAction
+10 = SaveAction
+11 = TryAgainAction | Blackout/Continue? screen
+12 = ShowAction | 2PIntroAnimation Event trigger
+13 = FlashbackAction | Same as Event, but exclusive to Library mode (has additional B button action); calls 16
+14 = Result2PAction | 2P win/loss/timeup text at end of 2P Battlemode match
+15 = TimeupAction | Presumably for levels with timer restriction, calls 7 if triggered.
+16 = EndAction | Quit
+------------------------
+2019-03-18
+GravitySwitcher | Space Gadget (3 calls unless specified)
+80293a10 / ?gravitySwithcer? | (39 calls)
+80074908 | halt at touch switch (39 calls)
+8009a2c8 | Activate object, no switch gravity
+8009a388 | Activate object, no switch gravity
+801eb588 | halt after change gravity (1 call) / seems unrelated
+80247b40 | No activate object
+802482d4 | No activate object
+80248338 | saa
+802483a8 | saa
+80270450 | unknown / maybe on checkpoint if gravity? / seems unrelated
+802704dc | saa / seems related
+8040f058 | unload all setobjs for duration of gravity switcher change (130 calls)
+8042270c | unknown / maybe on checkpoint if gravity?
+
+Call order on hit switcher:
+802482d4 -> 80247b40 -> 802483a8 (nop) -> 80248338 -> 8009a388 -> 80074908 (x2) -> 80293a10 (?gravitySwitcher) -> 80074908 (x2) -> (?gravitySwitcher) (repeat segment of a10 to 908) -> 8009a388 -> 8040f058 (green glow happens) -> 8009a2c8 (x2) -> 8040f058 (xmulti) (repeats whole cycle) -> 8040bcc0 (load and set floats small func, has two callers)
+
+note: exclusiveGravitySwitcher call 8009a388 occurs on restart; only occurs on Space Gadget (bingo?)
+calledbyGravitySwithcerALot also called on other levels, Glyphic canyon when leaving first checkpoint area (not caused by the checkpoint itself, seems to be a trigger)
+
+2019-03-29
+[BlackKnight] || INCOMPLETE || [Iter2]
+80067458 | No melee wep effect markers / damage
+80016390 | glCopyMatrix (copy player model to animation data)
+8004f040 | No melee wep effect, yes damage
+800461d0 | saa
+8007b4c8 | disable no move on 3rd strike | throw away weapon = stuck
+8007b534 | saa
+8007b580 | saa
+8007b5dc | saa
+80084108 | disable no move on 3rd strike
+800841e4 | no move at all during/after melee
+8008452c | allow for one swing only
+800847d4 | disable no move on 3rd strike
+80084a18 | don't swing, slow walk
+80093b74 | permanent strafe in one direction/ walk 
+80093bd4 | saa
+8009ca20 | prevent all melee attack calls
+800c658c | deplete all ammo on hit
+802dea10 | no melee wep effect
+-----------
+-> exploring 8009ca20 area
+--nop to inspect--
+8009ca34 | bne -> can't attack melee specific
+8009ca40 | only perform in-air spin attack
+8009ca48 | saa
+8009ca78 bctrl to load weapon state??
+--------------------------------
+prior old
+new iter:
+80084108 | 46 calls, same as 800847d4 (disable no move on 3rd strike)
+80084840 | saa
+800848a4 | saa
+80084914 | saa
+8008452c | rapid press for 2 swings, normally 1 swing (timer?)
+80084a18 | slow down when attacking, no animation or damage done
+80084b54 | disable no move on 3rd strike
+80084be4 | saa
+8023b114 | no weapon trails
+
+digging into 8009c9f0 / 8009ca20 (in list) / WeaponAttackSlowSpeedFunction
+[3rd for code]
+Disable Unarmed Melee (Allow B = Slide Only) [dreamsyntax]
+0409ca60 408200a0
+---
+2019-03-30
+8023b114 | no shoot gun, melee weapons do no trails and no damage, no count down. Animation still happens. Also prevents in-air shooting attack but not melee
+Noweapon melee works normal
+
+2019-03-31
+still digging in same func
+nop results|
+8009ca40 | no mid-air halt attack melee, gun, unarmed
+
+2019-04-05
+---CameraFixes---
+: Lost Impact Turrets :
+found malloc parent chain at 801cef54
+
+possible main free controller of camera @ 8007df28?
+
+: Alien Turret Sky Troops :
+malloc : 800999ac
+
+2019-04-07
+---Boss Calls---
+802d4cc0 | dead() for Diablon / Bottom continues attacking
+802e8114 | saa, but stops attacking
+
+80310160 | EggDealer Lava stop attacking, dead / no endstage @ 80310160
+----
+TrackSpecialCam
+8031aaf4 // egg dealer and diablon
+8029120c // sub bosses and black doom
+
+2P Optionals Freecam for All Bosses [dreamsyntax]
+C229120C 00000001
+4E800020 00000000
+C231AAF4 00000001
+4E800020 00000000
+------
+Death Warp
+80176fd0 | no P2 warp?
+-------------------
+2019-04-09
+GravitySwitcher
+New method: use GravitySwithcher found state of switchers, look for reads, check string references
+Look for dynamic pointer for "Player::SetGravityCommand"
+-> found PlayerBase instead
+call to read GravitySwitcher state @ bl at 80258f68
+
+mem 813513a0 -> player pointer?? -> no, its pointer to "GravitySignBoard" object
+lwz @ 80293958 ->  reads from GravitySwitcherState -> results in no playerStateSwitch
+
+find where floats are stored, first one read @exclusiveGravitySwitcher 8009a388
+
+
+Store SetGravityCommand (execute) @ into (r30 @ 8009a3ac) @ 812fcb80
+
+
+nop @ 8009a3ac for do not store SetGravityCommand on PlayerCommands executer
+
+
+Force character?
+802285dc 
+lis r15, 0x8003
+ori r15, r15, 0xA6A0
+
+
+Found Player::PlayerObject @ PlayerSpawnLoadCharacterModelAndWeapon? @ 80079f40 in r0
+Possible objectList @ 80f72c98 / r27 0x0038 @ 80079f44
+
+
+Stopping @ 80079f48 SaveState F7
+
+
+
+--------
+2019-04-20
+|| Texture Buffer Crash ||
+RelatedFunc5 does frees, no evident change on blr @ 800159d8
+RelatedParentFunc4 does EVENT BON/ANIM map || @ throw blr @ 80172560 || should prevent EV crash on end of stage
+
+Prevent End of Stage Crash v0.1
+C2172560 00000001
+4E800020 00000000
+* Breaks all models in events
+
+
+Try nop @ 801725b8 and @ 80172604
+
+
+---------------
+2019-04-27
+Fixing Library/Event sequence crashes
+Strategy: remove P2 spawn on Event
+EV_CutsceneItemsWarp 805EF2B5 | Not affected by Partner/SpecialCams | 
+Verifying possible values:
+Set to 0 on starting game and first load of regular level = should be P2
+(arbitrary) -> becomes this on EV level clear (westopolis neutral)
+-> becomes FF on falling (break before cutscene 1 westopolis)
+immediately becomes (arbitrary) after (during cutscene)
+-> becomes FF on falling again
+----------
+
+debug_bba:
+80330cb8
+8032c594
+8032863c
+801eb358
+
+
+C2330CB8 00000001
+38000001 00000000
+C232C594 00000001
+38000001 00000000
+C232863C 00000001
+38000001 00000000
+C21EB358 00000001
+38000001 00000000
+-----
+Not able to verify Cutscene in progress,
+for now, prevent spawn on non-playable stages:
+@ 8017707c
+
+lwz r4, 0xA8 (r4)
+cmpwi r4, 811
+bgt 0x8
+li r4, 800
+
+$2P Essentials Spawn P2 v2 [dreamsyntax]
+C217707C 00000003
+808400A8 2C04032B
+41810008 38800320
+60000000 00000000
+*Reduces crashes during in-game cutscenes
+-----------------------------------------------------------------------------------------------
+2019-04-29 [Rush]
+Found shake bug example: laser strikes in Westopolis (and self weapon ?)
+Key doors:
+- Based off P1 player position
+Partner Despawn:
+- Based off P1 camera position
+
+||Partner Despawn||
+-> Attempt without looking at prior
+Strategy: Break on '?deeperStateCall'
+
+found @ "Player::Npc::ShowCommand"
+Hide is not executed when P2 triggers and P1 is out of range.
+
+Confirmed using main camread with rotate
+-> NOT affecting:
+80433898
+801d9aac
+800c38bc
+801d9a14
+801d9290
+8000a3d8
+800bf62c
+800a0574
+
+--Back to diff:
+80019e10 no update any
+8006c2e8 -> stays scrunched
+80079a70 -> stays disappeared (no update any)
+
+Key Doors:
+8011b78c | door still opens no unlocking keys animation
+8011bc70 | saa 
+
+halt: 801211c4, 
+will crash dolphin: 80120d0c, 8015d780
+
+Shake Fix?
+blr @ 8000a508
+Seems to fix lasers but causes strange camera event instead in some partner areas
+C200A508 00000001
+4E800020 00000000 // do not use
+
+
+2P Essentials Remove ScreenShake v2 ??? [needs more added] [dreamsyntax]
+C21FA2DC 00000001
+4E800020 00000000
+C200EF58 00000001
+4E800020 00000000
+
+Switch to Key Doors
+
+
+2019-04-30
+Attempt to patch in Player Warp POC for GoalState Trigger to Possibly Reduce End Level Overflow/Crashes
+8016b2b0 original inst = li r0, 1
+
+patch to replace:
+P1 struct is always @ 807D71A0
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 80000
+stw r16, 0x0(r15)
+
+C216B2B0 00000004
+3DE0807D 61EF71A0
+81EF0000 820F0008
+3A100320 920F0008
+60000000 00000000
+
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lfs f23, 0x0(r15)
+addi f23, f23, 800
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 C2EF0000
+3AF70320 920F0000
+60000000 00000000
+
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 8
+lwz r16, 0x0(r15)
+addi r16, r16, 8000
+stw r16, 0x0(r15)
+
+C216B2B0 00000005
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+39EF0008 820F0000
+3A101F40 920F0000
+60000000 00000000
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0 # 999999f (word format)
+lis r15, 0x807D
+ori r15, r15, 0x71A0 # p1
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+#p2
+lis r15, 0x807D
+ori r15, r15, 0x71A8 # p2
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15) # deref to posX
+stw r16, 0x0(r15) # X
+addi r15, r15, 4
+stw r16, 0x0(r15) # Y
+addi r15, r15, 4
+stw r16, 0x0(r15) # Z
+li r0, 1 # original inst overwrote
+
+No comments version: 
+
+lis r16, 0x4974
+ori r16, r16, 0x23f0
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+lis r15, 0x807D
+ori r15, r15, 0x71A8
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+addi r15, r15, 4
+stw r16, 0x0(r15)
+li r0, 1
+
+2P Experimental Crash Prevention on Goal Event v1
+C216B2B0 0000000B
+3E004974 621023F0
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+920F0000 39EF0004
+920F0000 39EF0004
+920F0000 3DE0807D
+61EF71A8 81EF0000
+81EF0000 920F0000
+39EF0004 920F0000
+39EF0004 920F0000
+38000001 00000000
+*Experimental version, sometimes fails to warp correctly
+
+--------------
+2019-05-03
+New theory on buffers discussed with Donut
+PREDEFINED_LIMIT may exist per level instance.
+To test going to swap Central City (high fail rate) onto Mad Matrix. Prior test used The Doom but that may have been caused by Dolphin FST crash issue
+More on this later.
+
+Misc fixups :
+Circus Park
+Hero Mission should be co-op (count both rings):
+8016ed2c @ mr r4, r3
+where r3 contains current P1 ring count to be sent to MissionChecker with MissionRingCount in r3 after value moved to r4 checker
+
+lis r15, 0x8057
+ori r15, r15, 0x6758
+lwz r15, 0 (r15)
+add r3, r3, r15
+mr r4, r3
+
+2P Essentials Circus Park Hero Mission Co-Op [dreamsyntax]
+C216ED2C 00000003
+3DE08057 61EF6758
+81EF0000 7C637A14
+7C641B78 00000000
+
+Looking for Final Haunt / Vacuum Effect Split2 issue:
+Found @ 804342cc (master split/cam effects?)
+
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2 [dreamsyntax]
+C24342CC 00000001
+4E800020 00000000
+
+
+2019-05-04
+Turret Free Cam / Vehicle searching
+-> found bctrl master for type
+-----
+Security Camera GUN Fortress
+malloc @ 80269010 nop -> Seems this use of free may have a nullcheck so it may not be necessary to nop. Did not find free, only disables malloc
+Will make it v1 in case free needs to be nop'd later if the above is false and memory gets corrupted
+
+2P Essentials GUN Fortress SecurityTurret Fix v1 [dreamsyntax]
+C2269010 00000001
+60000000 00000000
+* Disables effects on Split1 and SpecialCamera for security turret segments
+-----
+2019-05-05
+NPC / Partner Hide Despawn Fix | [DONE]
+from earlier: BP @ 8006c2e8
+Identified DPAD and non-active PartnerSETObj Show/Hide command are separate instances
+Searching for non-active PartnerSETOBj Hide
+8001bdac halt
+Found @ 8007397c 
+-> This is master controller (all show/hide DPAD/non-active type are routed to this func)
+->> Found varience for Mission/Partner
+801f4454 has Hide on InactiveSETobj Partner, nop or change compare to include P2
+For now nop
+
+2P Essentials Partner Despawn Fix v1 [dreamsyntax]
+C21F4454 00000001
+60000000 00000000
+* Fixes partners disappearing if P2 gets to them while P1 is not in range
+
+-
+Vehicle Testing
+8007df28 (do not restore P2/P1 camera to Player, instead track vehicle until despawn)
+801b6060 free camera but leave Player in driving state
+Camera Free @ 801b7974 
+Prevent dismount @ 801ba5e8
+Camera Free @ 801bf428
+
+From above,
+nop @ 801beef8 // disable special cam malloc, attach etc
+blr @ 801bf410 // disable free (vehicle type specific verified)
+
+2P Essentials Fix Vehicles for P2 v0.1 [dreamsyntax]
+C21BEEF8 00000001
+60000000 00000000
+C21BF410 00000001
+4E800020 00000000
+* Only disables SpecialCam right now, Controls are still grabbing P1's 
+
+---
+ShakeFix?
+8000efe8
+blr @ 8000efc0
+No apparent side effects
+
+
+C200EFC0 00000001
+4E800020 00000000
+append to ScreenShake
+
+2P Essentials Remove ScreenShake v2 [dreamsyntax]
+c21fa2dc  00000001
+4e800020  00000000
+c200ef58  00000001
+4e800020  00000000
+c200efc0  00000001
+4e800020  00000000
+---
+For ChaosPowers underflow, due to strange handling of the check I have decided to just use a 2C + 04 gecko to force any negative bar to 0
+CC Points : 805766C8
+CB Points : 805766D4
+
+2C5766C8 00000000 // if Chaos Control 
+045766C8 00000000
+e2000001 80008000
+2C5766D4 00000000 // if Chaos Blast
+045766D4 00000000
+e2000001 80008000
+
+2P Essentials ChaosPowers Activation for P2 v2 [dreamsyntax]
+C216F160 00000001
+60000000 00000000
+2C5766C8 00000000
+045766C8 00000000
+E2000001 80008000
+2C5766D4 00000000
+045766D4 00000000
+E2000001 80008000
+* Prevents underflow of meters
+
+-----
+2019-05-07
+Key Door Fix
+DonutStopGaming found: 8011b928 [seems to load in a distance used to compare f1 which contains P1 distance from door]
+ ^ used in KeyDoors only 
+ 
+ 
+ 
+Can't start at fail case as success case steps to fail case area code
+8011b934 = entrypoint
+INSTR OVERWRITING:
+8011b934 bne-	 ->0x8011B958 (otherwise success = 8011b938 [nextline])
+
+GECKO BEGIN:
+bne- 0x14 [skip over success case mtlr jump, check P2 next]
+lis r15, 0x8011 // P1 in range, trigger success
+ori r15, r15, 0xB938
+mtlr r15
+blr
+//p1 is not in range, now we are injecting our P2 position and re doing the checks
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
+
+No comment version:
+bne- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r5, 0x807D
+ori r5, r5, 0x71A8
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13)
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB958
+mtlr r15
+blr
+
+2P Essentials Keydoors Detect P2 [DonutStopGaming & dreamsyntax]
+C211B934 0000000D
+40820014 3DE08011
+61EFB938 7DE803A6
+4E800020 3CA0807D
+60A571A8 80A50000
+80A50000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08040
+61EFCF2C 7DE803A6
+4E800021 C00D38B0
+FC010040 4C401382
+41820014 3DE08011
+61EFB958 7DE803A6
+4E800020 00000000
+
+2019-05-08
+Westopolis P1 only Triggers Fix |
+800e0c3c @ create Westopolis Lasers
+800e10ac = float checks etc for Westopolis Lasers / StateUpdate (can be set to any stage of laser)
+
+800e1174 @ bge- ->0x800E1184
+Reuse most of Keydoor code:
+GECKO BEGIN: (THIS DOES NOT WORK, needs to account for stack in other bl and the r5 strange behavior)
+bge- 0x14
+lis r15, 0x8011
+ori r15, r15, 0xB938
+mtlr r15
+blr
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lwz	r3, 0 (r30)
+lfs	f0, 0x003C (r3)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x800E
+ori r15, r15, 0x1184
+mtlr r15
+blr
+//natural return to 800e1178 (failure)
+
+2P Essentials Westopolis Triggers Detect P2 v0.1 TEST (broken does not work, Halts) [dreamsyntax]
+C20E1174 0000000F
+40800014 3DE08011
+61EFB938 7DE803A6
+4E800020 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08000
+61EF91EC 7DE803A6
+4E800021 3DE08040
+61EFCF50 7DE803A6
+4E800021 807E0000
+C003003C FC010040
+41800014 3DE0800E
+61EF1184 7DE803A6
+4E800020 00000000
+
+2P DevilDoom Super:
+800b7ed4 (onRestart/onDeath)
+
+2019-05-09
+Less cycles, accomplishes close to vanilla behavior: nop 800e1174 for instant lasers onRange detection
+nop 800e1174
+
+2P Essentials Westopolis Lasers Fix v1 [dreamsyntax]
+C20E1174 00000001
+60000000 00000000
+* Hacky fix that has lasers immediately fire when in range instead of comparing distance
+
+BallColor:
+800a5ab0 = Other Activity Color (Homing attack, spindash, slide trail) [r4]
+80087190 = JumpBall Color [r0]
+80080734 = Falling Color (and slide foot effect) [r0]
+80087df0 = nope
+80087eb4 = nope
+80087278 = nope
+80087190 = nope
+800a02d8 = nope
+80080648 = nope 
+800806f0 = nope
+80397434 = nope  
+
+Example Gecko: Other-Activity must li to r4, other two to r0
+X VALID VALUES:
+0 = White/0000000 Color
+1 = Sonic 
+2 = Tails
+3 = Knuckles
+4 = Amy
+5 = Rouge
+6 = Omega
+7 = Vector
+8 = Espio
+9 = Maria
+A = Bee
+B = Eggmonitor
+C = Dooms Eye
+
+Sonic-Color: 
+80080734
+
+Jump Ball Color Switch [dreamsyntax]
+C20A5AB0 00000001
+3880000X 00000000
+C2087190 00000001
+3800000X 00000000
+C2080734 00000001
+3800000X 00000000
+*Change all 3 X to valid values:
+*0 = White/0000000 Color
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink) 
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
+
+2019-05-11
+Computer Room object identified to not trigger goal on P2 touch:
+Found at 802317f4 (bge- skip)
+
+ChaosPowers Music Idle Disable v2::
+803c3bac (IronJungle load() track function
+Found 800a4d84 (bl to StopAndLoadNewTrack() of 800a4cd8 (ChaosPowersDisable))
+nop 800a4d84, append to existing music code:
+
+
+2P Optionals No Idle ChaosPowers Music v2
+C20A4FF0 00000001
+60000000 00000000
+C20A4D84 00000001
+60000000 00000000
+
+2019-05-14
+Turret/Vehicle Camera searching
+8060b274 (reoccuring r3)
+8060b27c (reoccuring r4)
+
+before 801ced24 is called (all turrets/vehicles)
+
+2019-05-17
+Westopolis Laser Fix v1 is invalid;; Causes crash on any EVENT that uses stg0100 (lasers will attempt to fire during cutscene result in out of buffer memory)
+Solution: properly implement distance check per laser per player::
+
+800e1174 @ bge- ->0x800E1184
+Reuse most of Keydoor code:
+r3 init = 8060b350
+
+
+2019-05-19
+r1 (sp) and r30 does not change within this func, account for this;
+OOPS I was sending this to the keydoor code !! (fixed in this attempt)
+Also should be blt- not bge as we want success case to jump to next line in original code
+
+blt- 0x78
+lwz r5, 0x000C (r30)
+addi r3, sp, 204
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+addi r3, sp, 240
+addi r4, sp, 204
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+addi r3, sp, 240
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lwz	r3, 0 (r30)
+lfs	f0, 0x003C (r3)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x800E
+ori r15, r15, 0x1184
+mtlr r15
+blr
+//natural return to 800e1184 (success)
+
+works
+
+2P Essentials Westopolis Lasers Fix v2 [dreamsyntax]
+C20E1174 00000010
+41800078 80BE000C
+386100CC 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 386100F0
+388100CC 3DE08000
+61EF91EC 7DE803A6
+4E800021 386100F0
+3DE08040 61EFCF50
+7DE803A6 4E800021
+807E0000 C003003C
+FC010040 41800014
+3DE0800E 61EF1184
+7DE803A6 4E800020
+60000000 00000000
+
+---
+Fix Computer Room goal ring detect for P2:
+bge- @ 802317f4
+
+Uses same format as Westopolis lasers, code can be mostly reused:
+
+blt- 0x74
+lwz r5, 0x0030 (r31)
+addi r3, sp, 56
+lis r4, 0x807D
+ori r4, r4, 0x71A8
+lwz r4, 0x0(r4)
+lwz r4, 0x0(r4)
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+addi r3, sp, 68
+addi r4, sp, 56
+lis r15, 0x8000
+ori r15, r15, 0x91EC
+mtlr r15
+blrl
+addi r3, sp, 68
+lis r15, 0x8040
+ori r15, r15, 0xCF50
+mtlr r15
+blrl
+lfs	f0, 0x003C (r31)
+fcmpo cr0, f1, f0
+blt- 0x14
+lis r15, 0x8023
+ori r15, r15, 0x18B4
+mtlr r15
+blr
+//natural return to 802317f8 (success)
+
+2P Essentials Computer Room Goal Fix [dreamsyntax]
+C22317F4 0000000F
+41800074 80BF0030
+38610038 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 38610044
+38810038 3DE08000
+61EF91EC 7DE803A6
+4E800021 38610044
+3DE08040 61EFCF50
+7DE803A6 4E800021
+C01F003C FC010040
+41800014 3DE08023
+61EF18B4 7DE803A6
+4E800020 00000000
+
+
+---
+Checkpoint Switching Searching::
+
+
+@ 800a8b98
+ori r3, r3, 0x8
+mr	r31, r3
+
+Attempt PlayerPointerSwap
+C20A8B98 00000002
+60630008 7C7F1B78
+60000000 00000000
+
+
+2019-05-20
+
+and completely overwrite wTexCal toplevel:
+@ 800a8bec
+stwu sp, -0x0010(sp)
+mflr r0
+stw r0, 0x0014(sp)
+lwz r0, 0x0004(r3)
+lwz r3, 0x0008(r3)
+ori r3, r3, 0x8
+nop (replace me with 54001838) == rlwinm r0, r0, 3, 0, 28 (1fffffff)
+add r3, r3, r0
+lwz r0, 0x0014(sp)
+mtlr r0
+addi sp, sp, 16
+
+C20A8BEC 00000006
+9421FFF0 7C0802A6
+90010014 80030004
+80630008 60630008
+54001838 7C630214
+80010014 7C0803A6
+38210010 00000000
+
+Failure, breaks P1 no change for P2 (checkpoints are broken)
+
+
+2019-05-26
+TrailBlaze State Shadow: nop @ 8008580c
+HomingAttack state transition on target hit? @ 80085f28
+MultiChain HomingAttack @ 80086850
+No HomingAttack others, but HALT later @ 80089930
+No HomingAttack others, no halt @ 800899d4
+80097c88 saa
+----
+CarType Fixup:
+li	r5, 0 = 801b924c (P1 control for MOUNT)
+li	r5, 0 = 801ba5d0 (P1 control for DISMOUNT)
+li	r5, 0 = 801b9210 (P1 control for ??DISMOUNT PT2)
+
+StatusBit Version: 
+P1 WhenBeginTransitionToDrive->0x10000
+P2 WhenBeginTransitionToDrive->0x65536
+
+OnMount:
+801b924c = Has isDriving flag [r4 needs to be 2 at end]
+OnDismount:
+801ba5d0 = Has isDriving flag [r4 needs to be 1 at end]
+801b9210 = Does not have isDriving flag (but hacky fix is to check for 0, but this is not unique) ||NOT NEEDED
+
+Also need to fetch UI State to determine who is elligible to mount/dismount based on UI shown to prevent dual players in vehicles case issues
+
+ignoring 801b9210/PT2 (not sure what it does, no crash even if ignored):
+Only using isDriving flag types:
+
+
+||DRAFT||
+FOR: MOUNT / 801b924c / r4 should be 2 at end 
+	P1Check GetFlag:
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+	Constants per player ifCheck:
+lis r4, 1 	//0x10000 (P1)
+cmpw r5, r4
+bne 0xC 		//branch to P2 check
+li r5, 0
+bne 0x** 		//re-use bne and jump to end and set r4
+	P2Check GetFlag:
+lis r5, 0x807D
+ori r5, r5, 0x71A8
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 6
+ori r4, r4, 0x5536 (P2)
+cmpw r5, r4
+bne 0x8
+li r5, 1
+li r4, 2 		//set original r4
+//natural return
+
+As I was writing that I realized since this is only called during CarMount/Dismount its pointless to check P2 at all if P1 fails, since it then must be P2. It should still be checked verbosely for UI elements to reduce error cases though
+
+
+This test version should allow for proper player to drive, but only if P2 gets in first. If P1 is in a vehicle and P2 attempts to get in vehicle P1 will still have control
+||P1 CheckOnly Version (no UI)||
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1 	//0x10000 (P1)
+cmpw r5, r4
+bne 0xC 		//branch to P2 check
+li r5, 0		//CONTROLLER TO P1
+beq+ 0x8 		//re-use known status and jump to end and set r4
+li r5, 1		//CONTROLLER TO P2
+li r4, 2 		//set original r4
+
+Code only:
+APPLY TO 801b924c // MOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+
+
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lwz r5, 0xA8(r5)
+lis r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v1 [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+80A500A8 3C800001
+7C052000 4082000C
+38A00000 41A20008
+38A00001 38800002
+60000000 00000000
+C21BA5D0 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+80A500A8 3C800001
+7C052000 4082000C
+38A00000 41A20008
+38A00001 38800001
+60000000 00000000
+*Disables SpecialCam & allows for P2 to drive if P2 gets in a CarType when P1 is not already driving
+*For P2 to drive, P2 needs to get in a vehicle while P1 is not in one
+
+Works!
+
+Adding UI check:
+P1 UI 805766EC
+A->CarType = 12 (valid during dismount call)... and is set before onMount is called...
+Stuck. Need different method for v2
+---------------------
+
+2019-06-02
+Prior Fix Vehicles code did not account for Weapon/ChaosPowers/ShieldBubble state.
+Found byte that only reflects isDriving (Turret, Vehicle, Saucer, etc)
+is triggered after onMount, and after onDismount
+@ 0xAE
+
+However, original usage of 0xA9 can be adapted, only grabbing right side of byte : XY where Y = 0 if not inMount/isMounted and X is just ChaosPowers true or false
+Ignoring the X and only Checking Y should be sufficient:
+
+lbz and then andi. to only look at Y in XY
+drop lis on r4 to just li
+  
+APPLY TO 801b924c // MOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+ 
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v2 [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+4082000C 38A00000
+41A20008 38A00001
+38800002 00000000
+C21BA5D0 00000007
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+4082000C 38A00000
+41A20008 38A00001
+38800001 00000000
+*Disables SpecialCam & allows for P2 to drive if P2 gets in a CarType when P1 is not already driving
+*For P2 to drive, P2 needs to get in a vehicle while P1 is not in one
+*Now will work regardless of WeaponType and ChaosPower state
+
+----
+2019-06-08
+Flyables TrueCam searching;
+Meanwhile also patchup Flyable FreeCams to not throw exception on restart/onGoal etc while player(s) are flying:
+blr @ 801b3148 instead of nop @ 801b317c
+blr @ 801b308c instead of nop @ 802cb65c
+
+Found reason for onGoal/onRestart/onDeath attempted free was because freeFlyableSpecialCam call occurs for that scenario @ 802cc084, and was not nop'd
+
+2P Essentials Flyables Freecam v2 [dreamsyntax]
+C21B3148 00000001
+4E800020 00000000
+C21B308C 00000001
+4E800020 00000000
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras. v2 fixes exception being thrown on restarting a stage or clearing it while one player is still on a flyable.
+
+The attach to 'ExternalCam' has been verified to be tied to Cam0, not to a split. 
+
+----
+2019-06-15
+Attempting to reduce global used textures:
+Candidates: 
+stg_cmn_gdt.one -> STG_GDT.TXD [212kb]
+common/WeaponResource.one -> WEAPONRESOURCE.TXD [92.5kb]
+common/vehicleResource.one -> VEHICLE.TXD [103kb]
+common/LensFlare.one -> LENSFLARE.TXD  [16.6kb]
+common/CommonEffect.one -> COMMONEFFECT.TXD [120kb] [[*Did not get loaded]]
+enemy/* [various]
+
+Updated README with testing done 6/15/2019 to identify crashes
+----
+2019-06-18
+Stages redone with HPP 0.8.1 except digital circuit.
+TXD stage TEX crunch done, needs testing. stg0600 GDT crunched.
+
+Separate Respawns:
+deathCamsRespawnEtc -> does not call deathcam post death state
+800447b0 -> never check after deathcam is active
+found SETObj checkpoint/death type load/unload @ 
+800cb654 Load
+800cb758 Unload
+8016f380 | warp related on death
+801738ac | never check after deathcam is active
+80204794 | never check after deathcam is active
+Weapon Drop Spasm
+
+nop @ 80178c10, 8023afd8
+
+
+$2P Optionals Independent Death WeaponDrop Management [dreamsyntax]
+c2178c10 00000001
+60000000 00000000
+c223afd8 00000001
+60000000 00000000
+*Player X will not lose weapon if Player Y dies
+*
+*Known bug: UI will not show for current held weapon until swapped or dropped and re-pickup
+
+
+$2P Optionals SETObjs Do Not Reset for Player Death [dreamsyntax]
+c20cb654 00000001
+4e800020 00000000
+c20cb758 00000001
+4e800020 00000000
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+ 
+For player is dying identification:
+Use Status2:
+80575FA8 -> 0x0 -> 0x0 -> 0xAE
+Or
+807D71A0 -> 0x0 -> 0xAE
+same for P2 0x8 -> ...
+0xAE for P1/P2 on DeathState = 0x44 [note dashramp uses same byte but 0x40, checkpoint warp is 0x02]
+
+Copy old notes:
+"
+-> exploring 80176f1c
+80176f28 | nop results in P1 deathcam stuck ON, P2 respawns, P1 does not.
+Restart still works fine (different branch)
+ 
+80176f74 | same but P2 and P1 roles reversed
+"
+
+APPLY TO 80176f28 // P1 respawn code()
+// ORIGINAL code: "bl->0x800B7F88"
+// This should check if P1 status byte 0xAE = 0x44, then take original bl. Else skip over it.
+// Accounts for StartStage() calling same function.
+// Attempted fix is to use offset 0x0, and check if its 00, if it is allow call to happen (hopefully only ever occurs at StageInitialize)
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r15
+beq 0x14
+lbz r15, 0x0(r16)
+li r17, 0x0
+cmpw r17, r15
+bne 0x14
+lis r15, 0x800B
+ori r15, r15, 0x7F88
+mtlr r15
+blrl
+
+APPLY TO 80176f74 // P2 respawn code()
+// ORIGINAL code: "bl->0x800B7F88" 
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r15
+beq 0x14
+lbz r15, 0x0(r16)
+li r17, 0x0
+cmpw r17, r15
+bne 0x14
+lis r15, 0x800B
+ori r15, r15, 0x7F88
+mtlr r15
+blrl
+
+Success
+
+$2P Optionals Independent Respawns [dreamsyntax]
+c2176f28 00000009
+3e00807d 621071a0
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c2176f74 00000009
+3e00807d 621071a8
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+C21CB454 00000001
+60000000 00000000
+*Experimental version
+*Player X's death will not cause Player Y to respawn
+
+
+Phase 1: SUCCESS / COMPLETE
+- Non-dead player maintain weapon (DONE)
+- SETObj state is maintained (DONE)
+- Identify way to tell which Player is Dying/Dead (DONE)
+- Warp and reset state of identified player (DONE)
+- Disable DeathCam for all [and temporarily use NoFadeScreen code] (DONE)
+
+Phase 2:
+- Only reset rings of respawned player (PARTIAL)
+- Partner State not reset
+- Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
+- Disable Death exclusive FadeToBlack (maintain it for other actions)
+- Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
+- Fix Mission sync (DONE)
+- Fix effects unloading for non-respawning player (DONE)
+
+DeathCam possible locations:
+DeathStateRelated and DeathCamsRespawn are two ones occuring PRIOR to the shift
+StuckOnDeathCam3 occurs after
+likely whichever is closer to DeathCam3
+
+--- Not the case.
+New theory: Shadow manually sets the camera for some actions instead of creating and attaching to an ExternalCamera (specialCam in my symbol notes)
+and one of these cases is DeathCam
+
+Found that blr on ??InsanelyLongSpecialCamAttachMaybeToStageManagerFunction_801c9ea4_
+results in no deathcam, but then breaks everything else and on initialize case.
+
+Bingo, caller on deathCam case:
+801cb454
+
+nop @ 801cb454
+
+DeathCam Remove, applied to Independent Respawns code above
+C21CB454 00000001
+60000000 00000000
+
+LimblessVector's Time Reset disable:
+$Timer No Reset On Death
+C2178bc4 00000001
+60000000 00000000
+-----------
+2019-06-19
+Phase 2 Death Respawns some fixes
+Stutter is ended by StageAction:ContinueAction, check later for StageAction halter
+
+Found Effects Unloading code:
+8042554c -> blr for no unload
+(Load effects address is function above it in Dolphin)
+
+Rings store @ 8016f32c (also occurs at initial spawn)
+For basic version nop, will initialize at 50 rings for first stage played and will maintain rings across stages.
+
+$Temporary Ring Carry [dreamsyntax]
+C216F32C 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
+
+$2P Optionals Independent Respawns TESTVERSION | IDENTIFIED MEMORY LEAK DO NOT USE [dreamsyntax]
+c2176f28 00000009
+3e00807d 621071a0
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c2176f74 00000009
+3e00807d 621071a8
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c21cb454 00000001
+60000000 00000000
+c242554c 00000001 X MEMORY LEAK (Quit calls this, do not blr)
+4e800020 00000000 X MEMORY LEAK (Quit calls this, do not blr)
+*Experimental version
+*Player X's death will not cause Player Y to respawn
+*REQUIRES No FadeScreen
+*DeathCamFix, EffectFix(MEMORY LEAK FOUND) included.
+
+$Timer No Reset On Death [LimblessVector]
+C2178bc4 00000001
+60000000 00000000
+
+$Temporary Ring Carry [dreamsyntax]
+C216F32C 00000001
+60000000 00000000
+*Testing/Temp version for Independent Respawns code
+*Will initialize at 50 rings for first stage played
+*and will maintain rings across succeeding stages
+
+
+EffectFix ONLY death: nop @ 80204400
+This finding suggests its possible I could mess up the SETObj case as well, verifying...
+-> no, the SETObj ones are exclusive to Death call state load/unload for last CheckpointData
+
+$2P Optionals Independent Respawns TESTVERSION v2 [dreamsyntax]
+c2176f28 00000009
+3e00807d 621071a0
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c2176f74 00000009
+3e00807d 621071a8
+82100000 82100000
+89f000ae 3a200044
+7c117800 41820014
+89f00000 3a200000
+7c117800 40820014
+3de0800b 61ef7f88
+7de803a6 4e800021
+60000000 00000000
+c21cb454 00000001
+60000000 00000000
+C2204400 00000001
+60000000 00000000
+*Experimental version
+*Player X's death will not cause Player Y to respawn
+*REQUIRES No FadeScreen
+*DeathCamFix, EffectFix included.
+
+2019-06-20
+FINALLY 2P Unknowns Spawn Special Cases Identified:
+c21a206c  00000001
+38000320  00000000
+This overrides some? textures (GUN Soldiers confirmed) to match the stage800-802 soldiers
+
+Stuff found to add to Respawn code:
+EnemyState is reset
+If player is wallclinging state is reset
+
+AnyAffinity:
+KillEnemiesType sync reset fix: blr @ 801a24ec
+TriggerType sync reset fix: blr @ 8016b110
+
+2P Optionals SETObjs Do Not Reset for Player Death TESTVERSION v2 [dreamsyntax]
+C20CB654 00000001
+4E800020 00000000
+C20CB758 00000001
+4E800020 00000000
+C21A24EC 00000001
+4E800020 00000000
+C216B110 00000001
+4E800020 00000000
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+*v2 now has Mission Sync
+
+Ring Fix:
+stw	r0, 0 (r30) @ 8016f32c
+Stores to playerRing bytes, called twice (once per player)
+Solution?
+Add if check for relevant isDead state 
+HOWEVER Restart() does not account for player state. Solution? use an unused register and fill it with a marker
+====
+ContinueAction type reg = 0
+RingStart type: reg = 1
+if reg = 0{
+	if (player1state == DEAD)
+		jmp EXEC
+	}
+	if (player2state == DEAD)
+		jmp EXEC
+	}
+	jmp NOEXEC
+}
+EXEC: 
+	original code (stw r0, 0 (r30))
+NOEXEC:
+    nop/return out of gecko injection
+====
+-> Thought of an oversight with original pseudocode, if P1 is dying and respawns just as P2 dies, P2 will never reset rings.
+
+Solution:
+
+r30 holds relevant player ring pointer
+8057670C = P1
+80576758 = P2 
+
+====
+ContinueAction type reg = 0
+RingStart type: reg = 1
+if reg = 0{
+	if r30 = 8057670C
+		if (player1state == DEAD)
+			jmp EXEC
+		}
+	else (assume P2) {
+		if (player2state == DEAD)
+			jmp EXEC
+		}
+	}
+	jmp NOEXEC
+}
+EXEC: 
+	original code (stw r0, 0 (r30))
+NOEXEC:
+    nop/return out of gecko injection
+====
+
+8016f32c = Write to player ring count
+
+80178cc8 = Restart/Initialize 
+Original OP : addi	r3, r29, 40
+use r15 as dummy register
+----------
+@ 80178cc8
+li r15, 1
+addi r3, r29, 40
+----------
+ASM :
+C2178CC8 00000002
+39E00001 387D0028
+60000000 00000000
+
+
+80178c14 = ContinueAction 
+Original OP : addi	r3, r30, 40
+----------
+@ 80178c14
+li r15, 0
+addi r3, r30, 40
+----------
+ASM : 
+C2178C14 00000002
+39E00000 387E0028
+60000000 00000000
+
+
+8016f32c = StoreRings to 0
+li r16, 1
+cmpw r15, r16
+beq 0xXX //if reg = 1, jump to EXEC
+//if r30 == 8057670C
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0xXX [jump to p2 is dead check]
+//if player 1 is dead
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0xXX //jump if not dead to NOEXEC
+beq 0xXX //jump to EXEC
+//if player 2 is dead
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0xXX //jump if not dead to NOEXEC
+stw r0, 0(r30) :: EXEC
+::NOEXEC
+
+NO SEPARATE LINE COMMENT VERSION:
+li r16, 1
+cmpw r15, r16
+beq 0x58 jump to EXEC
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0x28 [jump to p2 is dead check]
+lis r16, 0x807D // P1 ded
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x2C //jump if not dead to NOEXEC
+beq 0x24 //jump to EXEC
+lis r16, 0x807D // P2 ded
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x8 //jump if not dead to NOEXEC
+stw r0, 0(r30) :: EXEC
+::NOEXEC
+
+NO COMMMENTS
+li r16, 1
+cmpw r15, r16
+beq 0x58
+lis r16, 0x8057
+ori r16, r16, 0x670C
+cmpw r16, r30
+bne 0x28
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x2C
+beq 0x24
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+bne 0x8
+stw r0, 0(r30)
+
+ASM:
+C216F32C 0000000D
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 00000000
+
+COMBINED CODE:
+
+$2P Optionals Independent Ring Management [dreamsyntax]
+C2178CC8 00000002
+39E00001 387D0028
+60000000 00000000
+C2178C14 00000002
+39E00000 387E0028
+60000000 00000000
+C216F32C 0000000D
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 00000000
+
+----------------------
+2019-06-26 Jump Ball Codes for 2P
+
+800a5ab0 = Other Activity Color (Homing attack, spindash, slide trail) [r4]
+80087190 = JumpBall Color [r0]
+80080734 = Falling Color (and slide foot effect) [r0]
+
+Original JumpBall Code:
+c20a5ab0  00000001
+0388000X  00000000
+c2087190  00000001
+0380000X  00000000
+c2080734  00000001
+0380000X  00000000
+
+1 = Sonic (Blue)
+2 = Tails (Yellow)
+3 = Knuckles (Red)
+4 = Amy (Light Pink)
+5 = Rouge (Very Light Purple)
+6 = Omega (Red, Large Radius)
+7 = Vector (Green, Large Radius)
+8 = Espio (Light Blue)
+
+Draft:
+COLORS TO USE || 2 = Yellow [15] | 4 = Pink [16]
+		| 1 = Blue [17] | 6 = Orange [18] | 7 = Green [19]
+				
+	Account for non-playable characters first:
+	li r15, 15 // player bounds+1 start (skip redshadow)
+	lwz	r4, 0x0064 (r4) // original exec (entity ID retrieval)
+	cmpw r4, r15
+	blt 0x** [jump to exit]
+	--repeat per entity ID--
+	li r15, [entity ID]
+	cmpw r4, r15 
+	bgt 0xC [skip next 2 lines]
+	li r4, COLOR
+	beq 0x** [jump to exit]
+	--end repeat per entity ID--
+	
+	
+------
+Found non-jumpball type (maria, bee, eggmon, dooms eye) result in an exception
+with enough jumps, so these will not be utilized
+EDIT: -> This is not true, found the exception is caused by the fall color code
+Looking into why
+Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite; different junk register must be used for inject3
+EDIT2: -> This did not fix the problem
+
+800a5ab0 = [r4] 0388000X | lwz	r4, 0x0064 (r4)
+80087190 = [r0] 0380000X
+80080734 = [r0] 0380000X
+ID BOUNDS : 14 = Red Shadow | 19 = Green Android
+
+@ 800a5ab0 [JumpDash/Slide]
+li r15, 15
+lwz	r4, 0x0064 (r4)
+cmpw r4, r15
+blt 0x50
+bgt 0xC
+li r4, 0x2
+beq 0x44
+li r15, 16
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x4
+beq 0x30
+li r15, 17
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x1
+beq 0x1C
+li r15, 18
+cmpw r4, r15 
+bgt 0xC
+li r4, 0x6
+beq 0x8
+li r4, 7
+------
+Complete:
+[INJECT 1]
+C20A5AB0 0000000C
+39E0000F 80840064
+7C047800 41800050
+4181000C 38800002
+41820044 39E00010
+7C047800 4181000C
+38800004 41820030
+39E00011 7C047800
+4181000C 38800001
+4182001C 39E00012
+7C047800 4181000C
+38800006 41820008
+38800007 00000000
+
+@ 80087190 [JumpBall]
+li r15, 15
+lwz r0, 0x0064 (r4)
+cmpw r0, r15
+blt 0x50
+bgt 0xC
+li r0, 0x2
+beq 0x44
+li r15, 16
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x4
+beq 0x30
+li r15, 17
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x1
+beq 0x1C
+li r15, 18
+cmpw r0, r15 
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+Complete:
+[INJECT 2]
+C2087190 0000000C
+39E0000F 80040064
+7C007800 41800050
+4181000C 38000002
+41820044 39E00010
+7C007800 4181000C
+38000004 41820030
+39E00011 7C007800
+4181000C 38000001
+4182001C 39E00012
+7C007800 4181000C
+38000006 41820008
+38000007 00000000
+
+@ 80080734 [Falling]
+-> This is causing a recoverable exception occasionally
+Why? Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite
+Found playerID is being read 'f' in a place it should not be (r4?)
+Reason identified: reading from r15, which is NOT refreshed 
+prior to the overwrite
+EDIT2: This did not fix the issue
+
+
+Different Junk register must be used: r20
+li r20, 15
+lwz r0, 0x0064 (r4)
+cmpw r0, r20
+blt 0x50
+bgt 0xC
+li r0, 0x2
+beq 0x44
+li r20, 16
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x4
+beq 0x30
+li r20, 17
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x1
+beq 0x1C
+li r20, 18
+cmpw r0, r20 
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+[INJECT 3] (Broken / Issues)
+C2080734 0000000C
+3A80000F 80040064
+7C00A000 41800050
+4181000C 38000002
+41820044 3A800010
+7C00A000 4181000C
+38000004 41820030
+3A800011 7C00A000
+4181000C 38000001
+4182001C 3A800012
+7C00A000 4181000C
+38000006 41820008
+38000007 00000000
+
+Combined Code (Unoptimized)
+C20A5AB0 0000000C
+39E0000F 80840064
+7C047800 41800050
+4181000C 38800002
+41820044 39E00010
+7C047800 4181000C
+38800004 41820030
+39E00011 7C047800
+4181000C 38800001
+4182001C 39E00012
+7C047800 4181000C
+38800006 41820008
+38800007 00000000
+C2087190 0000000C
+39E0000F 80040064
+7C007800 41800050
+4181000C 38000002
+41820044 39E00010
+7C007800 4181000C
+38000004 41820030
+39E00011 7C007800
+4181000C 38000001
+4182001C 39E00012
+7C007800 4181000C
+38000006 41820008
+38000007 00000000
+C2080734 0000000C
+3A80000F 80040064
+7C00A000 41800050
+4181000C 38000002
+41820044 3A800010
+7C00A000 4181000C
+38000004 41820030
+3A800011 7C00A000
+4181000C 38000001
+4182001C 3A800012
+7C00A000 4181000C
+38000006 41820008
+38000007 00000000
+
+--
+2019-06-27
+
+Last time, exception was found on INJECT 3
+Problem was assumed to be junk register,
+moved to r20, no change.
+
+Further testing today found that its the 
+jump-dash to -> hit ground transition throwing the exception
+and is exclusive to INJECT 3 (isolated with no other codes)
+
+Now previous "all partners change to color type" 
+shall be tested. 
+
+Theories of what could be causing exception:
+1. There is a previous cmp value that is used in a cror
+being overwritten by our cmps in the gecko
+-> Original CR everytime: 90000088; with my changes: XYYYYYYY is non matching (at minimum for fail case)
+-> No exception thrown on attempted branch replacement -> NO
+
+2. Improper setting (all partners code should have same exception) -> NO
+
+3. Gecko location is overwriting used RAM? -> NO
+
+4. Too many cycles? -> NO
+
+5. Bad Gecko Code? (Consider cases above 19?) -> Not needed
+-> Rewriting: (optimize length with cmpwi instead)
+lwz r0, 0x0064 (r4)
+cmpwi r0, 15
+blt 0x44
+bgt 0xC
+li r0, 0x2
+beq 0x38
+cmpwi r0, 16 
+bgt 0xC
+li r0, 0x4
+beq 0x28
+cmpwi r0, 17 
+bgt 0xC
+li r0, 0x1
+beq 0x18
+cmpwi r0, 18
+bgt 0xC
+li r0, 0x6
+beq 0x8
+li r0, 7
+
+INJECT 3 [optimized, no issues]
+C2080734 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+
+Optimize INJECT 1 & INJECT 2
+
+INJECT 1 [optimized] / swap out r0 with r4 in INJECT 3
+lwz r4, 0x0064 (r4)
+cmpwi r4, 15
+blt 0x44
+bgt 0xC
+li r4, 0x2
+beq 0x38
+cmpwi r4, 16 
+bgt 0xC
+li r4, 0x4
+beq 0x28
+cmpwi r4, 17 
+bgt 0xC
+li r4, 0x1
+beq 0x18
+cmpwi r4, 18
+bgt 0xC
+li r4, 0x6
+beq 0x8
+li r4, 7
+
+C20A5AB0 0000000A
+80840064 2C04000F
+41800044 4181000C
+38800002 41820038
+2C040010 4181000C
+38800004 41820028
+2C040011 4181000C
+38800001 41820018
+2C040012 4181000C
+38800006 41820008
+38800007 00000000
+
+INJECT 2 [optimized] / Identical to INJECT 3 except @ 80087190
+C2087190 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+
+--> Final code:
+
+$2P Optionals Unique Android JumpBall Colors [dreamsyntax]
+C20A5AB0 0000000A
+80840064 2C04000F
+41800044 4181000C
+38800002 41820038
+2C040010 4181000C
+38800004 41820028
+2C040011 4181000C
+38800001 41820018
+2C040012 4181000C
+38800006 41820008
+38800007 00000000
+C2087190 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+C2080734 0000000A
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 00000000
+*Gives all the 2P Androids custom JumpBall colors
+
+-----
+Checkpoint Hunting
+Found SETObj logic
+Maybe found render
+Symbols updated
+
+2019-06-29
+- Revisiting prior research functions listed, most point to Checkpoint Virtual function Layer4, one @ Layer3
+-----------
+2019-06-30
+Switching to Independent Respawns Phase 2
+
+Phase 1: SUCCESS / COMPLETE
+- Non-dead player maintain weapon (DONE)
+- SETObj state is maintained (DONE)
+- Identify way to tell which Player is Dying/Dead (DONE)
+- Warp and reset state of identified player (DONE)
+- Disable DeathCam for all [and temporarily use NoFadeScreen code] (DONE)
+
+Phase 2:
+- Only reset rings of respawned player (DONE)
+- Partner/Mission Selected State not reset (PARTIAL) 
+- Timer should not reset (continuous timer) (DONE) -> LimblessVector had an existing code
+- Disable Death exclusive FadeToBlack (maintain it for other actions)
+- Remove respawn 'stutter' (chunk/geo refresh) if possible for non-respawning player
+- Fix Mission sync (DONE)
+- Fix effects unloading for non-respawning player (DONE)
+- Fix UI for non-dead player maintain weapon (DONE)
+
+nop @ 802044c4 for no weapon UI reset on other player death
+nop @ 802044cc for no mission UI (and select lock) reset on death
+
+@!inspect 80204554 for falling while wallrunning
+
+
+$2P Optionals Independent Death WeaponDrop Management v2 [BUG IDENTIFIED DO NOT USE] [dreamsyntax]
+C2178C10 00000001
+60000000 00000000
+C223AFD8 00000001
+60000000 00000000
+C22044C4 00000001
+60000000 00000000
+*Player X will not lose weapon if Player Y dies
+*Select Mode corruption bug identified DO NOT USE
+
+$2P Optionals SETObjs Do Not Reset for Player Death TESTVERSION v3 [dreamsyntax]
+C20CB654 00000001
+4E800020 00000000
+C20CB758 00000001
+4E800020 00000000
+C21A24EC 00000001
+4E800020 00000000
+C216B110 00000001
+4E800020 00000000
+C22044CC 00000001
+60000000 00000000
+*SETObjs will not reset if a player dies
+*Only applies to death, not to Restart
+*v2 now has Mission Sync
+*v3 now has MissionSelected Sync
+
+----
+Idea for non-death fade to black exclusive:
+@ 800448a0 | stwu sp, -0x0030(sp)
+Perform an if check if player1 or player2 status = dying/dead state, blr in this event
+
+Copying from Indendent Ring Method:
+lis r16, 0x807D // P1 ded?
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+beq 0x20 //jump to blr
+lis r16, 0x807D // P2 ded?
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpw r17, r16
+bne 0x8 //jump past blr
+blr
+stwu sp, -0x0030(sp)
+
+NO COMMENTS:
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+li r17, 0x44
+cmpw r17, r16
+beq 0x20
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpw r17, r16
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+C20448A0 00000009
+3E00807D 621071A0
+82100000 82100000
+8A1000AE 3A200044
+7C118000 41820020
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 7C118000
+40820008 4E800020
+9421FFD0 00000000
+
+Works except for 2 frames (when state reset happens maybe?)
+
+
+IDENTIFIED BUG: WeaponUI Maintain is corrupting select mode available stages
+
+----
+2019-07-03
+Due date of 2.0 has been moved back another month, now planned for 9-9-2019
+
+IDENTIFIED BUG2: FadeToBlack attempted fix causes exceptions at game initial initialize [RESOLVED]
+
+Mapping Mission/Goal functions for attempt POC:
+
+PoC for kill amount based affinity on goal ring:
+
+"Assuming you can set Dark/Hero/Neutral
+I think modifying the dark/hero points UI, replacing with enemy affinity counter would be a good way to have 'true route freedom'
+And then have expert goal rings as only goal trigger which then calculates your route based on the enemies killed
+I don't think that should be in reloaded since that throws out objectives entirely
+Difference calculation happens at the end
+E.g. westopolis you killed 30 humans, 44 aliens and reach goal
+44-30 
+14 -> take this number and check neutral ratio (-5 to 5 maybe )
+Not in range, so trigger Hero Route next stage
+More complex system would be object affinity e.g. the lanterns in cryptic castle
+But definitely enemy affinity count killed can be used
+And in the event there is an imbalance, holding DPAD down while going into goal will force Neutral route if that is preferred
+But it does depend on the goal trigger function having a shared function
+But I think it is given GoalAction is in the StageActionExecuter we found way earlier"
+
+Phase 0
+- Identify Global enemy counts [DONE] -> BlackArms, GUN, Eggman affinities are separate types
+- Identify How Dark/Hero/Neutral stage complete is determined
+- Identify way to inject enemy counts
+
+A good ---_ SIDETRACKED
+
+
+Coolmode :
+Freeze State bytes 1,2,3 on slope physics mode
+
+Physics Controller @ 80093728
+run friction @ 800937c4
+all air physics @ 80093838 -> does not reset velocity when returning to ground (but air has 0)\
+In-air hover friction assignment @ 800937f4  -> melee kick in air or shoot in air etc
+
+rlwinm magic function physics boom @ 8006cd78
+r4 contains magic number parameter -> find out what it does
+Guess: Physics type to compare
+
+
+800841e0 : BlackKnight mode | Physics friction reset for melee | 
+
+
+2019-07-04
+BossDiablon phase change player warp: (check later if global for all bosses or boss specific)
+call 1 @ 802d3a48
+call 2 @ 802d3a94
+
+Diablon Initialize/PhaseChange PlayerNoWarp EXPERIMENTAL
+C22D3A48 00000001
+60000000 00000000
+C22D3A94 00000001
+60000000 00000000
+
+---
+FadeToBlack disable for deaths only, with both null check now for gameInitialize (main menu):
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x3C
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+beq 0x28
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x18
+lwz r16, 0x0(r16)
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+C20448A0 0000000A
+3E00807D 621071A0
+82100000 2C100000
+41820030 82100000
+8A1000AE 2C100044
+41820020 3E00807D
+621071A8 82100000
+82100000 8A1000AE
+2C100044 40820008
+4E800020 9421FFD0
+60000000 00000000
+
+
+Safer checker:
+FadeToBlack disable for deaths only
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x40
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+beq 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x20
+lwz r16, 0x0(r16)
+cmpwi r16, 0x0
+beq 0x14
+lbz r16, 0xAE(r16)
+cmpwi r16, 0x44
+bne 0x8
+blr
+stwu sp, -0x0030(sp)
+
+Still has junk failure on boss stage complete
+
+--------------------
+2019-07-06
+Identified Vehicle Logic bctrl
+Found GUNMech logic
+Found GroundCheck for GUNMech logic @ 801ae7b0
+
+nop 801ae7b0
+
+$Dismount GUNMech in Air [dreamsyntax]
+C21AE7B0 00000001
+60000000 00000000
+--------------------
+
+2019-07-07
+Gravity Switchers
+
+Mapped out ChangeZone and ChangeSwitch switchers (they are separate, but share some functions)
+
+ChangeSwitch type no disable
+nop @ 802469dc (visual)
+nop @ 80246a4c (functional)
+
+ChangeZone type no disable
+nop @ 80247b84 (visual) 
+nop @ 80247be0 (functional)
+
+$GravitySwitchers NoDisable [dreamsyntax]
+C22469DC 00000001
+60000000 00000000
+C2246A4C 00000001
+60000000 00000000
+C2247B84 00000001
+60000000 00000000
+C2247BE0 00000001
+60000000 00000000
+
+Sidetrack:
+SHARED_isPlayerMainPlayer potential overwrite fixup: 
+
+Assumptions: 
+1. No other function uses the mainPlayer = static address @ 805EE588 (word)
+2. Caller passes proper player acting on object that uses SHARED_isPlayerMainPlayer
+3. Death and other functions that rely on this static address being 0 call this prior to executing
+
+Approach:
+1. Validate player pointer caller sends exists and find the earliest point it is acted on
+2. Set static address to 1 or 0 depending on what caller's player pointer is
+
+-> RIP Assumption #2 does not happen, void
+
+Sidetrack:
+For Vehicles code, is the player pressing button an option for detecting which player is dismounting?
+-> at the very least this will greatly reduce the chance of overlap
+
+This still leaves open the case where P1 and P2 are driving, and free() occurs on wrong player because P1 presses X at the same time thus free happens to player1's Vehicle twice
+But it makes it impossible for non-driving to interfere anymore, even if an wrong malloc occured
+ 
+ -> Confirmed player pressing button is still in poll pool at dismount() and mount() so it can be added as an AND
+ to allow for P2 to get in/out while P1 is driving to properly malloc/free
+ However due to merge of all button press it is possible to mount/dismount with it being unique values each time
+ need to find method to determine only X press with OR case
+
+Task for later ^  
+----------------------
+2019-07-08
+
+!!Found checkpoint warp takes player tagged by mainPlayer static address!!
+
+Devised plan for Vehicle and Checkpoint for determining only X press with inclusive OR case:
+solution:
+Single byte right-side bit 8 or greater = X is held
+@ 8056ED4F [P1]
+@ 8056ED7B [P2]
+
+Vehicles:
+APPLY TO 801b924c // MOUNT [BAD, X check needs to be revised to be done earlier/different function in code]
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24 // jump to li r5, 1
+//P1 passed first check, now check X pressed state
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC //less than branch to P2 case
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 2
+ 
+APPLY TO 801ba5d0 // DISMOUNT
+lis r5, 0x807D
+ori r5, r5, 0x71A0
+lwz r5, 0x0(r5)
+lwz r5, 0x0(r5)
+lbz r5, 0xA9(r5)
+andi. r5, r5, 0x1
+li r4, 0x1
+cmpw r5, r4
+bne 0x24
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+blt 0xC
+li r5, 0
+beq+ 0x8
+li r5, 1
+li r4, 1
+
+2P Essentials Fix Vehicles for P2 v2.9 EXPERIMENTAL [dreamsyntax]
+c21beef8 00000001
+60000000 00000000
+c21bf410 00000001
+4e800020 00000000
+C21B924C 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800002 00000000
+C21BA5D0 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800001 00000000
+*Disables SpecialCam & allows for P2 to drive CarType vehicles
+*Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
+*KNOWN PROBLEM: P1 MUST HOLD X while mounting vehicle otherwise controls will be mapped to P2
+
+Diverting to try this with checkpoint warp:
+
+Generic grab P1 control state and validate X is pressed:
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+
+Insert inject based on which player pressed X @ 80331114 [checkpoint UI execute initial]
+Main Player Special OBJ: 805EE588
+
+
+Checkpoint InitialUI MainPlayer Inject (attempt1) SOURCE
+80331114 origin: stwu	sp, -0x0010 (sp)
+
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r16, 0
+bge 0x8
+li r16, 1
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint InitialUI MainPlayer Inject (attempt1)
+C2331114 00000007
+3DE08056 61EFED4F
+89EF0000 71EF0008
+2C0F0008 3A000000
+40800008 3A000001
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+Checkpoint WarpSuccessful MainPlayer Cleanup SOURCE
+80129b50 origin: stwu	sp, -0x0020 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0020 (sp)
+
+Checkpoint WarpSuccessful MainPlayer Cleanup
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+
+Checkpoint WarpCancel MainPlayer Cleanup SOURCE
+80117614 origin: stwu	sp, -0x0010 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint WarpCancel MainPlayer Cleanup
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+
+Works, except P1 must HOLD X to warp self.
+This is similar to the vehicle issue, but its less frames compared to vehicle.
+There is no earlier func that I think can be checked (need to verify this), so should abort and do distance check only
+
+For distance check, need to identify SavePoint's floats
+FOUND @ r30 + 0x60 (X value) NOT offset
+mr r4, r30
+addi r4, r4, 0x60
+
+r5 in original function holds checkpoint value (e.g. 1 - 8)
+-> what else do we clobber if blrl?
+
+Grab KeyDoor code for example:
+//get P2 position 
+lis r5, 0x807D
+ori r5, r5, 0x71A8 # p2
+lwz r5, 0x0(r5) # deref to layer 1
+lwz r5, 0x0(r5) # deref to posX
+//now we call our first bl, 8011b91c->8040cd74 [subi step in distancecalc()]
+lis r15, 0x8040
+ori r15, r15, 0xCD74
+mtlr r15
+blrl
+//bl ->0x8040CF2C
+lis r15, 0x8040
+ori r15, r15, 0xCF2C
+mtlr r15
+blrl
+lfs f0, 0x38B0 (r13) //get constant line max distance
+fcmpo cr0, f1, f0
+cror 2, 0, 2
+beq- 0x14 // both players are not within range
+lis r15, 0x8011 // Both not in range
+ori r15, r15, 0xB958
+mtlr r15
+blr
+//natural return to 8011b938 // P2 in range, trigger success
+----------------
+2019-07-09
+
+Found earlier inject position @ 80118928	// VirtualFunction::IsStandingOnCheckpoint:OpenCheckpointUI(r3=CharCommandUnit, r5=UseCommand)_80118928_
+original code: stwu	sp, -0x0010 (sp)
+
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r16, 0
+bge 0x8
+li r16, 1
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+-> code is identical to original, just change inject address
+
+Checkpoint InitialUI MainPlayer Inject (attempt2) / BAD
+C2118928 00000007
+3DE08056 61EFED4F
+89EF0000 71EF0008
+2C0F0008 3A000000
+40800008 3A000001
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+-> This still has the frame issue / not early enough
+However it is smaller window of missing it (less frames rendered between checks)
+BUT this is used on Respawn(), unlike the other one so it cannot be used!
+
+Use Donut's Object distance compare check:
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+lfs f15, 0x34(r31)
+lfs f16, 0x38(r31)
+lfs f17, 0x3C(r31)
+lfs f18, 0(r7)
+lfs f19, 0x4(r7)
+lfs f20, 0x8(r7)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f17
+
+lfs f15, 0x34(r31)
+lfs f16, 0x38(r31)
+lfs f17, 0x3C(r31)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f17
+fcmpo cr0, f15, f21
+
+------------------------
+Why add r17, r17, r17?
+--------
+Use:
+r15 = P1
+r16 = P2
+r17 = SavePosX
+Inject @ 80331114
+
+f21 = distance of Player1 to Object
+f15 = distance of Player2 to Object
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f17
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f17
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+C2331114 00000017
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1FE0060 C21E0064
+C23E0068 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1882A
+C1FE0060 C21E0064
+C23E0068 C2480000
+C2680004 C2880008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1882A
+FC0FA840 3A000001
+41800008 3A000000
+3DE0805E 61EFE588
+920F0000 9421FFF0
+60000000 00000000
+
+Remove extra add, swap sub step
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f18, f15
+fmuls f15, f15, f15
+fsubs f16, f19, f16
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f20, f17
+fmuls f17, f17, f17
+fadds f21, f17, f15 ! flag for donut
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f18, f15
+fmuls f15, f15, f15
+fsubs f16, f19, f16
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f20, f17
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+----
+Math is still wrong
+DISTANCE CHECK MANUALLY FROM CHECKPOINT 3
+EXPECTED RESULT = P2 is CLOSER, WARP P2
+
+Checkpoint3 X - P1X = [] *SELF == 604,623
+Checkpoint3 Y - P1Y = [] *SELF == 1,881,650
+stick in f15 = n-1 + n-2 [prior instr] 2,486,273
+Checkpoint3 Z - P1Z = [] *SELF == 282,527,443
+finally add n-1 + n-2
+p1's line distance == 285,013,716‬
+
+Checkpoint3 X - P2X = [] *SELF == 0
+Checkpoint3 Y - P2Y = [] *SELF == 64.336441‬
+stick in f15 = n-1 + n-2 [prior instr] == 64.336441‬
+Checkpoint3 Z - P2Z = [] *SELF == 0.00074529‬
+finally add n-1 + n-2
+p2's line distance == 64 
+
+
+R8 was never changed to r16!!!!!!!!!
+
+
+Actually fixed code, no subtraction swap:
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+
+IT WORKS
+
+Final Checkpoint Code:
+
+$2P Essentials P2 CheckpointWarp v0.9 [dreamsyntax & DonutStopGaming]
+c2331114 00000017
+3de0807d 61ef71a0
+81ef0000 81ef0000
+3e00807d 621071a8
+82100000 82100000
+c1fe0060 c21e0064
+c23e0068 c24f0000
+c26f0004 c28f0008
+edef9028 edef03f2
+ee109828 ee100432
+edef802a ee31a028
+ee310472 eeb1782a
+c1fe0060 c21e0064
+c23e0068 c2500000
+c2700004 c2900008
+edef9028 edef03f2
+ee109828 ee100432
+edef802a ee31a028
+ee310472 edf1782a
+fc0fa840 3a000001
+41800008 3a000000
+3de0805e 61efe588
+920f0000 9421fff0
+60000000 00000000
+c2117614 00000003
+3a000000 3de0805e
+61efe588 920f0000
+9421fff0 00000000
+c2129b50 00000003
+3a000000 3de0805e
+61efe588 920f0000
+9421ffe0 00000000
+*Credit to DonutStopGaming for initial distance check, it had a bug ;]
+*Warp will pick the player closest to the checkpoint X was pressed on
+*v1 will have UI control for P2, right now only P1 has UI control
+
+--------------------------------------------------------------------------
+2019-07-10
+
+Donut's Pulley Code src as of this date:
+    [8015bef0]
+original:
+addi r3, r31, 52
+
+    checkCoaster:
+lis r7, 0x805F
+ori r7, r7, 0x4230
+lwz r8, 0x0(r9)
+cmpw cr7, r8, r7
+bne notCoaster
+
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r7)
+lfs f19, 0x4(r7)
+lfs f20, 0x8(r7)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f15, f17
+
+lfs f15, 0xE8(r9)
+lfs f16, 0xEC(r9)
+lfs f17, 0xF0(r9)
+lfs f18, 0(r8)
+lfs f19, 0x4(r8)
+lfs f20, 0x8(r8)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f15, f17
+fcmpo cr0, f15, f21
+
+li r7, 0x1
+blt p2closer
+subi r7, r7, 0x1
+
+    p2closer:
+stb r7, 0x314C(r13)
+
+    notCoaster:
+
+
+
+    |
+    V
+    
+    [8015beb4]
+mr r9, r31
+mr r31, r3
+
+    |
+    V
+    
+    [8008e790]
+    original:
+lwz r3, 0x0004 (r31)
+
+    getPlayerPointers:
+lis r7, 0x807D
+ori r7, r7, 0x71A0
+lwz r7, 0x0(r7)
+lwz r7, 0x0(r7)
+lis r8, 0x807D
+ori r8, r8, 0x71A8
+lwz r8, 0x0(r8)
+lwz r8, 0x0(r8)
+
+    checkP1Hang:
+lwz r7, 0xA2(r7)
+cmpwi r7, 0x82
+beq isHang
+
+    checkP2Hang:
+lwz r8, 0xA2(r8)
+cmpwi r8, 0x82
+beq isHang
+
+li r10, 0x0
+stw r10, 0x3148(r13)
+
+    isHang:
+
+    |
+    V
+
+    original:
+lwz r0, 0x0014 (sp)
+
+    new:
+li r7, 0
+stw r7, 0x3148(r13)
+
+------------------
+Moving on to controller struct searching for CheckpointUI controls
+
+80331388 <- seems promising, controller related or UI state change based on controls
+----------------
+2019-07-11
+Last find appears to possibly be UI animation transition, looking for other functions...
+No luck. Look back at P3 Struct code for Partners.
+
+
+Decoded:
+inject @ 800A85C4
+lwz r31,16(r3)
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x20
+lis r31,-32682
+ori r31,r31,60792
+sub r31,r31,r18
+cmpwi r31,0
+bne- 0x0C
+addi r18,r18,44
+stw r18,16(r3)
+lwz r18,16(r3)
+mr r31,r3
+
+OR use Donut's original source:
+lwz r31, 0x10(r3)
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x20
+lis r31, 0x8056
+ori r31, r31, 0xED78
+sub r31, r31, r18
+cmpwi r31, 0
+bne 0x0C
+la r18, 0x2C(r18)
+stw r18, 0x10(r3)
+
+lwz r18, 0x10(r3)
+mr r31, r3
+
+------------- ^ to be resumed...
+
+Sidetrack: checked if distance check can be used with Vehicle mount code, it is not clear.
+r31 does not contain Vehicle obj in current inject locations.
+
+Sidetrack: Boss stuff, mapped a lot of it , found master bctrl to Boss Logic for all boss types
+Mapped which ones read MainPlayerID for targeting (to later fix to support P2 for all bosses)
+-------------------------------
+2019-07-13
+Worked with Donut to find remaining bugs in Coaster code, then I fixed camera issue.
+Identified for future use all ExternalCams use: ??GetStageCameraManagerToR3_or_0_if_not_found_PutExternalCamInList(r4 = externalCamID)_801ce644_
+if going to append to externcam stack, much cleaner than finding the malloc/free and destroying those
+
+$2P Essentials Zipline/Pulley/Coaster Fix [DonutStopGaming & dreamsyntax]
+C21316D0 00000001
+80BF0070 00000000
+C2132128 00000001
+80BF0070 00000000
+C21323C4 00000001
+80BF0070 00000000
+C215BEB4 00000002
+7FE9FB78 7C7F1B78
+60000000 00000000
+C215BEF0 0000001A
+387F0034 3CE0805F
+60E74230 81090000
+7C083840 408200B8
+3CE0807D 60E771A0
+80E70000 80E70000
+3D00807D 610871A8
+81080000 81080000
+C1E900E8 C20900EC
+C22900F0 C2470000
+C2670004 C2870008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEAF882A
+C1E900E8 C20900EC
+C22900F0 C2480000
+C2680004 C2880008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDEF882A
+FC0FA840 38E00001
+41800008 38E7FFFF
+90E90070 390D314C
+1CE70004 7D083A14
+91280000 00000000
+C21313F8 00000001
+60000000 00000000
+*Main code by DonutStopGaming
+*Cam fix by dreamsyntax
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	WE HAVE REACHED THE GECKO CODE LIMIT
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+It is now necessary to refactor all the one liner C2 codes (nop/blr/simple one-line change) types 
+to be 04 writes OR modify the .dol directly.
+
+First attempt will be to rewrite to be 04 for all eligible code.
+
+----NOTE AT THIS POINT ANY CODES ABOVE MAY HAVE INACCURATE REPRESENTATION OF WHATS IN GUPE8P.ini!----
+THE LOGIC IS THE SAME BUT SOME SECTION WILL BE WRITTEN IN 04 FORMAT
+---------------------------------------------------------------------------------------------------------
+Refactor done.
+
+Starting point appears to be 80002348
+BEFORE: Using up to : 80002ee4
+AFTER: Using up to : 80002e74
+
+Non-junk memory is @ 80003100
+
+Saved: 0x70
+
+= 28 lines of code left
+-------------------
+
+Working on Gravity Switchers w Donut:
+$GravitySwitchers NoDisable [dreamsyntax]
+C22469DC 00000001
+60000000 00000000
+C2246A4C 00000001
+60000000 00000000
+C2247B84 00000001
+60000000 00000000
+C2247BE0 00000001
+60000000 00000000
+
+Refactor -> 
+$GravitySwitchers NoDisable [dreamsyntax]
+042469DC 60000000
+04246A4C 60000000
+04247B84 60000000
+04247BE0 60000000
+
+---------
+ExternalCam "Camera @ r29" in ExternalCamPos2
+@ mem 807d4300
+
+---- Still nothing on cameras.
+Temp FreeCam for SOME* Turrets:
+ARK :
+80317230
+8031723C
+^ Check if free() issue
+-> seems fine
+
+$Lost Impact Turret Freecam BAD DO NOT USE THROWS EXCEPTIONS [dreamsyntax]
+04317230 60000000
+0431723C 60000000
+------------------------------------
+2019-07-14
+Lots of pair work with Donut on controller UI.
+
+2019-07-15
+Air bug fix:
+For height lock issue BLR @ 801dbae4 -> BAD
+Still need to sort the endless flying state issue
+
+-> AIRBUG2 seems promising
+
+labeled more more potential funcs
+
+Found that BLR for height lock is bad as ramps, springs, balloons all use it to modify velocity
+Need different method.
+
+-------------
+2019-07-20
+Vehicle Speed/Control Overhaul:
+"Open Car" = Motorcycle:
+801bd8c8 = acceleration boost? nop @ fdivs 801bd8c0 for double tap to continuously accelerate
+801bd848 = steering angle
+801bd894 = apply gas / speed add and speed cap?
+801bd95c = apply brake / decrease speed
+801bd990 = deceleration (brake damper?)
+801bda24 = UNKNOWN
+801bd9dc = apply reverse
+
+end of 'controls' function for this vehicle type, searching elsewhere for air friction etc
+
+Open Car Type Testing:
+041BD8C0 60000000
+041BD88C 60000000
+041bd954 60000000
+041bd988 60000000
+-----------------
+
+GUNMech Goal : Alter Physics for Hover 
+nop @ 801accfc fdivs for very tight controls (no animation rotation dependent blocker)
+
+Hover speed reductions happen here:
+nop @ 801acf70
+nop @ 801acf74
+
+regular movement @ 801acfc8
+
+$GUNMech Physics Revamp [dreamsyntax]
+041ACF70 60000000
+041ACF74 60000000
+041ACCFC 60000000
+041AE7B0 60000000
+*Makes hover useful (fast) 
+*Tight turns
+*Dismountable mid-air
+
+--------
+Open Car Type found another physics func
+nop @ 801bbaf8
+nop @ 801bbb00
+for vehicle and tip over and explode
+
+
+Airtime post bne-
+@ 801bbb80 
+Air friction might be in here?
+
+Slope handler @ 801bbc00
+drift physics @ 801bbc20
+turn/speed ratio @ 801bbcb8
+
+Maintain velocity @ 801bbd60
+
+strange behavior in air @ 801bbb30 / 1c
+
+another possible function @ 801bd5c4
+-------
+2019-07-21
+Rocket Launcher physics
+momentum reset @ 8023d3b0
+
+Melee Weapon Overhaul
+ammo subtract per hit @ 8023d60c
+
+look @ Player::Behavior::GroundAttack @ 800841e4
+->
+800841e0 = momentum maintain AFTER halt
+80084108 = Player Behavior GroundAttack 2
+
+80084938 = Caller to damage and animation, slowdown still happens if blr'd
+-----
+Found air friction or air gravity value responder for vehicles @ 801b9b18
+
+Check all callers to get desired behavior:
+801bd3ec = allows for gas while in-air
+801bd59c =
+801bd4a8 = allows for turning while in-air
+801bccc0 =
+801bcd00 =
+801bd138 =
+801bc13c = gravity/downward Y axis while in air
+801bba70 =
+801bbaa0 =
+801bbb5c =
+801bb44c =
+
+----------------
+2019-07-22
+Misc physics searching
+spindash pinball / no stop | blr @ 8008ed8c
+
+$Pinball Spindash [dreamsyntax]
+0408ED8C 4E800020
+---
+Non-Lockon type rocket weapon logic:
+8023bb90 = no shoot
+8023bc50 = no knockback/momentum reset
+
+$CannonWeapons  No Knockback [dreamsyntax]
+0423D3B0 60000000
+0423BC50 60000000
+
+Found weapon/bullet stuff etc, mapped
+---------------------
+2019-07-23
+Full trace for level import failure (current theory is collision related)
+804418e8
+804418f0
+804418f8
+80441908
+8044190c
+80441910
+80441918
+80441920
+80441928
+80441938
+80441940
+80441948
+
+If recovers from crash no chunk has collision but the geometry is visible, also running at 60fps
+
+$No CameraFile Read [dreamsyntax]
+041c825c 60000000
+--------------
+2019-07-24
+nop @ 800440e4
+nop @ 8048cc34
+
+To abort loading TXD in stage (resume even if 10MB loop)
+-----------
+2019-07-25
+Looking into mainPlayerID mitigations for bosses // objects that use it 
+Found existing optimal write to mainPlayerID: stw registerwithval, 0x3148(r13)
+^r13 is unchanging static ref
+Is written to once @ 800ad324
+
+KNOWN REGULAR READS (tested on stg0201):
+80176f00 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f0c = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+80176f20 = SetPlayerPosition_OnInitializeOrRestartOrDeathOrCheckPoint
+801d9af0 = ??UnknownCheckingGameMode_and_MainPlayerID (constantly being read)
+80192408 = BlackArmWorm_AboutToFireAtMainPlayerID@80192408 (2x calculations read)
+80189930 = BkLarvaGenerator_SBkLarvaStateData_ReadsMainPlayerID@80189930
+----------
+KNOWN BOSS SPECIFIC READS (tested on stg0210):
+80242e78 = BlackBull_BossRootTask_Initialize_ReadsMainPlayerID
+80242b10 = BlackBull ?MainLogicLoop? r3=BlackBull0210VarParam OR BlackBullCtrlUnit_GetStatus OR __ReadsMainPlayerID_2
+80290e18 = ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+cycles between b10 and e18, nop both to reveal no other checks.
+----------
+EggBreaker (310):
+802a7090 = EggBreaker_ReadsMainPlayerID_1
+802a6da8 = EggMecaCtrlUnit_GetStatus_EggBreaker_ReadsMainPlayerID_2
+802a95ac = EggBreaker_ReadsMainPlayerID_3
+----------
+EggDealer (Lava Shelter)
+802fd844
+801d9af0 = Missile Check ?
+-------------------------
+2019-07-26
+SuperShadow/ChaosPhys searching
+found v0.2 crash on shooting while dying occurs @ 80499c84
+
+Blackknight:
+8008415c (3rd attack cycle momentum reset?)
+800841c8 -> regular position movement while swinging
+
+maintain momentum after swing by nop @ 800841d8 800841e0
+----------
+2019-07-27
+- Identified potential bug:
+sometimes vehicles will not be driveable later on in the level if a similar vehicle was already activated
+--------
+2019-07-28
+nop @ 802eb1f0 -> Control Stick has no velocity influence only rot
+found affecting oscillator @ 802eb220
+^ This is likely preparing distance check on Y axis for 
+later compare statement, which is what we actually want
+confirming this, subsequent functions affecting it:
+802eb22c
+X^2+Y^2 called just like later SETObj distance compares
+@ 802eb24c
+
+probable compare for Y-axis @ 802eb258
+0x533C(805eb440) == Address of Y axis oscillator value
+(ITS STATIC WTF)
+-> This may be a damper value
+^ Donut thinks this is friction controller for Y axis
+
+Starting @ 802eb260 (not taking branch)
+likely contains oscillation apply
+^ confirmed by reaching oscillation value results in no trigger
+difference ends @ 802eb290, will be before it
+
+rate of reaching oscillate val @ 802eb26c? (on the stack)
+
+40b3880000000000
+
+The compare must be with Y axis value to oscillate over:
+starting @ 802eb1f0
+
+nop @ 802eb218 results in XYZ oscillation instead of just Y
+r3 contains the copy of P1 + Y axis set relative position
+^ continue tomorrow
+------------
+2019-07-29
+SuperShadow fly toggle base if:
+2856ed4C 00000030
+XXXXXXXXXXXXXXXXX
+e2000001 80008000
+
+
+Attempt C0 inject:
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+beq 0x8
+stb r17,0xAF(r16)
+blr
+
+2856ed4e 00000030
+C0000000 00000005
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+9A3000AF 60000000
+4E800020 00000000
+e2000001 80008000
+
+FAILURE ^ 
+
+Instead compare @ 800a860c (original li r6, 1)
+r4 contains base controll address, r3 contains current word at r4
+0x30 = Z + Y
+cmpwi r3, 0x30
+bne- 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+bne 0x8
+stb r17,0xAF(r16)
+li r6, 1
+
+
+Good enough for testing
+SuperShadow Fly Toggle v0.1 (Z+Y) [dreamsyntax]
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+*SuperShadow Fly Toggle code
+*Has no 'last pressed' rule so may appear inconsistent
+
+----
+@ 802eb214 r5 will contain X axis and subsequent YZ clone of P1 position
+r3 contains just '1' at this point, but it is probably just stack junk
+
+In theory should be able to plop out 
+802eb21c
+addi r4, r5, 220 to be a reference to p2 XYZ
+
+@ 802eb21c
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r4, 0x0(r16)
+
+^ Proof of concept was a success, P2 is new oscillation target
+
+SuperShadow TestVer v0.3
+0417711c 60000000
+c60af2e4 800af3bc
+c20a860c 00000008
+2c030030 40820030
+3e00807d 621071a0
+82100000 82100000
+89f000af 3a200020
+7c117800 9a3000af
+3a200000 40820008
+9a3000af 38c00001
+60000000 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Does not deplete rings atm
+*Shooting a chaos spear while dying will result in a crash
+
+1. Distance to oscillate default 10, we want it set to 0 for always Y axis  control
+2. Speed of oscillation (we want it to be much faster than it is) default 25, not sure on what we want but its too slow as is
+3. Targeted Y axis
+4. Toggle fly on/off
+
+We will use self -> located in r5 
+and modify directly r4's stored location
+
+Target @ 802eb21c
+original: addi r4, r5, 220 (this is location we wish to overwrite)
+
+addi r4, r5, 220
+r4 now contains relevant area, we need to overwrite stored data
+safe areas:
+f0, f1, f2 (loaded immediately upon next BL)
+
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc) // rtoc should be persistent in this case, grabbing 25
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+^ this clones p1 position into r4 but r4y+25
+
+inject test #1 @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+for testing no inject, just modify static address @ 805F077C to be 0
+
+Player endless positive 25 Y axis oscillation test 
+C22EB21C 00000005
+388500DC C0050000
+D0040000 C0050004
+C022FC8C EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+// Success
+
+Now need to add per-control binds
+P1 controller grab (no axis): 8056ed4c
+lwz (reg), 0(reg containing above address)
+Simple version no XOR case, just direct press only:
+0x20 = UP 
+0x08 = DOWN
+
+inject test #2 [basic up/down controller response] @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+lis r16, 0x8056
+ori r16, r16, 0xED4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x08
+bne- 0x8
+fsubs f0, f0, f1
+cmpwi r16, 0x20
+bne- 0x8
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+Good enough for next test version::
+
+
+force float @ 805F077C to 0
+force float @ 805F936C to 200
+
+Y Axis Control for Super v0.1 (integrated w TestVer code v0.4)
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+
+SuperShadow TestVer v0.4 [dreamsyntax]
+0417711C 60000000
+C60AF2E4 800AF3BC
+C20A860C 00000008
+2C030030 40820030
+3E00807D 621071A0
+82100000 82100000
+89F000AF 3A200020
+7C117800 9A3000AF
+3A200000 40820008
+9A3000AF 38C00001
+60000000 00000000
+045F077C 00000000
+045F936C 43480000
+C22EB21C 00000009
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008056
+6210ED4C 82100000
+2C100008 40820008
+EC000828 2C100020
+40820008 EC00082A
+D0040004 C0050008
+D0040008 00000000
+*Has no 'last pressed' rule so toggle fly may appear inconsistent
+*Press Y+Z to switch fly on/off
+*Press X to descend
+*Press Z to ascend 
+*Does not deplete rings
+*Shooting a chaos spear while dying will result in a crash
+
+------------
+2019-08-01
+Checkpoint UI control mapping part 2...
+80331388 <- func with input eval calls
+eval @ 803313a8 | r3 = 1, r4 = 4 == Instant close on open
+eval @ 80331428 | r3 = 2, r4 = 4 == SAA
+eval @ 80331464 | r3 = 6, r4 = 4 == Nop results in spam pressing left/right; you can hear sound
+eval @ 803314dc | r3 = 5, r4 = 4 == SAA
+
+--- Sidetrack: 
+Independent Player Targeting for Bosses
+
+Known information:
+- mainPlayerID is used to control which player a boss targets, 
+  behavior interacts on, and collision information for attacks (for heavydog type and black doom)
+- Sonic & Diablon are coded to already attack nearest Player::Shadow type object
+  unlike any other boss object in the game. This boss type does not use mainPlayerID at all
+- Devil Doom warp ratio is based on mainPlayerID, NOT hardcoded to P1 Position
+
+-> Starting with Black Doom boss object
+
+---Black Doom Object---
+- Red swipe and Swift Strike attack only harms player being targeted
+-- SwiftStrike splash can harm both players
+- Meteor attack can harm both players
+- Looks towards player targeting
+- Can change mid-attack? -> YES
+- Pillar transparency occurs if Cam0 (or in theory cam with BossExternalCam) and mainPlayerID player is behind a pillar
+
+Sidenode: It appears in SetPlayerPosition the unregistration process when Shadow becomes a dead object and respawns occurs
+
+Implement Targeting Switching::
+Potential BlackDoom (or shared boss reads)
+@ 80282514 || ??ReadsMainPlayerID_Unknown1_802824e8_
+@ 80290e18 || ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+@ 80290590 || ??ReadsMainPlayerID_SHARED_2_Bosses
+@ 801d99a8 || ??UnknownCheckingGameMode_and_MainPlayerID (SoundListener? Unrelated?)
+Going to calculate closest player (similar to Checkpoint method if BossSetObj is accessible)
+
+80290e18 == ??? Unknown, no apparent behavior change
+80290590 == ??? Unknown, SAA 
+^ Determined the above do not affect targeting behavior
+
+80282514 == All of Black Doom's Targeting Rules
+
+Inject @ 80282514
+-> No possible SETObj positional values to compare?
+For test, rapidly switch between 0/1
+
+lwz r5, 0x3148 (r13)
+cmpwi r5, 0
+li r5, 0
+bne- 0x8
+li r5, 1
+stw r5, 0x3148 (r13)
+
+Rapid Swap BlackDoom MainPlayerID Test
+C2282514 00000004
+80AD3148 2C050000
+38A00000 40820008
+38A00001 90AD3148
+60000000 00000000
+
+Technically works, but behavior is not very interesting. Mostly still goes for P1.
+For some attacks like Meteor, goes for distance between P1 and P2
+
+
+Other solutions?
+- Find where onCollision or onDamage for Black Doom, and somehow fetch which player did the collision
+Then take player and set to mainPlayerID (next attack is last player that attacked)
+   -> Problem: Cleanup must be done for restart, death, and stageComplete / boss defeated
+
+- How is boss object turning towards player? 
+Find this area in code and reuse to calculate distance
+
+Potential calculation occurring @ 802825b4
+- Only tripped when player Y Axis changes
+^ Is this used to determine if Black Doom spawns high/low?
+--Verify by checking r3, r4, and r5
+r3 = string ref -> BlackDoomVarParam [used to store something prior to calc]
+
+by 802825cc, r4 holds float values XYZ of Player instance 
+			 r5 holds float values XYZ of BlackDoom instance? <- No, appears to also be a copy of player position 
+^ this was wrong, r4 = BlackDoom instance r5 is Player instance
+
+-> Another lead if the above fails Distance check calculation 2 occuring @ 80282668
+
+Seems Player copy floats are stored @ 0x8 (r31) + addi 304
+Black doom floats should be stored at same but addi 292 instead of 304
+^ WRONG It seems both are copies of player instance 
+
+-> Validate this holds true @ 80282514 == YES confirmed
+
+
+We can now use distance compare we did for Checkpoints for bosses:
+
+NOTE: This is just the main distance check for boss, need proper cleanup
+
+IDEA: Instead of storing to memory region for mainPlayerID, only overwrite r5 for boss behavior in this one function
+This way no cleanup is needed, and potentially no issues if this is truly the only instance boss targeting uses
+
+Copy compare code from checkpoints, modify to use Black Doom boss data
+
+Checking distance check params @  80282668
+^ This holds the true BlackDoom position value 
+
+Black Doom true writeable position floats are stored @ 0x8 (r31), then offset 1C of that address
+
+
+MainBoss Target Closest Player Inject @ 80282514 || ORIGINAL: lwz  r5, 0x3148 (r13)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lwz r17, 0x8(r31)
+lwz r17, 0x1C(r17)
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r5, 1
+blt 0x8
+li r5, 0
+
+2P Essentials Black Doom Type Boss Targets Closest Player [dreamsyntax]
+C2282514 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+// Success 
+
+NextSteps: 
+- Validate this controls CollisionDamage playerpointer controller
+  -> Appears to be the case, though this is hard to test 
+  ->>> Better boss to test this on will be HeavyDog type bossclass, 
+       with particle beam cannon collision rules
+
+- Verify if this affects all SubBoss class type bosses or if they have individual functions 
+  -> No, confirmed that every class of boss has its own mainPlayerID checker
+  -> EggDealer type, EggBreaker type, BlackBull type, DevilDoom type, and HeavyDog type are not affected by BlackDoom fix
+  
+Using the above example from BlackDoom it is likely all other boss classes follow the same model
+0x8 of BossRoot + 0x1C to get boss float data,
+then we can use it to soft-set the compare of mainPlayerID instead of storing it in memory (and thus requiring cleanup code as well)
+
+To be continued later
+  
+Accidental find:
+ToSuper() is controlled by mainPlayerID!!!!!!!!
+No need for hacky method for ShadowExecutor initializer
+----------------------
+2019-08-02
+HeavyDog type bosses same implementation: 
+Possible targets: 
+801d99a8 ??UnknownCheckingGameMode_and_MainPlayerID [Sound related, common checker]
+80290e18 ??ReadsMainPlayerID_SHARED_Bosses__BossCtrlUnit_CheckEvent
+80290590 [has X^2, Y^2, Z^2 call, probable candidate] ??ReadsMainPlayerID_SHARED_2_Bosses -> Was present in BlackDoom boss logic as well, didnt affect Boss Logic
+8024d6d8 [has X^2, Y^2, Z^2 call, probable candidate] HeavyDog/BlueFalcon_HeavyDogCtrlUnit_GetStatus__ReadsMainPlayerID
+
+Likely target is 8024d6d8
+verifying... YES / Confirmed
+
+Parent class always does same step, so can reuse code for black doom but injected at above location.
+
+2P Essentials HeavyDog Type Boss Targets Closest Player [dreamsyntax]
+C224D6D8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+
+EggBreaker Type Reads @ 802a6da8
+BlackBull Type Reads @ 80242b10
+DevilDoom Type Reads @ 8030ad74
+EGG DEALER DOES NOT USE mainPlayerID! Hardcoded to P1
+
+2P Essentials BlackBull Type Boss Targets Closest Player [dreamsyntax]
+C2242B10 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials DevilDoom Type Boss Targets Closest Player [dreamsyntax]
+C230AD74 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+2P Essentials EggBreaker Type Boss Targets Closest Player [dreamsyntax]
+C22A6DA8 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+
+Success, all the above codes work
+
+TODO: Once DOL inject method is finalized:
+All of these injects are identical, so for optimization inject once and branch to new code
+
+Bonus? -> BlackDoom Decorative Object based on closest player?
+
+Worm PlayerID check @ 80192408 -> floats not in same place as bosses, need to find parent class's floats...
+
+----------------
+2019-08-03
+DOL Injection method
+
+Testing if string space is safe to be overwritten:
+0x8051A550 // 0x0051797C
+to 0x8051BCA0 // 0x005190CC
+               = Space 0x1750
+			   
+		   End 0x51897C 0x1000 for codehandler 
+		       0x5190CC 0x750 for other codes (not big enough)
+
+Original gecko was using 0xB9C prior to limit being reached
+
+Starting region one @ 0x515FC5 / 80518B99 
+Ending region one @ 0x5190CB / 8051BC9F
+
+Total range : 0x3106
+
+Gecko Handler region 0x515FC5 - 0x516FC5
+Aux Region
+TA
+
+-> Determined Using large chunks of String areas still results in lost features and crashes
+Need to isolate ONLY safe areas OR Extend the DOL
+
+Due to how Shadow is laid out (with no REL files), first going to attempt to extend the dol.
+
+Original dol ends at 0x580700 (GCR Start.dol)
+extended to 0x583000
+
+Used mapper and found need to modify header to ensure no overwrite at extended areas
+Will continue this process once other features are implemented in gecko, proof of concept was a success.
+------------------------
+
+2019-08-05
+--Air bug attempts--
+mapped symbol
+------------------------
+2019-08-10
+Standalone functions for DOL injection are working
+MagicTXD resize automation task complete, ALL stages where P2 spawns in have been run through ruleset R1
+Problematic stages had their existing changed re-ran through the automator, crunching them further. Exceptions are stg900+ (due to Spawn code isolating them), stg800-802, stg0-5
+
+TheHatedGravity has started on HD texture replacements via Dolphin as a mitigation to the low res textures
+----
+Goal: Get CarType Vehicle properly alloc/free based on CLOSEST player instead of X press held or order of player mount.
+Revisiting V3 and V2 Vehicle codes...
+
+Todo: Computer Room stage exception do not reset setobjs for v4 code check stageID = 0603
+
+Super: 
+1. find read of mainPlayerID for Super
+2. find last relevant call
+add if mainplayerID=0 jump back to the start of that read and set to mainPlayerID=1
+else mainPlayerID=0
+
+^ StageInitialize DOES NOT use mainPlayerID for initial super. The above only works for restart/onDeath
+-------------------------
+2019-08-13
+Mapped one animation function, determined MTP tool can work if we find suitable way to trick it into loading separate .BON and .MTP per player.
+---------------------------------------
+2019-08-17
+Plans:
+- Airbug Fix
+- Checkpoint Warping has a bug (sometimes warps wrong player)
+- Only set locked state for player that jumped in warp hole / is using checkpoint (possible?)
+- Diablon Boss Warp Fix
+- Bosses and Cosmic Fall are EXCLUDED from independent series codes (rings, setobj load/unload, etc)
+- Hero / Normal /Dark Score added at the end
+----------------
+2019-08-18
+Messing with scale per HHC
+Defined 80016390 glxcopyMatrix r3, where r3 is any model:
+0x0 - X-Axis prime
+0x4
+0x8
+0x10
+0x14 - Y-Axis prime
+0x18
+0x20 - Rot?
+0x24 - Rot?
+0x28 - Z-Axis prime
+0x30 - ModelPosition X-Axis
+0x34 - ModelPosition Y-Axis
+0x38 - ModelPosition Z-Axis
+
+80015774 @ bl to glxCopyMatrix (0x80016390)
+replace with 805E4580 (air friction) = 3 is float
+
+X PRIME AND Y PRIME AND Z PRIME ONLY
+lis r15, 0x805E
+ori r15, r15, 0x4580 
+lfs f0, 0x0(r15)
+lfs	f1, 0x0(r4)
+fmuls f1, f1, f0
+stfs f1, 0x0(r4)
+lfs	f1, 0x0014 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0014(r4)
+lfs	f1, 0x0028 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0028(r4)
+lis r15, 0x8001
+ori r15, r15, 0x6390
+mtlr r15
+blrl
+
+ALL 
+lis r15, 0x805E
+ori r15, r15, 0x4580 
+lfs f0, 0x0(r15)
+lfs	f1, 0x0(r4)
+fmuls f1, f1, f0
+stfs f1, 0x0(r4)
+lfs	f1, 0x4(r4)
+fmuls f1, f1, f0
+stfs f1, 0x4(r4)
+lfs	f1, 0x8(r4)
+fmuls f1, f1, f0
+stfs f1, 0x8(r4)
+lfs	f1, 0x10(r4)
+fmuls f1, f1, f0
+stfs f1, 0x10(r4)
+lfs	f1, 0x0014 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0014(r4)
+lfs	f1, 0x18(r4)
+fmuls f1, f1, f0
+stfs f1, 0x18(r4)
+lfs	f1, 0x20(r4)
+fmuls f1, f1, f0
+stfs f1, 0x20(r4)
+lfs	f1, 0x24(r4)
+fmuls f1, f1, f0
+stfs f1, 0x24(r4)
+lfs	f1, 0x0028 (r4)
+fmuls f1, f1, f0
+stfs f1, 0x0028(r4)
+lis r15, 0x8001
+ori r15, r15, 0x6390
+mtlr r15
+blrl
+
+Scale for ALL [dreamsyntax]
+c2015774 00000012
+3de0805e 61ef4580
+c00f0000 c0240000
+ec210032 d0240000
+c0240004 ec210032
+d0240004 c0240008
+ec210032 d0240008
+c0240010 ec210032
+d0240010 c0240014
+ec210032 d0240014
+c0240018 ec210032
+d0240018 c0240020
+ec210032 d0240020
+c0240024 ec210032
+d0240024 c0240028
+ec210032 d0240028
+3de08001 61ef6390
+7de803a6 4e800021
+60000000 00000000
+*Edit AIR FRICTION float to control size
+*(Default = 3)
+*its at 805E4580
+------------------
+2019-08-21
+Plans:
+- Airbug Fix
+- Checkpoint Warping has a bug (sometimes warps wrong player) -> REPURPOSE ALL EXISTING mainPlayerID codes to indirectly modify access codes!
+- Only set locked state for player that jumped in warp hole / is using checkpoint (possible?)
+- Diablon Boss Warp Fix
+- Bosses and Cosmic Fall are EXCLUDED from independent series codes (rings, setobj load/unload, etc)
+- Hero / Normal /Dark Score added at the end
+- Checkpoint / Warp Control State Lock INDEPENDENT per player [BONUS]
+- Fix Death independent warps to ONLY warp on true death state
+
+
+[Checkpoint Warping] -> REPURPOSE ALL EXISTING mainPlayerID codes to indirectly modify access
+-> Verify issue is present -> Confirmed
+Re-write code to NOT store to mainPlayerID and instead change access ops
+Also optimize if possible using r13
+
+
+ORIGINAL CODE MainInject
+@ 80331114
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+
+Checkpoint WarpSuccessful MainPlayer Cleanup SOURCE
+80129b50 origin: stwu	sp, -0x0020 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0020 (sp)
+
+Checkpoint WarpCancel MainPlayer Cleanup SOURCE
+80117614 origin: stwu	sp, -0x0010 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+-----------------
+DETERMINED 0x60 of r30 is NOT going to be SavePoint Position values!
+For these scenarios...
+Checkpoints activated count over total, order does not matter:
+2/6
+5/6
+4/7
+5/7
+7/7
+??Stages with X/8 Checkpoint do not seem to have any issues
+-> no, repeated it a few times, seems random
+
+Possible Solutions: 
+- Use static vals of known checkpoint XYZ (inefficient)
+- Donut gravityswitcher method?? @Donut needs to elaborate
+
+More efficientish way of doing static vals check:
+checkpoint1(static) + (checkpointNum-1) * 0x1C
+r5 = checkpointNum = [1,8]
+r13 = 805EB440
+static address of Checkpoint 1X = 80575FE4
+Difference = 0x7545C/ Decimal: 480,348 range too great, cannot use r13
+
+MainInject Checkpoints StaticMethod v1
+@ 80331114
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+//
+Get address of current checkpoint pos
+lis r17, 0x8057
+ori r17, r17, 0x5FE4
+subi r19, r5, 1
+mulli r19, r19, 0x1C
+add r17, r17, r19
+//
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint Warp MainCode Rewrite v1
+C2331114 00000019
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+
+Works, add with cleanup codes for now
+
+2P Essentials Independent Checkpoint Warping v0.95 [dreamsyntax & DonutStopGaming]
+C2331114 00000019
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+*ONLY P1 has UI control
+*Credit to DonutStopGaming for distance check
+*0.95 fixes warp issues found in 0.9

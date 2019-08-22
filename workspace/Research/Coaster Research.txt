@@ -1,0 +1,68 @@
+	4/17/19
+---------------
+Previously able to get p2 to switch to the hanging position and float towards pully (but not grab it) by swapping pointers mid to late process of creating command
+
+	7/6/19
+---------------
+Created test gecko code for ziplines... I mean Coasters*
+Code currently working as a rough proof of concept, but has several issues where the main player value is set unexpectedly
+I believe the cause of this issue is a mixture of the main player value manipulation, and my method of using "status byte" to which player is "hanging" after collision is confirmed
+Turns out that there is no unique status for only hanging on coasters, which caused issues when the status byte was testing equal to that value in other situations
+Issues included players not resetting when dying, not respawning after dying, warping to wrong coasters
+
+	7/8/19
+---------------
+It does appear that by doing a rough distance check for every player upon any player collision, I can effectively determine which player "collided".
+To take it a step further, by making a gecko code to this function that changes the main player value depending on closest distance, this indeed lets both players ride coasters
+...
+Okay made it.
+Current gecko code for 2p coasters takes the approach of doing an impromptu rough estimate distance check, and modifying the global "main player" address as necessary
+This is proving to be problematic, as too many things rely on the global address being 0, for player 1
+Things that can go wrong with this approach:
+	- P1 can have position, camera, or both not updated upon restart or death, if the value is leftover to be 1 by accident
+	- Specifically for coasters: if there is any change in the value while on the path, depending on how it occured, it can result in both players teleported to the same coaster, or being on seperate coasters, and having both end when the shortest one is finished
+	- While not having seen any issues from this yet, p2 being on a coaster requires the global value to be set to 1, which effectively disallows p1 from interacting with any p1 specific object, unless it is patched to account for this behavior
+...
+So far it has the following issues documented by dreamsyntax:
+	- problem1 -> player2 gets on while P1 is on a pulley = p1 warps to p2's pulley
+	- problem2 -> player1 gets on while P2 is on a pulley = whichever pulley reaches end of track first will cause both pulleys to end track
+	- problem3 -> player1 dies while P2 is on a pulley = SA2 ending
+	
+Going to see if there is ANY way to determine which player is interacting with an object, to allow for object specific patching without manipulating the global value
+Looking into the "isMainPlayer" function, as practically every p1 specific object uses it to apply the action only to player 1
+...
+After extensively looking into the function, unfortunately determined that this function will not be able to determine which player initiated the command
+The function is essentially a long drawn out equivalent of saying "pPlayer = plsyerPointers[ID]", with "ID" being passed into the function as a parameter, typically coming from the main player global value, which is typically 0 for p1
+New approach - determine if there is any relation between the current acting player, and their correspinding player pointer
+...
+Attemping to look at object UpDownReel to see how it handles accepting two different players commands
+UpDownReel appears to have a field in its class specific to which player pointer it is acting on, where coaster does not after a brief search
+Following the trail to this field, it appears that the command itself (IE: SomethingHang or CommandRide) does have a field for player pointer, which then gets set to UpDownReel
+Independently, after a few bps and memory searches, found a potential address that appears to contain the current colliding player pointer, regardless of current global main player value
+After tracing it back, it is indeed the CommandRide class that contains this pointer
+Now checking to see if I can locate where this command is provided the player pointer. Proving to be tricky as the pointer is very dynamic, with even the same savestate providing differnet addresses.
+Eventually able to locate a potential lead. 80051fa8, called from 801db674 appears to set a player pointer to *(CommandRide + 0x14)
+It does appear to be player 1s pointer, even if p2 is the one colliding with coaster. Now to determine if there is a way to trace it back further
+Quick look at the call stack shows that it likely stems from ShadowExecuter somehow.
+
+	7/9/19
+---------------
+This method getting to be hard to follow, on the side I am also trying to go as far down the callstack as i can while still remaining in coaster exclusive functions
+The reason for this is to see if switching the main player global value at various parts of the process will show me an idea of where to start looking
+So far im as what appears to be the last coaster specific function, 8009bd80. changing main player at this point makes p2 grab the coaster and ride, but will fail the distance check making it dissapear, and also does not animate correctly
+Will try checking the stack for any pointers that may still be pointing to P1
+...
+Unfortunately after much looking, there does not appear to be any direct relation to player pointer, and collision.
+Without having analyzed the actual collision code, it appears that the collision function 8015be9c is only equipped to check if there has been any collision with any object of the "player" type, and does not determine at any point which player collided
+Furthermore, the relevant code that assigns the actions to player 1 do so only because of the static main player value, and take no other factor into account.
+...
+So maybe I can use this to my advantage??
+...
+
+	7/12/19
+---------------
+Due to the increasing number of issues with manipulating main player value as other functions need it, attempting to emulate effect by creating a "current" player byte in an unused structure field.
+Replacing all current coaster refereces to main player value with this new structure entry
+...
+Perfect!
+Now it works better than before, and doesnt break anything requring main player byte to be 0

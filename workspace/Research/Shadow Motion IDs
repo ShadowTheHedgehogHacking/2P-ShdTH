@@ -1,0 +1,143 @@
+	<Shadow Motion IDs>
+0 - 37: T-Pose
+38: Chaos Blast
+39: Chaos Control Start
+40: Chaos Control
+41: Punch
+42: Slide
+43: Sword Swing
+44: Horizontal Hang Grab
+45: Horizontal Hang Sword Swing
+46: Horizontal Hang Double Sword Swing
+47: <?> Horizontal Hang Gun Hold
+48: Vertical Hang Grab
+49: Veritcal Hang Sword Swing
+50: Vertical Hang Double Sword Swing
+51: Veritcal Hang Slide Down
+52: <?> Veritcal Hang Slide Related
+53: <?> Vertical Hang
+54: Vertical Hang Climb Up
+55: <?> Horizontal Hang
+56: Horiztonal Hang Slide Right
+57: <?> Rocket Hang
+58: Horiztonal Hang Slide Left
+59: Skid Start
+60: <?> Skid Related
+61: Skid
+62: Skid Finish
+63: <?> Skid Turn
+64: <?> Skid Turn
+65: Weapon Drop
+66: Weapon Pickup
+67: Hurt Start
+68: Hurt Falling
+69: Hurt Land
+70: <?> Fall Forward Start
+71: <?> Fall Forward
+72: <?> Fall Forward Land
+73: Trip
+74: <?> Trip Backwards
+75: <?> Trip Backwards End
+76: <?> Trip Backwards End 2
+77: Debris Lift Holding
+78: Debris Lift Release
+79: Debris Lift Start
+80: Debris Lift Throw
+81: Fan Float Vertical
+82: Fan Float Horizontal
+83: Launched
+84: Rail Ride
+85: Rail Ride Sword Swing
+86: <?> Rail Ride Sword Swing
+87: <?> Rail Ride Sword Swing
+88: Rail Ride Inverse
+89: Rail Ride Inverse Sword Swing
+90: <?> Rail Ride Inverse Sword Swing
+91: <?> Rail Ride Inverse Sword Swing
+92: Rail Ride Lean Left
+93: <?> Rail Ride Holding Weapon
+94: <?> Rail Ride Holding Box And Weapon
+95: Rail Ride Throw Box Holding Weapon
+96: Rail Ride Lean Right
+97: Rail Grind Start
+98: Rail Grind Finish
+99: <?> Rail Ride Land
+100: <?> Rail Ride Holding Box
+101: Rail Ride Throw Box
+102: Skate Run
+103: Standing
+104: Idle
+105: <?> Standing Holding Weapon
+106: Idle Laying Down
+107: <?> Standing Holding Box And Weapon
+108: Falling
+109: Curl Landing
+110: Jump Start
+111: Curl
+112: Jump Backflip
+113: Spin
+114: Uncurl
+115: Air Kick
+116: Air Sword Swing
+117: Fall Landing
+118: <?>
+119: <?>
+120: <?> Related To In Air Shooting (Chaos Spear?)
+121: Vacuum Gun Air Suck Float
+122: <?>
+123: <?> Jump Holding Box
+124: <?>
+125: <?> Holding Box No Breathing
+126: <?>
+127: Trick
+128: Trick
+129: <?> Unused Trick
+130: Dying On Ground
+131: Dying In Air
+132: <?> Lift Box
+133: <?> Holding Box While Breathing
+134: Throw Box
+135: <?> Walk Holding Box
+136: Slow Run Holding Box
+137: <?> Walking Swinging Sword
+138: <?> Strafing Backwards
+139: Strafe Left Holding Box
+140: Strafe Right Holding Box
+142: Strafe Jump Left Holding Box
+143: <?> Strafe Related Holding Box
+144: Strafe Jump Right Holding Box
+145: Skate Run
+146: <?> Launched Or Flying
+147: <?> Walking
+148: <?>
+149: <?> Pushing 
+150: <?> Strafe Walking Right
+151: <?> Walking
+152: Wall Jump
+153: Wall Stand Left
+154: Wall Jump Land Left
+155: Wall Stand Right
+156: Wall Jump Land Right
+157: Wall Right Left
+158: Wall Run Right
+159 - 172: <?> T-Pose
+173: <?> T-Pose Rising
+174: <?> T-Pose Falling
+175 - 177: <?> T-Pose
+178: <?>Invisible
+179: <?> Model Partially Stuck In T-Pose
+180 - 182: <?> T-Pose
+183 - 189: <?> Messed Up Arms
+190: <?> Crash
+191 - 199: <?> Messed Up Arms
+200 - 228: <?> T-Pose
+229: <?> G.U.N.?
+236: G.U.N. Walker Standing
+362: Super Jump Dash
+363: Super Hurt
+364: Super Float Idle
+365: Super Float Walk
+366: Super Strafe Backwards
+367: Super Strafe Left
+368: Super Strafe Right
+369: Super Float Run

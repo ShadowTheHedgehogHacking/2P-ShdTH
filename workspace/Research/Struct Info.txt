@@ -1,26 +1,115 @@
 Shadow Player Struct:
+	0x38 - vTable
+		0x10 - (void* () fpExecuteCommand) (void* pSelf, Command* pCommand)
 	0xA8 - Status 2:
 		-0x80000000 hasGun
 	0xAC - Status 3:
-		-0x40000000 enables super shadow during loadzz
+		-0x40000000 enables super shadow during load
 		-0x04000000 controls dont turn with camera
 		-0x00000100 no shadow
 		-0x00004000 disable walking
 		-0x00000400 disable movement
 		-0x00000010 dont lose rings when hit
-		-0x00000020 super fly mode
+		-0x00000020 super fly mod
 		-0x00000040 animation doesnt change
 		-0x00000080 player invisible
 		-0x00000004 canChaosControl
 		-0x00000008 canChaosBlast
 		
 		
+Behavior:
+	0x10 - int behaviorType
+
+ExternalCamera:
+	0x0 - 
+	0x4 -
+	0x8 -
+	0x1c - 
+	0x20 - float xScale
+	0x24 - float xRot  0-35 degree?
+	0x28 - float yFlip
+	0x2C - float xRot  45-90 degrees?
+
+CharCommand:
+	0x8 - void fpConstructor
+
+Coaster:
+	0x4 - active/visible/collision
+	0x18 - vTable
+		0x8 - ~Coaster()
+		0x1C - nullsub()
+		0x20 - boost::detail::sp_counted_base
+	0x24 - 
+	0x50 - something?
+		0x24 - SonicteamUSA::System::CharaColli::CharaColliBody***
+			0x4 - SonicteamUSA::System::CharaColli::CharaColliBase***
+	0x60 - int state
+			-0x0 inactive
+			-0x1 playerRiding
+			-0x2 ridingWithoutPlayer
+			-0x3 breaking
+	0x64 - int indexID
+			
+	0xBC - float xTilt maybe
+	0xE8 - float xPos Maybe
+	0xF4 - float hangAngle
+
+GravityChangeCollision:
+	0x0 - char* pName
+	0x4 - size ?
+	0x40 - float*[3] position
+	0x60 - float xPos
+	0x64 - float yPos
+	0x68 - float zPos
+
+GravityChangeSwitch:
+	0x0 - char* pName
+	0x4 - size ?
+	0xC - GravitySignBoard* ?
+	0x10 - Gadget* ?
+	0x18 - GravityChangeSwitch** ?
+	0x28 - pXYZ?
+	0x30 - direction?
+	0x34 - flost*[3] position
+	0x3C - GadgetModelInfo**** ?
+	0x50 - ?
+	0x54 - Effect::PJS::EffectArrangerPJS* ?
+	0x58 - boost::detail::sp_counted_base_impl<Effect::System::EffectElement *, boost::checked_deleter<Effect::System::EffectElement>>
+	0x5C - ?
+	0x68 - XYZ?
+
+GravityChangeZone:
+	0x0 - char* pName
+	0x4 - size ?
+	0x34 - float*[3] position
+	0x28 - float[3]** pXYZ?
+	0x34 - float[3]* pRealXYZ?
+
+
+Motion:
+	0x58 - pParent maybe
+	0x42C - int motionOrAnimID
+
 Player:
 	0x0 - char* pName
 	0x4 - size ?
 	0x8 - enemy ?
+	
+PlayerCommand:
+	0x4 - short commandID
+	0x8 - (void*() fpExec)()
+	0xC - (void*() fpInit)()
+	0x14 - int 
 
+Player::Behavior::Behavior:
+	0x4 - PlayerPointer*
 
+Player::Behavior::SomethingHang:
+	0x24 - pXYZ
+
+Player::Behavior::InitializeArgsSomethingHang:
+	0x4 - int ID?
+	
 Shadow:
 	0x0 - char* pName
 	0x4 - size ?
@@ -47,11 +136,42 @@ ShadowWeapon:
 	0x0 - char* pName
 	0x4 - int size?
 	0x28 - my player pointer
+
+StageCameraManager:
+	0x0 - char* pName
+	0x4 - int size?
+	0x10 - PJSCameraPreTask* ?
+	
+	
+Super:
+	0x0 - char* pName
+	0x4 - int size?
+	0x18 - Player::Shadow::Super** ?
+
+Player::InternalOption:
+	-
+
+
+UpDownReel:
+	0x44 - float startYOffset
+	0x48 - float finishYOffset
+	0x4C - float launchAngle
+	0x50 - float launchHSpeed
+	0x54 - int state
+	0x58 - float currentYOffset
+	0X64 - vector3* xyzSetCollison Maybe
+	0x90 - Player* Player
+	0x98 - int collisionOrStatusRelated Maybe
 	
 	
 		(*Struct Sizes*)
 CharaColliMove - 0x3B
+Coaster - 0xDB28
+GravityChangeCollision - 0x9410
+GravityChangeSwitch - 0xBEE8
+GravityChangeZone - 0x7620
 Motion - 0x1428
 Shadow - 0xC30
 ShadowExecuter - 0x888
 ShadowWeapon - 0x1490
+Super - 0xF460

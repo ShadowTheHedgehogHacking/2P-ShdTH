@@ -50,6 +50,75 @@ for the bctrl above, code goes like this:
 801a0480 a few steps out, might be main function caller?
 sets position, angle, super etc on restart. confirmed working as nopping makes it not happen
 looking for player pointer
+
+	4/29/19
+800b7e44 appears to be the function that calls ToSuper for shadow, called by 80177124 bl ->0x800B7E44
+added no fade code, able to confirm that shadow loads in like normal, and super is done later, so it should be possible to reproduce at any time
+800b7e68 bl	->0x800A8B74 <- appears to be the one that makes shadow super, nopping makes it not happen
+so far r3/r30, and r4/r31 do not have anything player related
+well wait..
+nopping 800b7ed4 bctrl prevents super as well
+yeah that makes more sense
+so this should be possible, but due to everything being in the stack, and the stack always changing, not sure how to call this function at will
+although it appears that the loading of the model has nothing to do with the to super function??
+it looks like it may be a call to createeffect(), super specific call a few steps out, 800a2bc0 bl ->0x8027E2D0
+interesting..
+one more step out brings me to 80099f1c, which looks alot like the opposite of revertsuper() after glimpsing over the asm
+bingo!? blr'ing 80099f1c prevents any of supers traits, despite the previous functions
+80099fc8 bl	->0x800A7F14 <- seems to make super not happen when nopped?
+actually upon further testing it seems the above halts(?), and 80099f8c bne- ->0x80099F90 prevents super when nopped
+	4/30/19
+oh ok so it was actually a rlwinm/bne combo that i nopped, which bnes over 80099fc8, so something inbetween causing halt?
+anyways, the rlwinm appears to be testing some resu;t of the above 80099f8c bne- ->0x80099F90, inside of which has 800a2bc0 bl ->0x8027E2D0, which has a call to CreateEffect() at 8027e2ec bl ->0x8004EFC4
+hmmmm
+this is starting to resemble part of revert, also cotaining a string "super" and assigning it to something
+looks like player super pointer is set but not read in this function, mey have to do read bp on player super pointers
+...
+OR may have to check further into 8027e310 bl ->0x8027EFC4, inside is a stage check for 701, changing to current stage activates fly mode
+	5/7/19
+8027efdc bl	->0x8006D714 <- nop = halt
+8027efe4 bl	->0x80027D5C <- nop = super model not loaded
+8027eff0 bl	->0x80078C88 <- nop = super model not loaded
+8027eff8 bl	->0x8027AA78 <- nop = super model not loaded
+8027f000 bl	->0x801D2DE8 <- nop = no apparent effect
+8027f020 bdnz+ ->0x8027F014 
+8027f050 bdnz+ ->0x8027F044
+8027f070 beq- ->0x8027F07C <- b = no apparent effect
+8027f078 bl	->0x800AA58C <- nop = no apparent effect
+8027f088 bl	->0x80076CA8 <- nop = show ammo count
+8027f09c bne- ->0x8027F0B0 <- nop = flight mode
+8027f0ac bl	->0x80076CA8 <- skipped by above if not level 710
+8027f0b8 bl	->0x80079334 <- nop = no apparent effect
+8027f0cc bl	->0x800AADA4 <- nop = chaos spear targets self
+8027f0d8 bl	->0x80051F88 <- nop = same as above, also no bullets, and screen blur from fully charged chaos spear doesnt dissapear automatically
+8027f0e4 bl	->0x80051BD4 <- nop = no apparent effect
+8027f0f0 bl	->0x802F0740 <- nop = halt
+8027f0fc bl	->0x8027F174 <- nop = halt
+8027f11c bctrl(8023b214) <- nop = no chaos spear, cannot pickup weapons
+8027f128 bl	->0x8005BD24 <- nop = no apparent effect
+8027f134 bl	->0x800ADE1C <- nop = no apparent effect
+8027f144 bl	->0x80076CA8 <- nop = no apparent effect
+8027f150 bl	->0x80051BD4 <- nop = no apparent effect
+
+8027eff8->8027aa90->8027ae20 bl	->0x800128D8 <- appears to be the important function, but wow this is going to take some time to figure out
+	5/9/19
+SO...
+bp on 800af548, do a punch or spindash (punch perferred), bp trips, grab r4 which points to address of action, change to address of "Player::ToSuperCommand"(80520EF0)...
+Super Transformation!
+(also doing the same thing a second time de transforms)
+so how do I do this more conviniently...?
+	5/10/19
+looks like the key may be deepstatecall or deeperstatecall or deepstatecallee
+in these cases, r4 is the command, changing to ToSuperCommand works here as well
+so far no sign of a player pointer
+
+	5/12/19
+Super Function call order:
+800b7e44
+8009a0cc
+800a2b7c
+8009a070
+
 		(/*Transformation*)
 
 		(*De-Transformation*)
@@ -256,7 +325,11 @@ looks like destructor, wont call next one if blr'd
 then comes 8005d03c(Weapon::WeaponBase):
 looks like its a destructor too
 further looking shows that these functions are called by eachother in hierarchy
-	
+	4/30/19
+side note: found the code that gives shadow the chaos spear "weapon" while looking at related transformation code above. changing ammo from 999 to 1 but still infinite
+	5/6/19
+appears as though enemies generate some secondary weapon object when shooting? not sure, see a few functions that are called when shadow picks up a weapon, that are also called when an enemy shoots a bullet
+
 			</Weapons>
 		(/*Super State & Actions*)
 
@@ -265,4 +338,24 @@ further looking shows that these functions are called by eachother in hierarchy
 	4/17/19
 for potential 2p shadow: 80099f48 changes the stack in some way to put the player pointer at 0x20(sp), investigate
 ...
-actually its just r4 that contains player pointer
+actually its just r4 that contains player 
+
+	5/9/19
+attempting to have both players be super with following steps:
+set a bp just after the bctrl, like on 800b7ed8
+then set pc to 800b7e54(i tried 800b7e4c so that mflr would happen but it crashed so have to do e54)
+i dont think you have to set r0 as its set later but i always set it to p2 x pointer here just in case
+go ahead and grab the address from r1, add 0x18 to it then set it to p2 x pointer at this time
+step over the code until you get to the 800b7e9c lwz r0, 0x0018 (sp)  by this time sp + 0x18 will have been set to 0 by the bl above it
+go ahead and set sp + 0x18 back to p2 x pointer
+step through the code and make sure it doesnt branch at 800b7ea4 beq- ->0x800B7ED8
+if it doesnt branch youre good to go
+
+this works! but p2 super model does not load correcty. however a death/restart seems to fix this
+	5/12/19
+further investigation shows that I should be able to change r3 to p2 pointer right before 80099f88 so that it grabs p2s pointer, then set pc back to 80099f90 to get p1s pointer from stack
+this should set both players to super, works on glyphic canyon, will check devil doom
+success!
+although just like last attempt, p2 doesnt load super model correctly (even after restart), will look into changing pointers earlier in the call stack
+will probably go ahead and put bps on all super functions to determine call order as well
+documenting call order in transformation section
