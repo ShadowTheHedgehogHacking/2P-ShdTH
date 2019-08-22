@@ -6651,3 +6651,235 @@ ec210032 d0240028
 *Edit AIR FRICTION float to control size
 *(Default = 3)
 *its at 805E4580
+------------------
+2019-08-21
+Plans:
+- Airbug Fix
+- Checkpoint Warping has a bug (sometimes warps wrong player) -> REPURPOSE ALL EXISTING mainPlayerID codes to indirectly modify access codes!
+- Only set locked state for player that jumped in warp hole / is using checkpoint (possible?)
+- Diablon Boss Warp Fix
+- Bosses and Cosmic Fall are EXCLUDED from independent series codes (rings, setobj load/unload, etc)
+- Hero / Normal /Dark Score added at the end
+- Checkpoint / Warp Control State Lock INDEPENDENT per player [BONUS]
+- Fix Death independent warps to ONLY warp on true death state
+
+
+[Checkpoint Warping] -> REPURPOSE ALL EXISTING mainPlayerID codes to indirectly modify access
+-> Verify issue is present -> Confirmed
+Re-write code to NOT store to mainPlayerID and instead change access ops
+Also optimize if possible using r13
+
+
+ORIGINAL CODE MainInject
+@ 80331114
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x60(r30)
+lfs f16, 0x64(r30)
+lfs f17, 0x68(r30)
+lfs f18, 0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+
+Checkpoint WarpSuccessful MainPlayer Cleanup SOURCE
+80129b50 origin: stwu	sp, -0x0020 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0020 (sp)
+
+Checkpoint WarpCancel MainPlayer Cleanup SOURCE
+80117614 origin: stwu	sp, -0x0010 (sp)
+
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+-----------------
+DETERMINED 0x60 of r30 is NOT going to be SavePoint Position values!
+For these scenarios...
+Checkpoints activated count over total, order does not matter:
+2/6
+5/6
+4/7
+5/7
+7/7
+??Stages with X/8 Checkpoint do not seem to have any issues
+-> no, repeated it a few times, seems random
+
+Possible Solutions: 
+- Use static vals of known checkpoint XYZ (inefficient)
+- Donut gravityswitcher method?? @Donut needs to elaborate
+
+More efficientish way of doing static vals check:
+checkpoint1(static) + (checkpointNum-1) * 0x1C
+r5 = checkpointNum = [1,8]
+r13 = 805EB440
+static address of Checkpoint 1X = 80575FE4
+Difference = 0x7545C/ Decimal: 480,348 range too great, cannot use r13
+
+MainInject Checkpoints StaticMethod v1
+@ 80331114
+
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+//
+Get address of current checkpoint pos
+lis r17, 0x8057
+ori r17, r17, 0x5FE4
+subi r19, r5, 1
+mulli r19, r19, 0x1C
+add r17, r17, r19
+//
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+li r16, 1
+blt 0x8
+li r16, 0
+lis r15, 0x805E
+ori r15, r15, 0xE588
+stw r16, 0(r15)
+stwu sp, -0x0010 (sp)
+
+Checkpoint Warp MainCode Rewrite v1
+C2331114 00000019
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+
+Works, add with cleanup codes for now
+
+2P Essentials Independent Checkpoint Warping v0.95 [dreamsyntax & DonutStopGaming]
+C2331114 00000019
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+C2117614 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 00000000
+C2129B50 00000003
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 00000000
+*ONLY P1 has UI control
+*Credit to DonutStopGaming for distance check
+*0.95 fixes warp issues found in 0.9
