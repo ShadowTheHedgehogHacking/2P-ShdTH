@@ -78,6 +78,7 @@ Normal Priority:
 * Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player* (some are disabled)
 * Bosses (with the exception of Egg Dealer) will attack closest player
 
+
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
