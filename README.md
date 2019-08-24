@@ -16,12 +16,11 @@ High Priority:
 * Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
 * Devil Doom [WIP / -> Identified mainPlayerID is controller]
-* Downscale all enemy, level, gdt textures to reduce crashing
-* Coaster/Pulley/Ziplines Fix v2 (Some do not work in v1) [WIP]
+* Coaster/Pulley/Ziplines Fix v2 (Circus Park does not work in v1) [WIP]
 
 Normal Priority:
 * Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
-* Bosses / Worm Enemies / AlienShips should attack closest player [PARTIAL / Applicable Bosses done]
+* Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
 * Fix the case where if P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
 
@@ -40,6 +39,7 @@ Normal Priority:
 * Coaster/Pulley/Ziplines fixed (v1)
 * Individual death-to-checkpoint (Basic)
 * Physics Rewrite for GUNMech Jumpers
+* Downscale all stage and stage_gdt textures to reduce crashing
 
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
@@ -49,8 +49,6 @@ Normal Priority:
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
-* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
-* Worm Enemies and AlienShips will only target P1
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -84,6 +82,8 @@ Normal Priority:
 * Item Bubbles / Hint Bubbles content render based on P1's relative location
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
+* Worm Enemies and AlienShips will only target P1
+* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
 
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
