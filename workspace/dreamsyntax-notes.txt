@@ -7038,4 +7038,50 @@ Try: 8057FA85 for FadeManagement
 Respawns Dark slime same byte
 holding a box
 new respawn code breaks androids
-more bugs: Mad MAtrix panels are broken
+more bugs: Mad Matrix panels are broken [identified to be caused by Coaster Fix v1] -> Fixed with Donut, awaiting him to post finished ver
+---------------------------------------
+2019-08-29
+Found v3 respawn code broke a LOT:
+- Either player using dark slime
+- Break weapon-bound androids
+Solution for respawns bug: Compare entire word of known safe region instead?:
+v2 resulted in warp if either player happened to have X pos of 0, so instead make it extremely unlikely by checking a full word:
+
+From v2 -> v3: Change initialize check to lbz r15,0xB3(r16) instead of 0x0(r16) -> typo originally probably
+v3 -> v4 Change same instruction to be lwz r15, 0x0(r16) instead (not lbz)
+^ found this changes nothing
+Reverting back to v2 and adding bug info
+
+2P Optionals Independent Respawns v2 [dreamsyntax]
+C2176F28 00000009
+3E00807D 621071A0
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+60000000 00000000
+C2176F74 00000009
+3E00807D 621071A8
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+60000000 00000000
+041CB454 60000000
+04204400 60000000
+*Player X's death will not cause Player Y to respawn
+*REQUIRES No FadeScreen
+*DeathCamFix, EffectFix included
+*
+*Known Bugs: If using Dark Spindash or on some* rails
+*and a player dies causes both players to reset
+
+Revert WeaponDrop Management code to v1, it broke RingManagement.
+SETOBjs Do Not Reset for Player Death v5 worked as intended.
+
