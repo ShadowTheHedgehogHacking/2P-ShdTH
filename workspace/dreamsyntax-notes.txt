@@ -7028,3 +7028,14 @@ C20CB758 00000005
 *v4 now has Cosmic Fall, Last Way, and Final Bosses SETObj resetting on either player dying
 *v5 now has MissionPartner Sync
 
+
+Independent Ring Code not working?
+Reason: 2P Optionals Independent Death WeaponDrop Management v3
+blocks updating of ringcount on death
+
+Try: 8057FA85 for FadeManagement
+
+Respawns Dark slime same byte
+holding a box
+new respawn code breaks androids
+more bugs: Mad MAtrix panels are broken
