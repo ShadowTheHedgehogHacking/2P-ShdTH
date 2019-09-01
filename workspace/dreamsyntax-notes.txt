@@ -7085,3 +7085,48 @@ C2176F74 00000009
 Revert WeaponDrop Management code to v1, it broke RingManagement.
 SETOBjs Do Not Reset for Player Death v5 worked as intended.
 
+Worked with Donut and found MadMatrix issues with Coaster v1 is not sufficient.
+Worked with Donut again (v1.95) now code uses rlwinm that should pass along any error cases to the game's original handler
+Mad Matrix should be exception free. Identified 0x198 and 0x184 still has issues occasionally for CircusPark/SpaceGadget
+---
+2019-08-31
+lwz r4, 0x0064 (r4)
+cmpwi r4, 15
+bne- 0x8
+li r4, 7
+
+lwz r0, 0x0064 (r4)
+cmpwi r0, 15
+bne- 0x8
+li r0, 7
+
+Jump Ball Color Switch v2 [dreamsyntax]
+c20a5ab0 00000003
+80840064 2c04000e
+40820008 3880000X
+60000000 00000000
+c2087190 00000003
+80040064 2c00000e
+40820008 3800000X
+60000000 00000000
+c2080734 00000003
+80040064 2c00000e
+40820008 3800000X
+60000000 00000000
+*v2 changes player's ball only
+*Change all 3 X to valid values:
+*0 = (Default Orange, but White Homing Attack)
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink) 
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
+----
+2019-09-01

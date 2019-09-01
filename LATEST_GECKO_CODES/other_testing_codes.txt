@@ -307,3 +307,33 @@ C2129B50 00000003
 *Warp will pick the player closest to the checkpoint X was pressed on
 *v1 will have UI control for P2, right now only P1 has UI control
 *OLD Has issues with some cases of warping wrong player, succeeded by v0.95
+
+
+Jump Ball Color Switch v2 [dreamsyntax]
+c20a5ab0 00000003
+80840064 2c04000e
+40820008 3880000X
+60000000 00000000
+c2087190 00000003
+80040064 2c00000e
+40820008 3800000X
+60000000 00000000
+c2080734 00000003
+80040064 2c00000e
+40820008 3800000X
+60000000 00000000
+*v2 changes player's ball only
+*Change all 3 X to valid values:
+*0 = (Default Orange, but White Homing Attack)
+*1 = Sonic (Blue)
+*2 = Tails (Yellow)
+*3 = Knuckles (Red)
+*4 = Amy (Light Pink) 
+*5 = Rouge (Very Light Purple)
+*6 = Omega (Red, Large Radius)
+*7 = Vector (Green, Large Radius)
+*8 = Espio (Light Blue)
+*9 = Maria (Default Orange, but White Homing Attack)
+*A = Bee (Default Orange, but White Homing Attack)
+*B = Eggmonitor (Default Orange, but White Homing Attack)
+*C = Dooms Eye (Default Orange, but White Homing Attack)
