@@ -7130,3 +7130,10 @@ c2080734 00000003
 *C = Dooms Eye (Default Orange, but White Homing Attack)
 ----
 2019-09-01
+CameraHook research via GUN Jeep @ GUN Fortress
+BP at 801beedc and check params for createSpecialCam
+r4 = floatX (Y, Z 0x4 up each) of newCam? or car obj itself
+r5 = unknown? 0?
+r6 = Jeep -> unknown? 0? [GUN -> lwz 0x88 r6]
+
+Distacted with Transparency on Geo, labeled some stuff but no results
