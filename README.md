@@ -19,10 +19,9 @@ High Priority:
 * Coaster/Pulley/Ziplines Fix v2 (Circus Park does not work in v1) [WIP]
 
 Normal Priority:
-* Space Gadget Gravity Switchers fixed [WIP / POC->Done, further issues identified / DonutStopGaming Task]
+* Space Gadget Gravity Switchers fixed [v1.9 DONE; v2 WIP]
 * Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
 * Fix the case where if P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 
 #### Completed for 2.0
 * Verify 1:1 misc bytes for level edits per HPP v0.7.6+
@@ -43,7 +42,6 @@ Normal Priority:
 
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
-* Gravity switches on Space Gadget only alter P1's gravity
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
@@ -75,6 +73,7 @@ Normal Priority:
 * Independent Warping/Backtracking via Checkpoints* (No independent UI yet)
 * Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player* (some are disabled)
 * Bosses (with the exception of Egg Dealer) will attack closest player
+* Gravity Switchers on Space Gadget alter proper player's gravity
 
 
 ## Other Known Issues (Not planned to be fixed)
@@ -83,13 +82,14 @@ Normal Priority:
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
 * Worm Enemies and AlienShips will only target P1
-* Checkpoint Bonus (Rings, Bubble, Lives) are always 10 rings if P2 activates checkpoint
+* Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
 * Optional BlackKnight style melee replacement
 * Both players required to reach GoalRing for stage complete
 * Physics Rewrite for GUNMech Jumpers [DONE]
+* WeaponsTargeting & HomingAttack Other Player Enable/Disable
 
 ## Dev
 * dreamsyntax
