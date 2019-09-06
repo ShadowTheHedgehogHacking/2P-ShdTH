@@ -12,20 +12,18 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Road to 2.0 (WIP) | Release Date: 9/9/2019
 High Priority:
-* Proper CameraHook for Turrets/Flyables
 * Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
 * Devil Doom [WIP / -> Identified mainPlayerID is controller]
-* Coaster/Pulley/Ziplines Fix v2 (Circus Park does not work in v1) [WIP]
 
 Normal Priority:
 * Space Gadget Gravity Switchers fixed [v1.9 DONE; v2 WIP]
 * Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
-* Fix the case where if P1 is in a Vehicle and P2 attempts to use a CarTypeVehicle, P1 will have control of P2
+* Find another way for Vehicles/Turrets/Flyables Controls/Cams to detect which player uses them instead of holding X
 
 #### Completed for 2.0
-* Verify 1:1 misc bytes for level edits per HPP v0.7.6+
-* Vehicles map to correct player's controlpad and freecam
+* Verify 1:1 misc/unknown bytes for level edits per HPP v0.7.6+
+* Vehicles map to correct player's controlpad
 * Fix "ChaosPowers activate for both players" - add underflow check
 * Fix "Disable ScreenShake" - (occasional endless shake issue)
 * Partner does not despawn if P1 is not in range of "RW:Range" activation patch for P2
@@ -35,18 +33,20 @@ Normal Priority:
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Key Doors, Westopolis Triggers, Computer Room react to P2
 * Android characters have unique JumpBall colors
-* Coaster/Pulley/Ziplines fixed (v1)
 * Individual death-to-checkpoint (Basic)
 * Physics Rewrite for GUNMech Jumpers
 * Downscale all stage and stage_gdt textures to reduce crashing
+* Coaster/Pulley/Ziplines Fix v2
+* Proper CameraHook for Turrets/Flyables/Vehicles
+
 
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
-* Turrets alter P1's camera if P2 uses it
 * SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
+* Keys collected do not save
 
 ## Done so far:
 * Level chunks load/unload based on both players
