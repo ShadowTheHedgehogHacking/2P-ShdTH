@@ -337,3 +337,14 @@ c2080734 00000003
 *A = Bee (Default Orange, but White Homing Attack)
 *B = Eggmonitor (Default Orange, but White Homing Attack)
 *C = Dooms Eye (Default Orange, but White Homing Attack)
+
+
+2P Essentials FlyablesCam Fix v2 [dreamsyntax]
+041b3148 4e800020
+041b308c 4e800020
+*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+*v2 fixes exception being thrown on restarting a stage or clearing it while one player is still on a flyable.
+
+SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
+0417711c 60000000
+c60af2e4 800af3bc

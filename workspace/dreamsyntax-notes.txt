@@ -7137,3 +7137,176 @@ r5 = unknown? 0?
 r6 = Jeep -> unknown? 0? [GUN -> lwz 0x88 r6]
 
 Distacted with Transparency on Geo, labeled some stuff but no results
+----
+2019-09-05
+Camera stuff has been identified.
+LostImpact turrets are an exception! They load camera data on RW Render distance instead of object activation! :\
+All other types of turrets/flyables/vehicles use once-activated check, each independent
+
+Use generic get X status:
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+
+
+Flyables: 801b3b14
+GUN Turret: 800e943c
+Alien Turret: 800eb524
+Vehicles: 801b8010
+use below code in all possible above hook scenarios:
+lis r5, 0x8056
+ori r5, r5, 0xED4F
+lbz r5, 0x0(r5)
+andi. r5, r5, 0x8
+cmpwi r5, 0x8
+li r5, 1
+bne- 0x8
+li r5, 0
+
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v0.8 (Experimental)
+C21B3B14 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C20E943C 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C20EB524 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C21B8010 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+*P1 MUST hold down X until fully mounted otherwise camera will attach to P2
+*If P1 is holding X when P2 tries to mount P1 will get camera 
+*Does not fix Lost Impact Turrets
+
+2P Essentials Fix Vehicles for P2 v2.95 [dreamsyntax]
+C21B924C 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800002 00000000
+C21BA5D0 0000000A
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+38800001 00000000
+*P1 MUST HOLD X while mounting vehicle otherwise controls&camera will be mapped to P2
+*Allows for P2 to drive CarType vehicles
+*Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
+
+Lost Impact Turret / ARK Turret Experiment:
+
+nop bctrl controller @ 801b69a0
+begin LostImpact_VehicleTurrets__CAMERA_SPLIT_ASSIGNMENT @ 80317a48
+Inject location / OnActivate/OnMount() for ARK Turret @ 80317038
+original instruction: stwu	sp, -0x00B0 (sp)
+lis r15, 0x8031
+ori r15, r15, 0x7a48
+mtlr r15
+blrl
+stwu sp, -0x00B0(sp)
+
+^^ FAILED
+
+BUT, learned I can overwrite the stored reference successfully onActivate/onMount!
+
+have a "is ARKTurret" case -> @ 8031722c : li	r10, 1
+li r15 = 0xEF (arbitrary code of my choosing)::
+
+C231722C 00000002
+39400001 39E000EF
+60000000 00000000
+
+Within CreateExternalCameraSpecialP1Only() ->
+@ 801cedc4 origin: lwz r4, 0 (r24)
+lwz r4, 0 (r24)
+cmpwi r15, 0xEF
+bne- 0x28
+lis r15, 0x8056
+ori r15, r15, 0xED4F
+lbz r15, 0x0(r15)
+andi. r15, r15, 0x8
+cmpwi r15, 0x8
+li r15, 1
+bne- 0x8
+li r15, 0A
+stw r15, 0xA0(r4)
+
+Completed LostImpactTurret Camera Controll
+c231722c 00000002
+39400001 39e000ef
+60000000 00000000
+c21cedc4 00000007
+80980000 2c0f00ef
+40820028 3de08056
+61efed4f 89ef0000
+71ef0008 2c0f0008
+39e00001 40820008
+39e00000 91e400a0
+60000000 00000000
+
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v0.9
+C21B3B14 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C20E943C 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C20EB524 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C21B8010 00000005
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+60000000 00000000
+C231722C 00000002
+39400001 39E000EF
+60000000 00000000
+C21CEDC4 00000007
+80980000 2C0F00EF
+40820028 3DE08056
+61EFED4F 89EF0000
+71EF0008 2C0F0008
+39E00001 40820008
+39E00000 91E400A0
+60000000 00000000
+*P1 MUST hold down X until fully mounted otherwise camera will attach to P2
+*If P1 is holding X when P2 tries to mount P1 will get camera
