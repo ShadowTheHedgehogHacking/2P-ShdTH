@@ -8,13 +8,12 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Level Status
-![Current Level Map](./res/level_status.png)
+# ALL LEVELS ARE NOW PLAYABLE!
 
 ## Road to 2.0 (WIP) | Release Date: 9/9/2019
 High Priority:
 * Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
-* Devil Doom [WIP / -> Identified mainPlayerID is controller]
 
 Normal Priority:
 * Space Gadget Gravity Switchers fixed [v1.9 DONE; v2 WIP]
@@ -38,7 +37,7 @@ Normal Priority:
 * Downscale all stage and stage_gdt textures to reduce crashing
 * Coaster/Pulley/Ziplines Fix v2
 * Proper CameraHook for Turrets/Flyables/Vehicles
-
+* Devil Doom [TestVer DONE]
 
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI

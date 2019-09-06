@@ -7324,7 +7324,7 @@ However if only set to P2 becomes black super, throws exception.
 Potential solution? Call ToSuper after calling it for P1?
 ^ Is this called onRestart/OnDeath? This could result in memory leak...
 
-Inject @ 80177128 / original: lis	r3, 0x8052
+Inject @ 80177128 / original: lis	r3, 0x8052 || FAILED DO NOT USE
 Replace with:
 li r3, 1
 lis r15, 0x800B
@@ -7361,4 +7361,46 @@ mtlr r15
 blr
 li r3, 0
 
+Devil Doom BalloonRings Applies to Closest Player v1
+C2322D24 00000016
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+60000000 00000000
+*Uses swarm instance, so accuracy varies
 
+Redo Inject for P2 ToSuper on Init:
+(beq was jumping to original inject location, move to bl itself and call it twice)
+Inject @ 80177124 / original: bl 800B7E44
+Replace with:
+lis r15, 0x800B
+ori r15, r15, 0x7E44
+mtlr r15
+blrl
+li r3, 1
+mtlr r15
+blrl
+
+C2177124 00000004
+3DE0800B 61EF7E44
+7DE803A6 4E800021
+38600001 7DE803A6
+4E800021 00000000
