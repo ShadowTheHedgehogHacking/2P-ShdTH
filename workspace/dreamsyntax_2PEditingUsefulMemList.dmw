@@ -1475,6 +1475,18 @@
                     "label": "UI PrisonIsland Dark KillEnemies",
                     "typeIndex": 2,
                     "unsigned": true
+                },
+                {
+                    "address": "80575EFC",
+                    "baseIndex": 0,
+                    "label": "MissionManagerTask",
+                    "length": 55,
+                    "pointerOffsets": [
+                        "0",
+                        "0"
+                    ],
+                    "typeIndex": 5,
+                    "unsigned": false
                 }
             ],
             "groupName": "Mission"
@@ -7212,111 +7224,93 @@
             "groupName": "RESEARCH / UNDEFINED"
         },
         {
-            "address": "8060B428",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8144C58C",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0"
+            "groupEntries": [
+                {
+                    "address": "809E6540",
+                    "baseIndex": 1,
+                    "label": "Parent",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E6544",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Unknown1",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E6548",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Unknown2",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E654C",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Width",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E6550",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Height",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E6554",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Unknown",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E6558",
+                    "baseIndex": 0,
+                    "label": "Global Viewport Unknown",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E655C",
+                    "baseIndex": 0,
+                    "label": "Global Viewport OffsetX",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E655D",
+                    "baseIndex": 0,
+                    "label": "Global Viewport OffsetX?",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E655F",
+                    "baseIndex": 0,
+                    "label": "Global Viewport OffsetY",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "809E64A0",
+                    "baseIndex": 1,
+                    "label": "No label",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809E6540",
+                    "baseIndex": 1,
+                    "label": "No label",
+                    "typeIndex": 2,
+                    "unsigned": true
+                }
             ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8060B42C",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8144C590",
-            "baseIndex": 0,
-            "label": "No label",
-            "length": 555,
-            "pointerOffsets": [
-                "0",
-                "0",
-                "0",
-                "0"
-            ],
-            "typeIndex": 5,
-            "unsigned": false
-        },
-        {
-            "address": "8060B3E8",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0",
-                "0"
-            ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8060B3E8",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0",
-                "0"
-            ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8060B3E8",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0",
-                "4"
-            ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8060B3E8",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0",
-                "8"
-            ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "80575EFC",
-            "baseIndex": 0,
-            "label": "No label",
-            "length": 55,
-            "pointerOffsets": [
-                "0",
-                "0"
-            ],
-            "typeIndex": 5,
-            "unsigned": false
-        },
-        {
-            "address": "809DCF94",
-            "baseIndex": 0,
-            "label": "No label",
-            "length": 55,
-            "pointerOffsets": [
-                "0",
-                "0",
-                "0"
-            ],
-            "typeIndex": 5,
-            "unsigned": false
+            "groupName": "ViewPort"
         }
     ]
 }

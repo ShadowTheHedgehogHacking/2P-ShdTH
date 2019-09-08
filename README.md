@@ -10,9 +10,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 # ALL LEVELS ARE NOW PLAYABLE!
 
-## Road to 2.0 (WIP) | Release Date: 9/9/2019
+## Road to 2.0 (WIP) | Release Date: 9/9/2019 (Tomorrow)
 High Priority:
-* Checkpoint Warping/Backtracking separate warping [PARTIAL / Warp Done; Needs UI Control]
 * Fix "Air bug" - (player state pointer overlap issue)
 
 Normal Priority:
@@ -37,10 +36,10 @@ Normal Priority:
 * Downscale all stage and stage_gdt textures to reduce crashing
 * Coaster/Pulley/Ziplines Fix v2
 * Proper CameraHook for Turrets/Flyables/Vehicles
-* Devil Doom [TestVer DONE]
+* Devil Doom / Super for P2
+* Checkpoint Warping/Backtracking separate warping
 
 ## Problems
-* Checkpoint Warp Menu only P1 controls Checkpoint UI
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
@@ -68,13 +67,11 @@ Normal Priority:
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
 * Vehicles no longer alter P1's camera if P2 uses it; P2 can control CarType Vehicles if mounting while P1 is not driving
 * Key Doors, Westopolis Triggers, Computer Room react to P2
-* Independent Warping/Backtracking via Checkpoints* (No independent UI yet)
-* Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player* (some are disabled)
+* Independent Warping/Backtracking via Checkpoints
+* Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player
 * Bosses (with the exception of Egg Dealer) will attack closest player
 * Gravity Switchers on Space Gadget alter proper player's gravity
 * SuperShadow/DevilDoom activates for both players
-
-
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
@@ -98,18 +95,17 @@ Normal Priority:
 ## Credits
 * DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, structs analysis, and numerous other address discoveries
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix, 
-* TheHatedGravity for red/yellow TrueBlackShadow textures, v1.2+ MenuUI, v2.0 Banner
-* Infinite Lives by Link Master
-* Chaos Powers Activators by Zzetti
+* TheHatedGravity for red/yellow TrueBlackShadow textures, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Muzzarino for some symbol findings
+* Chaos Powers Activators by Zzetti
+* Infinite Lives by Link Master
 
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
+* TryTwo for extremely useful new debugging features in Dolphin
+* aldelaro5 for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant)
-* aldelaro5 for Dolphin Memory Engine
-* TryTwo for extremely useful new debugging features in Dolphin
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
-* DeadlyFugu, Muzzarino
-* Heroes Hacking Central (&Shadow)
+* Heroes Hacking Central (&Shadow) for keeping us insane during this project

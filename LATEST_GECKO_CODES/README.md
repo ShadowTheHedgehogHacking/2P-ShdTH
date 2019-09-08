@@ -1,9 +1,8 @@
 ## Latest gecko codes
+`other_testin_codes.txt` are codes no longer in use or not related specifically to 2P mod (SuperShadow v0.4 for example).
 
-`GUPE8P.ini` is for Dolphin
+`GUPE8P.ini` is for development
 
 Place it in Dolphin\User\GameSettings
 
-`OCARINA_FORMAT.txt` is for Nintendont / Creating GCT
-
-Use something like `Gecko Cheat Code Manager v1.2` to export to GCT
+Note we have hit the Gecko limit, so this is only used for verifying codes. Many need to be disabled to test new codes.
