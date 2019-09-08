@@ -42,7 +42,6 @@ Normal Priority:
 ## Problems
 * Checkpoint Warp Menu only P1 controls Checkpoint UI
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
-* SuperShadow only activates for P1
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
 * Keys collected do not save
@@ -73,6 +72,8 @@ Normal Priority:
 * Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player* (some are disabled)
 * Bosses (with the exception of Egg Dealer) will attack closest player
 * Gravity Switchers on Space Gadget alter proper player's gravity
+* SuperShadow/DevilDoom activates for both players
+
 
 
 ## Other Known Issues (Not planned to be fixed)

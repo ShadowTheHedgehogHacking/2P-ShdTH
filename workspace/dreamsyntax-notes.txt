@@ -7404,3 +7404,25 @@ C2177124 00000004
 7DE803A6 4E800021
 38600001 7DE803A6
 4E800021 00000000
+-------------------------------
+2019-09-08
+Checkpoint UI:
+identified 'r4' holds the multi of the struct to perform eval on
+for pauseUI : r4 = 0/1, but lacks analog [inputs only]
+However for 4 eval points for CheckpointUI
+it works for all inputs
+r4 = 4 for p1, r4 = 5 for p2
+
+Reuse dist check using static pos of cur checkpoint activated on (reuse in existing memory is not possible)
+original : li r4, 4
+@
+80331390
+80331424
+80331460
+803314d8
+
+It is not safe to assume r15 wont be overwritten between interactions (chunks etc)
+So it must be re-called 4 times. 
+
+We cannot reuse the same check of which checkpoint on, because this UI function is separate.
+Need to possibly use position of drawn Shadow head icon/selected checkpoint when onInit happens and store that? Not sure
