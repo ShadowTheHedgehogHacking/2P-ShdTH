@@ -7587,3 +7587,18 @@ EE310472 EDF1782A
 FC0FA840 38800005
 41800008 38800004
 60000000 00000000
+
+---
+Airbug fixing attempts:
+@ 8008f8b0 (ori = b 0x8008F8FC)
+inject with 
+cmpwi r0, 1
+lis r15, 0x8008
+ori r15, r15, 0xF8FC
+bne- 0xC
+lis r15, 0x8008
+ori r15, r15, 0xF8B4
+mtlr r15
+blr
+
+^ 1 is movement, so this causes issue of when moving in blower state continuously fall
