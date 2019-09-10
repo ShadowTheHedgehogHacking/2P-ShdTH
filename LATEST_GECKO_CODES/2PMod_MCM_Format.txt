@@ -905,3 +905,19 @@ NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
 3AE00000 41820008
 3AF70001 92F60074
 EC010028 48000000
+
+
+	-==-
+
+
+MoveArenaLo 0x1000
+Modifies ArenaLo to be shifted 0x1000
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+<setNewLoArena> NTSC 1.06
+38631000 906D26F8
+4E800020
+
+NTSC 1.06 --- 0x80370144 ---- 480012A1 -> bl <setNewLoArena>
+------------- 0x80370180 ---- 48001265 -> bl <setNewLoArena>
+------------- 0x80050bd8 ---- 4832080D -> bl <setNewLoArena>

@@ -10,7 +10,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 # ALL LEVELS ARE NOW PLAYABLE!
 
-## Road to 2.0 (WIP) | Release Date: 9/9/2019 (Tomorrow)
+## Road to 2.0 (WIP) | Release Date: 9/XX/2019 DELAYED
 High Priority:
 * Fix "Air bug" - (player state pointer overlap issue)
 

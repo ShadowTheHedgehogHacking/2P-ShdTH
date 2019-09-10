@@ -7615,3 +7615,16 @@ DOL Injection Library conversion:
 Any padding added by WiiRD '60000000 / 00000000'
 should be removed, returning to func is NOT implicit
 when in DOL format, need to use '48000000' to signify branch to start
+
+Extended, but overwriting stack, need to move ArenaLo 0x1000 up
+8060d580 @ 80370144
+8060b580 @ 80370180
+8060b5a0 @ 80050bd8
+817e7500 @ 80050bf8
+
+C2370144 00000002
+38631000 906D26F8
+60000000 00000000
+for first three addresses, should be safe since ClearStack() is called later
+
+Delay release, works but moves all static addresses so exceptions everywhere.

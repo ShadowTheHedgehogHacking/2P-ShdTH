@@ -35,7 +35,7 @@ defaultRevision = 'NTSC 1.06' # Should follow the revision string convention of 
 # You may also add regions. Just be sure that you know what you're doing and have tested the region, and that no regions overlap with one another!
 customCodeRegions = OrderedDict([
 
-	( 'NTSC 1.06|TM Region', [ (  0x517D64, 0x517F6B ) ] ), 	# Total space: 0x2106
+	( 'NTSC 1.06|TM Region', [ (  0x580660, 0x58165C ) ] ), 	# Total space: 0x1000
 	( 'NTSC 1.06|Gen Regions', [ ( 0x515FC5, 0x516FC5 ) ] ), # Total space: 0x1000
 	# The following regions are only for use with extended NTSC 1.02 SSBM DOLs
 	# Part 1 of Data Section 8
@@ -62,7 +62,7 @@ customCodeRegions = OrderedDict([
 # and/or standalone functions.
 geckoConfiguration = {
 	'hookOffsets': { 'NTSC 1.06': 0x377B78 },
-	'codelistRegion': 'TM Region', # If Gecko codes are used, the codelist will be placed at the start of this region (must exist in customCodeRegions)
+	'codelistRegion': 'Gen Regions', # If Gecko codes are used, the codelist will be placed at the start of this region (must exist in customCodeRegions)
 	'codehandlerRegion': 'Gen Regions' # If Gecko codes are used, the codehandler will be placed at the start of this region (must exist in customCodeRegions)
 } # Recommended defaults: Tournament Mode Region for the codelist, and Aux Code Regions for the codehandler
 
