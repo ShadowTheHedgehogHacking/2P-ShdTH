@@ -4479,7 +4479,7 @@
 8008f910 0000002c 8008f910 0 zz_8008f910_
 8008f93c 0000006c 8008f93c 0 zz_8008f93c_
 8008f9a8 00000008 8008f9a8 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-8008f9b0 00000058 8008f9b0 0 zz_8008f9b0_
+8008f9b0 00000058 8008f9b0 0 Stream::?()
 8008fa08 00000044 8008fa08 0 zz_8008fa08_
 8008fa4c 00000004 8008fa4c 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8008fa50 00000048 8008fa50 0 dCreateGeom
@@ -21279,7 +21279,7 @@
 8027eaa0 000000d8 8027eaa0 0 zz_8027eaa0_
 8027eb78 000001e8 8027eb78 0 ToSuperExceptionFixBP@8027ec38
 8027ed60 00000078 8027ed60 0 zz_8027ed60_
-8027edd8 00000044 8027edd8 0 zz_8027edd8_
+8027edd8 00000044 8027edd8 0 Super::StatusIsActive()
 8027ee1c 0000008c 8027ee1c 0 zz_8027ee1c_
 8027eea8 000000b4 8027eea8 0 Super::CheckStatus()
 8027ef5c 00000068 8027ef5c 0 zz_8027ef5c_
