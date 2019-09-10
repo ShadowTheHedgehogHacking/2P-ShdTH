@@ -493,10 +493,10 @@ NTSC 1.06 --- 0x800A5AB0 ---- 80840064 -> Branch
 38000001 41820018
 2C000012 4181000C
 38000006 41820008
-38000007 48000000
+38000007 4E800020
 
-------------- 0x80080734 ---- 80040064 -> b <jumpballr0>
-------------- 0x80087190 ---- 80040064 -> b <jumpballr0>
+------------- 0x80080734 ---- 80040064 -> bl <jumpballr0>
+------------- 0x80087190 ---- 80040064 -> bl <jumpballr0>
 
 
 	-==-
@@ -596,11 +596,11 @@ EDEF802A EE31A028
 EE310472 EDF1782A
 FC0FA840 38800005
 41800008 38800004
-48000000
+4E800020
 
-------------- 0x803314D8 ---- 38800004 -> b <CheckpointUI_DistCheck>
-------------- 0x80331460 ---- 38800004 -> b <CheckpointUI_DistCheck>
-------------- 0x80331424 ---- 38800004 -> b <CheckpointUI_DistCheck>
+------------- 0x803314D8 ---- 38800004 -> bl <CheckpointUI_DistCheck>
+------------- 0x80331460 ---- 38800004 -> bl <CheckpointUI_DistCheck>
+------------- 0x80331424 ---- 38800004 -> bl <CheckpointUI_DistCheck>
 
 
 	-==-
@@ -707,14 +707,14 @@ EDEF802A EE31A028
 EE310472 EDF1782A
 FC0FA840 38A00001
 41800008 38A00000
-48000000
+4E800020
 
-NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> b <Boss_PickPlayer>
-------------- 0x8024D6D8 ---- 80AD3148 -> b <Boss_PickPlayer>
-------------- 0x80242B10 ---- 80AD3148 -> b <Boss_PickPlayer>
-------------- 0x8030AD74 ---- 80AD3148 -> b <Boss_PickPlayer>
-------------- 0x802A6DA8 ---- 80AD3148 -> b <Boss_PickPlayer>
-------------- 0x80322D24 ---- 80AD3148 -> b <Boss_PickPlayer>
+NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x8024D6D8 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x80242B10 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x802A6DA8 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x80322D24 ---- 80AD3148 -> bl <Boss_PickPlayer>
 
 
 	-==-
@@ -823,12 +823,12 @@ NTSC 1.06 --- 0x8031722C ---- 39400001 -> Branch
 88A50000 70A50008
 2C050008 38A00001
 40820008 38A00000
-48000000
+4E800020
 
-------------- 0x801B3B14 ---- 38A00000 -> b <Camera_PickPlayer>
-------------- 0x800E943C ---- 38A00000 -> b <Camera_PickPlayer>
-------------- 0x800EB524 ---- 38A00000 -> b <Camera_PickPlayer>
-------------- 0x801B8010 ---- 38A00000 -> b <Camera_PickPlayer>
+------------- 0x801B3B14 ---- 38A00000 -> bl <Camera_PickPlayer>
+------------- 0x800E943C ---- 38A00000 -> bl <Camera_PickPlayer>
+------------- 0x800EB524 ---- 38A00000 -> bl <Camera_PickPlayer>
+------------- 0x801B8010 ---- 38A00000 -> bl <Camera_PickPlayer>
 
 
 	-==-
@@ -842,12 +842,12 @@ Now will work regardless of WeaponType, ChaosPower state, and if P1 is already d
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x801B924C ---- 38A00000 -> Branch
 
-b <fixvehicles_shared_case>
+bl <fixvehicles_shared_case>
 38800002 48000000
 
 ------------- 0x801BA5D0 ---- 38A00000 -> Branch
 
-b <fixvehicles_shared_case>
+bl <fixvehicles_shared_case>
 38800001 48000000
 
 <fixvehicles_shared_case> NTSC 1.06
@@ -860,7 +860,7 @@ b <fixvehicles_shared_case>
 70A50008 2C050008
 4180000C 38A00000
 41A20008 38A00001
-48000000
+4E800020
 
 
 	-==-
