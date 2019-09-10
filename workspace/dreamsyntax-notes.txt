@@ -7602,3 +7602,16 @@ mtlr r15
 blr
 
 ^ 1 is movement, so this causes issue of when moving in blower state continuously fall
+---
+2019-09-09
+EggDealer
+nop check:
+802fd1bc - SlowMovement EggDealer
+80311518 - Slot compare timer for self activation
+8032f060 - Slot cycling compare check
+80334b20 - Flee if too far from player @ 80334b24
+-----------
+DOL Injection Library conversion:
+Any padding added by WiiRD '60000000 / 00000000'
+should be removed, returning to func is NOT implicit
+when in DOL format, need to use '48000000' to signify branch to start

@@ -513,6 +513,13 @@
                             ],
                             "typeIndex": 3,
                             "unsigned": false
+                        },
+                        {
+                            "address": "807D79EA",
+                            "baseIndex": 0,
+                            "label": "P2 Status Byte",
+                            "typeIndex": 0,
+                            "unsigned": true
                         }
                     ],
                     "groupName": "P2"
