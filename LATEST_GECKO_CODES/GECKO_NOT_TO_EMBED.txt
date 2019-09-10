@@ -1,0 +1,81 @@
+[Gecko]
+$Quick Boot [LimblessVector]
+C22B6484 00000007
+82830000 2C140009
+40820024 3E808056
+3A9476A6 3A9476A6
+82940000 2C140008
+4082000C 3A800006
+92830000 80630000
+60000000 00000000
+*Press 'X' to skip
+*to select mode after the blue save message appears
+*
+*WARNING: Pressing X prior to the  text being visible will result in skipping loading the save data
+$Always Skippable Cutscenes [BlazinZzetti]
+085780AC FFFFFFFF
+20020004 00000000
+*Allows you to always skip cutscenes, regardless if it's your first viewing
+$Infinite Lives [Link Master]
+04576704 00000063
+$Disable Partner Intro [LimblessVector]
+0857D77B 00000001
+000B0004 00000000
+*Disables the special zoom-in camera that typically plays the first time you meet a partner in a stage or story
+$No Bloom [Unknown]
+F6000001 80008180
+4BFFE6F9 807F00DC
+14000000 60000000
+E0000000 80008000
+*Required if using Vulkan Graphics backend for 2P Mod (crash if bloom is on)
+$Widescreen Hack v2 [CosmoCortney, TeconMoon, LimblessVector]
+0458412C 3F9F7CEE
+*Cutscenes, character intros
+*
+*Requires Dolphin to be forced 16:9
+*Movies, HUD, and menus are stretched to cover the screen
+$2P Essentials SplitScreen Widescreen Hack [dreamsyntax]
+045841BC 3F9F7CEE
+045841EC 3F9F7CEE
+0458415C 3F1F7CEE
+0458418C 3F1F7CEE
+*2P Vertical and 2P Horizontal aspect adjustment
+$2P Essentials Vertical-SplitScreen v3 [dreamsyntax]
+2857D768 00000000
+0457D700 00000001
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+*If you use this code, do not enable Horizontal version
+*Vertical has better performance
+$2P Essentials Horizontal-SplitScreen v3 [dreamsyntax]
+2857D768 00000000
+0457D700 00000002
+E2000001 80008000
+2857D768 00001000
+0457D700 00000000
+E2000001 80008000
+*If you use this code, do not enable Vertical version
+*Vertical has better performance
+$2P Essentials Split2 tracks P2 [dreamsyntax]
+0457D70B 00000001
+$2P Essentials ChaosPowers Activation for P2 v2 [dreamsyntax]
+0416F160 60000000
+2C5766C8 00000000
+045766C8 00000000
+E2000001 80008000
+2C5766D4 00000000
+045766D4 00000000
+E2000001 80008000
+*Prevents underflow of meters
+$Partner mapped to PORT3 (Broken If Dark Partner is activated first) [DonutStopGaming]
+C20A85C4 00000007
+83E30010 7FF2F850
+2C1F0000 40820020
+3FE08056 63FFED78
+7FF2F850 2C1F0000
+4082000C 3A52002C
+92430010 82430010
+7C7F1B78 00000000
+*Needs to be updated to account for different partner start cases

@@ -1,0 +1,907 @@
+No FadeScreen
+[Muzzarino]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800448A0 ---- 9421FFD0 -> 4E800020
+
+
+	-==-
+
+
+2P Essentials Prevent SplitScreen Reset
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80205DBC ---- 90050060 -> 60000000
+------------- 0x80205ED4 ---- 90030060 -> 60000000
+------------- 0x80204A4C ---- 90030060 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Attach Cam1 to P2 v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801CE900 ---- 4182001C -> 60000000
+
+
+	-==-
+
+
+2P Essentials Spawn P2 v2
+Does not spawn P2 during events taking place on non-playable levels (e.g. stg900)
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8017707C ---- 808400A8 -> Branch
+
+808400A8 2C04032B
+41810008 38800320
+48000000
+
+
+	-==-
+
+
+2P Essentials SETObject Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800CB5E4 ---- 880300B2 -> 38000001
+------------- 0x80169C08 ---- 880400B2 -> 38000001
+
+
+	-==-
+
+
+2P Essentials P2 Sound Listener Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801D9990 ---- 880300B2 -> 38000001
+
+
+	-==-
+
+
+2P Essentials UI for 1P Modes
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801FFE0C ---- 880300B2 -> 60000000
+------------- 0x801FEC40 ---- 41820048 -> 60000000
+------------- 0x801FF65C ---- 41820094 -> 60000000
+------------- 0x80201F18 ---- 418202D4 -> 60000000
+------------- 0x80200764 ---- 418201B4 -> 60000000
+------------- 0x80201358 ---- 418204D4 -> 60000000
+------------- 0x801FE99C ---- 41820188 -> 60000000
+
+
+	-==-
+
+
+2P Essentials ChaosPowers Half Idle Drain Speed
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016F0D4 ---- 2C050000 -> Branch
+
+2C050000 38A5000C
+48000000
+
+
+	-==-
+
+
+2P Optionals No ChaosPowers Glow
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A4EBC ---- 481D5C61 -> 60000000
+
+
+	-==-
+
+
+2P Optionals No Idle ChaosPowers Music v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A4FF0 ---- 4812E899 -> 60000000
+------------- 0x800A4D84 ---- 4812EAB5 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Chunk Fix
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8003A58C ---- 38600000 -> Branch
+
+C01E0000 C02301B0
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0000
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0004 C02301B4
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0004
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0008 C02301B8
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0008
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+3DE08003 61EFA69C
+7DE803A6 4E800020
+48000000
+
+------------- 0x8003A5A4 ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5BC ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5D4 ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5EC ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A604 ---- 38600000 -> b 0x8003A58C
+
+
+	-==-
+
+
+Partner mapped to AI only
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8006F830 ---- 40820040 -> b 0x8006F870
+
+
+	-==-
+
+
+2P Essentials Disable ChaosPowers CameraEvent
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8007B400 ---- 4802797D -> 60000000
+------------- 0x8007C4B0 ---- 480268CD -> 60000000
+
+
+	-==-
+
+
+2P Essentials Disable ChaosControl CameraEffect
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A2A64 ---- 480008C9 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Prevent Vehicle Despawn
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801B5F4C ---- 41820038 -> 60000000
+
+
+	-==-
+
+
+2P Essentials P2 Can Pause
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801E3ADC ---- 4182003C -> 60000000
+
+
+	-==-
+
+
+2P Essentials Remove ScreenShake v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801FA2DC ---- 9421FFC0 -> 4E800020
+------------- 0x8000EF58 ---- 9421FFF0 -> 4E800020
+------------- 0x8000EFC0 ---- 9421FF70 -> 4E800020
+
+
+	-==-
+
+
+2P Optionals Freecam for All Bosses
+Disables special cam hooks for bosses
+Intentionally does not include intro/defeat special cams
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8029120C ---- 9421FEF0 -> 4E800020
+------------- 0x8031AAF4 ---- 9421FFD0 -> 4E800020
+
+
+	-==-
+
+
+2P Essentials Circus Park Hero Mission Co-Op
+Makes P2's collected rings count towards Hero Mission
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016ED2C ---- 7C641B78 -> Branch
+
+3DE08057 61EF6758
+81EF0000 7C637A14
+7C641B78 48000000
+
+
+	-==-
+
+
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x804342CC ---- 9421FE40 -> 4E800020
+
+
+	-==-
+
+
+2P Essentials GUN Fortress SecurityTurret Fix
+Disables effects on Split1 and SpecialCamera for security turret segments
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80269010 ---- 4BFFFCD1 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Partner Despawn Fix
+Fixes partners disappearing if P2 gets to them while P1 is not in range
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801F4454 ---- 4BE7F511 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Keydoors Detect P2
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8011B934 ---- 40820024 -> Branch
+
+40820014 3DE08011
+61EFB938 7DE803A6
+4E800020 3CA0807D
+60A571A8 80A50000
+80A50000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08040
+61EFCF2C 7DE803A6
+4E800021 C00D38B0
+FC010040 4C401382
+41820014 3DE08011
+61EFB958 7DE803A6
+4E800020 48000000
+
+
+	-==-
+
+
+2P Essentials Westopolis Lasers Fix v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800E1174 ---- 40800010 -> Branch
+
+41800078 80BE000C
+386100CC 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 386100F0
+388100CC 3DE08000
+61EF91EC 7DE803A6
+4E800021 386100F0
+3DE08040 61EFCF50
+7DE803A6 4E800021
+807E0000 C003003C
+FC010040 41800014
+3DE0800E 61EF1184
+7DE803A6 4E800020
+48000000
+
+
+	-==-
+
+
+2P Essentials Computer Room Goal Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802317F4 ---- 408000C0 -> Branch
+
+41800074 80BF0030
+38610038 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 38610044
+38810038 3DE08000
+61EF91EC 7DE803A6
+4E800021 38610044
+3DE08040 61EFCF50
+7DE803A6 4E800021
+C01F003C FC010040
+41800014 3DE08023
+61EF18B4 7DE803A6
+4E800020 48000000
+
+
+	-==-
+
+
+2P Optionals Independent Death WeaponDrop Management
+Player X will not lose weapon if Player Y dies
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178C10 ---- 4BFF6365 -> 60000000
+------------- 0x8023AFD8 ---- 4BFFF135 -> 60000000
+
+
+	-==-
+
+
+2P Optionals SETObjs Do Not Reset for Player Death v5
+SETObjs will not reset if a player dies
+Only applies to death, not to Restart
+v2 now has Mission Sync
+v3 now has MissionSelected Sync
+v4 now has Cosmic Fall, Last Way, and Final Bosses SETObj resetting on either player dying
+v5 now has MissionPartner Sync
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800CB654 ---- 9421FFF0 -> Branch
+
+3E008057 6210D748
+82100000 2C10025B
+41820010 2C100262
+40800008 4E800020
+9421FFF0 48000000
+
+------------- 0x800CB758 ---- 9421FFF0 -> Branch
+
+3E008057 6210D748
+82100000 2C10025B
+41820010 2C100262
+40800008 4E800020
+9421FFF0 48000000
+
+------------- 0x801A24EC ---- 9421FFF0 -> 4E800020
+------------- 0x8016B110 ---- 9421FFF0 -> 4E800020
+------------- 0x802044CC ---- 4BE691DD -> 60000000
+------------- 0x8020445C ---- 4BE707B5 -> 60000000
+
+
+	-==-
+
+
+2P Optionals Independent Respawns v2
+Player X's death will not cause Player Y to respawn
+REQUIRES No FadeScreen
+DeathCamFix, EffectFix included
+
+Known Bugs: If using Dark Spindash or on some* rails
+and a player dies causes both players to reset
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80176F28 ---- 4BF41061 -> Branch
+
+3E00807D 621071A0
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+48000000
+
+------------- 0x80176F74 ---- 4BF41015 -> Branch
+
+3E00807D 621071A8
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+48000000
+
+------------- 0x801CB454 ---- 4BFFEA51 -> 60000000
+------------- 0x80204400 ---- 4822114D -> 60000000
+
+
+	-==-
+
+
+Timer No Reset On Death
+[LimblessVector]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178BC4 ---- D0040094 -> 60000000
+
+
+	-==-
+
+
+2P Optionals Independent Ring Management
+Player X's death will not cause Player Y to lose rings
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178CC8 ---- 387D0028 -> Branch
+
+39E00001 387D0028
+48000000
+
+------------- 0x80178C14 ---- 387E0028 -> Branch
+
+39E00000 387E0028
+48000000
+
+------------- 0x8016F32C ---- 901E0000 -> Branch
+
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 48000000
+
+
+	-==-
+
+
+2P Optionals Unique Android JumpBall Colors
+Gives all the 2P Androids custom JumpBall colors
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A5AB0 ---- 80840064 -> Branch
+
+80840064 2C04000F
+41800044 4181000C
+38800002 41820038
+2C040010 4181000C
+38800004 41820028
+2C040011 4181000C
+38800001 41820018
+2C040012 4181000C
+38800006 41820008
+38800007 48000000
+
+<jumpballr0> NTSC 1.06
+80040064 2C00000F
+41800044 4181000C
+38000002 41820038
+2C000010 4181000C
+38000004 41820028
+2C000011 4181000C
+38000001 41820018
+2C000012 4181000C
+38000006 41820008
+38000007 48000000
+
+------------- 0x80080734 ---- 80040064 -> b <jumpballr0>
+------------- 0x80087190 ---- 80040064 -> b <jumpballr0>
+
+
+	-==-
+
+
+2P Essentials Checkpoint Warping Fix
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80331114 ---- 9421FFF0 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 48000000
+
+------------- 0x80117614 ---- 9421FFF0 -> Branch
+
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 48000000
+
+------------- 0x80129B50 ---- 9421FFE0 -> Branch
+
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 48000000
+
+------------- 0x80331390 ---- 38800004 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+8263003C 3A73FFFF
+1E73001C 7E319A14
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38800005
+41800008 38800004
+48000000
+
+<CheckpointUI_DistCheck> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+827E003C 3A73FFFF
+1E73001C 7E319A14
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38800005
+41800008 38800004
+48000000
+
+------------- 0x803314D8 ---- 38800004 -> b <CheckpointUI_DistCheck>
+------------- 0x80331460 ---- 38800004 -> b <CheckpointUI_DistCheck>
+------------- 0x80331424 ---- 38800004 -> b <CheckpointUI_DistCheck>
+
+
+	-==-
+
+
+2P Essentials Zipline/Pulley/Coaster Fix v2
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801316D0 ---- 80AD3148 -> 80BF0020
+------------- 0x80132128 ---- 80AD3148 -> 80BF0020
+------------- 0x801323C4 ---- 80AD3148 -> 80BF0020
+------------- 0x8015BEB4 ---- 7C7F1B78 -> Branch
+
+7FEFFB78 7C7F1B78
+48000000
+
+------------- 0x8015BEF0 ---- 387F0034 -> Branch
+
+387F0034 55F0273E
+2C100008 408200BC
+3CE0805F 60E74230
+810F0000 7C083840
+408200A8 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EF00E8
+C20F00EC C22F00F0
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EF00E8
+C20F00EC C22F00F0
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EF0020
+48000000
+
+------------- 0x801313F8 ---- 4809D65D -> 60000000
+
+
+	-==-
+
+
+GUNMech Physics Revamp
+Makes hover useful (fast)
+Tight turns
+Dismountable mid-air
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801ACF70 ---- D03F00E4 -> 60000000
+------------- 0x801ACF74 ---- D01F00E8 -> 60000000
+------------- 0x801ACCFC ---- EC210024 -> 60000000
+------------- 0x801AE7B0 ---- 41820024 -> 60000000
+
+
+	-==-
+
+
+CarType Vehicles Suck Less r1
+Tap X to accelerate faster in vehicles
+Tap X in air to make further distances
+Tap X always for optimal speed!
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801BD8C0 ---- EC010024 -> 60000000
+------------- 0x801BD3EC ---- 4BFFC72D -> 60000000
+
+
+	-==-
+
+
+2P Essentials Bosses Target Closest Player
+BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
+Includes DevilDoom BalloonRings Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+<Boss_PickPlayer> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+48000000
+
+NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> b <Boss_PickPlayer>
+------------- 0x8024D6D8 ---- 80AD3148 -> b <Boss_PickPlayer>
+------------- 0x80242B10 ---- 80AD3148 -> b <Boss_PickPlayer>
+------------- 0x8030AD74 ---- 80AD3148 -> b <Boss_PickPlayer>
+------------- 0x802A6DA8 ---- 80AD3148 -> b <Boss_PickPlayer>
+------------- 0x80322D24 ---- 80AD3148 -> b <Boss_PickPlayer>
+
+
+	-==-
+
+
+CannonWeapons No Knockback
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8023D3B0 ---- 4BDD7A6D -> 60000000
+------------- 0x8023BC50 ---- 4BDD91CD -> 60000000
+
+
+	-==-
+
+
+2P Essentials GravitySwitcher Fix v1.9
+Bug: If player X warps/dies to a checkpoint player Y is near, gravity will not change for player X
+[DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80293938 ---- 808D4F00 -> Branch
+
+808D4F00 811F0000
+3D20804F 61293D08
+7C084840 41820020
+3D20804F 61293BD8
+7C084840 4182001C
+815F0040 397F006C
+4800001C 815F0034
+397F0020 48000010
+815F0034 397F0074
+48000004 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EA0000
+C20A0004 C22A0008
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EA0000
+C20A0004 C22A0008
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EB0000
+390D3150 1CE70004
+7D083A14 93E80000
+48000000
+
+------------- 0x8029396C ---- 80AD3148 -> Branch
+
+811F0000 3D20804F
+61293D08 7C084840
+4182001C 3D20804F
+61293BD8 7C084840
+41820014 80BF006C
+48000010 80BF0020
+48000008 80BF0074
+48000000
+
+
+	-==-
+
+
+GravitySwitchers NoDisable
+Required for GravitySwitcher Fix, will be integrated with v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802469DC ---- 4BF1BE29 -> 60000000
+------------- 0x80246A4C ---- 4BF1A895 -> 60000000
+------------- 0x80247B84 ---- 4BF1AC81 -> 60000000
+------------- 0x80247BE0 ---- 4BF19701 -> 60000000
+
+
+	-==-
+
+
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v0.9
+P1 MUST hold down X until fully mounted otherwise camera will attach to P2
+If P1 is holding X when P2 tries to mount P1 will get camera
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8031722C ---- 39400001 -> Branch
+
+39400001 39E000EF
+48000000
+
+------------- 0x801CEDC4 ---- 80980000 -> Branch
+
+80980000 2C0F00EF
+40820028 3DE08056
+61EFED4F 89EF0000
+71EF0008 2C0F0008
+39E00001 40820008
+39E00000 91E400A0
+48000000
+
+<Camera_PickPlayer> NTSC 1.06
+3CA08056 60A5ED4F
+88A50000 70A50008
+2C050008 38A00001
+40820008 38A00000
+48000000
+
+------------- 0x801B3B14 ---- 38A00000 -> b <Camera_PickPlayer>
+------------- 0x800E943C ---- 38A00000 -> b <Camera_PickPlayer>
+------------- 0x800EB524 ---- 38A00000 -> b <Camera_PickPlayer>
+------------- 0x801B8010 ---- 38A00000 -> b <Camera_PickPlayer>
+
+
+	-==-
+
+
+2P Essentials Fix Vehicles for P2 v2.95
+P1 MUST HOLD X while mounting vehicle otherwise controls will be mapped to P2
+Allows for P2 to drive CarType vehicles
+Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801B924C ---- 38A00000 -> Branch
+
+b <fixvehicles_shared_case>
+38800002 48000000
+
+------------- 0x801BA5D0 ---- 38A00000 -> Branch
+
+b <fixvehicles_shared_case>
+38800001 48000000
+
+<fixvehicles_shared_case> NTSC 1.06
+3CA0807D 60A571A0
+80A50000 80A50000
+88A500A9 70A50001
+38800001 7C052000
+40820024 3CA08056
+60A5ED4F 88A50000
+70A50008 2C050008
+4180000C 38A00000
+41A20008 38A00001
+48000000
+
+
+	-==-
+
+
+2P Essentials P2 Super for DevilDoom
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
+
+3DE0800B 61EF7E44
+7DE803A6 4E800021
+38600001 7DE803A6
+4E800021 48000000
+
+------------- 0x8041D338 ---- 80030000 -> Branch
+
+2C030000 40820014
+3DE08041 61EFD34C
+7DE803A6 4E800020
+80030000 48000000
+
+------------- 0x8027E77C ---- 38600000 -> Branch
+
+2C060000 40820014
+3DE08027 61EFEA84
+7DE803A6 4E800020
+38600000 48000000
+
+------------- 0x8027F154 ---- 38000000 -> Branch
+
+801F0004 80000054
+28000000 38000000
+41820008 380000FF
+48000000
+
+------------- 0x800AF32C ---- EC010028 -> Branch
+
+82DE0028 82D6023C
+82D60044 82D60028
+82F60074 281700FF
+3AE00000 41820008
+3AF70001 92F60074
+EC010028 48000000
