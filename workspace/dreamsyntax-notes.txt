@@ -7312,7 +7312,8 @@ C21CEDC4 00000007
 *If P1 is holding X when P2 tries to mount P1 will get camera
 
 
-Found bug: Keys do not save
+Found bug: Keys do not save if P2 collects them || Revisited this, could not reproduce on Westopolis
+^ possibly stage specific caused by Respawns code binding issue?
 --------
 2019-09-06
 ToSuper onInit:
@@ -7666,4 +7667,28 @@ ori	sp, sp, 0xA568
 Seems to work, but overwrote at end
 Shifting range to be 0x60A570 in DOL start overwrite range, reducing 0x1000 to 0xFFC of space in DOL, 0xFF8 usable in MCM.
 Appears to have worked.
+----
 
+SuperModelFix DOL version
+C227F154 00000004
+801F0004 80000054
+28000000 38000000
+41820008 380000FF
+60000000 00000000
+from
+
+lwz r0,4(r31)
+lwz r0,84(r0)
+cmplwi r0,0
+li r0,0
+beq- 0x08
+li r0,255
+nop
+
+to
+static overwrite 
+@ 8027f154
+380000FF
+
+
+TODO: make space gadget coasters grindable
