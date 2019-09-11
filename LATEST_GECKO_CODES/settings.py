@@ -35,7 +35,7 @@ defaultRevision = 'NTSC 1.06' # Should follow the revision string convention of 
 # You may also add regions. Just be sure that you know what you're doing and have tested the region, and that no regions overlap with one another!
 customCodeRegions = OrderedDict([
 
-	( 'NTSC 1.06|TM Region', [ (  0x580660, 0x58165C ) ] ), 	# Total space: 0x1000
+	( 'NTSC 1.06|TM Region', [ (  0x580660, 0x581658 ) ] ), 	# Total space: 0xFFC; Note 0x58165C is end of DOL inject
 	( 'NTSC 1.06|Gen Regions', [ ( 0x515FC5, 0x516FC5 ) ] ), # Total space: 0x1000
 	# The following regions are only for use with extended NTSC 1.02 SSBM DOLs
 	# Part 1 of Data Section 8

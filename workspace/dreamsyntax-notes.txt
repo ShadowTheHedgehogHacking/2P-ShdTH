@@ -7628,3 +7628,42 @@ C2370144 00000002
 for first three addresses, should be safe since ClearStack() is called later
 
 Delay release, works but moves all static addresses so exceptions everywhere.
+--------------------
+2019-09-10
+ArenaHi needs to be moved 0x1000 down instead of arenaLo being modified? Might cause FST to shift and also corrupt, but attempting:
+817e7500 @ 803701a0
+doesnt seem FST load and other func calls are used?
+@ 803701a0
+addi r3, r3, -0x1000
+stw	r3, 0x5A88 (r13)
+blr
+
+C23701A0 00000002
+3863F000 906D5A88
+4E800020 00000000
+
+and shift final arenalo @ 80050bf8
+
+C2050BF8 00000002
+3863F000 906D26F8
+4E800020 00000000
+
+Fails because DOL can only do max of '80' unable to do '81' for MSB.
+
+Shadow's entire stack space:
+805FB568 - 8060B568
+
+Shrink to :
+
+8060A568?
+Possible problems? perhaps
+Patch 80003328
+from 
+ori	sp, sp, 0xB568
+to
+ori	sp, sp, 0xA568
+
+Seems to work, but overwrote at end
+Shifting range to be 0x60A570 in DOL start overwrite range, reducing 0x1000 to 0xFFC of space in DOL, 0xFF8 usable in MCM.
+Appears to have worked.
+
