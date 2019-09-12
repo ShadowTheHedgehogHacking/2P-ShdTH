@@ -7692,3 +7692,20 @@ static overwrite
 
 
 TODO: make space gadget coasters grindable
+----
+09-11-2019
+Chunk per viewport trial #2:
+stw @ 8003aa08 controlling draw/no draw
+
+reads: 
+8003a7a8 (geo await)
+8003aa80 (render?)
+8003a8e4 (TBlock Manage, self)
+8003a9dc (TBlock Manage, self)
+
+::
+nop @ 8003aa80 = slower chunk load in?
+
+nop @ 80047250 = P1 viewport no longer renders geo; Skybox is still visible (wtf) ??????
+Seems P2 viewport is drawn if any instance calling Opaq is left over??? -> Need to investigate the why
+-> Perhaps if condition check for split mode and then has additional draw within Opaq/bctrl's within?
