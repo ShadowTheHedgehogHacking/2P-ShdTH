@@ -7693,7 +7693,7 @@ static overwrite
 
 TODO: make space gadget coasters grindable
 ----
-09-11-2019
+2019-09-11
 Chunk per viewport trial #2:
 stw @ 8003aa08 controlling draw/no draw
 
@@ -7709,3 +7709,72 @@ nop @ 8003aa80 = slower chunk load in?
 nop @ 80047250 = P1 viewport no longer renders geo; Skybox is still visible (wtf) ??????
 Seems P2 viewport is drawn if any instance calling Opaq is left over??? -> Need to investigate the why
 -> Perhaps if condition check for split mode and then has additional draw within Opaq/bctrl's within?
+----------
+2019-09-14
+GravitySwitcher checkpoint segment obj: possible checks
+attempt nops @ 
+80258f74
+80258f94
+80258fe4
+80247c1c
+80247c28
+80246a9c
+80246aa8
+-----------------------
+Found the check for sign direction occurs @ 
+80247860
+nop this;
+STILL NEED to find way to cause multiple exec() for obj; Currently stops after change
+80247850 <- This for check
+80247874 <- for destroy obj on use
+
+
+GravitySwitchers NoDestroyCheckpointWarpObj
+nop @ 80247850
+nop @ 80247860
+nop @ 80247874
+
+^ Does not work for all cases; Most still fail
+---------
+
+SHAnim research for Shadowth117
+@ 80412654 begins parsing 'xamy' at start of file 
+
+
+.MTN/SHTHanim
+0x0        U8Int  0x4
+0x1        U8Int  Endianness 0 for little endian, 1 for big endian
+0x2        U16Int 0x0
+0x4        U32Int 0x0
+0x8        U32Int Filesize
+0xC        U8Int  0xFF
+0xD        U8Int  0x07
+0xE        U16Int 0x0
+0xF        U16Int Unknown Short1
+0x12    U16Int Unknown Short2
+0x14    char[0x20] modelname
+0x34    header_end, structs start
+
+while(!end_of_file)
+{
+    // Struct header
+    0x0        U32Int Structlength
+    0x4        U16Int Amount of keyframes
+    0x6        U8Int  Unkown flag; 0 or 2
+    0x7        U8Int  1 unless last strip of file. Last of file is 0
+    0x8        struct_header_end, keyframes start
+    
+    for (i = 1; i < Amount of keyframes; i++)
+    {
+        0x0        U16Int  Keyframe Time
+        0x2        U16Int? Keyframe data1
+        0x4        U16Int? Keyframe data2
+        0x6        keyframe_end, next keyframe starts
+    }
+    
+    if(StructLength % 4 > 0)
+    (
+        padding of StructLength % 4 (generally two 0x0 bytes)
+    )
+}
+----------------

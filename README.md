@@ -11,7 +11,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 # ALL LEVELS ARE NOW PLAYABLE!
 
 ## Road to 2.0 (WIP) | Release Date: 9/19/2019
-* Fix "Air bug" - (player state pointer overlap issue)
+* Fix "Air bug" - [PARTIAL / Multiple blower objects result in issue]
 * Space Gadget Gravity Switchers fixed [v1.9 DONE; v2 WIP]
 * Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
 * Make Space Gadget Coasters Grindable
