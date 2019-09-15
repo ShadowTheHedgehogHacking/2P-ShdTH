@@ -10,13 +10,11 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 # ALL LEVELS ARE NOW PLAYABLE!
 
-## Road to 2.0 (WIP) | Release Date: 9/9/2019 (Tomorrow)
-High Priority:
+## Road to 2.0 (WIP) | Release Date: 9/19/2019
 * Fix "Air bug" - (player state pointer overlap issue)
-
-Normal Priority:
 * Space Gadget Gravity Switchers fixed [v1.9 DONE; v2 WIP]
 * Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
+* Make Space Gadget Coasters Grindable
 * Find another way for Vehicles/Turrets/Flyables Controls/Cams to detect which player uses them instead of holding X
 
 #### Completed for 2.0
@@ -43,7 +41,6 @@ Normal Priority:
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * If Dark Partner is activated first, P3 remapping fails
 * Phase 2 Warp for P2 in Diablon Boss
-* Keys collected do not save
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -109,3 +106,4 @@ Normal Priority:
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant)
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * Heroes Hacking Central (&Shadow) for keeping us insane during this project
+* metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification

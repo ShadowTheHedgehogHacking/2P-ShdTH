@@ -152,14 +152,6 @@ FC010040 4C411382
 	-==-
 
 
-Partner mapped to AI only
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x8006F830 ---- 40820040 -> b 0x8006F870
-
-
-	-==-
-
 
 2P Essentials Disable ChaosPowers CameraEvent
 [dreamsyntax]
@@ -869,7 +861,16 @@ bl <fixvehicles_shared_case>
 2P Essentials P2 Super for DevilDoom
 [DonutStopGaming, dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
+NTSC 1.06 --- 0x800AF32C ---- EC010028 -> Branch
+
+82DE0028 82D6023C
+82D60044 82D60028
+82F60074 281700FF
+3AE00000 41820008
+3AF70001 92F60074
+EC010028 48000000
+
+------------- 0x80177124 ---- 4BF40D21 -> Branch
 
 3DE0800B 61EF7E44
 7DE803A6 4E800021
@@ -890,18 +891,15 @@ NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
 7DE803A6 4E800020
 38600000 48000000
 
-------------- 0x8027F154 ---- 38000000 -> Branch
+------------- 0x8027f154 ---- 38000000 -> 380000FF
 
-801F0004 80000054
-28000000 38000000
-41820008 380000FF
-48000000
 
-------------- 0x800AF32C ---- EC010028 -> Branch
+	-==-
 
-82DE0028 82D6023C
-82D60044 82D60028
-82F60074 281700FF
-3AE00000 41820008
-3AF70001 92F60074
-EC010028 48000000
+
+StackReduction
+Reduces Stack from 0x10000 to 0x9000
+Uses this space for code injection
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80003328 ---- 6021B568 -> 6021A568

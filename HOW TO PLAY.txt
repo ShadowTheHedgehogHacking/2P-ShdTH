@@ -5,7 +5,7 @@
 		█  █  █  █  █▄   ▄▀ █  █ █   █  ▀▄▄▄▄▀     █  █ █  █   █     █  █  ▄ █   
 		███▀    █   ▀███▀      █    █            ▄▀   █  █ █  ▀         █ █   ▀▄ 
 			   ▀              █    ▀                  █   ██           █   ▀     
-							 ▀                                        ▀  
+
 								.----------------. 
 								| .--------------. |
 								| |    ___       | |
@@ -29,29 +29,25 @@
 									Bring you
 							2 Player Shadow The Hedgehog
 
-=== Release 5 / v2.0 - 2019.07.07 ===
+=== Release 5 / v2.0 - 2019.09.19 ===
 
 === Things to Know ===
-- Chunks Fix currently causes crashes if players are too far away.
-	This is especially present on The Doom / GUN Fortress / Central City
-	Stay within reasonable range to not crash.
-- Air-vents/Air Blower bug - either player may get stuck in the animation.
-	Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
-- Checkpoint backtracking does not work
-- Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator, Z+L+R is Clear Chaos Powers
 - Change characters:
 	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
+- Air-vents/Air Blower bug - either player may get stuck in the animation.
+	Use Chaos Blast to break out of the animation. (either player Z+L to fill meter)
+- Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator, Z+L+R is Clear Chaos Powers
 
 === Setup ===
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
 To play this mod, you must:
-(1) copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
+(1) copy over the files in 'root' onto the root of the ShadowTheHedgehog.iso
 (2) enable Gecko codes and use provided GCT (Wii/Nintendont) or game config .ini (Dolphin)
 
 You can find a setup tutorial video at: https://www.youtube.com/watch?v=FNH20sALtJM or search for "dreamsyntax" on YouTube
 
-=== Extracting and Rebuilding ISO with Modification ===
+=== Extracting and Rebuilding ISO ===
     Open gcr.exe (GameCube Rebuilder)
     Select "Image -> Open" on the menubar
     Select your ShadowTheHedgehog ISO
@@ -108,7 +104,7 @@ Some testers reported 100% worked best for them, others 120%, with the majority 
     Configure Controllers
     Play!
 
-For performance issues adjust clockspeed while running the game (Dolphin has a bug with this where your change may not save on restart. Try checking the clockspeed adjustment setting on/off twice):
+For performance issues adjust clockspeed while running the game (Note: Dolphin only saves this change for next run if your game is NOT running; You should find the value that runs best then close the game, set it again and it will stay there):
     Select Config
     Select Advanced Tab
     Adjust CPU Clock Override slider

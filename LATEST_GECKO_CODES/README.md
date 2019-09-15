@@ -1,8 +1,11 @@
 ## Latest gecko codes
-`other_testin_codes.txt` are codes no longer in use or not related specifically to 2P mod (SuperShadow v0.4 for example).
 
-`GUPE8P.ini` is for development
+## DEVELOPERS
+Note we have hit the Gecko limit, so `development_only` is only used for verifying codes.
+Many need to be disabled to test new codes, keep this in mind if writing more codes.
 
-Place it in Dolphin\User\GameSettings
+`2PMod_MCM_Format.txt` and `settings.py` are for MeleeCodeManager v4.2 by DRGN
+Set the ISO to be read as v1.06 NTSC to properly edit the DOL. Note the stack shift code is REQUIRED for testing!
 
-Note we have hit the Gecko limit, so this is only used for verifying codes. Many need to be disabled to test new codes.
+## END USERS
+The small GUPE8P.ini is the correct one to use (the other codes are embedded in the DOL)
