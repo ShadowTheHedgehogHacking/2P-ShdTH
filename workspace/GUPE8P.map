@@ -4475,9 +4475,9 @@
 8008f7c8 00000004 8008f7c8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 8008f7cc 00000048 8008f7cc 0 dCreateGeom
 8008f814 0000007c 8008f814 0 AIRBUG_FIXME
-8008f890 00000080 8008f890 0 AIRBUG2_FIXME_MovementWhileInAirBlowerState(r3=Player::Behavior::Stream, r4/r6/r26/r31=AccelerateCommand, r5=boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>)
+8008f890 00000080 8008f890 0 AIRBUG2_FIXME_MovementWhileInAirBlowerState(r3=Player::Behavior::Stream, r4/r6/r26/r31=AccelerateCommand, r5=boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>)(Player::Behavior::Stream, Player::StreamCommand)
 8008f910 0000002c 8008f910 0 zz_8008f910_
-8008f93c 0000006c 8008f93c 0 zz_8008f93c_
+8008f93c 0000006c 8008f93c 0 Stream::SetAnimationAndStatus()
 8008f9a8 00000008 8008f9a8 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 8008f9b0 00000058 8008f9b0 0 Stream::?()
 8008fa08 00000044 8008fa08 0 zz_8008fa08_
@@ -4861,7 +4861,7 @@
 8009ac14 0000006c 8009ac14 0 zz_8009ac14_
 8009ac80 00000058 8009ac80 0 zz_8009ac80_
 8009acd8 000000b4 8009acd8 0 zz_8009acd8_
-8009ad8c 0000004c 8009ad8c 0 zz_8009ad8c_
+8009ad8c 0000004c 8009ad8c 0 SetsCorrectCommandForAirBugMaybe
 8009add8 0000009c 8009add8 0 zz_8009add8_
 8009ae74 0000005c 8009ae74 0 FormationOffensive::__dt(void)
 8009aed0 00000028 8009aed0 0 zz_8009aed0_

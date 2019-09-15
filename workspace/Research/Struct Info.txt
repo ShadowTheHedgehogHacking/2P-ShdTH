@@ -54,6 +54,13 @@ Coaster:
 	0xE8 - float xPos Maybe
 	0xF4 - float hangAngle
 
+Fan:
+	0x30 - float* pXYZ
+	0x48 - PlayerShadow*
+	0X60 - int fallAtTop
+	0x68 - float vBlowerSizeMaybe
+	0x98 - int state
+
 GravityChangeCollision:
 	0x0 - char* pName
 	0x4 - size ?
