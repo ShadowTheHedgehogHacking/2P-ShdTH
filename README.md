@@ -12,7 +12,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Road to 2.0 (WIP) | Release Date: 9/19/2019
 * Fix "Air bug" - [PARTIAL / Multiple blower objects result in issue]
-* Find another way for Vehicles/Turrets/Flyables Controls/Cams to detect which player uses them instead of holding X
+* Vehicles/Turrets/Flyables Controls/Cams detect which player uses them by distance instead of holding X (WIP/ CarType Vehicles Done)
 * Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
 
 #### Completed for 2.0

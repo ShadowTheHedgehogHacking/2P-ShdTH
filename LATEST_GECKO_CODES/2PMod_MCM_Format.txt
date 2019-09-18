@@ -152,7 +152,6 @@ FC010040 4C411382
 	-==-
 
 
-
 2P Essentials Disable ChaosPowers CameraEvent
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
@@ -790,9 +789,7 @@ NTSC 1.06 --- 0x802469DC ---- 4BF1BE29 -> 60000000
 	-==-
 
 
-2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v0.9
-P1 MUST hold down X until fully mounted otherwise camera will attach to P2
-If P1 is holding X when P2 tries to mount P1 will get camera
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v1 WIP
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x8031722C ---- 39400001 -> Branch
@@ -820,39 +817,34 @@ NTSC 1.06 --- 0x8031722C ---- 39400001 -> Branch
 ------------- 0x801B3B14 ---- 38A00000 -> bl <Camera_PickPlayer>
 ------------- 0x800E943C ---- 38A00000 -> bl <Camera_PickPlayer>
 ------------- 0x800EB524 ---- 38A00000 -> bl <Camera_PickPlayer>
-------------- 0x801B8010 ---- 38A00000 -> bl <Camera_PickPlayer>
+------------- 0x801B8010 ---- 38A00000 -> Branch
+
+7F91E378 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
 
 
 	-==-
 
 
-2P Essentials Fix Vehicles for P2 v2.95
-P1 MUST HOLD X while mounting vehicle otherwise controls will be mapped to P2
+2P Essentials Fix Vehicles for P2 v3
 Allows for P2 to drive CarType vehicles
-Now will work regardless of WeaponType, ChaosPower state, and if P1 is already driving
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x801B924C ---- 38A00000 -> Branch
+NTSC 1.06 --- 0x801BA5D0 ---- 38A00000 -> Branch
 
-bl <fixvehicles_shared_case>
-38800002 48000000
+7FF1FB78 3A310008
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
 
-------------- 0x801BA5D0 ---- 38A00000 -> Branch
+------------- 0x801B924C ---- 38A00000 -> Branch
 
-bl <fixvehicles_shared_case>
-38800001 48000000
-
-<fixvehicles_shared_case> NTSC 1.06
-3CA0807D 60A571A0
-80A50000 80A50000
-88A500A9 70A50001
-38800001 7C052000
-40820024 3CA08056
-60A5ED4F 88A50000
-70A50008 2C050008
-4180000C 38A00000
-41A20008 38A00001
-4E800020
+7FF1FB78 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
 
 
 	-==-
@@ -903,3 +895,31 @@ Uses this space for code injection
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80003328 ---- 6021B568 -> 6021A568
+
+
+	-==-
+
+
+DistanceCheck Standalone Function
+DistanceCheck(r17) where r17=Address of floatX of comparison obj
+[dreamsyntax, DonutStopGaming]
+<DistanceCheck> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 4E800020

@@ -7848,10 +7848,111 @@ Due to misc registers per call it is best to convert existing
 distanceCheck codes to a shared func that accepts r3 (or some other register)
 as the common float (not a pointer) and returns the result of 0/1 based on which player into
 that same register used to pass in the common float
-Then it is the caller's repsonsibility to use this return to determine result
+Then it is the caller's responsibility to use this return to determine result
 
 Depending on space, should refactor prior distance code uses and follow this new 
 shared function.
 
+DistanceCheck(r17=AddressToTargetFloatX) -> call blt if P2 is closer (implementer needs to write)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+blr
+
+New Checkpoint UI Inject Example:
+lis r17, 0x8057
+ori r17, r17, 0x5FE4
+lwz r19, 0x3C (r3) [FOR 80331390 use r3, otherwise r30]
+subi r19, r19, 1
+mulli r19, r19, 0x1C
+add r17, r17, r19
+bl <DistanceCheck>
+li r4, 5
+blt 0x8
+li r4, 4
 
 
+MCM Standalone Function for DistanceCheck(r17)
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 4E800020
+
+Vehicles V3 Patch using above DistanceCheck and passing to r17::
+	VehiclesCam: 801b8010    | r28 
+	VehiclesMount: 801b924c  | r31
+	VehiclesDismount:801ba5d0| r31 + 0x8
+Use mr r17, rXX
+
+--VehiclesCam @ 801b8010
+mr r17, r28
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--VehiclesMount @ 801b924c
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--VehicleDismount @ 801ba5d0
+mr r17, r31
+addi r17, r17, 0x8
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+Success; Continue tomorrow for other camera instances
