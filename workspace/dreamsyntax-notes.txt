@@ -7778,3 +7778,29 @@ while(!end_of_file)
     )
 }
 ----------------
+
+2019-09-17
+GravityColli continued:
+
+nop @ 80247888 [multi exec]
+
+Latest attempt:
+80247830
+80247850
+80247860
+80247874
+80247888
+
+^ Results in GravityColli occasionally overwriting other switchers if in exec range
+Even with multi exec appears to map to closest player, so instead of code solution
+next attempting HPP double GravityColli objects on spawn pos and other exec locations if it results in success
+
+Experiment was a success, although its still necessary to prevent the check
+of current global gravity / sign position to guarantee execution
+This shows that its based on closest player:
+
+This is a problem for warps still, due to one player warping will eat both warps.
+As such for V1 only spawn shall be corrected and the nop of 80247860 will remain
+
+
+nop @ 80247860
