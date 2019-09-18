@@ -7804,3 +7804,54 @@ As such for V1 only spawn shall be corrected and the nop of 80247860 will remain
 
 
 nop @ 80247860
+---------
+Looking how to replace "HOLD X" for Turret/Vehicle mount:
+
+For standard turret/flyable ::
+r31 holds float X of the object being
+add check there and do r5 calculation
+---
+For ArkType Turret:
+Confirmed that even though its still necessary to do a special case compare,
+we can successfully pass down r31 without loss;
+However, r31 will no longer hold this value at this point, so it must be stored or carried
+r17 should be a safe candidate for carry on this one func
+
+@ 8031722c, store r31 into r17
+@ 801cedc4, do original compare of EF, do dist check call instead of hold X compare
+---
+For Flyables:
+One deref of r31 to get to float X at top of func 
+OR
+One deref of r30 to get to float X at 801b3b14 (injection site)
+---
+For CarType Vehicle:
+Control Segment:
+OnMount @ 801b924c :: use r31
+OnDismount @ 801ba5d0 :: use r31 + 0x8 (8 = X, C = Y, ^0 = Z)
+Camera Segment:
+Cam @ 801b8010 :: use r28 -> 8118da08 , also: r31 from OnMount is sustained; Can pass down/store due to callstack r15/r17
+---
+
+Flyables: 801b3b14       | 0x0 (r30)
+GUN Turret: 800e943c     | r31
+Alien Turret: 800eb524   | r31
+ArkType TurretS1:8031722c| mr r17, r31 (copy r31, pass below)
+ArkType TurretS2:801cedc4| none, needs above data in r17
+VehiclesCam: 801b8010    | r28 
+VehiclesMount: 801b924c  | r31
+VehiclesDismount:801ba5d0| r31 + 0x8
+
+Mapped out required new injects for Camera v1 (and Vehicles v3)
+
+Due to misc registers per call it is best to convert existing 
+distanceCheck codes to a shared func that accepts r3 (or some other register)
+as the common float (not a pointer) and returns the result of 0/1 based on which player into
+that same register used to pass in the common float
+Then it is the caller's repsonsibility to use this return to determine result
+
+Depending on space, should refactor prior distance code uses and follow this new 
+shared function.
+
+
+
