@@ -789,37 +789,47 @@ NTSC 1.06 --- 0x802469DC ---- 4BF1BE29 -> 60000000
 	-==-
 
 
-2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v1 WIP
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v1
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x8031722C ---- 39400001 -> Branch
-
-39400001 39E000EF
-48000000
-
-------------- 0x801CEDC4 ---- 80980000 -> Branch
+NTSC 1.06 --- 0x801CEDC4 ---- 80980000 -> Branch
 
 80980000 2C0F00EF
-40820028 3DE08056
-61EFED4F 89EF0000
-71EF0008 2C0F0008
-39E00001 40820008
+40820018
+bl <DistanceCheck>
+39E00001 41800008
 39E00000 91E400A0
 48000000
 
-<Camera_PickPlayer> NTSC 1.06
-3CA08056 60A5ED4F
-88A50000 70A50008
-2C050008 38A00001
-40820008 38A00000
-4E800020
-
-------------- 0x801B3B14 ---- 38A00000 -> bl <Camera_PickPlayer>
-------------- 0x800E943C ---- 38A00000 -> bl <Camera_PickPlayer>
-------------- 0x800EB524 ---- 38A00000 -> bl <Camera_PickPlayer>
 ------------- 0x801B8010 ---- 38A00000 -> Branch
 
 7F91E378 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x801B3B14 ---- 38A00000 -> Branch
+
+823E0000 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x8031722C ---- 39400001 -> Branch
+
+7FF1FB78 39400001
+39E000EF 48000000
+
+------------- 0x800EB524 ---- 38A00000 -> Branch
+
+7FF1FB78 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x800E943C ---- 38A00000 -> Branch
+
+7FF1FB78 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000

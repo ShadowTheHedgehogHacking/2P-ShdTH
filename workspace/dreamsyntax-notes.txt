@@ -7256,7 +7256,7 @@ andi. r15, r15, 0x8
 cmpwi r15, 0x8
 li r15, 1
 bne- 0x8
-li r15, 0A
+li r15, 0
 stw r15, 0xA0(r4)
 
 Completed LostImpactTurret Camera Controll
@@ -7956,3 +7956,52 @@ blt 0x8
 li r5, 0
 
 Success; Continue tomorrow for other camera instances
+---------------------------
+2019-09-18
+
+Flyables: 801b3b14       | 0x0 (r30)
+GUN Turret: 800e943c     | r31
+Alien Turret: 800eb524   | r31
+ArkType TurretS1:8031722c| mr r17, r31 (copy r31, pass below)
+ArkType TurretS2:801cedc4| none, needs above data in r17
+
+--Flyables @ 801b3b14
+lwz r17, 0x0(r30)
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--GUN Turret @ 800e943c [same as VehiclesMount, AlienTurret]
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--Alien Turret @ 800eb524
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--ArkType TurretS1 @ 8031722c
+mr r17, r31
+li r10, 1
+li r15, 0xEF
+
+--ArkType TurretS2 @ 801cedc4 | origin: lwz r4, 0 (r24)
+lwz r4, 0 (r24)
+cmpwi r15, 0xEF
+bne- 0x18
+bl <DistanceCheck>
+li r15, 1
+blt 0x8
+li r15, 0
+stw r15, 0xA0(r4)
+
+Success; Attempt of chaining standalone functions failed; But not needed anyway, only saved a few bytes. Reverted to the above.
+----
+
+
