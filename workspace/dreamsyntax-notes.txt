@@ -8003,5 +8003,67 @@ stw r15, 0xA0(r4)
 
 Success; Attempt of chaining standalone functions failed; But not needed anyway, only saved a few bytes. Reverted to the above.
 ----
+2019-09-19
+EggDealer Boss calc:
+There are x4 fcmpos;
+However it cycles P1 position pointer / EggDealer position pointer per check for some reason.
+Let's inject to get the following behavior:
 
+If player 1 OR player 2 is within range of EggDealer, do not trigger run away.
+Give priority to player 1 if both players are on opposite sides and determining next route
+-> Only check for P2 if P1 is out of range <-
+
+Need a check for P1 pointer due to being 3rd deref chain address check
+80334b24 bge- 80334b30
+80334b34 bge- 80334b40
+^ first two compare against 0x8(r3) [Z axis]
+80334b4c bge- 80334b58
+80334b5c bge- 80334b68 
+^ final two compare against 0x0(r3) [X axis]
+
+Instead of chaining these, alternate approach is to swap out r3 to the player closest to EggDealer
+(while not messing with the case of EggDealer self-checking itself for whatever reason
+
+0x0(r31) holds data of eggdealer Pos
+@ 80334ad8 get r3 from stack, then does null check and bne's 
+
+Inject @ 80334b1c | original: lfs	f0, 0x0008 (r3)
+// get P1 X level 3 and verify before distance compare (skip over for EggDealer self check case)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+cmpw r15, r3
+bne 0x20 // skip the rest of the code 
+lwz r17, 0x0(r31) //get EggDealer X
+bl <DistanceCheck>
+bge 0x14 //change nothing if P1 is closer
+lis r3, 0x807D
+ori r3, r3, 0x71A8
+lwz r3, 0x0(r3)
+lwz r3, 0x0(r3)
+lfs f0, 0x8(r3)
+
+No comments: 
+Inject @ 80334b1c | original: lfs	f0, 0x0008 (r3)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+cmpw r15, r3
+bne 0x20
+lwz r17, 0x0(r31)
+bl <DistanceCheck>
+bge 0x14
+lis r3, 0x807D
+ori r3, r3, 0x71A8
+lwz r3, 0x0(r3)
+lwz r3, 0x0(r3)
+lfs f0, 0x8(r3)
+
+Success; However this only affects 'flee' action; But this makes the boss more easily attackable as P2.
+
+Airbug final attempt for v2.0:
+Donut's current WIP code breaks if player X is near a blower but player Y is out of range of any blower obj.
+Need to address both states somehow.
 

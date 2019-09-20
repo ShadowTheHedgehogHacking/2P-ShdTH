@@ -673,7 +673,7 @@ NTSC 1.06 --- 0x801BD8C0 ---- EC010024 -> 60000000
 
 2P Essentials Bosses Target Closest Player
 BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
-Includes DevilDoom BalloonRings Fix
+Includes DevilDoom BalloonRings Fix, EggDealer
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 <Boss_PickPlayer> NTSC 1.06
@@ -706,6 +706,17 @@ NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x802A6DA8 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x80322D24 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x80334B1C ---- C0030008 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+7C0F1800 40820020
+823F0000
+bl <DistanceCheck>
+40800014 3C60807D
+606371A8 80630000
+80630000 C0030008
+48000000
 
 
 	-==-

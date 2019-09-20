@@ -10,9 +10,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 # ALL LEVELS ARE NOW PLAYABLE!
 
-## Road to 2.0 (WIP) | Release Date: 9/19/2019
+## Road to 2.0 (WIP) | Release Date: 2019-09-19 (Today)
 * Fix "Air bug" - [PARTIAL / Multiple blower objects result in issue]
-* Bosses should attack closest player [PARTIAL / All Bosses except Egg Dealer]
 
 #### Completed for 2.0
 * Verify 1:1 misc/unknown bytes for level edits per HPP v0.7.6+
@@ -36,6 +35,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Make Space Gadget Coasters Grindable
 * Space Gadget Gravity Switchers Fixed* (Checkpoint warp/deaths may run into issues)
 * Vehicles/Turrets/Flyables Controls/Cams detect which player uses them by distance
+* All bosses act on closest player
 
 ## Problems
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
