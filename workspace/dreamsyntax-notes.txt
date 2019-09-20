@@ -8064,6 +8064,54 @@ lfs f0, 0x8(r3)
 Success; However this only affects 'flee' action; But this makes the boss more easily attackable as P2.
 
 Airbug final attempt for v2.0:
-Donut's current WIP code breaks if player X is near a blower but player Y is out of range of any blower obj.
-Need to address both states somehow.
+Donut's current WIP code breaks if multiple Fan Exec()s are happening at the same time
+Need to address this condition somehow.
+Mad matrix blowers are also entirely separate?
 
+height fix: 
+[801dbae4]
+lwz r22, 0x0(r4)
+lwz r22, 0x22C(r22)
+lwz r22, 0x30(r22)
+lwz r22, 0x10(r22)
+
+cmpwi r22, 0x18
+bne- original
+blr
+
+    original:
+stwu sp, -0x20(sp)
+
+C2103794 00000009
+3EC0807D 62D671A0
+82D60000 82D60000
+82FF0024 7C16B840
+40820020 3EC0807D
+62D671A8 82D60000
+82D60000 82FF0024
+7C16B840 40820004
+92DF0024 92C10010
+7EC0B378 00000000
+
+
+My ver:
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r23,0x24(r31)
+cmplw r22,r23
+bne- 0x14
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22,0x24(r31)
+stw r22,0x10(sp)
+mr r0,r22
+
+Idea: Airbug only happens if players enter fan near each other; SO: 
+Only do custom code if players are close enough to X range?
+
+Inject @ 80103794
+Original: lwz	r0, 0x0010 (sp)
