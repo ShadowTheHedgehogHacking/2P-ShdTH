@@ -7318,6 +7318,34 @@
                 }
             ],
             "groupName": "ViewPort"
+        },
+        {
+            "address": "807C6A3C",
+            "baseIndex": 1,
+            "label": "P1 Xpos",
+            "typeIndex": 1,
+            "unsigned": false
+        },
+        {
+            "address": "807C6A2C",
+            "baseIndex": 1,
+            "label": "P1 Width",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "807C6B7C",
+            "baseIndex": 1,
+            "label": "P2 Xpos",
+            "typeIndex": 1,
+            "unsigned": false
+        },
+        {
+            "address": "807C6B6C",
+            "baseIndex": 1,
+            "label": "P2 Width",
+            "typeIndex": 2,
+            "unsigned": true
         }
     ]
 }

@@ -5894,6 +5894,7 @@ Blackknight:
 800841c8 -> regular position movement while swinging
 
 maintain momentum after swing by nop @ 800841d8 800841e0
+
 ----------
 2019-07-27
 - Identified potential bug:
@@ -8115,3 +8116,22 @@ Only do custom code if players are close enough to X range?
 
 Inject @ 80103794
 Original: lwz	r0, 0x0010 (sp)
+--------------------------------------------------------
+2019-10-03
+Optimization / Cleanups 
+Attempting to get Per-viewport rendering (Chunks is phase 1)
+blr of main 'PrepareForRenderStuff' has no world render but increases performance
+change branch of 8004722c to render all except geo, no change of performance oddly
+
+801e4cb0 -> creates views overlaying on left view
+nop bl to mainloop to kill renderview 0
+-------------------------
+2019-10-06
+nop @ 80463c18 PlayerModel Animation Affected by Lighting
+=================================
+2019-11-23
+Blackknight:
+8008415c (3rd attack cycle momentum reset?)
+800841c8 -> regular position movement while swinging
+
+maintain momentum after swing by nop @ 800841d8 800841e0

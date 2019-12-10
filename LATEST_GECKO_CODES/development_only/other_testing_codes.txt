@@ -384,3 +384,51 @@ $CarType Vehicles Insta Accel/Brake [dreamsyntax]
 041BD88C 60000000
 041BD954 60000000
 *STACKS with r1 code
+
+$Unrestrict Geo/Coli Names [dreamsyntax]
+041E2810 60000000
+*Allows for using as many chunks as you want without being constrainted to the stage's original properties.
+*
+*Geo models must still follow:
+*[NAME]_[MATTYPE]_[CHUNKNUM]
+*
+*Collision models must still follow:
+*[NAME]_COLI_[CHUNKNUM]
+*
+*The 2nd and 3rd params can be swapped (weird inconsistency, would recommend just following the above)
+
+
+$2P Essentials SplitScreen NETPLAY Widescreen Hack [dreamsyntax]
+0458415C 3F9F7CEE
+0458418C 3F9F7CEE
+*Widescreen for SingleScreen Vertical type for NETPLAY
+
+$2P NETPLAY Vertical-SingleScreen P1 v1 [dreamsyntax]
+027C6A3C 00000000
+047C6A2C 00000280
+027C6B7C 00000280
+047C6B6C 00000140
+*REQUIRES Vertical-SplitScreen v3 ALSO TO BE ON!
+*
+*P1
+*x=default
+*w=640
+*P2:
+*x=640
+*w=default
+
+$2P NETPLAY Vertical-SingleScreen P2 v1 [dreamsyntax]
+027C6A3C 00000280
+047C6A2C 00000140
+027C6B7C 00000000
+047C6B6C 00000280
+*REQUIRES Vertical-SplitScreen v3 ALSO TO BE ON!
+*
+*P1
+*x=640
+*w=320
+*
+*P2
+*x=0
+*w=640
+
