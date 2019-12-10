@@ -1,0 +1,163 @@
+{
+    "watchList": [
+        {
+            "address": "8056E098",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8056E084",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F0E344",
+            "baseIndex": 0,
+            "label": "X-press-action-speed",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80F0E32C",
+            "baseIndex": 0,
+            "label": "X-press-action-unknown something ",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80512E68",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 4,
+            "unsigned": false
+        },
+        {
+            "address": "80F0E348",
+            "baseIndex": 0,
+            "label": "X-press-active",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80512E8C",
+            "baseIndex": 0,
+            "label": "X-press-idle",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F0E330",
+            "baseIndex": 0,
+            "label": "X-press-offscreen-and-speed?",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F0E330",
+            "baseIndex": 0,
+            "label": "X-press-offscreen-and-speed?",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80EF0B60",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 40,
+            "typeIndex": 6,
+            "unsigned": true
+        },
+        {
+            "address": "80576700",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "807D4E60",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "805F67A8",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67A4",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F677C",
+            "baseIndex": 0,
+            "label": "Vehicle DamageTaken",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F6794",
+            "baseIndex": 0,
+            "label": "Vehicle DamageValue per Damage",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8057670C",
+            "baseIndex": 0,
+            "label": "ring",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "8057D6A0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "805F67D0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67D4",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67F0",
+            "baseIndex": 0,
+            "label": "RingCountX",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67F4",
+            "baseIndex": 0,
+            "label": "RingCountY",
+            "typeIndex": 3,
+            "unsigned": false
+        }
+    ]
+}
