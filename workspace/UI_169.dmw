@@ -92,14 +92,63 @@
         {
             "address": "805F67A8",
             "baseIndex": 0,
-            "label": "No label",
+            "label": "P1 Ammo UI X Axis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67A0",
+            "baseIndex": 0,
+            "label": "P2 Ammo UI X Axis",
             "typeIndex": 3,
             "unsigned": false
         },
         {
             "address": "805F67A4",
             "baseIndex": 0,
-            "label": "No label",
+            "label": "P1 and P2 Ammo UI Y Axis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67E0",
+            "baseIndex": 0,
+            "label": "P2 RingCount UI XAxis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67D4",
+            "baseIndex": 0,
+            "label": "P1 and P2 RingCount UI YAxis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67E0",
+            "baseIndex": 0,
+            "label": "P1 RingCount UI XAxis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67D0",
+            "baseIndex": 0,
+            "label": "P2 RingCount UI XAxis",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67F0",
+            "baseIndex": 0,
+            "label": "SinglePlayer RingCountX",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F67F4",
+            "baseIndex": 0,
+            "label": "SinglePlayer RingCountY",
             "typeIndex": 3,
             "unsigned": false
         },
@@ -132,31 +181,272 @@
             "unsigned": false
         },
         {
-            "address": "805F67D0",
+            "address": "80F4EC28",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 60,
+            "typeIndex": 6,
+            "unsigned": true
+        },
+        {
+            "address": "80F4E6E8",
             "baseIndex": 0,
             "label": "No label",
             "typeIndex": 3,
             "unsigned": false
         },
         {
-            "address": "805F67D4",
+            "address": "80F4E6D8",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80F4E6DC",
+            "baseIndex": 0,
+            "label": "Draw RingIcon",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80F4CCA0",
             "baseIndex": 0,
             "label": "No label",
             "typeIndex": 3,
             "unsigned": false
         },
         {
-            "address": "805F67F0",
+            "address": "80EE2738",
             "baseIndex": 0,
-            "label": "RingCountX",
+            "label": "No label",
             "typeIndex": 3,
             "unsigned": false
         },
         {
-            "address": "805F67F4",
+            "address": "80512E8C",
             "baseIndex": 0,
-            "label": "RingCountY",
+            "label": "No label",
             "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80EE2720",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80EE2734",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80A16030",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80A16048",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F6834",
+            "baseIndex": 0,
+            "label": "2P Timer X-Pos",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F6838",
+            "baseIndex": 0,
+            "label": "2P Timer Y-Pos",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F30EC8",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 96,
+            "typeIndex": 6,
+            "unsigned": true
+        },
+        {
+            "address": "80F30EC0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F30ED8",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F30EF0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F30A9C",
+            "baseIndex": 0,
+            "label": "RingEnabler",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80585A54",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80585A54",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805FB380",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805FB398",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805FB384",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805FB388",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805FB38C",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F317FC",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 32,
+            "typeIndex": 6,
+            "unsigned": true
+        },
+        {
+            "address": "80F317FC",
+            "baseIndex": 0,
+            "label": "RingPt1",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F31810",
+            "baseIndex": 0,
+            "label": "Ring_Pt2",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F31824",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F31838",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F4CC1C",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 32,
+            "typeIndex": 6,
+            "unsigned": true
+        },
+        {
+            "address": "80F317A4",
+            "baseIndex": 1,
+            "label": "IGNOREBELOW",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "805F67D8",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 6,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "80B1C0BC",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 6,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "80B1C15C",
+            "baseIndex": 0,
+            "label": "No label",
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80B1C15B",
+            "baseIndex": 0,
+            "label": "2P RIngTHing",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80B1C158",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
             "unsigned": false
         }
     ]

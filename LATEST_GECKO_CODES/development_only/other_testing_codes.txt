@@ -432,3 +432,10 @@ $2P NETPLAY Vertical-SingleScreen P2 v1 [dreamsyntax]
 *x=0
 *w=640
 
+$Dreamsyntax 169 UI SuperFix WIP [dreamsyntax]
+045f67a0 c1700000
+045f67a8 44250000
+045f67e0 442f0000
+045f67d0 c2600000
+045F67F0 C2780000
+*WIP Patches to remaining UI elements to be true 16:9 without weirdness
