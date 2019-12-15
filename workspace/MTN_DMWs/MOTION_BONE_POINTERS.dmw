@@ -1,0 +1,233 @@
+{
+    "watchList": [
+        {
+            "groupEntries": [
+                {
+                    "address": "81233D40",
+                    "baseIndex": 0,
+                    "label": "amy bon",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "8127A8C0",
+                    "baseIndex": 0,
+                    "label": "amy mtp",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "80AC6F20",
+                    "baseIndex": 0,
+                    "label": "SH BON",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "80ADE280",
+                    "baseIndex": 0,
+                    "label": "pshadow mtp",
+                    "typeIndex": 0,
+                    "unsigned": false
+                },
+                {
+                    "address": "807D18EC",
+                    "baseIndex": 1,
+                    "label": "point to pshadow mtp",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809D99A4",
+                    "baseIndex": 1,
+                    "label": "point to pshadow mtp2",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809DA5D0",
+                    "baseIndex": 1,
+                    "label": "point to pshadow mtp3",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "809D9968",
+                    "baseIndex": 1,
+                    "label": "point to sh bon",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "80AC6210",
+                    "baseIndex": 1,
+                    "label": "point to sh bon2",
+                    "typeIndex": 2,
+                    "unsigned": true
+                }
+            ],
+            "groupName": "HMM"
+        },
+        {
+            "address": "813DC550",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "813DE8B8",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 6,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "813DE8B8",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 6,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "805EDB30",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "809D9948",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 6,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "80F93AD8",
+            "baseIndex": 1,
+            "label": "No label",
+            "length": 7,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "groupEntries": [
+            ],
+            "groupName": "PAMYHAX"
+        },
+        {
+            "address": "8131E9C0",
+            "baseIndex": 0,
+            "label": "below PAMYMTP",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "81253060",
+            "baseIndex": 0,
+            "label": "ABOVE PAMY.MTP BELWO AMY.BON",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80FD4860",
+            "baseIndex": 0,
+            "label": "ABOVEAMY.BON",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80AEDC80",
+            "baseIndex": 0,
+            "label": "SHADOWMTP BELOW",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80ABC8E0",
+            "baseIndex": 0,
+            "label": "ABOVE SHADOW MTP BELOW SHBON",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80ABC140",
+            "baseIndex": 0,
+            "label": "ABOVE SH BON",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "807D18EC",
+            "baseIndex": 1,
+            "label": "point SHADOW MTP BELOW1",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "809D99A4",
+            "baseIndex": 1,
+            "label": "point SHADOW MTP BELOW2",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "809DA5D0",
+            "baseIndex": 1,
+            "label": "point SHADOW MTP BELOW3",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "809D9968",
+            "baseIndex": 1,
+            "label": "point ABOVE SHADOW MTP BELOW SHBON",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "80ABD890",
+            "baseIndex": 1,
+            "label": "point ABOVE SHADOW MTP BELOW SHBON2",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "809D992C",
+            "baseIndex": 1,
+            "label": "POINT ABOVE SH BON",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "80ABC4B0",
+            "baseIndex": 1,
+            "label": "POINT ABOVE SH BON",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "809D9878",
+            "baseIndex": 1,
+            "label": "SHADOW TXD HEADER",
+            "typeIndex": 2,
+            "unsigned": true
+        },
+        {
+            "address": "80ABD890",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        }
+    ]
+}

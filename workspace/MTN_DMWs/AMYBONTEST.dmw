@@ -1,0 +1,219 @@
+{
+    "watchList": [
+        {
+            "groupEntries": [
+                {
+                    "address": "80F9EE58",
+                    "baseIndex": 0,
+                    "label": "FILEREF",
+                    "length": 7,
+                    "typeIndex": 5,
+                    "unsigned": true
+                },
+                {
+                    "address": "80F9EE78",
+                    "baseIndex": 1,
+                    "label": "AMY.BON POINTER",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80F9F02C",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F094",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F0FC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F164",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F1C0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F1C4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80F9F1CC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "80FDFAB0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "POINTER_POINTER"
+                }
+            ],
+            "groupName": "AMYBON"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "80F9EE94",
+                    "baseIndex": 0,
+                    "label": "FILEREF",
+                    "length": 7,
+                    "typeIndex": 5,
+                    "unsigned": true
+                },
+                {
+                    "address": "80F9EEB4",
+                    "baseIndex": 1,
+                    "label": "AMY.MTP POINTER",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80EF8920",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "812423B4",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "8134F184",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "POINTER_POINTER"
+                }
+            ],
+            "groupName": "AMYMTP"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "809D9948",
+                    "baseIndex": 0,
+                    "label": "FILEREF",
+                    "length": 6,
+                    "typeIndex": 5,
+                    "unsigned": true
+                },
+                {
+                    "address": "809D9968",
+                    "baseIndex": 1,
+                    "label": "SH.BON POINTER",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80AC6210",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "POINTER_POINTER"
+                }
+            ],
+            "groupName": "SHBON"
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "809D9984",
+                    "baseIndex": 0,
+                    "label": "FILEREF",
+                    "length": 10,
+                    "typeIndex": 5,
+                    "unsigned": true
+                },
+                {
+                    "address": "809D99A4",
+                    "baseIndex": 1,
+                    "label": "SHADOW.MTP POINTER",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "807D18EC",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        },
+                        {
+                            "address": "809DA5D0",
+                            "baseIndex": 1,
+                            "label": "No label",
+                            "typeIndex": 2,
+                            "unsigned": true
+                        }
+                    ],
+                    "groupName": "POINTER_POINTER"
+                }
+            ],
+            "groupName": "SHADOWMTP"
+        },
+        {
+            "address": "805F13B0",
+            "baseIndex": 1,
+            "label": "InitializeBONE_PRIMARYPOINTER",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80AC9BC8",
+            "baseIndex": 1,
+            "label": "No label",
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        }
+    ]
+}

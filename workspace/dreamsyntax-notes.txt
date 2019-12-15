@@ -8135,3 +8135,35 @@ Blackknight:
 800841c8 -> regular position movement while swinging
 
 maintain momentum after swing by nop @ 800841d8 800841e0
+-----------
+2019-12-12
+BlackKnight:
+Found phys new velocity while strikes 1/2 active: 805F2700 (float) default 400
+Function relative: 80084204
+
+Disable slide on B-press:
+change to b @ 800a023c becomes 48000038
+
+nop 8023d60c (ammo deplete for melee disable)
+
+For testing, set float to 4000 and disable slide on B-press.
+----
+2019-12-13
+MotionIDs of use
+116 = swing twirl
+137: <?> Walking Swinging Sword
+----------
+2019-12-14
+Determined .ONE archives are NOT file order dependent
+it is EXTENSION dependent.
+You can also have additional files at the end
+But MINIMUM expected files cannot be removed
+
+This means we are able to potentially have custom animations for P2 character slots.
+Attempted to get custom BON and MTP loads but was unsuccessful except one instance where I did not realize it was successful and have yet to reproduce it
+The files are loaded, however player pointer ref cannot reassign (havent found true pointer yet)
+
+For 'easier' testing attempted to use AMY.ONE's .BON and .MTP slot to have a in-use live pointer for MTP/BON.
+Have yet to identify it. Found special static address holding global 'MOTION' of some kind.
+Added to DMW
+------------

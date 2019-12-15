@@ -1427,6 +1427,19 @@
                 },
                 {
                     "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "MOTION",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "230",
+                        "420"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
                     "baseIndex": 1,
                     "label": "0x22C Npc::SonicTypeExecuter",
                     "pointerOffsets": [
@@ -1948,7 +1961,7 @@
         {
             "address": "805F6040",
             "baseIndex": 0,
-            "label": "ahhhh",
+            "label": "AnimationTimeScale",
             "typeIndex": 3,
             "unsigned": false
         },
@@ -2351,6 +2364,20 @@
         },
         {
             "address": "805F96E0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F2700",
+            "baseIndex": 0,
+            "label": "MeleeShadowStuff",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "805F2704",
             "baseIndex": 0,
             "label": "No label",
             "typeIndex": 3,
