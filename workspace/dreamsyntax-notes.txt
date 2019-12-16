@@ -8167,3 +8167,28 @@ For 'easier' testing attempted to use AMY.ONE's .BON and .MTP slot to have a in-
 Have yet to identify it. Found special static address holding global 'MOTION' of some kind.
 Added to DMW
 ------------
+2019-12-15
+
+Cracked MTP/BON load initialize scripts, fully allows for unique player animations and BON file.
+
+General flow:
+deref 0x14 of 807d8658 == 809d93a8
+subi r3, r4, 2 [1b -2 =| 19
+
+0x19 * 60 [dec]
+
+ = 0x5dc
+ 
+ r0 [0x14 of said address]
+ + add 0x5dc 
+ 
+ == 809d9984
+ 
+ 2c of that 
+ 
+----------
+81071C74
+=================
+BON IS IDENTICAL, even same ref EXCEPT!!! 5A0 instead of 5DC
+
+Need to write a 'nice' way to make it detect per player
