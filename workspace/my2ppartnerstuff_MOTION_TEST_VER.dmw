@@ -2661,6 +2661,27 @@
             "length": 10,
             "typeIndex": 5,
             "unsigned": true
+        },
+        {
+            "address": "809DC320",
+            "baseIndex": 1,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "809DC334",
+            "baseIndex": 1,
+            "label": "Partner POINTER",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "809DC21C",
+            "baseIndex": 1,
+            "label": "No label",
+            "typeIndex": 2,
+            "unsigned": false
         }
     ]
 }

@@ -8192,3 +8192,6 @@ subi r3, r4, 2 [1b -2 =| 19
 BON IS IDENTICAL, even same ref EXCEPT!!! 5A0 instead of 5DC
 
 Need to write a 'nice' way to make it detect per player
+=================
+2019-12-18
+800a0130 - threshold/controller for slide on X press

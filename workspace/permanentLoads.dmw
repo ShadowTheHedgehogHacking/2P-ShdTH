@@ -1,0 +1,88 @@
+{
+    "watchList": [
+        {
+            "address": "805EC170",
+            "baseIndex": 0,
+            "label": "GameMode Byte?",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "8057D6A0",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 0,
+            "unsigned": false
+        },
+        {
+            "address": "80558160",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 36,
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "8055837C",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 555,
+            "pointerOffsets": [
+                "0",
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "804CF570",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "typeIndex": 5,
+            "unsigned": true
+        },
+        {
+            "address": "807D6F08",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 5555,
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "groupEntries": [
+                {
+                    "address": "804CECD0",
+                    "baseIndex": 0,
+                    "label": "CameraSetEditor",
+                    "length": 55,
+                    "typeIndex": 5,
+                    "unsigned": false
+                },
+                {
+                    "address": "805E8718",
+                    "baseIndex": 1,
+                    "label": "PointsToCameraSetEditor",
+                    "typeIndex": 2,
+                    "unsigned": true
+                },
+                {
+                    "address": "8053C1A0",
+                    "baseIndex": 1,
+                    "label": "PointsToCameraSetEditorPointer",
+                    "typeIndex": 2,
+                    "unsigned": true
+                }
+            ],
+            "groupName": "CameraSetEditor"
+        }
+    ]
+}

@@ -13,6 +13,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Problems
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * For SpaceGadget if both players warp/respawn to the same checkpoint while the other player is in range, the latter player will not have correct gravity set
+* DevilDoom crashes for some people
+* DevilDoom fight is not balanced for two players (very hard to win)
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -65,6 +67,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Both players required to reach GoalRing for stage complete
 * Physics Rewrite for GUNMech Jumpers [DONE]
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Unique Animation/Model Per Player [POC DONE]
 
 ## Dev
 * dreamsyntax
