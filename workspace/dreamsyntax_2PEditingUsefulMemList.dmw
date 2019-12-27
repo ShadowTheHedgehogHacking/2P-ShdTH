@@ -2129,6 +2129,13 @@
                     "unsigned": false
                 },
                 {
+                    "address": "80576758",
+                    "baseIndex": 0,
+                    "label": "P2 Ring Count",
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
                     "address": "8057D7DC",
                     "baseIndex": 0,
                     "label": "P1 Selected Character",
@@ -2141,13 +2148,6 @@
                     "label": "P2 Selected Character",
                     "typeIndex": 2,
                     "unsigned": true
-                },
-                {
-                    "address": "80576758",
-                    "baseIndex": 0,
-                    "label": "P2 Ring Count",
-                    "typeIndex": 2,
-                    "unsigned": false
                 }
             ],
             "groupName": "PlayerStruct"

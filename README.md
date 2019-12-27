@@ -51,6 +51,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Individual death-to-checkpoint (Basic)
 * Physics Rewrite for GUNMech Jumpers
 * Downscale all stage and stage_gdt textures to make the game crashless
+* P2's scores and rings add to game totals at ranking
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
@@ -63,7 +64,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
-* Optional BlackKnight style melee replacement
+* Optional BlackKnight style melee replacement [POC DONE]
 * Both players required to reach GoalRing for stage complete
 * Physics Rewrite for GUNMech Jumpers [DONE]
 * WeaponsTargeting & HomingAttack Other Player Enable/Disable
