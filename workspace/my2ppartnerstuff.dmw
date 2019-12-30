@@ -932,6 +932,19 @@
                         {
                             "address": "80575FA8",
                             "baseIndex": 0,
+                            "label": "0x3E0 motionID indexStart",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "230",
+                                "3E0"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
                             "label": "0x420 motionID",
                             "pointerOffsets": [
                                 "0",
@@ -958,19 +971,6 @@
                         {
                             "address": "80575FA8",
                             "baseIndex": 0,
-                            "label": "0x430",
-                            "pointerOffsets": [
-                                "0",
-                                "0",
-                                "230",
-                                "430"
-                            ],
-                            "typeIndex": 3,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "80575FA8",
-                            "baseIndex": 0,
                             "label": "0x428",
                             "pointerOffsets": [
                                 "0",
@@ -979,6 +979,19 @@
                                 "428"
                             ],
                             "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x430",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "230",
+                                "430"
+                            ],
+                            "typeIndex": 3,
                             "unsigned": false
                         },
                         {
@@ -997,12 +1010,12 @@
                         {
                             "address": "80575FA8",
                             "baseIndex": 0,
-                            "label": "0x3E0",
+                            "label": "0x450",
                             "pointerOffsets": [
                                 "0",
                                 "0",
                                 "230",
-                                "3E0"
+                                "450"
                             ],
                             "typeIndex": 2,
                             "unsigned": false
@@ -1094,7 +1107,7 @@
                                     "unsigned": false
                                 }
                             ],
-                            "groupName": " "
+                            "groupName": "pppWeapon?"
                         }
                     ],
                     "groupName": "0x238 pShadowWeapon"
@@ -1104,12 +1117,42 @@
                         {
                             "address": "80575FA8",
                             "baseIndex": 1,
-                            "label": "0x44 Super",
+                            "label": "0x1C",
                             "pointerOffsets": [
                                 "0",
                                 "0",
                                 "23C",
-                                "44"
+                                "1C"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x28 **ShadowPlayer",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "23C",
+                                "28",
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 1,
+                            "label": "0x44 Effect Struct",
+                            "pointerOffsets": [
+                                "0",
+                                "0",
+                                "23C",
+                                "44",
+                                "18",
+                                "0"
                             ],
                             "typeIndex": 2,
                             "unsigned": false
@@ -1133,6 +1176,294 @@
                                 {
                                     "address": "80575FA8",
                                     "baseIndex": 0,
+                                    "label": ".",
+                                    "length": 155,
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "typeIndex": 5,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x18 pVTable",
+                                    "length": 155,
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "18",
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "typeIndex": 5,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x28 components maybe",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0xC pAuraModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "C"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x10 pSuperShadowModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "10"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x14 pLeftHandModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "14"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x18 pRightHandModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "18"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x1C pEyesModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "1C"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x20 pLeftEyeModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "20"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x24 pRightEyeModel",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "24"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "2C"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 1,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x28 eyeBlinkState",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "28"
+                                    ],
+                                    "typeIndex": 2,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
+                                    "label": "0x6C transformTimer",
+                                    "pointerOffsets": [
+                                        "0",
+                                        "0",
+                                        "23C",
+                                        "44",
+                                        "28",
+                                        "6C"
+                                    ],
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "80575FA8",
+                                    "baseIndex": 0,
                                     "label": "0x74 something super effect related",
                                     "pointerOffsets": [
                                         "0",
@@ -1146,7 +1477,7 @@
                                     "unsigned": false
                                 }
                             ],
-                            "groupName": "."
+                            "groupName": "Super"
                         }
                     ],
                     "groupName": "0x23C pEffect"
@@ -1351,6 +1682,59 @@
                 {
                     "address": "80575FA8",
                     "baseIndex": 1,
+                    "label": "0x21C cmd",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "21C"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575FA8",
+                    "baseIndex": 1,
+                    "label": "0x23C Effect",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "23C"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575FA8",
+                    "baseIndex": 0,
+                    "label": "0x23C Effect 0x44 0x68",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "23C",
+                        "44",
+                        "68"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575FA8",
+                    "baseIndex": 0,
+                    "label": "0x23C Effect 0x44 0x28 0x74",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "23C",
+                        "44",
+                        "28",
+                        "74"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575FA8",
+                    "baseIndex": 1,
                     "label": "0x224 pController",
                     "pointerOffsets": [
                         "8",
@@ -1368,18 +1752,6 @@
                         "8",
                         "0",
                         "22C"
-                    ],
-                    "typeIndex": 2,
-                    "unsigned": false
-                },
-                {
-                    "address": "80575FA8",
-                    "baseIndex": 1,
-                    "label": "0x21C cmd",
-                    "pointerOffsets": [
-                        "8",
-                        "0",
-                        "21C"
                     ],
                     "typeIndex": 2,
                     "unsigned": false
@@ -1407,6 +1779,127 @@
                     ],
                     "typeIndex": 2,
                     "unsigned": false
+                },
+                {
+                    "address": "80575FA8",
+                    "baseIndex": 0,
+                    "label": "0x230 pMotion",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "230"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x42C ID maybe?",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "42C"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x3E0 motionID indexStart",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "3E0"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x420 motionID",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "420"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x424",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "424"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x428",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "428"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x430",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "430"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x43C motionSpeed",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "43C"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80575FA8",
+                            "baseIndex": 0,
+                            "label": "0x450",
+                            "pointerOffsets": [
+                                "8",
+                                "0",
+                                "230",
+                                "450"
+                            ],
+                            "typeIndex": 2,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "pMotion"
                 }
             ],
             "groupName": "P2 Struct"
@@ -1428,12 +1921,74 @@
                 {
                     "address": "80575F54",
                     "baseIndex": 0,
-                    "label": "MOTION",
+                    "label": "y",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "4"
+                    ],
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "z",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "8"
+                    ],
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 1,
+                    "label": "0x230 pMotion",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "230"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "0x420 MotionID",
                     "pointerOffsets": [
                         "0",
                         "0",
                         "230",
                         "420"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "0x3E0 motionID indexStart",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "230",
+                        "3E0"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 1,
+                    "label": "0x8 pShadowExecutor",
+                    "pointerOffsets": [
+                        "0",
+                        "0",
+                        "230",
+                        "8"
                     ],
                     "typeIndex": 2,
                     "unsigned": false
@@ -1465,6 +2020,93 @@
                         "0"
                     ],
                     "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "y",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "4"
+                    ],
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "z",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "8"
+                    ],
+                    "typeIndex": 3,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 1,
+                    "label": "0x230 pMotion",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "230"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "0x420 MotionID",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "230",
+                        "420"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 0,
+                    "label": "0x3E0 motionID indexStart",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "230",
+                        "3E0"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 1,
+                    "label": "0x8 pShadowExecutor",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "230",
+                        "8"
+                    ],
+                    "typeIndex": 2,
+                    "unsigned": false
+                },
+                {
+                    "address": "80575F54",
+                    "baseIndex": 1,
+                    "label": "0x22C Npc::SonicTypeExecuter",
+                    "pointerOffsets": [
+                        "8",
+                        "0",
+                        "22C"
+                    ],
+                    "typeIndex": 2,
                     "unsigned": false
                 }
             ],
@@ -2372,15 +3014,67 @@
         {
             "address": "805F2700",
             "baseIndex": 0,
-            "label": "MeleeShadowStuff",
+            "label": "Melee Travel While Swinging Speed",
             "typeIndex": 3,
             "unsigned": false
         },
         {
             "address": "805F2704",
             "baseIndex": 0,
-            "label": "No label",
+            "label": "Melee Rotation Speed",
             "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "80F04048",
+            "baseIndex": 1,
+            "label": "Arbitrary P1 FanStore",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80F040C8",
+            "baseIndex": 1,
+            "label": "Arbitrary P1 FanStore",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80575FA8",
+            "baseIndex": 1,
+            "label": "P1 FAN",
+            "pointerOffsets": [
+                "0",
+                "0",
+                "290"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80575FA8",
+            "baseIndex": 1,
+            "label": "P2 FAN",
+            "pointerOffsets": [
+                "8",
+                "0",
+                "290"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "807D866C",
+            "baseIndex": 1,
+            "label": "Master Shadow.one Handler",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "805F13B0",
+            "baseIndex": 1,
+            "label": "Master MTP/BON Load Address for Shadow",
+            "typeIndex": 2,
             "unsigned": false
         }
     ]

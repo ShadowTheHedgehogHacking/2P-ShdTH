@@ -8374,3 +8374,67 @@ $2P Essentials ScoreFix Rings [dreamsyntax]
 C2202F54 00000002
 81E30000 8063004C
 7C637A14 00000000
+
+--------------------------------------------------
+2019-12-28
+Airbug Fix w Donut:
+@ 801037b4 li r29, 1
+^ only is reached when current player of current fan is within 7.5 +/* fan(0x68) - float vBlowerSize
+
+Store current fan r31 [fan pointer] into Player's personal space (allocate fixed area in DOL with MCM)
+similar to RTOC
+
+li r29, 1
+lis r15, 0x80F0
+addi r15, r15, 0x40C8
+stw r31, 0x0(r15)
+
+@ 80102408 stwu	sp, -0x00C0 (sp)
+blr if stored player pointer does not match r31?
+lis r15, 0x80F0
+addi r15, r15, 0x40C8
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+blr
+stwu sp, -0x00C0 (sp)
+
+--- with dynamic: r22 + 0x210
+li r29, 1
+addi r15, r22, 0x290
+stw r31, 0x0(r15)
+
+@ 80102408 stwu	sp, -0x00C0 (sp)
+blr if stored player pointer does not match r31?
+addi r15, r22, 0x290
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+blr
+stwu sp, -0x00C0 (sp)
+
+---------
+Shift to below func with guaranteed fan:
+@ 801037d8: addi	r3, r31, 152
+addi r3, r31, 152
+addi r15, r22, 0x290
+stw r31, 0x0(r15)
+-------------------
+No change (except correct pointer is not overwritten) but identified later bnes/beqs that are related:
+
+Behavior identified as take the branch if in current fan for both of the below:
+
+IN: 8010386c bne, below it check for pointer of stored fan:
+@ 80103870 : addi r3, sp, 16
+IN: 801038ac beq
+@ 801038b0 : li	r3, 24
+
+?always take branch maybe? no, no change.
+
+@ 801038e0 bctrl
+Try: skip if not stored fan
+addi r15, r22, 0x290
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+bctrl
