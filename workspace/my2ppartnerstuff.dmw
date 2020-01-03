@@ -1,20 +1,6 @@
 {
     "watchList": [
         {
-            "address": "8159FECC",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": true
-        },
-        {
-            "address": "80F5A1E4",
-            "baseIndex": 0,
-            "label": "<dynamic>partner inactive timer",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
             "address": "805F2BF8",
             "baseIndex": 0,
             "label": "<static> value to set ai timer to on 2p input",
@@ -130,36 +116,9 @@
             "groupName": "p3 controls"
         },
         {
-            "address": "80F5F920",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
             "address": "80576000",
             "baseIndex": 0,
             "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "813B3628",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "0"
-            ],
-            "typeIndex": 2,
-            "unsigned": false
-        },
-        {
-            "address": "813B3650",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "D0"
-            ],
             "typeIndex": 3,
             "unsigned": false
         },
@@ -169,23 +128,6 @@
             "label": "No label",
             "typeIndex": 2,
             "unsigned": true
-        },
-        {
-            "address": "812DE328",
-            "baseIndex": 0,
-            "label": "No label",
-            "pointerOffsets": [
-                "A2"
-            ],
-            "typeIndex": 1,
-            "unsigned": false
-        },
-        {
-            "address": "80F5F93C",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
         },
         {
             "address": "809EF480",
@@ -263,7 +205,7 @@
             "address": "805EF9A8",
             "baseIndex": 0,
             "label": "No label",
-            "length": 99,
+            "length": 555,
             "pointerOffsets": [
                 "C",
                 "0",
@@ -275,28 +217,6 @@
             "unsigned": false
         },
         {
-            "address": "80F59F62",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 1,
-            "unsigned": false
-        },
-        {
-            "address": "80F5F95C",
-            "baseIndex": 0,
-            "label": "No label",
-            "length": 20,
-            "typeIndex": 5,
-            "unsigned": false
-        },
-        {
-            "address": "80F59EC0",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
             "address": "80575F54",
             "baseIndex": 0,
             "label": "No label",
@@ -305,27 +225,6 @@
                 "0",
                 "0"
             ],
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "80F7C99A",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 1,
-            "unsigned": true
-        },
-        {
-            "address": "80FF6452",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 1,
-            "unsigned": true
-        },
-        {
-            "address": "8132AB28",
-            "baseIndex": 0,
-            "label": "No label",
             "typeIndex": 3,
             "unsigned": false
         },
@@ -2231,27 +2130,6 @@
             "unsigned": false
         },
         {
-            "address": "80F792E8",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "81298BD8",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "81298BC0",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
             "address": "80575FA8",
             "baseIndex": 1,
             "label": "statusbit",
@@ -2385,13 +2263,6 @@
             "unsigned": false
         },
         {
-            "address": "81300BB0",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
             "address": "8060B40C",
             "baseIndex": 0,
             "label": "No label",
@@ -2470,69 +2341,6 @@
         },
         {
             "address": "8060B444",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "80EFDE90",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "810B6140",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "810B6178",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "810B61E8",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "81290898",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "8129089C",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "8139ACAC",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "8139FC10",
-            "baseIndex": 1,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": true
-        },
-        {
-            "address": "8139FC70",
             "baseIndex": 1,
             "label": "No label",
             "typeIndex": 2,
@@ -2708,90 +2516,6 @@
             "address": "805F5CC8",
             "baseIndex": 0,
             "label": "camDistanceRelated?",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8128C4C4",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8128C4C8",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": true
-        },
-        {
-            "address": "8128C4CC",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8128E034",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8128E038",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": true
-        },
-        {
-            "address": "8128E03C",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "813662A0",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "813662A4",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": true
-        },
-        {
-            "address": "813662A8",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "8136662C",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": false
-        },
-        {
-            "address": "81366630",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 3,
-            "unsigned": true
-        },
-        {
-            "address": "81366634",
-            "baseIndex": 0,
-            "label": "No label",
             "typeIndex": 3,
             "unsigned": false
         },
@@ -2998,13 +2722,6 @@
             "unsigned": false
         },
         {
-            "address": "814A3A5C",
-            "baseIndex": 0,
-            "label": "No label",
-            "typeIndex": 2,
-            "unsigned": false
-        },
-        {
             "address": "805F96E0",
             "baseIndex": 0,
             "label": "No label",
@@ -3026,23 +2743,9 @@
             "unsigned": false
         },
         {
-            "address": "80F04048",
-            "baseIndex": 1,
-            "label": "Arbitrary P1 FanStore",
-            "typeIndex": 2,
-            "unsigned": false
-        },
-        {
-            "address": "80F040C8",
-            "baseIndex": 1,
-            "label": "Arbitrary P1 FanStore",
-            "typeIndex": 2,
-            "unsigned": false
-        },
-        {
             "address": "80575FA8",
             "baseIndex": 1,
-            "label": "P1 FAN",
+            "label": "Arbitrary P1 FAN (Temp Code Ver)",
             "pointerOffsets": [
                 "0",
                 "0",
@@ -3054,7 +2757,7 @@
         {
             "address": "80575FA8",
             "baseIndex": 1,
-            "label": "P2 FAN",
+            "label": "Arbitrary P2 FAN (Temp Code Ver)",
             "pointerOffsets": [
                 "8",
                 "0",
