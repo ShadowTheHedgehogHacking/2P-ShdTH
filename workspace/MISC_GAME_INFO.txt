@@ -1,0 +1,41 @@
+Shadow's entire stack space: (0x10000)
+805FB568 - 8060B568
+
+Shadow ViTraceHook @ 0x00377B78
+
+Optimal way to write to mainPlayerID:
+	stw [register with value], 0x3148 (r13)
+
+Status byte check in the wild typical convention:
+	addi r3, r4, 168
+	li r4, 53
+	bl ->0x80076CC8
+
+===2019-04-28===
+Potential Buffer Size Increases on Split
+80573B7C
+====2019-01-11===
+Post chunks code no texture size modification crash log:
+Westopolis: No crash
+Digital Circuit: Missing collision at first area
+Glyphic Canyon: No crash
+Lethal Highway: Crash near Doom's Eye Intro
+Cryptic Castle: Freeze after downward slope
+Prison Island: No crash
+Circus Park: Crash after falling from balloons
+Central City: Missing geo/collision at multi-gun drop Dark Mission Bomb
+Sky Troops: No crash
+Mad Matrix : No collision, No geo at first area
+Death Ruins : No crash
+The Ark : No crash
+Air Fleet: Crash after first corner
+Iron Jungle: No crash
+Space Gadget: Crash after regain control
+Lost Impact: Crash after Maria intro
+Gun Fortress: Crash after dropping in-game
+Black Comet: Crash after moving towards next area (left by GUN robot)
+Lava Shelter: No crash
+Cosmic Fall: Crash after first mini-pulley
+Final Haunt: Crash after Giants drop in hallway
+Last Way: No Crash ???WTF???
+====================

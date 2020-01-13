@@ -1003,21 +1003,21 @@
                                 {
                                     "address": "807D76B0",
                                     "baseIndex": 0,
-                                    "label": "Cam0 Position With Rotate X",
+                                    "label": "Cam0 Render/Chunk Position With Rotate X",
                                     "typeIndex": 3,
                                     "unsigned": false
                                 },
                                 {
                                     "address": "807D76B4",
                                     "baseIndex": 0,
-                                    "label": "Cam0 Position With Rotate Y",
+                                    "label": "Cam0 Render/Chunk Position With Rotate Y",
                                     "typeIndex": 3,
                                     "unsigned": false
                                 },
                                 {
                                     "address": "807D76B8",
                                     "baseIndex": 0,
-                                    "label": "Cam0 Position With Rotate Z",
+                                    "label": "Cam0 Render/Chunk Position With Rotate Z",
                                     "typeIndex": 3,
                                     "unsigned": false
                                 }
@@ -1042,27 +1042,6 @@
                             "label": "RO | P2 X ?",
                             "typeIndex": 3,
                             "unsigned": true
-                        },
-                        {
-                            "address": "8057D703",
-                            "baseIndex": 0,
-                            "label": "Splitscreen type",
-                            "typeIndex": 0,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "8057D70B",
-                            "baseIndex": 0,
-                            "label": "Splitscreen split 2",
-                            "typeIndex": 0,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "8057D707",
-                            "baseIndex": 0,
-                            "label": "Splitscreen split 1",
-                            "typeIndex": 0,
-                            "unsigned": false
                         },
                         {
                             "address": "807D77E0",
@@ -1110,27 +1089,6 @@
                                 },
                                 {
                                     "address": "807D77A8",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "80EFA1D8",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "80EFA304",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "80EFA338",
                                     "baseIndex": 0,
                                     "label": "No label",
                                     "typeIndex": 3,
