@@ -7,7 +7,7 @@ C23A367C 00000001
 60000000 00000000
 C23A3680 00000001
 60000000 00000000
-*
+
 $Increase alloc space to 24575
 C23A2DF4 00000001
 38635FFF 00000000
@@ -17,7 +17,7 @@ C23A2D84 00000001
 38635FFF 00000000
 C23A2DA0 00000001
 38635FFF 00000000
-*
+
 $Increase alloc space to 28056
 c23a2df4 00000001
 38636D98 00000000
@@ -27,13 +27,13 @@ c23a2d84 00000001
 38636D98 00000000
 c23a2da0 00000001
 38636D98 00000000
-*
+
 $Double r5 in freemalloc
 C23A2D88 00000001
 38A00068 00000000
 C23A2DF8 00000001
 38A00068 00000000
-*
+
 $4x r5 in freemalloc
 C23A2D88 00000001
 38A000D0 00000000
@@ -68,6 +68,7 @@ $SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
 C217711C 00000001
 60000000 00000000
 C60AF2E4 800AF3BC
+
 $Play as BATTLE Characters in 1P Mode v2 [dreamsyntax]
 C217707C 00000001
 38800320 00000000
@@ -93,68 +94,66 @@ C2310130 00000001
 4E800020 00000000
 
 $WTF
-2856ed4e 00000020
-02f69482 0000004c
-e2000000 80008000
+2856ED4E 00000020
+02F69482 0000004C
+E2000000 80008000
 
 $Unlimited Spindash [dreamsyntax]
-c20a0174 00000001
+C20A0174 00000001
 60000000 00000000
 
-$BOSS FREEcam
-C229120C 00000001
-4E800020 00000000
-C231AAF4 00000001
-4E800020 00000000
-*
+$Bosses Freecam
+0429120C 4E800020
+0431AAF4 4E800020
+
 $Unstable/Untested Experimental Prevent Crash Buffer v0.001
 C203A1F8 00000001
 60000000 00000000
-*
+
 $TRK_BBA Debug Mode
-c2330cb8 00000001
+C2330CB8 00000001
 38000001 00000000
-c232c594 00000001
+C232C594 00000001
 38000001 00000000
-c232863c 00000001
+C232863C 00000001
 38000001 00000000
-c21eb358 00000001
+C21EB358 00000001
 38000001 00000000
 
 $Disable Unarmed Melee (Allow B = Slide Only) [dreamsyntax]
-0409ca60 408200a0
+0409CA60 408200A0
 *8009ca60
 *beq should become bne-
 *408200a0
 
 $1.5P Z+Dpad-R to activate (SplitCam only)[dreamsyntax]
 2856ED4E 000000100
-0457d703 00000000
+0457D703 00000000
 E2000001 80008000
 2856ED4E 00000080
-0457d703 00000000
+0457D703 00000000
 E2000001 80008000
 2856ED4E 00000220
-0457d703 00000002
+0457D703 00000002
 E2000001 80008000
 
 $TrailBlaze Shadow
-c208580c  00000001
-4e800020  00000000
+C208580C 00000001
+4E800020 00000000
 
-2P Experimental Crash Prevention on Goal Event v1 [dreamsyntax]
-c216b2b0  0000000b
-3e004974  621023f0
-3de0807d  61ef71a0
-81ef0000  81ef0000
-920f0000  39ef0004
-920f0000  39ef0004
-920f0000  3de0807d
-61ef71a8  81ef0000
-81ef0000  920f0000
-39ef0004  920f0000
-39ef0004  920f0000
-38000001  00000000
+$2P Experimental Crash Prevention on Goal Event v1 [dreamsyntax]
+C216B2B0 0000000B
+3E004974 621023F0
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+920F0000 39EF0004
+920F0000 39EF0004
+920F0000 3DE0807D
+61EF71A8 81EF0000
+81EF0000 920F0000
+39EF0004 920F0000
+39EF0004 920F0000
+38000001 00000000
 *Experimental version, sometimes fails to warp correctly
 
 $2P Optionals GUN Soldier Textures Identical Special Cases [dreamsyntax]
@@ -165,7 +164,7 @@ C21A206C 00000001
 *Removed from codelist as it makes GUN Soldiers not match their stage environment.
 
 $Ring Carry Code [dreamsyntax]
-c216f32c 00000001
+C216F32C 00000001
 60000000 00000000
 *Testing/Temp version for Independent Respawns code
 *Will initialize at 50 rings for first stage played
@@ -194,14 +193,14 @@ C2080734 00000001
 *C = Dooms Eye (Default Orange, but White Homing Attack)
 
 $2P Optionals Temporary Pulley/Zipline Disable [dreamsyntax]
-c2132f70 00000001
-4e800020 00000000	
+C2132F70 00000001
+4E800020 00000000	
 *Disables use of Pulley/Ziplines; Intended for use with PATH edit for all Pulley/Zipline -> Rail
 *If you intend to play Cryptic Castle this should be left off
 
 $2P Optionals Replace Air Blower with High Jump [dreamsyntax]
-c2103c4c 00000001
-4e800020 00000000
+C2103C4C 00000001
+4E800020 00000000
 *Replaces any Air Blowers with boost to vertical height if in jump/falling animation.
 *Prevents Air Bug but replaces original game behavior.
 *Will cause some stages to be unplayable (The Doom)
@@ -210,21 +209,24 @@ c2103c4c 00000001
 $Vehicles are Unholy Weapons of War [dreamsyntax]
 041BD8C0 60000000
 041BD88C 60000000
-041bd954 60000000
-041bd988 60000000
-041bd4a8 60000000
-041bd3ec 60000000
+041BD954 60000000
+041BD988 60000000
+041BD4A8 60000000
+041BD3EC 60000000
+
 $Moonjump
-c20a7840 00000007
-3e808056 3a9476a6
-3a9476a6 82940000
-2c141000 3e80805f
-3a942bd8 4082000c
-3ea043a0 41820008
-3ea0c3a0 92b40000
-c3e294f8 00000000
+C20A7840 00000007
+3E808056 3A9476A6
+3A9476A6 82940000
+2C141000 3E80805F
+3A942BD8 4082000C
+3EA043A0 41820008
+3EA0C3A0 92B40000
+C3E294F8 00000000
+
 $No CameraFile Read
 041c825c 60000000
+
 $SuperShadow Fly Toggle v0.1 (Z+Y) [dreamsyntax]
 C20A860C 00000008
 2C030030 40820030
@@ -237,6 +239,7 @@ C20A860C 00000008
 60000000 00000000
 *SuperShadow Fly Toggle code
 *Has no 'last pressed' rule so may appear inconsistent
+
 $SuperPlayer Basic Y Axis Control
 C22EB21C 00000009
 388500DC C0050000
@@ -250,7 +253,7 @@ D0040004 C0050008
 D0040008 00000000
 
 $2P Essentials Airbug Height Fix [dreamsyntax]
-041dbae4 4e800020
+041DBAE4 4E800020
 ** BREAKS PHYSICS ON LOTS OF OBJECTS / BAD CODE
 
 $DisableFadeToBlackForDeath EXPERIMENTAL
@@ -308,18 +311,17 @@ C2129B50 00000003
 *v1 will have UI control for P2, right now only P1 has UI control
 *OLD Has issues with some cases of warping wrong player, succeeded by v0.95
 
-
 Jump Ball Color Switch v2 [dreamsyntax]
-c20a5ab0 00000003
-80840064 2c04000e
+C20A5AB0 00000003
+80840064 2C04000E
 40820008 3880000X
 60000000 00000000
-c2087190 00000003
-80040064 2c00000e
+C2087190 00000003
+80040064 2C00000E
 40820008 3800000X
 60000000 00000000
-c2080734 00000003
-80040064 2c00000e
+C2080734 00000003
+80040064 2C00000E
 40820008 3800000X
 60000000 00000000
 *v2 changes player's ball only
@@ -340,14 +342,14 @@ c2080734 00000003
 
 
 2P Essentials FlyablesCam Fix v2 [dreamsyntax]
-041b3148 4e800020
-041b308c 4e800020
-*Disables EventCam for flyables. In future version might apply EventCam to both cameras.
+041B3148 4E800020
+041B308C 4E800020
+*Disables EventCam for flyables.
 *v2 fixes exception being thrown on restarting a stage or clearing it while one player is still on a flyable.
 
 SuperShadow NoFlying TestVer v0.2 [dreamsyntax]
-0417711c 60000000
-c60af2e4 800af3bc
+0417711C 60000000
+C60AF2E4 800AF3BC
 
 $SuperShadow TestVer v0.4 [dreamsyntax]
 0417711C 60000000
@@ -396,7 +398,7 @@ $Unrestrict Geo/Coli Names [dreamsyntax]
 *[NAME]_COLI_[CHUNKNUM]
 *
 *The 2nd and 3rd params can be swapped (weird inconsistency, would recommend just following the above)
-
+*This code CRASHES THE GAME after playing a stage, or when playing any event (including 2P VS Intros)
 
 $2P Essentials SplitScreen NETPLAY Widescreen Hack [dreamsyntax]
 0458415C 3F9F7CEE
@@ -432,10 +434,40 @@ $2P NETPLAY Vertical-SingleScreen P2 v1 [dreamsyntax]
 *x=0
 *w=640
 
-$Dreamsyntax 169 UI SuperFix WIP [dreamsyntax]
-045f67a0 c1700000
-045f67a8 44250000
-045f67e0 442f0000
-045f67d0 c2600000
+$Dreamsyntax 169 UI SuperFix WIP pre 2020 [dreamsyntax]
+045F67A0 C1700000
+045F67A8 44250000
+045F67E0 442F0000
+045F67D0 C2600000
 045F67F0 C2780000
 *WIP Patches to remaining UI elements to be true 16:9 without weirdness
+
+$No HUD
+0457D7E8 00000000
+
+$No Subtitles
+045E1B9C 00000000
+
+$BlackKnight/MeleeSucksLess r1 [dreamsyntax]
+0423D60C 60000000
+040A023C 48000038
+045F2700 45FA0000
+045F2704 42C80000
+
+$Partner mapped to AI only [dreamsyntax]
+C606F830 8006F870
+
+$Partner mapped to PORT3 v2 [DonutStopGaming]
+C20A85C4 0000000C
+3FE08056 63FFED4C
+82430010 7FFF9050
+281F0000 41820038
+82430010 3FE08056
+63FFED78 7C1F9040
+40820030 826D314C
+3A730001 926D314C
+28130001 4182001C
+3A5F002C 92430010
+48000010 824D314C
+3A400000 924D314C
+7C7F1B78 00000000

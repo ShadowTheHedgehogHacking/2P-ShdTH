@@ -1,5 +1,5 @@
 Shadow's entire stack space: (0x10000)
-805FB568 - 8060B568
+805FB568 - 8060B568 [DOL 0x581658]
 
 Shadow ViTraceHook @ 0x00377B78
 
