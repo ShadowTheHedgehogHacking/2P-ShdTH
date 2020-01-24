@@ -497,8 +497,8 @@ EDEF882A FC0FA840
 
 
 2P Essentials Bosses Target Closest Player
-BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
-Includes DevilDoom BalloonRings Fix, EggDealer
+Full supported boss types: BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
+Includes partial patch for EggDealer
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 <Boss_PickPlayer> NTSC 1.06
@@ -530,7 +530,6 @@ NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x80242B10 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x802A6DA8 ---- 80AD3148 -> bl <Boss_PickPlayer>
-------------- 0x80322D24 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x80334B1C ---- C0030008 -> Branch
 
 3DE0807D 61EF71A0
@@ -686,40 +685,31 @@ bl <DistanceCheck>
 	-==-
 
 
-2P Essentials P2 Super for DevilDoom
-[DonutStopGaming, dreamsyntax]
+2P Essentials P2 Super for DevilDoom v2
+Purposely leaves transparent skin for P2
+Let P2 run out of rings to fix, otherwise there is no issue
+[DonutStopGaming, dreamsyntax,]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x800AF32C ---- EC010028 -> Branch
-
-82DE0028 82D6023C
-82D60044 82D60028
-82F60074 281700FF
-3AE00000 41820008
-3AF70001 92F60074
-EC010028 48000000
-
-------------- 0x80177124 ---- 4BF40D21 -> Branch
+NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
 
 3DE0800B 61EF7E44
 7DE803A6 4E800021
 38600001 7DE803A6
-4E800021 48000000
+4E800021 00000000
 
 ------------- 0x8041D338 ---- 80030000 -> Branch
 
 2C030000 40820014
 3DE08041 61EFD34C
 7DE803A6 4E800020
-80030000 48000000
+80030000 00000000
 
 ------------- 0x8027E77C ---- 38600000 -> Branch
 
 2C060000 40820014
 3DE08027 61EFEA84
 7DE803A6 4E800020
-38600000 48000000
-
-------------- 0x8027f154 ---- 38000000 -> 380000FF
+38600000 00000000
 
 
 	-==-
@@ -781,7 +771,6 @@ NTSC 1.06 --- 0x800A85C4 ---- 7C7F1B78 -> Branch
 48000010 824D314C
 3A400000 924D314C
 7C7F1B78 48000000
-
 
 
 	-==-
@@ -860,3 +849,19 @@ NTSC 1.06 --- 0x802018CC ---- 80BD002C -> Branch
 
 81E30000 8063004C
 7C637A14 00000000
+
+
+	-==-
+
+
+2P Essentials DevilDoom BalloonRings Adds To Both Players
+[dreamsyntax,]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178B34 ---- 387F0028 -> Branch
+
+387F0028 3E008057
+6210D748 82100000
+2C1002C6 40820014
+39E3004C 820F0000
+7E102214 920F0000
+60000000 00000000

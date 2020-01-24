@@ -8519,3 +8519,56 @@ C20CB758 00000005
 *v3 now has MissionSelected Sync
 *v4 now has Cosmic Fall, Last Way, and Final Bosses SETObj resetting on either player dying
 *v5 now has MissionPartner Sync
+------------------
+2020-01-23
+Starting work on fixing issues with Super/DevilDoom:
+RingItem uses commands, and uses Swarm instance for entire collidable/ring balloon objs, forced to P1 collision:
+This is a problem because it is impossible to know who got the rings (current code uses Swarm position and is accurate only 40%)
+SOLUTION: Leave it as is (hardcoded to P1) but modify 
+"ReduceRingsOrAddRings_By_Collision" to do a stage check for 710, then 
+add r4 (current object hit ring value) to P2's ring address.
+r3 will contain P1's ring address @ 80178b34
+P2's address is r3+0x4C
+
+@ 80178b34 | original: addi	r3, r31, 40
+addi r3, r31, 40
+lis r16, 0x8057
+ori r16, r16, 0xD748
+lwz r16, 0x0(r16)
+cmpwi r16, 710
+bne- 0x14
+addi r15, r3, 0x4C
+lwz r16, 0x0(r15)
+add r16, r16, r4
+stw r16, 0x0(r15)
+
+Success
+
+$2P Essentials DevilDoom BalloonRings Adds To Both Players [dreamsyntax]
+C2178B34 00000006
+387F0028 3E008057
+6210D748 82100000
+2C1002C6 40820014
+39E3004C 820F0000
+7E102214 920F0000
+60000000 00000000
+
+$2P Essentials P2 Super for DevilDoom v2 [dreamsyntax, DonutStopGaming]
+C2177124 00000004
+3DE0800B 61EF7E44
+7DE803A6 4E800021
+38600001 7DE803A6
+4E800021 00000000
+C241D338 00000004
+2C030000 40820014
+3DE08041 61EFD34C
+7DE803A6 4E800020
+80030000 00000000
+C227E77C 00000004
+2C060000 40820014
+3DE08027 61EFEA84
+7DE803A6 4E800020
+38600000 00000000
+*Purposely leaves transparent skin for P2
+*Let P2 run out of rings to fix, otherwise there is no issue
+
