@@ -8571,4 +8571,98 @@ C227E77C 00000004
 38600000 00000000
 *Purposely leaves transparent skin for P2
 *Let P2 run out of rings to fix, otherwise there is no issue
+-----------------------
+2020-01-24
 
+GravityChangeCollision block obj destroys itself after beq is valid::
+@ 80247850
+
+Grabbing wrong player (nearest?) to apply to, then deletes
+If delete is nulled it might still grab wrong player -> add extra setobj per 
+GravityChangeCollision obj and add spawn displacement?
+
+86c - 888 nop | Confirmed success on behavior continuous until deload
+^ Might cause memleak?
+Instead: remove 'destroy' halfword save: 80247888 (safer)
+
+Issue: Confirmed still grabs wrong player (closest)
+
+
+Solution1: Find all displacements per-checkpoint and shift
+existing objects to account for displacement
+Solution2 -> Failed / Restore current GravityDir check and switch to other player if no result found | Even with one player this causes less success
+
+Implementing Soln 1:
+Per-checkpoint transXYZ is identical for P1/P2 (minus decimal)
+Instead need to approximate collision bump::
+969 -> 980 [+11 for P2] (right of checkpoint's rotation facing)
+Typically X/Y/Z depends on gravity mode
+Map of checkpoint data? (will list if looking at HPP is not sufficient without errors)
+Restart (init): Y + 50 (unique due to ~10-20 restart displacement)
+Checkpoint1: X +11
+
+Problem: Binds to current player until out of range
+In general not an issue. Impossible to account for all chains
+esp in Independent respawns. In general 'hot zones'
+have had 4 directions added for safety
+
+GravityChangeCollision Obj Patch v2 [dreamsyntax]
+04247860 60000000
+04247888 60000000
+
+Combine All GravitySwitcher/Zone/Colli Codes:
+
+$2P Essentials GravitySwitcher Fix v2 [DonutStopGaming, dreamsyntax]
+C2293938 00000021
+808D4F00 811F0000
+3D20804F 61293D08
+7C084840 41820020
+3D20804F 61293BD8
+7C084840 4182001C
+815F0040 397F006C
+4800001C 815F0034
+397F0020 48000010
+815F0034 397F0074
+48000004 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EA0000
+C20A0004 C22A0008
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EA0000
+C20A0004 C22A0008
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EB0000
+390D3150 1CE70004
+7D083A14 93E80000
+60000000 00000000
+C229396C 00000008
+811F0000 3D20804F
+61293D08 7C084840
+4182001C 3D20804F
+61293BD8 7C084840
+41820014 80BF006C
+48000010 80BF0020
+48000008 80BF0074
+60000000 00000000
+042469DC 60000000
+04246A4C 60000000
+04247B84 60000000
+04247BE0 60000000
+04247860 60000000
+04247888 60000000
+
+ChaosPowers DemoCam assignments for CC/CB occurs at: 800a65b8
+ -> No clear way to tell which player used the power, so assignment not simple.
+If resort to using status byte, will run into the issue of if one player already is using CC/CB the other won't get the camera.

@@ -546,9 +546,8 @@ bl <DistanceCheck>
 	-==-
 
 
-2P Essentials GravitySwitcher Fix v1.9
-Bug: If player X warps/dies to a checkpoint player Y is near, gravity will not change for player X
-[DonutStopGaming]
+2P Essentials GravitySwitcher Fix v2
+[DonutStopGaming, dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80293938 ---- 808D4F00 -> Branch
 
@@ -584,7 +583,7 @@ EDEF882A FC0FA840
 38E7FFFF 90EB0000
 390D3150 1CE70004
 7D083A14 93E80000
-48000000
+60000000 00000000
 
 ------------- 0x8029396C ---- 80AD3148 -> Branch
 
@@ -595,20 +594,14 @@ EDEF882A FC0FA840
 41820014 80BF006C
 48000010 80BF0020
 48000008 80BF0074
-48000000
+60000000 00000000
 
-
-	-==-
-
-
-GravitySwitchers NoDisable
-Required for GravitySwitcher Fix, will be integrated with v2
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x802469DC ---- 4BF1BE29 -> 60000000
+------------- 0x802469DC ---- 4BF1BE29 -> 60000000
 ------------- 0x80246A4C ---- 4BF1A895 -> 60000000
 ------------- 0x80247B84 ---- 4BF1AC81 -> 60000000
 ------------- 0x80247BE0 ---- 4BF19701 -> 60000000
+------------- 0x80247860 ---- 4182000C -> 60000000
+------------- 0x80247888 ---- B01F0004 -> 60000000
 
 
 	-==-

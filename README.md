@@ -62,6 +62,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Worm Enemies and AlienShips will only target P1
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 * Phase 2 Warp for P2 in Diablon Boss
+* Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
 
 ## Bonus Roadmap
 * Static weapon swaps for Metal Androids
