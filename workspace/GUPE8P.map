@@ -1710,7 +1710,7 @@
 800448a0 00000238 800448a0 0 FadeToBlack()
 80044ad8 00000224 80044ad8 0 zz_80044ad8_
 80044cfc 00000058 80044cfc 0 zz_80044cfc_
-80044d54 00000034 80044d54 0 zz_80044d54_
+80044d54 00000034 80044d54 0 Unknown_MainFunc_FadeTask
 80044d88 00000058 80044d88 0 zz_80044d88_
 80044de0 00000030 80044de0 0 MainFuncTo(r3/r31=FadeDrawTask, r29=RenderLevel_OnFade)__FadeToBlackTick_80044de0_
 80044e10 00000024 80044e10 0 ??ValidateFadeIsComplete,BlackScreenON
@@ -1727,7 +1727,7 @@
 800452a0 00000058 800452a0 0 relatedTo:TBGReadManager
 800452f8 00000050 800452f8 0 zz_800452f8_
 80045348 00000070 80045348 0 zz_80045348_
-800453b8 00000140 800453b8 0 UnknownMainFunc38(r3/r31=TBGReadManager, r29=System)_800453b8_
+800453b8 00000140 800453b8 0 UnknownMainFunc38(r3/r31=TBGReadManager, r29=System)
 800454f8 000000dc 800454f8 0 zz_800454f8_
 800455d4 00000084 800455d4 0 zz_800455d4_
 80045658 0000006c 80045658 0 zz_80045658_
@@ -2005,7 +2005,7 @@
 8004e8d4 0000004c 8004e8d4 0 zz_8004e8d4_
 8004e920 000000d8 8004e920 0 zz_8004e920_
 8004e9f8 00000044 8004e9f8 0 zz_8004e9f8_
-8004ea3c 00000004 8004ea3c 0 DBClose 	NdevExi2A.a DebuggerDriver.o
+8004ea3c 00000004 8004ea3c 0 RenderLevel_SpriteLast or RenderLevel_Punch__DBClose 	NdevExi2A.a DebuggerDriver.o
 8004ea40 00000048 8004ea40 0 zz_8004ea40_
 8004ea88 00000038 8004ea88 0 zz_8004ea88_
 8004eac0 0000002c 8004eac0 0 zz_8004eac0_
@@ -6314,10 +6314,10 @@
 800ca1e0 00000078 800ca1e0 0 zz_800ca1e0_
 800ca258 0000004c 800ca258 0 zz_800ca258_
 800ca2a4 00000028 800ca2a4 0 zz_800ca2a4_
-800ca2cc 0000006c 800ca2cc 0 zz_800ca2cc_
+800ca2cc 0000006c 800ca2cc 0 READS_TESTNAKAZAWA_PHASE2
 800ca338 00000060 800ca338 0 zz_800ca338_
 800ca398 00000070 800ca398 0 early_checkon
-800ca408 000000e8 800ca408 0 zz_800ca408_
+800ca408 000000e8 800ca408 0 READS_TESTNAKAZAWA_ON_STAGEINIT
 800ca4f0 00000098 800ca4f0 0 Generic_BctrlStateController
 800ca588 000000bc 800ca588 0 zz_800ca588_
 800ca644 000001dc 800ca644 0 SE_Z7074_BOXCYLINDER1
@@ -15526,7 +15526,7 @@
 801cfd48 00000004 801cfd48 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801cfd4c 00000058 801cfd4c 0 zz_801cfd4c_
 801cfda4 00000058 801cfda4 0 zz_801cfda4_
-801cfdfc 0000003c 801cfdfc 0 zz_801cfdfc_
+801cfdfc 0000003c 801cfdfc 0 Unknown_MainFunc2020_01(r3=CameraMatrix->Reset2D)
 801cfe38 00000078 801cfe38 0 zz_801cfe38_
 801cfeb0 0000003c 801cfeb0 0 RenderStop, RenderLevel_PostRender
 801cfeec 00000050 801cfeec 0 ??writeToTextureBufferSize?@80573B7C_IsTextBuffer?_801cfeec_
@@ -15706,7 +15706,7 @@
 801d3dc8 00000090 801d3dc8 0 ??isCalledBySaucerTypeVehicleFunc??_801d3dc8_
 801d3e58 00000098 801d3e58 0 zz_801d3e58_
 801d3ef0 0000007c 801d3ef0 0 zz_801d3ef0_
-801d3f6c 00000034 801d3f6c 0 AudioRelated(r3=AudioLoopManagerTask, r29=Audio)_801d3f6c_
+801d3f6c 00000034 801d3f6c 0 AudioRelated(r3=AudioLoopManagerTask, r29=Audio)
 801d3fa0 00000058 801d3fa0 0 zz_801d3fa0_
 801d3ff8 00000050 801d3ff8 0 zz_801d3ff8_
 801d4048 00000054 801d4048 0 zz_801d4048_
@@ -15752,7 +15752,7 @@
 801d4b00 00000004 801d4b00 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801d4b04 00000030 801d4b04 0 TRK_memset
 801d4b34 00000008 801d4b34 0 GXInitTexObjUserData 	gx.a GXTexture.o
-801d4b3c 00000034 801d4b3c 0 AudioRelated3(r3/r31=AudioManagerTask,r29=Audio)_801d4b3c_
+801d4b3c 00000034 801d4b3c 0 AudioRelated3(r3/r31=AudioManagerTask,r29=Audio)
 801d4b70 00000058 801d4b70 0 zz_801d4b70_
 801d4bc8 00000050 801d4bc8 0 zz_801d4bc8_
 801d4c18 00000020 801d4c18 0 cPlayer::PostPhysicsUpdate(void)
@@ -15813,11 +15813,11 @@
 801d6914 000000a0 801d6914 0 zz_801d6914_
 801d69b4 00000098 801d69b4 0 zz_801d69b4_
 801d6a4c 00000028 801d6a4c 0 zz_801d6a4c_
-801d6a74 00000090 801d6a74 0 UnknownMainFunc1(r3/r31=TObjSERIF, r29=Audio)_801d6a74_
+801d6a74 00000090 801d6a74 0 UnknownMainFunc1(r3/r31=TObjSERIF, r29=Audio)
 801d6b04 000000bc 801d6b04 0 zz_801d6b04_
 801d6bc0 0000008c 801d6bc0 0 zz_801d6bc0_
 801d6c4c 000000a8 801d6c4c 0 zz_801d6c4c_
-801d6cf4 00000394 801d6cf4 0 AudioRelated2(r3/r31=TObjBGM, r29=Audio)_801d6cf4_
+801d6cf4 00000394 801d6cf4 0 AudioRelated2(r3/r31=TObjBGM, r29=Audio)
 801d7088 000000a0 801d7088 0 zz_801d7088_
 801d7128 0000006c 801d7128 0 zz_801d7128_
 801d7194 00000058 801d7194 0 zz_801d7194_
@@ -16078,7 +16078,7 @@
 801dddd4 000000c8 801dddd4 0 zz_801dddd4_
 801dde9c 00000054 801dde9c 0 zz_801dde9c_
 801ddef0 00000060 801ddef0 0 zz_801ddef0_
-801ddf50 00000034 801ddf50 0 UnknownMainFunc43(r3/r31=DeltaMorphAnimManagerTask, r29=System)_801ddf50_
+801ddf50 00000034 801ddf50 0 UnknownMainFunc43(r3/r31=DeltaMorphAnimManagerTask, r29=System)
 801ddf84 00000058 801ddf84 0 zz_801ddf84_
 801ddfdc 0000007c 801ddfdc 0 zz_801ddfdc_
 801de058 0000002c 801de058 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
@@ -16248,7 +16248,7 @@
 801e3404 00000624 801e3404 0 r3/r31=TPauseManager, r29=System
 801e3a28 00000118 801e3a28 0 ??SomethingCheckingGameMode_801e3a28_
 801e3b40 0000007c 801e3b40 0 zz_801e3b40_
-801e3bbc 00000308 801e3bbc 0 UnknownMainFunc41(r3/r31=TPauseManager, r29=System)_801e3bbc_
+801e3bbc 00000308 801e3bbc 0 UnknownMainFunc41(r3/r31=TPauseManager, r29=System)
 801e3ec4 00000060 801e3ec4 0 zz_801e3ec4_
 801e3f24 00000060 801e3f24 0 zz_801e3f24_
 801e3f84 00000070 801e3f84 0 zz_801e3f84_
@@ -16284,9 +16284,9 @@
 801e4b98 00000048 801e4b98 0 zz_801e4b98_
 801e4be0 0000017c 801e4be0 0 cameraAssignSplitStatus(r29=Render)
 801e4d5c 00000048 801e4d5c 0 zz_801e4d5c_
-801e4da4 00000004 801e4da4 0 DBClose 	NdevExi2A.a DebuggerDriver.o
+801e4da4 00000004 801e4da4 0 RenderAttach_End__DBClose 	NdevExi2A.a DebuggerDriver.o
 801e4da8 00000048 801e4da8 0 zz_801e4da8_
-801e4df0 00000030 801e4df0 0 updateSplitScreenAspect_(r3/r31=RenderAttach_Start,r29=Render)_801e4df0
+801e4df0 00000030 801e4df0 0 updateSplitScreenAspect_(r3/r31=RenderAttach_Start,r29=Render)
 801e4e20 00000048 801e4e20 0 zz_801e4e20_
 801e4e68 00000058 801e4e68 0 zz_801e4e68_
 801e4ec0 00000058 801e4ec0 0 zz_801e4ec0_
@@ -16631,7 +16631,7 @@
 801eb370 0000002c 801eb370 0 cCharacter::UpdateBlinking(float)
 801eb39c 00000088 801eb39c 0 zz_801eb39c_
 801eb424 0000005c 801eb424 0 zz_801eb424_
-801eb480 00000034 801eb480 0 zz_801eb480_
+801eb480 00000034 801eb480 0 UnknownMainFunc_TextureUVAnimManagerTask
 801eb4b4 00000058 801eb4b4 0 zz_801eb4b4_
 801eb50c 00000044 801eb50c 0 zz_801eb50c_
 801eb550 0000007c 801eb550 0 zz_801eb550_
@@ -24039,7 +24039,7 @@
 802e0e84 000000b8 802e0e84 0 zz_802e0e84_
 802e0f3c 00000024 802e0f3c 0 cNet::GetGoalLineX( (void))
 802e0f60 0000015c 802e0f60 0 zz_802e0f60_
-802e10bc 0000019c 802e10bc 0 WorkingDebugCode(r3/r31=DebugDispDeleteList, r29=System)_802e10bc_
+802e10bc 0000019c 802e10bc 0 WorkingDebugCode(r3/r31=DebugDispDeleteList, r29=System)
 802e1258 00000018 802e1258 0 zz_802e1258_
 802e1270 0000003c 802e1270 0 zz_802e1270_
 802e12ac 0000000c 802e12ac 0 GXInitLightColor
@@ -24185,7 +24185,7 @@
 802e5b2c 00000048 802e5b2c 0 zz_802e5b2c_
 802e5b74 00000068 802e5b74 0 zz_802e5b74_
 802e5bdc 00000058 802e5bdc 0 zz_802e5bdc_
-802e5c34 0000002c 802e5c34 0 UnknownMainFunc37(r3/r31=SaveMessageDrawTask)__btu_init_core 	bte.a btu_init.o
+802e5c34 0000002c 802e5c34 0 UnknownMainFunc37(r3/r31=SaveMessageDrawTask, r29=RenderLevel_Gindows)__btu_init_core 	bte.a btu_init.o
 802e5c60 000000f0 802e5c60 0 zz_802e5c60_
 802e5d50 00000048 802e5d50 0 cHeadTrack::__dt(void)
 802e5d98 00000074 802e5d98 0 zz_802e5d98_
@@ -27346,7 +27346,7 @@
 8034b974 00000040 8034b974 0 JUTTexture::JUTTexture(void) 	J3DU.a J3DUShadow.o
 8034b9b4 00000030 8034b9b4 0 TRK_memset
 8034b9e4 00000008 8034b9e4 0 GXInitTexObjUserData 	gx.a GXTexture.o
-8034b9ec 00000034 8034b9ec 0 zz_8034b9ec_
+8034b9ec 00000034 8034b9ec 0 UnknownMainFunc_2020_02_VibrationManager
 8034ba20 00000058 8034ba20 0 zz_8034ba20_
 8034ba78 00000054 8034ba78 0 zz_8034ba78_
 8034bacc 0000005c 8034bacc 0 FormationOffensive::__dt(void)
