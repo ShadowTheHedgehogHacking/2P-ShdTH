@@ -1,5 +1,5 @@
 #ステージパラメータ
-#2P spawn positions 12.08.2018
+#2P spawn positions 2019-09-15
 #Game interprets P2 xpos spawn as xpos+-5 or xpos+-10 until Pause->Restart
 
 [Practice]
@@ -225,7 +225,7 @@ MISSIONCOUNT_H : 1 1
 [Space]
 #Space Gadget
 PLAYER : 0 1160 1716 47 0 90 0
-PLAYER : 1 1160 1756 47 0 90 0
+PLAYER : 1 1160 1766 47 0 90 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : -11175 -7744 -10624
 GOALEVENTPOS_H : -11175 -7744 -10624

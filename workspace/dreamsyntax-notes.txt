@@ -5894,6 +5894,7 @@ Blackknight:
 800841c8 -> regular position movement while swinging
 
 maintain momentum after swing by nop @ 800841d8 800841e0
+
 ----------
 2019-07-27
 - Identified potential bug:
@@ -7256,7 +7257,7 @@ andi. r15, r15, 0x8
 cmpwi r15, 0x8
 li r15, 1
 bne- 0x8
-li r15, 0A
+li r15, 0
 stw r15, 0xA0(r4)
 
 Completed LostImpactTurret Camera Controll
@@ -7693,7 +7694,7 @@ static overwrite
 
 TODO: make space gadget coasters grindable
 ----
-09-11-2019
+2019-09-11
 Chunk per viewport trial #2:
 stw @ 8003aa08 controlling draw/no draw
 
@@ -7709,3 +7710,1016 @@ nop @ 8003aa80 = slower chunk load in?
 nop @ 80047250 = P1 viewport no longer renders geo; Skybox is still visible (wtf) ??????
 Seems P2 viewport is drawn if any instance calling Opaq is left over??? -> Need to investigate the why
 -> Perhaps if condition check for split mode and then has additional draw within Opaq/bctrl's within?
+----------
+2019-09-14
+GravitySwitcher checkpoint segment obj: possible checks
+attempt nops @ 
+80258f74
+80258f94
+80258fe4
+80247c1c
+80247c28
+80246a9c
+80246aa8
+-----------------------
+Found the check for sign direction occurs @ 
+80247860
+nop this;
+STILL NEED to find way to cause multiple exec() for obj; Currently stops after change
+80247850 <- This for check
+80247874 <- for destroy obj on use
+
+
+GravitySwitchers NoDestroyCheckpointWarpObj
+nop @ 80247850
+nop @ 80247860
+nop @ 80247874
+
+^ Does not work for all cases; Most still fail
+---------
+
+SHAnim research for Shadowth117
+@ 80412654 begins parsing 'xamy' at start of file 
+
+
+.MTN/SHTHanim
+0x0        U8Int  0x4
+0x1        U8Int  Endianness 0 for little endian, 1 for big endian
+0x2        U16Int 0x0
+0x4        U32Int 0x0
+0x8        U32Int Filesize
+0xC        U8Int  0xFF
+0xD        U8Int  0x07
+0xE        U16Int 0x0
+0xF        U16Int Unknown Short1
+0x12    U16Int Unknown Short2
+0x14    char[0x20] modelname
+0x34    header_end, structs start
+
+while(!end_of_file)
+{
+    // Struct header
+    0x0        U32Int Structlength
+    0x4        U16Int Amount of keyframes
+    0x6        U8Int  Unkown flag; 0 or 2
+    0x7        U8Int  1 unless last strip of file. Last of file is 0
+    0x8        struct_header_end, keyframes start
+    
+    for (i = 1; i < Amount of keyframes; i++)
+    {
+        0x0        U16Int  Keyframe Time
+        0x2        U16Int? Keyframe data1
+        0x4        U16Int? Keyframe data2
+        0x6        keyframe_end, next keyframe starts
+    }
+    
+    if(StructLength % 4 > 0)
+    (
+        padding of StructLength % 4 (generally two 0x0 bytes)
+    )
+}
+----------------
+
+2019-09-17
+GravityColli continued:
+
+nop @ 80247888 [multi exec]
+
+Latest attempt:
+80247830
+80247850
+80247860
+80247874
+80247888
+
+^ Results in GravityColli occasionally overwriting other switchers if in exec range
+Even with multi exec appears to map to closest player, so instead of code solution
+next attempting HPP double GravityColli objects on spawn pos and other exec locations if it results in success
+
+Experiment was a success, although its still necessary to prevent the check
+of current global gravity / sign position to guarantee execution
+This shows that its based on closest player:
+
+This is a problem for warps still, due to one player warping will eat both warps.
+As such for V1 only spawn shall be corrected and the nop of 80247860 will remain
+
+
+nop @ 80247860
+---------
+Looking how to replace "HOLD X" for Turret/Vehicle mount:
+
+For standard turret/flyable ::
+r31 holds float X of the object being
+add check there and do r5 calculation
+---
+For ArkType Turret:
+Confirmed that even though its still necessary to do a special case compare,
+we can successfully pass down r31 without loss;
+However, r31 will no longer hold this value at this point, so it must be stored or carried
+r17 should be a safe candidate for carry on this one func
+
+@ 8031722c, store r31 into r17
+@ 801cedc4, do original compare of EF, do dist check call instead of hold X compare
+---
+For Flyables:
+One deref of r31 to get to float X at top of func 
+OR
+One deref of r30 to get to float X at 801b3b14 (injection site)
+---
+For CarType Vehicle:
+Control Segment:
+OnMount @ 801b924c :: use r31
+OnDismount @ 801ba5d0 :: use r31 + 0x8 (8 = X, C = Y, ^0 = Z)
+Camera Segment:
+Cam @ 801b8010 :: use r28 -> 8118da08 , also: r31 from OnMount is sustained; Can pass down/store due to callstack r15/r17
+---
+
+Flyables: 801b3b14       | 0x0 (r30)
+GUN Turret: 800e943c     | r31
+Alien Turret: 800eb524   | r31
+ArkType TurretS1:8031722c| mr r17, r31 (copy r31, pass below)
+ArkType TurretS2:801cedc4| none, needs above data in r17
+VehiclesCam: 801b8010    | r28 
+VehiclesMount: 801b924c  | r31
+VehiclesDismount:801ba5d0| r31 + 0x8
+
+Mapped out required new injects for Camera v1 (and Vehicles v3)
+
+Due to misc registers per call it is best to convert existing 
+distanceCheck codes to a shared func that accepts r3 (or some other register)
+as the common float (not a pointer) and returns the result of 0/1 based on which player into
+that same register used to pass in the common float
+Then it is the caller's responsibility to use this return to determine result
+
+Depending on space, should refactor prior distance code uses and follow this new 
+shared function.
+
+DistanceCheck(r17=AddressToTargetFloatX) -> call blt if P2 is closer (implementer needs to write)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lis r16, 0x807D
+ori r16, r16, 0x71A8
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r15)
+lfs f19, 0x4(r15)
+lfs f20, 0x8(r15)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f21, f17, f15
+lfs f15, 0x0(r17)
+lfs f16, 0x4(r17)
+lfs f17, 0x8(r17)
+lfs f18, 0x0(r16)
+lfs f19, 0x4(r16)
+lfs f20, 0x8(r16)
+fsubs f15, f15, f18
+fmuls f15, f15, f15
+fsubs f16, f16, f19
+fmuls f16, f16, f16
+fadds f15, f15, f16
+fsubs f17, f17, f20
+fmuls f17, f17, f17
+fadds f15, f17, f15
+fcmpo cr0, f15, f21
+blr
+
+New Checkpoint UI Inject Example:
+lis r17, 0x8057
+ori r17, r17, 0x5FE4
+lwz r19, 0x3C (r3) [FOR 80331390 use r3, otherwise r30]
+subi r19, r19, 1
+mulli r19, r19, 0x1C
+add r17, r17, r19
+bl <DistanceCheck>
+li r4, 5
+blt 0x8
+li r4, 4
+
+
+MCM Standalone Function for DistanceCheck(r17)
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 4E800020
+
+Vehicles V3 Patch using above DistanceCheck and passing to r17::
+	VehiclesCam: 801b8010    | r28 
+	VehiclesMount: 801b924c  | r31
+	VehiclesDismount:801ba5d0| r31 + 0x8
+Use mr r17, rXX
+
+--VehiclesCam @ 801b8010
+mr r17, r28
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--VehiclesMount @ 801b924c
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--VehicleDismount @ 801ba5d0
+mr r17, r31
+addi r17, r17, 0x8
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+Success; Continue tomorrow for other camera instances
+---------------------------
+2019-09-18
+
+Flyables: 801b3b14       | 0x0 (r30)
+GUN Turret: 800e943c     | r31
+Alien Turret: 800eb524   | r31
+ArkType TurretS1:8031722c| mr r17, r31 (copy r31, pass below)
+ArkType TurretS2:801cedc4| none, needs above data in r17
+
+--Flyables @ 801b3b14
+lwz r17, 0x0(r30)
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--GUN Turret @ 800e943c [same as VehiclesMount, AlienTurret]
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--Alien Turret @ 800eb524
+mr r17, r31
+bl <DistanceCheck>
+li r5, 1
+blt 0x8
+li r5, 0
+
+--ArkType TurretS1 @ 8031722c
+mr r17, r31
+li r10, 1
+li r15, 0xEF
+
+--ArkType TurretS2 @ 801cedc4 | origin: lwz r4, 0 (r24)
+lwz r4, 0 (r24)
+cmpwi r15, 0xEF
+bne- 0x18
+bl <DistanceCheck>
+li r15, 1
+blt 0x8
+li r15, 0
+stw r15, 0xA0(r4)
+
+Success; Attempt of chaining standalone functions failed; But not needed anyway, only saved a few bytes. Reverted to the above.
+----
+2019-09-19
+EggDealer Boss calc:
+There are x4 fcmpos;
+However it cycles P1 position pointer / EggDealer position pointer per check for some reason.
+Let's inject to get the following behavior:
+
+If player 1 OR player 2 is within range of EggDealer, do not trigger run away.
+Give priority to player 1 if both players are on opposite sides and determining next route
+-> Only check for P2 if P1 is out of range <-
+
+Need a check for P1 pointer due to being 3rd deref chain address check
+80334b24 bge- 80334b30
+80334b34 bge- 80334b40
+^ first two compare against 0x8(r3) [Z axis]
+80334b4c bge- 80334b58
+80334b5c bge- 80334b68 
+^ final two compare against 0x0(r3) [X axis]
+
+Instead of chaining these, alternate approach is to swap out r3 to the player closest to EggDealer
+(while not messing with the case of EggDealer self-checking itself for whatever reason
+
+0x0(r31) holds data of eggdealer Pos
+@ 80334ad8 get r3 from stack, then does null check and bne's 
+
+Inject @ 80334b1c | original: lfs	f0, 0x0008 (r3)
+// get P1 X level 3 and verify before distance compare (skip over for EggDealer self check case)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+cmpw r15, r3
+bne 0x20 // skip the rest of the code 
+lwz r17, 0x0(r31) //get EggDealer X
+bl <DistanceCheck>
+bge 0x14 //change nothing if P1 is closer
+lis r3, 0x807D
+ori r3, r3, 0x71A8
+lwz r3, 0x0(r3)
+lwz r3, 0x0(r3)
+lfs f0, 0x8(r3)
+
+No comments: 
+Inject @ 80334b1c | original: lfs	f0, 0x0008 (r3)
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+cmpw r15, r3
+bne 0x20
+lwz r17, 0x0(r31)
+bl <DistanceCheck>
+bge 0x14
+lis r3, 0x807D
+ori r3, r3, 0x71A8
+lwz r3, 0x0(r3)
+lwz r3, 0x0(r3)
+lfs f0, 0x8(r3)
+
+Success; However this only affects 'flee' action; But this makes the boss more easily attackable as P2.
+
+Airbug final attempt for v2.0:
+Donut's current WIP code breaks if multiple Fan Exec()s are happening at the same time
+Need to address this condition somehow.
+Mad matrix blowers are also entirely separate?
+
+height fix: 
+[801dbae4]
+lwz r22, 0x0(r4)
+lwz r22, 0x22C(r22)
+lwz r22, 0x30(r22)
+lwz r22, 0x10(r22)
+
+cmpwi r22, 0x18
+bne- original
+blr
+
+    original:
+stwu sp, -0x20(sp)
+
+C2103794 00000009
+3EC0807D 62D671A0
+82D60000 82D60000
+82FF0024 7C16B840
+40820020 3EC0807D
+62D671A8 82D60000
+82D60000 82FF0024
+7C16B840 40820004
+92DF0024 92C10010
+7EC0B378 00000000
+
+
+My ver:
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r23,0x24(r31)
+cmplw r22,r23
+bne- 0x14
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22,0x24(r31)
+stw r22,0x10(sp)
+mr r0,r22
+
+Idea: Airbug only happens if players enter fan near each other; SO: 
+Only do custom code if players are close enough to X range?
+
+Inject @ 80103794
+Original: lwz	r0, 0x0010 (sp)
+--------------------------------------------------------
+2019-10-03
+Optimization / Cleanups 
+Attempting to get Per-viewport rendering (Chunks is phase 1)
+blr of main 'PrepareForRenderStuff' has no world render but increases performance
+change branch of 8004722c to render all except geo, no change of performance oddly
+
+801e4cb0 -> creates views overlaying on left view
+nop bl to mainloop to kill renderview 0
+-------------------------
+2019-10-06
+nop @ 80463c18 PlayerModel Animation Affected by Lighting
+=================================
+2019-11-23
+Blackknight:
+8008415c (3rd attack cycle momentum reset?)
+800841c8 -> regular position movement while swinging
+
+maintain momentum after swing by nop @ 800841d8 800841e0
+-----------
+2019-12-12
+BlackKnight:
+Found phys new velocity while strikes 1/2 active: 805F2700 (float) default 400
+Function relative: 80084204
+
+Disable slide on B-press:
+change to b @ 800a023c becomes 48000038
+
+nop 8023d60c (ammo deplete for melee disable)
+
+For testing, set float to 4000 and disable slide on B-press.
+----
+2019-12-13
+MotionIDs of use
+116 = swing twirl
+137: <?> Walking Swinging Sword
+----------
+2019-12-14
+Determined .ONE archives are NOT file order dependent
+it is EXTENSION dependent.
+You can also have additional files at the end
+But MINIMUM expected files cannot be removed
+
+This means we are able to potentially have custom animations for P2 character slots.
+Attempted to get custom BON and MTP loads but was unsuccessful except one instance where I did not realize it was successful and have yet to reproduce it
+The files are loaded, however player pointer ref cannot reassign (havent found true pointer yet)
+
+For 'easier' testing attempted to use AMY.ONE's .BON and .MTP slot to have a in-use live pointer for MTP/BON.
+Have yet to identify it. Found special static address holding global 'MOTION' of some kind.
+Added to DMW
+------------
+2019-12-15
+
+Cracked MTP/BON load initialize scripts, fully allows for unique player animations and BON file.
+
+General flow:
+deref 0x14 of 807d8658 == 809d93a8
+subi r3, r4, 2 [1b -2 =| 19
+
+0x19 * 60 [dec]
+
+ = 0x5dc
+ 
+ r0 [0x14 of said address]
+ + add 0x5dc 
+ 
+ == 809d9984
+ 
+ 2c of that 
+ 
+----------
+81071C74
+=================
+BON IS IDENTICAL, even same ref EXCEPT!!! 5A0 instead of 5DC
+
+Need to write a 'nice' way to make it detect per player
+=================
+2019-12-18
+800a0130 - threshold/controller for slide on X press
+-------------------------------------------------------------
+2019-12-27
+Bringing back score when 16:9 UI is ready
+restore 80201358 (show scores) -> 418204d4
+
+Can add P2's score here or remove P2's scoring entirely and give it to P1.
+Opted for the latter, found its the same func with no changes, switching to the former...
+
+4C = p1/p2 difference of offset
+
+==== NEUTRAL SCORE ====
+802018cc = neutral UI score while playing
+original:
+	where r29 = 805766e4
+	lwz r5, 0x002C (r29)
+after:
+	lwz r5, 0x002C (r29)
+	lwz r15, 0x0078 (r29)
+	add r5, r5, r15
+	
+8020287c = print total with time bonus and record to save to file
+original:
+	lwz	r3, 0x002C (r3) <- note overwrites ref to itself
+after:
+	lwz r15, 0x002C (r3)
+	lwz r3, 0x0078 (r3)
+	add r3, r3, r15
+	
+80202dc8 = print breakdown on ranking screen
+original:
+	lwz	r5, 0x002C (r4)
+after:
+	lwz r5, 0x002C (r4)
+	lwz r15, 0x0078 (r4)
+	add r5, r5, r15
+	
+80202850 = neutral additional bonus for hero/dark missions
+(IDENTICAL 'after' func TO time bonus regular one!, make standalone func in MCM)
+original:
+	lwz	r3, 0x002C (r3)
+after:
+	lwz r15, 0x002C (r3)
+	lwz r3, 0x0078 (r3)
+	add r3, r3, r15
+========================
+==== HERO SCORE ====
+802018f8 = hero UI score while playing
+original:
+	lwz	r5, 0x0030 (r29)
+after:
+	lwz	r5, 0x0030 (r29)
+	lwz	r15, 0x007C (r29)	
+	add r5, r5, r15
+
+802027b4 = print total with bonuses
+original:
+	lwz	r5, 0x0030 (r3)
+after:
+	lwz	r5, 0x0030 (r3)
+	lwz	r15, 0x007C (r3)	
+	add r5, r5, r15
+
+80202c68 = print breakdown on ranking screen
+original:
+	lwz	r5, 0x0030 (r4)
+after:
+	lwz	r5, 0x0030 (r4)
+	lwz	r15, 0x007C (r4)	
+	add r5, r5, r15
+	
+802027d0 = subtract dark scores
+original:
+	lwz	r5, 0x0034 (r3)
+after:
+	lwz	r5, 0x0034 (r3)
+	lwz	r15, 0x0080 (r3)
+	add r5, r5, r15
+
+802027ec = add neutral score to hero/dark score
+original:
+	lwz	r3, 0x002C (r3)
+after:
+	lwz r15, 0x002C (r3)
+	lwz r3, 0x0078 (r3)
+	add r3, r3, r15
+=========================
+==== DARK SCORE ====
+80201924 = dark UI score while playing
+original:
+	lwz	r5, 0x0034 (r29)
+after:
+	lwz	r5, 0x0034 (r29)
+	lwz	r15, 0x0080 (r29)
+	add r5, r5, r15
+															
+80202834 = print totals with bonuses
+original:
+	lwz	r5, 0x0034 (r3)
+after:
+	lwz	r5, 0x0034 (r3)
+	lwz	r15, 0x0080 (r3)
+	add r5, r5, r15
+
+80202d18 = print breakdown on ranking screen
+original:
+	lwz	r5, 0x0034 (r4)
+after:
+	lwz	r5, 0x0034 (r4)
+	lwz	r15, 0x0080 (r4)
+	add r5, r5, r15
+	
+80202818 = subtract hero scores
+original:
+	lwz	r5, 0x0030 (r3)
+after:
+	lwz	r5, 0x0030 (r3)
+	lwz	r15, 0x007C (r3)	
+	add r5, r5, r15
+==========================
+Rings Totals:
+8057670c = P1 rings
+80576758 = P2 rings
+neutral/hero/dark ring calc @ 80202f54 bl to -> 8016F280
+which has: lwz r3, 0 (r3)
+hijack and swap with:
+	lwz r15, 0 (r3)
+	lwz r3, 0x4C (r3)
+	add r3, r3, r15
+	
+Gecko Codes (Testing only, implement in MCM for release):
+$2P Essentials ScoreFix Neutral [dreamsyntax]
+C22018CC 00000002
+80BD002C 81FD0078
+7CA57A14 00000000
+C220287C 00000002
+81E3002C 80630078
+7C637A14 00000000
+C2202DC8 00000002
+80A4002C 81E40078
+7CA57A14 00000000
+C2202850 00000002
+81E3002C 80630078
+7C637A14 00000000
+
+$2P Essentials ScoreFix Hero [dreamsyntax]
+C22018F8 00000002
+80BD0030 81FD007C
+7CA57A14 00000000
+C22027B4 00000002
+80A30030 81E3007C
+7CA57A14 00000000
+C2202C68 00000002
+80A40030 81E4007C
+7CA57A14 00000000
+C22027D0 00000002
+80A30034 81E30080
+7CA57A14 00000000
+C22027EC 00000002
+81E3002C 80630078
+7C637A14 00000000
+
+$2P Essentials ScoreFix Dark [dreamsyntax]
+C2201924 00000002
+80BD0034 81FD0080
+7CA57A14 00000000
+C2202834 00000002
+80A30034 81E30080
+7CA57A14 00000000
+C2202D18 00000002
+80A40034 81E40080
+7CA57A14 00000000
+C2202818 00000002
+80A30030 81E3007C
+7CA57A14 00000000
+
+$2P Essentials ScoreFix Rings [dreamsyntax]
+C2202F54 00000002
+81E30000 8063004C
+7C637A14 00000000
+
+--------------------------------------------------
+2019-12-28
+Airbug Fix w Donut:
+@ 801037b4 li r29, 1
+^ only is reached when current player of current fan is within 7.5 +/* fan(0x68) - float vBlowerSize
+
+Store current fan r31 [fan pointer] into Player's personal space (allocate fixed area in DOL with MCM)
+similar to RTOC
+
+li r29, 1
+lis r15, 0x80F0
+addi r15, r15, 0x40C8
+stw r31, 0x0(r15)
+
+@ 80102408 stwu	sp, -0x00C0 (sp)
+blr if stored player pointer does not match r31?
+lis r15, 0x80F0
+addi r15, r15, 0x40C8
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+blr
+stwu sp, -0x00C0 (sp)
+
+--- with dynamic: r22 + 0x210
+li r29, 1
+addi r15, r22, 0x290
+stw r31, 0x0(r15)
+
+@ 80102408 stwu	sp, -0x00C0 (sp)
+blr if stored player pointer does not match r31?
+addi r15, r22, 0x290
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+blr
+stwu sp, -0x00C0 (sp)
+
+---------
+Shift to below func with guaranteed fan:
+@ 801037d8: addi	r3, r31, 152
+addi r3, r31, 152
+addi r15, r22, 0x290
+stw r31, 0x0(r15)
+-------------------
+No change (except correct pointer is not overwritten) but identified later bnes/beqs that are related:
+
+Behavior identified as take the branch if in current fan for both of the below:
+
+IN: 8010386c bne, below it check for pointer of stored fan:
+@ 80103870 : addi r3, sp, 16
+IN: 801038ac beq
+@ 801038b0 : li	r3, 24
+
+?always take branch maybe? no, no change.
+
+@ 801038e0 bctrl
+Try: skip if not stored fan
+addi r15, r22, 0x290
+lwz r15, 0x0(r15)
+cmpw r15, r31
+beq- 0x8
+bctrl
+----------------------
+2020-01-22
+Start preparing for 2.1
+
+Merging Independent Respawns as a type:
+
+2P Optionals Independent Respawns Full v1
+C2176F28 00000009
+3E00807D 621071A0
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+60000000 00000000
+C2176F74 00000009
+3E00807D 621071A8
+82100000 82100000
+89F000AE 3A200044
+7C117800 41820014
+81F00000 3A200000
+7C117800 40820014
+3DE0800B 61EF7F88
+7DE803A6 4E800021
+60000000 00000000
+041CB454 60000000
+04204400 60000000
+040448A0 4E800020
+04178C10 60000000
+0423AFD8 60000000
+C2178CC8 00000002
+39E00001 387D0028
+60000000 00000000
+C2178C14 00000002
+39E00000 387E0028
+60000000 00000000
+C216F32C 0000000D
+3A000001 7C0F8000
+41820058 3E008057
+6210670C 7C10F000
+40820028 3E00807D
+621071A0 82100000
+82100000 8A1000AE
+3A200044 7C118000
+4082002C 41820024
+3E00807D 621071A8
+82100000 82100000
+8A1000AE 3A200044
+7C118000 40820008
+901E0000 00000000
+C20CB654 00000005
+3E008057 6210D748
+82100000 2C10025B
+41820010 2C100262
+40800008 4E800020
+9421FFF0 00000000
+C20CB758 00000005
+3E008057 6210D748
+82100000 2C10025B
+41820010 2C100262
+40800008 4E800020
+9421FFF0 00000000
+041A24EC 4E800020
+0416B110 4E800020
+042044CC 60000000
+0420445C 60000000
+*Player X's death will not cause Player Y to respawn
+*No FadeScreen, DeathCamFix, EffectFix included
+*
+*Known Bugs: If using Dark Spindash or on some* rails
+*and a player dies causes both players to reset
+*
+*SETObjs will not reset if a player dies
+*Player X's death will not cause Player Y to lose rings
+*Only applies to death, not to Restart
+*v2 now has Mission Sync
+*v3 now has MissionSelected Sync
+*v4 now has Cosmic Fall, Last Way, and Final Bosses SETObj resetting on either player dying
+*v5 now has MissionPartner Sync
+------------------
+2020-01-23
+Starting work on fixing issues with Super/DevilDoom:
+RingItem uses commands, and uses Swarm instance for entire collidable/ring balloon objs, forced to P1 collision:
+This is a problem because it is impossible to know who got the rings (current code uses Swarm position and is accurate only 40%)
+SOLUTION: Leave it as is (hardcoded to P1) but modify 
+"ReduceRingsOrAddRings_By_Collision" to do a stage check for 710, then 
+add r4 (current object hit ring value) to P2's ring address.
+r3 will contain P1's ring address @ 80178b34
+P2's address is r3+0x4C
+
+@ 80178b34 | original: addi	r3, r31, 40
+addi r3, r31, 40
+lis r16, 0x8057
+ori r16, r16, 0xD748
+lwz r16, 0x0(r16)
+cmpwi r16, 710
+bne- 0x14
+addi r15, r3, 0x4C
+lwz r16, 0x0(r15)
+add r16, r16, r4
+stw r16, 0x0(r15)
+
+Success
+
+$2P Essentials DevilDoom BalloonRings Adds To Both Players [dreamsyntax]
+C2178B34 00000006
+387F0028 3E008057
+6210D748 82100000
+2C1002C6 40820014
+39E3004C 820F0000
+7E102214 920F0000
+60000000 00000000
+
+$2P Essentials P2 Super for DevilDoom v2 [dreamsyntax, DonutStopGaming]
+C2177124 00000004
+3DE0800B 61EF7E44
+7DE803A6 4E800021
+38600001 7DE803A6
+4E800021 00000000
+C241D338 00000004
+2C030000 40820014
+3DE08041 61EFD34C
+7DE803A6 4E800020
+80030000 00000000
+C227E77C 00000004
+2C060000 40820014
+3DE08027 61EFEA84
+7DE803A6 4E800020
+38600000 00000000
+*Purposely leaves transparent skin for P2
+*Let P2 run out of rings to fix, otherwise there is no issue
+-----------------------
+2020-01-24
+
+GravityChangeCollision block obj destroys itself after beq is valid::
+@ 80247850
+
+Grabbing wrong player (nearest?) to apply to, then deletes
+If delete is nulled it might still grab wrong player -> add extra setobj per 
+GravityChangeCollision obj and add spawn displacement?
+
+86c - 888 nop | Confirmed success on behavior continuous until deload
+^ Might cause memleak?
+Instead: remove 'destroy' halfword save: 80247888 (safer)
+
+Issue: Confirmed still grabs wrong player (closest)
+
+
+Solution1: Find all displacements per-checkpoint and shift
+existing objects to account for displacement
+Solution2 -> Failed / Restore current GravityDir check and switch to other player if no result found | Even with one player this causes less success
+
+Implementing Soln 1:
+Per-checkpoint transXYZ is identical for P1/P2 (minus decimal)
+Instead need to approximate collision bump::
+969 -> 980 [+11 for P2] (right of checkpoint's rotation facing)
+Typically X/Y/Z depends on gravity mode
+Map of checkpoint data? (will list if looking at HPP is not sufficient without errors)
+Restart (init): Y + 50 (unique due to ~10-20 restart displacement)
+Checkpoint1: X +11
+
+Problem: Binds to current player until out of range
+In general not an issue. Impossible to account for all chains
+esp in Independent respawns. In general 'hot zones'
+have had 4 directions added for safety
+
+GravityChangeCollision Obj Patch v2 BAD WITH LEAKS [dreamsyntax]
+04247860 60000000
+04247888 60000000
+
+Combine All GravitySwitcher/Zone/Colli Codes:
+
+$2P Essentials GravitySwitcher Fix v2 BAD WITH LEAKS [DonutStopGaming, dreamsyntax]
+C2293938 00000021
+808D4F00 811F0000
+3D20804F 61293D08
+7C084840 41820020
+3D20804F 61293BD8
+7C084840 4182001C
+815F0040 397F006C
+4800001C 815F0034
+397F0020 48000010
+815F0034 397F0074
+48000004 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EA0000
+C20A0004 C22A0008
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EA0000
+C20A0004 C22A0008
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EB0000
+390D3150 1CE70004
+7D083A14 93E80000
+60000000 00000000
+C229396C 00000008
+811F0000 3D20804F
+61293D08 7C084840
+4182001C 3D20804F
+61293BD8 7C084840
+41820014 80BF006C
+48000010 80BF0020
+48000008 80BF0074
+60000000 00000000
+042469DC 60000000
+04246A4C 60000000
+04247B84 60000000
+04247BE0 60000000
+04247860 60000000
+04247888 60000000
+
+ChaosPowers DemoCam assignments for CC/CB occurs at: 800a65b8
+ -> No clear way to tell which player used the power, so assignment not simple.
+If resort to using status byte, will run into the issue of if one player already is using CC/CB the other won't get the camera.
+------------
+2020-02-01
+GravitySwitcher v2 code causes memleak, status byte must be cleared to allow for proper free
+Remove the new fix (but leave new SETObj placements for better success rate)
+(remove 247888 nop), rest stays the same
+
+$2P Essentials GravitySwitcher Fix v3 [DonutStopGaming, dreamsyntax]
+C2293938 00000021
+808D4F00 811F0000
+3D20804F 61293D08
+7C084840 41820020
+3D20804F 61293BD8
+7C084840 4182001C
+815F0040 397F006C
+4800001C 815F0034
+397F0020 48000010
+815F0034 397F0074
+48000004 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EA0000
+C20A0004 C22A0008
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EA0000
+C20A0004 C22A0008
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EB0000
+390D3150 1CE70004
+7D083A14 93E80000
+60000000 00000000
+C229396C 00000008
+811F0000 3D20804F
+61293D08 7C084840
+4182001C 3D20804F
+61293BD8 7C084840
+41820014 80BF006C
+48000010 80BF0020
+48000008 80BF0074
+60000000 00000000
+042469DC 60000000
+04246A4C 60000000
+04247B84 60000000
+04247BE0 60000000
+04247860 60000000
+
+Unfortunately that is as good as it will get for GravityChangeCollision obj fixes
