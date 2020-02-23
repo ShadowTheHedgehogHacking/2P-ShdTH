@@ -56,9 +56,15 @@ Coaster:
 
 Fan:
 	0x30 - float* pXYZ
+	0x38 - GadgetModelInfo***
+		0x24 - SonicteamUSA::System::CharaColli::CharaColliBodyCharInfo
+		0x2C - int collisionObjectTypeMaybe
 	0x48 - PlayerShadow*
 	0X60 - int fallAtTop
+	0x64 - int 
 	0x68 - float vBlowerSizeMaybe
+	0x6C - float hBlowerSizeMaybe?
+	0x70 - float vResistanceRelatedMaybe?
 	0x98 - int state
 
 GravityChangeCollision:
