@@ -8,12 +8,11 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Level Status
-# ALL LEVELS ARE NOW PLAYABLE!
+# All levels and modes are compatible v2.0+
 
 ## Problems
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Not Compatible with Nintendont Since v2.0
-* For SpaceGadget if both players warp/respawn to the same checkpoint while the other player is in range, the latter player will not have correct gravity set
 * DevilDoom crashes for some people [Fixed in v2.1 (not released yet)]
 * DevilDoom fight is not balanced for two players (very hard to win) [Fixed in v2.1 (not released yet)] 
 
@@ -65,11 +64,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
 
 ## Bonus Roadmap
-* Static weapon swaps for Metal Androids
-* Optional BlackKnight style melee replacement [POC DONE]
-* Both players required to reach GoalRing for stage complete
 * Physics Rewrite for GUNMech Jumpers [DONE]
-* WeaponsTargeting & HomingAttack Other Player Enable/Disable
+* Optional BlackKnight style melee replacement [POC DONE]
 * Unique Animation/Model Per Player [POC DONE]
 * Non-Overlapping 16:9 UI [WIP]
 

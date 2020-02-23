@@ -8723,3 +8723,163 @@ C229396C 00000008
 04247860 60000000
 
 Unfortunately that is as good as it will get for GravityChangeCollision obj fixes
+-----------------
+2020-02-16
+Airbug Attempt #3984734987
+@ 801037b4
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 0x290
+li r29, 1
+stw r31, 0x0(r15)
+
+@ 801038e0 bctrl
+Try: skip if not stored fan
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lwz r15, 0x290(r15)
+cmpw r15, r31
+bne- 0x8
+bctrl
+
+@ 80103794 lwz	r0, 0x0010 (sp)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r23,0x24(r31)
+cmplw r22,r23
+bne- 0x14
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmpw r15, r31
+bne- 0xC
+stw r22,0x24(r31)
+stw r22,0x10(sp)
+lwz	r0, 0x0010 (sp)
+-------------------------------------------
+2020-02-22
+Old:
+
+SuperShadow XOR Up/Down control + Remap to L/Z
+
+Original :
+inject test #2 [basic up/down controller response] @ 802eb21c
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+lis r16, 0x8056
+ori r16, r16, 0xED4C
+lwz r16, 0x0(r16)
+cmpwi r16, 0x08
+bne- 0x8
+fsubs f0, f0, f1
+cmpwi r16, 0x20
+bne- 0x8
+fadds f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+Found:
+805A5816 byte, FF if L is held down, 0 if not
+80575D5E OOR FE instead of 5E byte : 0x8 if Z held, Z+L = 0x18, Z+R = 0x28, Z+L+R = 0x38, L+R = 0x30
+
+New code with XOR + control change to L = down, Z = up
+addi r4, r5, 220
+lfs f0, 0(r5)
+stfs f0, 0(r4)
+lfs f0, 0x4(r5)
+lfs	f1, -0x0374 (rtoc)
+lis r16, 0x8057
+ori r16, r16, 0x5D5E
+lbz r16, 0x0(r16)
+cmpwi r16, 0x08
+bne- 0x8
+fadds f0, f0, f1
+lis r16, 0x805A
+ori r16, r16, 0x5816
+lbz r16, 0x0(r16)
+cmpwi r16, 0xFF
+bne- 0x8
+fsubs f0, f0, f1
+stfs f0, 0x4(r4)
+lfs f0, 0x8(r5)
+stfs f0, 0x8(r4)
+
+New inject:
+C22EB21C 0000000B
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008057
+62105D5E 8A100000
+2C100008 40820008
+EC00082A 3E00805A
+62105816 8A100000
+2C1000FF 40820008
+EC000828 D0040004
+C0050008 D0040008
+60000000 00000000
+
+Change toggle to D-pad Up (0x40)
+Instead compare @ 800a860c (original li r6, 1)
+8056ed4c
+lbz r16, 0xB(r4)
+cmpwi r16, 0x40
+bne- 0x30
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+li r17, 0x0
+bne 0x8
+stb r17,0xAF(r16)
+li r6, 1
+
+Works (PadButtonDown instead, no more last pressed issue)
+
+
+SuperShadow TestVer v0.5 [dreamsyntax]
+0417711C 60000000
+C60AF2E4 800AF3BC
+C20A860C 00000008
+8A04000B 2C100040
+40820030 3E00807D
+621071A0 82100000
+82100000 89F000AF
+3A200020 7C117800
+9A3000AF 3A200000
+40820008 9A3000AF
+38C00001 00000000
+045F077C 00000000
+045F936C 43480000
+C22EB21C 0000000B
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008057
+62105D5E 8A100000
+2C100008 40820008
+EC00082A 3E00805A
+62105816 8A100000
+2C1000FF 40820008
+EC000828 D0040004
+C0050008 D0040008
+60000000 00000000
+*Press "D-pad UP" to switch fly on/off (must homing attack after, you can buffer a switch in advance)
+*Hold L to descend
+*Hold Z to ascend
+*Does not deplete rings
+*Shooting a chaos spear while dying will result in a crash

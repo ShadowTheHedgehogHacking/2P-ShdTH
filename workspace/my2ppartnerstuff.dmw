@@ -2745,7 +2745,7 @@
         {
             "address": "80575FA8",
             "baseIndex": 1,
-            "label": "Arbitrary P1 FAN (Temp Code Ver)",
+            "label": "Arbitrary P1 FAN (Temp 290 ver)",
             "pointerOffsets": [
                 "0",
                 "0",
@@ -2756,8 +2756,32 @@
         },
         {
             "address": "80575FA8",
-            "baseIndex": 1,
-            "label": "Arbitrary P2 FAN (Temp Code Ver)",
+            "baseIndex": 0,
+            "label": "Arbitrary P1 FAN (Temp 210 ver",
+            "pointerOffsets": [
+                "0",
+                "0",
+                "210"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80575FA8",
+            "baseIndex": 0,
+            "label": "Arbitrary P2 FAN (210 Ver)",
+            "pointerOffsets": [
+                "8",
+                "0",
+                "210"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80575FA8",
+            "baseIndex": 0,
+            "label": "Arbitrary P2 FAN (290 Ver)",
             "pointerOffsets": [
                 "8",
                 "0",
