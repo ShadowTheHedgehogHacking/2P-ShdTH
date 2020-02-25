@@ -8831,6 +8831,7 @@ C0050008 D0040008
 60000000 00000000
 
 Change toggle to D-pad Up (0x40)
+lbz of 0xB to get last-pressed instead of isPressed
 Instead compare @ 800a860c (original li r6, 1)
 8056ed4c
 lbz r16, 0xB(r4)
@@ -8883,3 +8884,75 @@ C0050008 D0040008
 *Hold Z to ascend
 *Does not deplete rings
 *Shooting a chaos spear while dying will result in a crash
+------------
+2020-02-23
+SuperShadow phys change:
+805F27A0 (air dash) 0.40 (0x3ECCCCCD) -> 0.10 (0x3DCCCCCD) while flying
+805F2720 (homing attack speed) 1000 -> 2500 (0x451C4000) while in super form (both modes)
+805F936C (fly up/down rate) 200 -> 400 (0x43C80000)
+
+@ 800a860c (modify to include phys swap of air dash per mode)
+lbz r16, 0xB(r4)
+cmpwi r16, 0x40
+bne- 0x50
+lis r16, 0x807D
+ori r16, r16, 0x71A0
+lwz r16, 0x0(r16)
+lwz r16, 0x0(r16)
+lbz r15, 0xAF(r16)
+li r17, 0x20
+cmpw r17, r15
+stb r17,0xAF(r16)
+lis r15, 0x805F
+ori r15, r15, 0x27A0
+lis r17, 0x3DCC
+ori r17, r17, 0xCCCD
+stw r17, 0x0(r15)
+li r17, 0x0
+bne 0x14
+stb r17,0xAF(r16)
+lis r17, 0x3ECC
+ori r17, r17, 0xCCCD
+stw r17, 0x0(r15)
+li r6, 1
+
+SuperShadow TestVer v0.6 [dreamsyntax]
+0417711C 60000000
+045F077C 00000000
+045F936C 43C80000
+045F2720 451C4000
+C60AF2E4 800AF3BC
+C20A860C 0000000C
+8A04000B 2C100040
+40820050 3E00807D
+621071A0 82100000
+82100000 89F000AF
+3A200020 7C117800
+9A3000AF 3DE0805F
+61EF27A0 3E203DCC
+6231CCCD 922F0000
+3A200000 40820014
+9A3000AF 3E203ECC
+6231CCCD 922F0000
+38C00001 00000000
+C22EB21C 0000000B
+388500DC C0050000
+D0040000 C0050004
+C022FC8C 3E008057
+62105D5E 8A100000
+2C100008 40820008
+EC00082A 3E00805A
+62105816 8A100000
+2C1000FF 40820008
+EC000828 D0040004
+C0050008 D0040008
+60000000 00000000
+*Press "D-pad UP" to switch fly on/off (must homing attack after, you can buffer a switch in advance)
+*Hold Z to ascend
+*Hold L to descend
+*Spammable Dash While Flying
+*2.5x faster homing attack
+*
+*Does not deplete rings
+*Shooting a chaos spear while dying will result in a crash
+*Dying while in flying mode results in respawning in the same spot you died, with broken camera
