@@ -712,13 +712,6 @@
                     "unsigned": false
                 },
                 {
-                    "address": "80512E60",
-                    "baseIndex": 0,
-                    "label": "UI Skew?",
-                    "typeIndex": 3,
-                    "unsigned": false
-                },
-                {
                     "address": "80585980",
                     "baseIndex": 0,
                     "label": "No label",
@@ -792,7 +785,7 @@
                 {
                     "address": "805859A8",
                     "baseIndex": 0,
-                    "label": "No label",
+                    "label": "Use for RING",
                     "typeIndex": 3,
                     "unsigned": false
                 },
@@ -820,7 +813,7 @@
                 {
                     "address": "805859C4",
                     "baseIndex": 0,
-                    "label": "No label",
+                    "label": "Use for FADE UI",
                     "typeIndex": 3,
                     "unsigned": false
                 },
@@ -857,6 +850,53 @@
         },
         {
             "address": "80F2CD7C",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "812FE8D8",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "8060B1EC",
+            "baseIndex": 0,
+            "label": "Stack STORED for RING",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "8060B1D0",
+            "baseIndex": 1,
+            "label": "stack",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "805859A8",
+            "baseIndex": 0,
+            "label": "No label",
+            "typeIndex": 3,
+            "unsigned": false
+        },
+        {
+            "address": "807D5980",
+            "baseIndex": 0,
+            "label": "No label",
+            "length": 55,
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
+            "address": "8060B1E4",
             "baseIndex": 0,
             "label": "No label",
             "typeIndex": 3,

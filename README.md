@@ -32,7 +32,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * P2's flyables do not overwrite P1's camera
 * Vehicles no longer disappear on P2 dismount if P1 is not nearby
 * Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
-* Spawners / Worms work properly
 * Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
 * Circus Park Hero Mission counts P2's rings
 * Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
@@ -49,13 +48,13 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * GUN Fortress Security Camera segments are free-cam
 * Android characters have unique JumpBall colors
 * Individual death-to-checkpoint (Basic)
-* Physics Rewrite for GUNMech Jumpers
+* Physics Rewrite for GUNMech Jumpers (Optional)
 * Downscale all stage and stage_gdt textures to make the game crashless
 * P2's scores and rings add to game totals at ranking
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
-* Item Bubbles / Hint Bubbles content render based on P1's relative location
+* Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
 * Worm Enemies and AlienShips will only target P1
@@ -63,25 +62,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Phase 2 Warp for P2 in Diablon Boss
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
 
-## Bonus Roadmap
-* Physics Rewrite for GUNMech Jumpers [DONE]
-* Optional BlackKnight style melee replacement [POC DONE]
-* Unique Animation/Model Per Player [POC DONE]
-* Non-Overlapping 16:9 UI [WIP]
-
 ## Dev
 * dreamsyntax
 * DonutStopGaming
 
 ## Credits
 * dreamsyntax for starting this project/everything
-* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, structs analysis, and numerous other address discoveries
+* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
 * TheHatedGravity for red/yellow TrueBlackShadow textures, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Muzzarino for some symbol findings
-* Chaos Powers Activators by Zzetti
-* Infinite Lives by Link Master
 
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project

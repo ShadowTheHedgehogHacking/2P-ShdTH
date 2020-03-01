@@ -8956,3 +8956,86 @@ C0050008 D0040008
 *Does not deplete rings
 *Shooting a chaos spear while dying will result in a crash
 *Dying while in flying mode results in respawning in the same spot you died, with broken camera
+------------
+2020-02-29
+RingUI
+Shift Canvas1 (3d layer) for RingUI icon ONLY:
+Do this by checking LR to be Ring() render function and chain 4 calls deep to validate and change final float function call
+::: @ 801fffcc (Ring_2P.GNCP_TextAndImage::Render() [and singleplayer]
+801fffd0
+-> call to UI _ Draw Relative to Canvas Value
+sp + 16
+sp + 208
+sp + 128
+aka 0x160 or 352
+then lwz r0, 0x0024 (sp/sp is chain edit though)
+
+Inject @ 8035e204 (UnknownStepToUI_MissionStuff_1) -> Read Float UI 805859A8 (canvas overlay width and height, store in stack)
+mr r15, sp
+addi r15, r15, 352
+lwz r15, 0x24(r15)
+lis r16, 0x801f
+ori r16, r16, 0xffd0
+cmpw r15, r16
+beq- 0xC .... wait 
+
+Change of plan, because we only want to alter width not height its easier to overwrite inside the BL rather than call it and reproduce code
+
+0xC4660000 = float -920
+
+Inject @ 80361ad4 || stfs	f0, 0 (r3)
+stfs f0, 0 (r3)
+mr r15, sp
+addi r15, r15, 352
+lwz r15, 0x24(r15)
+lis r16, 0x801f
+ori r16, r16, 0xffd0
+cmpw r15, r16
+bne- 0x1C
+lwz r16, 0x0(r5)
+lis r15, 0xC466
+stw r15, 0x0(r5)
+lfs f0, 0x0(r5)
+stfs f0, 0 (r3)
+stw r16, 0x0(r5)
+
+---
+Good, but another function ignores this for the matrix:
+
+Add 16 to stack difference (deeper chain) = 368
+Inject @ 80361a44 || stfs	f0, 0 (r3)
+stfs f0, 0 (r3)
+mr r15, sp
+addi r15, r15, 368
+lwz r15, 0x24(r15)
+lis r16, 0x801f
+ori r16, r16, 0xffd0
+cmpw r15, r16
+bne- 0x20
+lwz r16, 0x0(r5)
+lis r15, 0xC466
+stw r15, 0x0(r5)
+lfs f0, 0x0(r5)
+fmuls f0, f1, f0
+stfs f0, 0 (r3)
+stw r16, 0x0(r5)
+
+Good, but determined simpler approach::
+
+@ 8035e208 true shift occurs (stack)
+original: lfs	f2, 0x001C (sp)
+mr r15, sp
+addi r15, r15, 352
+lwz r15, 0x24(r15)
+lis r16, 0x801f
+ori r16, r16, 0xffd0
+cmpw r15, r16
+lfs	f2, 0x001C (sp)
+bne- 0x18
+lwz r16, 0x001C(sp)
+lis r15, 0xC466
+stw r15, 0x1C(sp)
+lfs	f2, 0x001C (sp)
+stw r16, 0x1C(sp)
+
+Failure, still is at 640 at spawn, does not change at all until next stage restart
