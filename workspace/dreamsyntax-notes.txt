@@ -9039,3 +9039,20 @@ lfs	f2, 0x001C (sp)
 stw r16, 0x1C(sp)
 
 Failure, still is at 640 at spawn, does not change at all until next stage restart
+-----------------------------------------------
+2020-03-04
+
+Valid StageID w/Attributes NullCheck Canceler
+c2176c7c 00000002
+3c60804c 60634ab8
+60000000 00000000
+
+^ This combined with force gamemode = 0, selectedStageToLoad=* (dmw freeze), unlimited chunks code 
+
+allows for ANY stageID (101, 107, etc....) to be used.
+Suggests possibility for custom stage slots if enough effort put in
+Also draws into question if buffers are stage specific
+
+Interesting logs:
+次シーンのサイズで確保 - > Secure with the size of the next scene
+<missing original> -> "Wow I can't marok" [malloc]
