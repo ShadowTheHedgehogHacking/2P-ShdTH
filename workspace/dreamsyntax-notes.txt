@@ -9056,3 +9056,46 @@ Also draws into question if buffers are stage specific
 Interesting logs:
 次シーンのサイズで確保 - > Secure with the size of the next scene
 <missing original> -> "Wow I can't marok" [malloc]
+--------------------------
+2020-03-06
+BulletManager "timescale?" affecting speed of EVERYTHING at
+
+Read from it @ 80058d38 for BulletPhys/BulletManager
+lfs f31, 0(r5)
+fadds	f31, f31, f31
+fadds	f31, f31, f31
+fadds	f31, f31, f31
+fadds	f31, f31, f31
+
+Bullet TimeScale? @ 5!
+C2058D38 00000003
+C3E50000 EFFFF82A
+EFFFF82A EFFFF82A
+EFFFF82A 00000000
+
+Bullet TimeScale? @ 4!
+C2058D38 00000003
+C3E50000 EFFFF82A
+EFFFF82A EFFFF82A
+60000000 00000000
+
+Bullet TimeScale? @ 3!
+C2058D38 00000002
+C3E50000 EFFFF82A
+EFFFF82A 00000000
+
+All Bullets Double Speed
+C2058D38 00000002
+C3E50000 EFFFF82A
+60000000 00000000
+--------------------------------
+2020-03-13
+Experimenting with Nintendont
+Trying stack modification without DOL expansion (might not be possible, but validating)
+
+-> stack init result in 0xDEADBABE @ 805FB558 
+
+First safe address (low):
+8060A570
+last address:
+8060B568 (do not write here, reduce a few to be safe...)
