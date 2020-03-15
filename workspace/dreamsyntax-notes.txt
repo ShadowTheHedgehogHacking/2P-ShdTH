@@ -9099,3 +9099,93 @@ First safe address (low):
 8060A570
 last address:
 8060B568 (do not write here, reduce a few to be safe...)
+---------------------------------
+2020-03-15
+MTP/BON Stuff Resumed:
+@ 800b44dc, first pass is always fixed value. 2nd pass is dynamic.
+
+r5 = 0x807d18c4 ALWAYS for P1, dynamic for P2
+
+r29 80fe3de0
+SW2PY.DFF pointer 80FE3D84
+0x5C
+
+r29 8127b080
+pointer 8127B024
+0x5C
+
+Can be used to get BON/MTP ref override (and maybe foot effect override too)
+
+HOW TO GET MTP/BON OVERRIDE:
+Find Sondow.MTP, 
+then : -0x5dc of that address
+Override Master MTP/BON Shadow Handler @ 807D866C to that address
+
+SW2BODY to SONDOW.MTP difference: 0x2D0
+-> Final shift -0x30C from pointer deref
+
+--
+pointerToSW2BODY = r29 - 0x5C
+r16 -> 0x0(pointerToSW2BODY)
+r16 = r16 - 0x30C
+r15 = 0x2729 (or some other value to designate P2)
+--
+
+Injection #1: 800b44dc | Original: lwz	r4, 0x085C (r31)
+lwz	r4, 0x085C (r31)
+lis r16, 0x807D
+ori r16, r16, 0x18C4
+cmpw r5, r16
+li r15, 0
+beq 0x10
+lwz r16, -0x5C(r29)
+subi r16, r16, 0x30C
+li r15, 0x2729
+
+
+Injection #2: @ 8001483c | Original: lwz	r0, 0x0014 (r3)
+cmpwi r15, 0x2729
+bne- 0x8
+stw r16, 0x14(r3)
+lwz	r0, 0x0014 (r3)
+
+
+injection #3 @ 800b474c | Original: addi	sp, sp, 32 
+addi sp, sp, 32
+lis r15, 0x807D
+ori r15, r15, 0x866C
+lis r16, 0x809D
+ori r16, r16, 0x93A8
+stw r16, 0x0(r15)
+------
+$P2 Shadow MTP Animation Override TestVersion 1 [dreamsyntax]
+C20B44DC 00000005
+809F085C 3E00807D
+621018C4 7C058000
+39E00000 41820010
+821DFFA4 3A10FCF4
+39E02729 00000000
+C201483C 00000003
+2C0F2729 40820008
+92030014 80030014
+60000000 00000000
+C20B474C 00000004
+38210020 3DE0807D
+61EF866C 3E00809D
+621093A8 920F0000
+60000000 00000000
+*P1 must be regular shadow
+*P2 must be yellow android shadow
+*
+*shadow2py.one archive MUST CONTAIN:
+*HS.BON
+*SONDOW.MTP
+*IN THAT ORDER at the bottom of the file
+*
+*You can put whatever BON/MTP you want, including whatever models, but the name must match the above
+Sonic Jump Ball Addon:
+8060a800 r0
+8060a850 r4
+
+0460a800 38000001
+0460a850 38800001
