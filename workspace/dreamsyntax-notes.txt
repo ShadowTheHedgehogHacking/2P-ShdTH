@@ -9189,3 +9189,7 @@ Sonic Jump Ball Addon:
 
 0460a800 38000001
 0460a850 38800001
+----------
+Missing textures identified:
+Prison Island general forest textures
+Space gadget hero route expert missing HD earth
