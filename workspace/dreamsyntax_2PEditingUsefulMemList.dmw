@@ -8,150 +8,6 @@
             "unsigned": false
         },
         {
-            "address": "8057D6A0",
-            "baseIndex": 0,
-            "label": "StageSequence Related?",
-            "typeIndex": 0,
-            "unsigned": false
-        },
-        {
-            "address": "80558160",
-            "baseIndex": 0,
-            "label": "StageSequence Related?",
-            "length": 36,
-            "pointerOffsets": [
-                "0",
-                "0"
-            ],
-            "typeIndex": 5,
-            "unsigned": false
-        },
-        {
-            "address": "8055837C",
-            "baseIndex": 0,
-            "label": "StageSequence Related?",
-            "length": 555,
-            "pointerOffsets": [
-                "0",
-                "0"
-            ],
-            "typeIndex": 5,
-            "unsigned": false
-        },
-        {
-            "groupEntries": [
-                {
-                    "groupEntries": [
-                        {
-                            "address": "807D77D4",
-                            "baseIndex": 0,
-                            "label": "Velocity",
-                            "typeIndex": 3,
-                            "unsigned": true
-                        },
-                        {
-                            "address": "807D77D8",
-                            "baseIndex": 0,
-                            "label": "VelocityAccelRate",
-                            "typeIndex": 3,
-                            "unsigned": true
-                        },
-                        {
-                            "groupEntries": [
-                                {
-                                    "address": "8060D7B4",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 2,
-                                    "unsigned": false
-                                },
-                                {
-                                    "address": "807D76B4",
-                                    "baseIndex": 0,
-                                    "label": "MemCopy of Cam0 Position With Rotate Y",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "807D7730",
-                                    "baseIndex": 0,
-                                    "label": "MemCopy of Cam0 Position With Rotate Y",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "807D7748",
-                                    "baseIndex": 0,
-                                    "label": "MemCopy of Cam0 Position With Rotate Y",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "807D77A4",
-                                    "baseIndex": 0,
-                                    "label": "MemCopy of Cam0 Position With Rotate Y",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "8056EEB0",
-                                    "baseIndex": 0,
-                                    "label": "MemCopy of Cam0 Position With Rotate Y",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                }
-                            ],
-                            "groupName": "camtrash_searches"
-                        },
-                        {
-                            "address": "807D76BC",
-                            "baseIndex": 0,
-                            "label": "FetchedCam0X",
-                            "typeIndex": 3,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "8060B268",
-                            "baseIndex": 0,
-                            "label": "No label",
-                            "typeIndex": 3,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "8060B1E8",
-                            "baseIndex": 0,
-                            "label": "No label",
-                            "typeIndex": 3,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "80080EF8",
-                            "baseIndex": 1,
-                            "label": "No label",
-                            "typeIndex": 2,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "804B0000",
-                            "baseIndex": 1,
-                            "label": "No label",
-                            "typeIndex": 2,
-                            "unsigned": false
-                        },
-                        {
-                            "address": "80082C00",
-                            "baseIndex": 1,
-                            "label": "No label",
-                            "typeIndex": 2,
-                            "unsigned": false
-                        }
-                    ],
-                    "groupName": "PlayerAnim"
-                }
-            ],
-            "groupName": "Dynamic Memory (Use for Struct Identification later w/ Pointer)"
-        },
-        {
             "groupEntries": [
                 {
                     "address": "805766F0",
@@ -665,6 +521,42 @@
                         }
                     ],
                     "groupName": "Misc Game State / Properties"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "8057D6A0",
+                            "baseIndex": 0,
+                            "label": "StageSequence Related?",
+                            "typeIndex": 0,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80558160",
+                            "baseIndex": 0,
+                            "label": "StageSequence Related?",
+                            "length": 36,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8055837C",
+                            "baseIndex": 0,
+                            "label": "StageSequence Related?",
+                            "length": 555,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "StageSequence"
                 }
             ],
             "groupName": "StageManager"
@@ -842,6 +734,83 @@
                     "label": "P2 Selected Character",
                     "typeIndex": 2,
                     "unsigned": true
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "805212E4",
+                            "baseIndex": 0,
+                            "label": "TouchHangCommand",
+                            "length": 155,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "805214F4",
+                            "baseIndex": 0,
+                            "label": "StartJumpCommand",
+                            "length": 122,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8051FD28",
+                            "baseIndex": 0,
+                            "label": "EndJumpCommand",
+                            "length": 55,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8052154C",
+                            "baseIndex": 0,
+                            "label": "StartAttackCommand",
+                            "length": 55,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8053D524",
+                            "baseIndex": 0,
+                            "label": "AccelerateInputCommand",
+                            "length": 155,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "80520F48",
+                            "baseIndex": 0,
+                            "label": "SetGravityCommand",
+                            "length": 25,
+                            "pointerOffsets": [
+                                "0",
+                                "0"
+                            ],
+                            "typeIndex": 5,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "PlayerCommand Refs"
                 }
             ],
             "groupName": "PlayerStruct"
@@ -1020,9 +989,108 @@
                                     "label": "Cam0 Render/Chunk Position With Rotate Z",
                                     "typeIndex": 3,
                                     "unsigned": false
+                                },
+                                {
+                                    "groupEntries": [
+                                        {
+                                            "address": "807D77D4",
+                                            "baseIndex": 0,
+                                            "label": "Velocity",
+                                            "typeIndex": 3,
+                                            "unsigned": true
+                                        },
+                                        {
+                                            "address": "807D77D8",
+                                            "baseIndex": 0,
+                                            "label": "VelocityAccelRate",
+                                            "typeIndex": 3,
+                                            "unsigned": true
+                                        },
+                                        {
+                                            "groupEntries": [
+                                                {
+                                                    "address": "807D76B4",
+                                                    "baseIndex": 0,
+                                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                                    "typeIndex": 3,
+                                                    "unsigned": true
+                                                },
+                                                {
+                                                    "address": "807D7730",
+                                                    "baseIndex": 0,
+                                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                                    "typeIndex": 3,
+                                                    "unsigned": true
+                                                },
+                                                {
+                                                    "address": "807D7748",
+                                                    "baseIndex": 0,
+                                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                                    "typeIndex": 3,
+                                                    "unsigned": true
+                                                },
+                                                {
+                                                    "address": "807D77A4",
+                                                    "baseIndex": 0,
+                                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                                    "typeIndex": 3,
+                                                    "unsigned": true
+                                                },
+                                                {
+                                                    "address": "8056EEB0",
+                                                    "baseIndex": 0,
+                                                    "label": "MemCopy of Cam0 Position With Rotate Y",
+                                                    "typeIndex": 3,
+                                                    "unsigned": true
+                                                }
+                                            ],
+                                            "groupName": "memcopies (used for different things)"
+                                        },
+                                        {
+                                            "address": "807D76BC",
+                                            "baseIndex": 0,
+                                            "label": "Camera0 Related, UNKNOWN",
+                                            "typeIndex": 3,
+                                            "unsigned": false
+                                        }
+                                    ],
+                                    "groupName": "Cam0 Velocity and memCopies"
                                 }
                             ],
                             "groupName": "Camera0"
+                        },
+                        {
+                            "groupEntries": [
+                                {
+                                    "address": "8056EEC0",
+                                    "baseIndex": 0,
+                                    "label": "Small Reads, Partner does not use",
+                                    "typeIndex": 3,
+                                    "unsigned": false
+                                },
+                                {
+                                    "address": "807D7740",
+                                    "baseIndex": 0,
+                                    "label": "attachScreenToCamUses",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D774C",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                },
+                                {
+                                    "address": "807D77A8",
+                                    "baseIndex": 0,
+                                    "label": "No label",
+                                    "typeIndex": 3,
+                                    "unsigned": true
+                                }
+                            ],
+                            "groupName": "All Cam0 PosWRotate Z Copies"
                         },
                         {
                             "groupEntries": [
@@ -1063,39 +1131,6 @@
                             "label": "RO | P1 Position Z",
                             "typeIndex": 3,
                             "unsigned": false
-                        },
-                        {
-                            "groupEntries": [
-                                {
-                                    "address": "8056EEC0",
-                                    "baseIndex": 0,
-                                    "label": "Small Reads, Partner does not use",
-                                    "typeIndex": 3,
-                                    "unsigned": false
-                                },
-                                {
-                                    "address": "807D7740",
-                                    "baseIndex": 0,
-                                    "label": "attachScreenToCamUses",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "807D774C",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                },
-                                {
-                                    "address": "807D77A8",
-                                    "baseIndex": 0,
-                                    "label": "No label",
-                                    "typeIndex": 3,
-                                    "unsigned": true
-                                }
-                            ],
-                            "groupName": "All Cam0 PosWRotate Z Copies"
                         },
                         {
                             "address": "807D77FC",
@@ -2336,83 +2371,6 @@
                 }
             ],
             "groupName": "Score Tracking"
-        },
-        {
-            "groupEntries": [
-                {
-                    "address": "805212E4",
-                    "baseIndex": 0,
-                    "label": "TouchHangCommand",
-                    "length": 155,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                },
-                {
-                    "address": "805214F4",
-                    "baseIndex": 0,
-                    "label": "StartJumpCommand",
-                    "length": 122,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                },
-                {
-                    "address": "8051FD28",
-                    "baseIndex": 0,
-                    "label": "EndJumpCommand",
-                    "length": 55,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                },
-                {
-                    "address": "8052154C",
-                    "baseIndex": 0,
-                    "label": "StartAttackCommand",
-                    "length": 55,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                },
-                {
-                    "address": "8053D524",
-                    "baseIndex": 0,
-                    "label": "AccelerateInputCommand",
-                    "length": 155,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                },
-                {
-                    "address": "80520F48",
-                    "baseIndex": 0,
-                    "label": "SetGravityCommand",
-                    "length": 25,
-                    "pointerOffsets": [
-                        "0",
-                        "0"
-                    ],
-                    "typeIndex": 5,
-                    "unsigned": false
-                }
-            ],
-            "groupName": "PlayerCommand Refs"
         },
         {
             "groupEntries": [
