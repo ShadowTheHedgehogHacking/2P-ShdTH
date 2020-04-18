@@ -9193,3 +9193,9 @@ Sonic Jump Ball Addon:
 Missing textures identified:
 Prison Island general forest textures
 Space gadget hero route expert missing HD earth
+-------------
+2020-03-30
+Rest Heap -> (has everything before the three are allocated)
+Global -> 0x250000
+Event -> 0xB80000
+ETC -> 0x580000
