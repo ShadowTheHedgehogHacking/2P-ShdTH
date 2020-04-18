@@ -34,7 +34,7 @@
 800091a4 0000002c 800091a4 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 800091d0 0000001c 800091d0 0 TakeR3asFunctionAsset_setFloatsLoadFloats__droprings_drawObject
 800091ec 0000001c 800091ec 0 CopyValuesFromPointerR4toPointerR3
-80009208 0000006c 80009208 0 zz_80009208_
+80009208 0000006c 80009208 0 r3=GamePeripheralTask
 80009274 00000058 80009274 0 zz_80009274_
 800092cc 00000008 800092cc 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 800092d4 00000058 800092d4 0 zz_800092d4_
@@ -3812,7 +3812,7 @@
 80079698 00000044 80079698 0 zz_80079698_
 800796dc 00000044 800796dc 0 zz_800796dc_
 80079720 00000050 80079720 0 ?MovementPlayer(r31=StringName of Player::Behavior r3=BehaviorReference)
-80079770 00000098 80079770 0 zz_80079770_
+80079770 00000098 80079770 0 DamageCommand
 80079808 00000058 80079808 0 UpdateUIState_??GetBytesFromParent
 80079860 00000088 80079860 0 zz_80079860_
 800798e8 00000030 800798e8 0 zz_800798e8_
@@ -4226,7 +4226,7 @@
 80086dd8 000000c8 80086dd8 0 Player::Behavior::Idle
 80086ea0 000000f0 80086ea0 0 Player::Behavior::Idle
 80086f90 00000008 80086f90 0 Player::Behavior::Idle2__gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-80086f98 000000a4 80086f98 0 zz_80086f98_
+80086f98 000000a4 80086f98 0 StateTransition(r3=Current Behavior of Player::Behavior, r4=Command to use to transition Player::StartJumpCommand)
 8008703c 00000058 8008703c 0 zz_8008703c_
 80087094 00000044 80087094 0 zz_80087094_
 800870d8 00000004 800870d8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -4236,62 +4236,62 @@
 800871d8 000004c4 800871d8 0 Player::Behavior::Fall_alsoSomethingThatUsesCharacterId
 8008769c 00000008 8008769c 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 800876a4 0000011c 800876a4 0 ShadowExecuterFunc(r3=Player::Behavior::Jump)
-800877c0 000007c4 800877c0 0 ??SomethingWithCharacterID_800877c0_
+800877c0 000007c4 800877c0 0 Player::Behavior::Jump
 80087f84 00000008 80087f84 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 80087f8c 00000008 80087f8c 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-80087f94 0000005c 80087f94 0 zz_80087f94_
+80087f94 0000005c 80087f94 0 r3=Player::Behavior::Jump r4=Player::EndJumpCommand
 80087ff0 00000058 80087ff0 0 zz_80087ff0_
 80088048 0000004c 80088048 0 zz_80088048_
 80088094 00000018 80088094 0 zz_80088094_
 800880ac 00000004 800880ac 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800880b0 00000048 800880b0 0 dCreateGeom
-800880f8 000000d8 800880f8 0 zz_800880f8_
+800880f8 000000d8 800880f8 0 JumpDash Collision Adjustment SubFunc
 800881d0 00000070 800881d0 0 zz_800881d0_
 80088240 00000064 80088240 0 zz_80088240_
 800882a4 000001f0 800882a4 0 JumpDash_And_SuperFly_Physics_And_ActionsStateUpdater
-80088494 0000008c 80088494 0 zz_80088494_
+80088494 0000008c 80088494 0 Player::Behavior::JumpDash and InitializeArgs
 80088520 00000088 80088520 0 zz_80088520_
 800885a8 00000074 800885a8 0 zz_800885a8_
 8008861c 00000030 8008861c 0 zz_8008861c_
 8008864c 00000054 8008864c 0 zz_8008864c_
 800886a0 00000014 800886a0 0 zz_800886a0_
-800886b4 00000058 800886b4 0 zz_800886b4_
+800886b4 00000058 800886b4 0 JumpDash_Related_SubFunc3
 8008870c 00000034 8008870c 0 zz_8008870c_
 80088740 00000040 80088740 0 zz_80088740_
-80088780 00000078 80088780 0 zz_80088780_
+80088780 00000078 80088780 0 Player::Behavior::JumpDash Collision Adjustment
 800887f8 00000004 800887f8 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800887fc 00000008 800887fc 0 OSGetStackPointer 	os.a OSContext.o
-80088804 000001cc 80088804 0 zz_80088804_
+80088804 000001cc 80088804 0 Player::Behavior::JumpDash Player::Behavior::InitializeArgs
 800889d0 00000074 800889d0 0 JumpDash_Related
-80088a44 0000005c 80088a44 0 zz_80088a44_
-80088aa0 00000090 80088aa0 0 zz_80088aa0_
-80088b30 00000064 80088b30 0 zz_80088b30_
+80088a44 0000005c 80088a44 0 JumpDash_Related_SubFunc
+80088aa0 00000090 80088aa0 0 JumpDash_Related_SubFunc2
+80088b30 00000064 80088b30 0 Player::Behavior::JumpDash
 80088b94 00000058 80088b94 0 zz_80088b94_
-80088bec 00000044 80088bec 0 zz_80088bec_
+80088bec 00000044 80088bec 0 JumpDash r5 HardCoded Behavior
 80088c30 00000004 80088c30 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-80088c34 0000007c 80088c34 0 zz_80088c34_
-80088cb0 00000050 80088cb0 0 zz_80088cb0_
+80088c34 0000007c 80088c34 0 Player::Behavior::JumpDash
+80088cb0 00000050 80088cb0 0 Player::Behavior::JumpDash SubFunc3
 80088d00 00000014 80088d00 0 zz_80088d00_
 80088d14 00000048 80088d14 0 dCreateGeom
 80088d5c 00000184 80088d5c 0 Player::Behavior::Idle
-80088ee0 00000088 80088ee0 0 zz_80088ee0_
+80088ee0 00000088 80088ee0 0 Player::Behavior::Landing
 80088f68 000000a8 80088f68 0 Player::Behavior::Landing
 80089010 00000008 80089010 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
 80089018 00000058 80089018 0 zz_80089018_
-80089070 00000044 80089070 0 zz_80089070_
+80089070 00000044 80089070 0 Landing - Hardcoded r5 Player::Shadow::ShadowBehavior
 800890b4 00000004 800890b4 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 800890b8 00000048 800890b8 0 dCreateGeom
-80089100 00000300 80089100 0 zz_80089100_
+80089100 00000300 80089100 0 Player::Behavior::Launch
 80089400 00000004 80089400 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-80089404 000000c4 80089404 0 zz_80089404_
+80089404 000000c4 80089404 0 Player::Behavior::Launch End?
 800894c8 000001a0 800894c8 0 zz_800894c8_
 80089668 00000008 80089668 0 gdev_cc_shutdown 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\cc\exi2\GCN\EXI2_GDEV_GCN\mai
-80089670 00000058 80089670 0 zz_80089670_
+80089670 00000058 80089670 0 Hardcoded PlayerBehaviorLaunch
 800896c8 0000004c 800896c8 0 zz_800896c8_
 80089714 00000004 80089714 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 80089718 00000048 80089718 0 dCreateGeom
 80089760 00000004 80089760 0 DBClose 	NdevExi2A.a DebuggerDriver.o
-80089764 00000120 80089764 0 zz_80089764_
+80089764 00000120 80089764 0 Player::Behavior::LightDash
 80089884 00000044 80089884 0 zz_80089884_
 800898c8 00000008 800898c8 0 J3DShapeMtxMulti::getUseMtxNum(void) const 	J3DGraphBase.a J3DShapeMtx.o
 800898d0 0000009c 800898d0 0 zz_800898d0_
@@ -4302,7 +4302,7 @@
 80089a3c 00000010 80089a3c 0 nlListContainer<P8SaveData>::__ct(void)
 80089a4c 00000194 80089a4c 0 zz_80089a4c_
 80089be0 00000040 80089be0 0 zz_80089be0_
-80089c20 00000510 80089c20 0 zz_80089c20_
+80089c20 00000510 80089c20 0 Player::Behavior::LightDash r5=boost::detail::sp_counted_base_impl<Player::Behavior::Behavior *, boost::checked_deleter<Player::Behavior::Behavior>>
 8008a130 00000040 8008a130 0 zz_8008a130_
 8008a170 00000040 8008a170 0 zz_8008a170_
 8008a1b0 00000048 8008a1b0 0 zz_8008a1b0_
@@ -4818,7 +4818,7 @@
 80099a00 00000050 80099a00 0 zz_80099a00_
 80099a50 00000084 80099a50 0 zz_80099a50_
 80099ad4 00000044 80099ad4 0 zz_80099ad4_
-80099b18 000000a4 80099b18 0 zz_80099b18_
+80099b18 000000a4 80099b18 0 Player::ActingAccelerateCommand
 80099bbc 00000040 80099bbc 0 zz_80099bbc_
 80099bfc 00000064 80099bfc 0 zz_80099bfc_
 80099c60 00000090 80099c60 0 zz_80099c60_
@@ -4843,7 +4843,7 @@
 8009a5e4 00000078 8009a5e4 0 zz_8009a5e4_
 8009a65c 00000090 8009a65c 0 zz_8009a65c_
 8009a6ec 00000090 8009a6ec 0 zz_8009a6ec_
-8009a77c 0000017c 8009a77c 0 zz_8009a77c_
+8009a77c 0000017c 8009a77c 0 Player::IgnoreInputCommand
 8009a8f8 0000007c 8009a8f8 0 zz_8009a8f8_
 8009a974 00000080 8009a974 0 zz_8009a974_
 8009a9f4 00000080 8009a9f4 0 zz_8009a9f4_
@@ -4855,7 +4855,7 @@
 8009ac80 00000058 8009ac80 0 zz_8009ac80_
 8009acd8 000000b4 8009acd8 0 zz_8009acd8_
 8009ad8c 0000004c 8009ad8c 0 SetsCorrectCommandForAirBugMaybe
-8009add8 0000009c 8009add8 0 zz_8009add8_
+8009add8 0000009c 8009add8 0 Player::LaunchCommand
 8009ae74 0000005c 8009ae74 0 FormationOffensive::__dt(void)
 8009aed0 00000028 8009aed0 0 zz_8009aed0_
 8009aef8 00000048 8009aef8 0 zz_8009aef8_
@@ -4904,7 +4904,7 @@
 8009c6c0 00000054 8009c6c0 0 zz_8009c6c0_
 8009c714 000000a8 8009c714 0 Slide_MASTERFUNCTION
 8009c7bc 00000010 8009c7bc 0 StoreExecution_ForSlide?
-8009c7cc 00000010 8009c7cc 0 zz_8009c7cc_
+8009c7cc 00000010 8009c7cc 0 Player::StartActionCommand
 8009c7dc 00000074 8009c7dc 0 zz_8009c7dc_
 8009c850 000000b0 8009c850 0 StartJumpCommand::StartJumpCommand()_8009c850_
 8009c900 00000094 8009c900 0 zz_8009c900_
@@ -29517,10 +29517,10 @@
 8039e0c4 0000004c 8039e0c4 0 TRKTargetReadInstruction
 8039e110 0000014c 8039e110 0 TRKTargetAccessMemory
 8039e25c 000002a4 8039e25c 0 TRKValidMemory32
-8039e500 00000008 8039e500 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e508 00000008 8039e508 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e510 00000008 8039e510 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e518 00000008 8039e518 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
+8039e500 00000008 8039e500 0 039e500 00000008 8039e500 0 039e500 00000008 8039e500 0 039e500 00000008 8039e500 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
+8039e508 00000008 8039e508 0 039e508 00000008 8039e508 0 039e508 00000008 8039e508 0 039e508 00000008 8039e508 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
+8039e510 00000008 8039e510 0 039e510 00000008 8039e510 0 039e510 00000008 8039e510 0 039e510 00000008 8039e510 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
+8039e518 00000008 8039e518 0 039e518 00000008 8039e518 0 039e518 00000008 8039e518 0 039e518 00000008 8039e518 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
 8039e520 0000018c 8039e520 0 TRKSaveExtended1Block
 8039e6ac 0000002c 8039e6ac 0 zz_8039e6ac_
 8039e6d8 000001b8 8039e6d8 0 TRKRestoreExtended1Block
@@ -29615,43 +29615,43 @@
 803a0d6c 0000000c 803a0d6c 0 GetOneTimerLeadGroundContactAnims(void)
 803a0d78 0000005c 803a0d78 0 __cvt_fp2unsigned
 803a0dd4 0000004c 803a0dd4 0 __save_fpr
-803a0e00 00000020 803a0e00 0 _savefpr_25 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e08 00000018 803a0e08 0 _savefpr_27 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e0c 00000014 803a0e0c 0 _savefpr_28 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e10 00000010 803a0e10 0 _savefpr_29 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e00 00000020 803a0e00 0 __save_fpr::
+803a0e08 00000018 803a0e08 0 __save_fpr::
+803a0e0c 00000014 803a0e0c 0 __save_fpr::
+803a0e10 00000010 803a0e10 0 __save_fpr::
 803a0e20 0000004c 803a0e20 0 __restore_fpr
-803a0e4c 00000020 803a0e4c 0 _restfpr_25 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e54 00000018 803a0e54 0 _restfpr_27 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e58 00000014 803a0e58 0 _restfpr_28 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e5c 00000010 803a0e5c 0 _restfpr_29 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e4c 00000020 803a0e4c 0 __restore_fpr::
+803a0e54 00000018 803a0e54 0 __restore_fpr::
+803a0e58 00000014 803a0e58 0 __restore_fpr::
+803a0e5c 00000010 803a0e5c 0 __restore_fpr::
 803a0e6c 0000004c 803a0e6c 0 __save_gpr
-803a0e70 00000048 803a0e70 0 _savegpr_15 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e74 00000044 803a0e74 0 _savegpr_16 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e78 00000040 803a0e78 0 _savegpr_17 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e7c 0000003c 803a0e7c 0 _savegpr_18 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e80 00000038 803a0e80 0 _savegpr_19 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e84 00000034 803a0e84 0 _savegpr_20 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e88 00000030 803a0e88 0 _savegpr_21 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e8c 0000002c 803a0e8c 0 _savegpr_22 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e90 00000028 803a0e90 0 _savegpr_23 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e94 00000024 803a0e94 0 _savegpr_24 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e98 00000020 803a0e98 0 _savegpr_25 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e9c 0000001c 803a0e9c 0 _savegpr_26 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ea0 00000018 803a0ea0 0 _savegpr_27 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e70 00000048 803a0e70 0 __save_gpr::
+803a0e74 00000044 803a0e74 0 __save_gpr::
+803a0e78 00000040 803a0e78 0 __save_gpr::
+803a0e7c 0000003c 803a0e7c 0 __save_gpr::
+803a0e80 00000038 803a0e80 0 __save_gpr::
+803a0e84 00000034 803a0e84 0 __save_gpr::
+803a0e88 00000030 803a0e88 0 __save_gpr::
+803a0e8c 0000002c 803a0e8c 0 __save_gpr::
+803a0e90 00000028 803a0e90 0 __save_gpr::
+803a0e94 00000024 803a0e94 0 __save_gpr::
+803a0e98 00000020 803a0e98 0 __save_gpr::
+803a0e9c 0000001c 803a0e9c 0 __save_gpr::
+803a0ea0 00000018 803a0ea0 0 __save_gpr::
 803a0eb8 0000004c 803a0eb8 0 __restore_gpr
-803a0ebc 00000048 803a0ebc 0 _restgpr_15 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec0 00000044 803a0ec0 0 _restgpr_16 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec4 00000040 803a0ec4 0 _restgpr_17 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec8 0000003c 803a0ec8 0 _restgpr_18 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ecc 00000038 803a0ecc 0 _restgpr_19 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed0 00000034 803a0ed0 0 _restgpr_20 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed4 00000030 803a0ed4 0 _restgpr_21 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed8 0000002c 803a0ed8 0 _restgpr_22 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0edc 00000028 803a0edc 0 _restgpr_23 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee0 00000024 803a0ee0 0 _restgpr_24 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee4 00000020 803a0ee4 0 _restgpr_25 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee8 0000001c 803a0ee8 0 _restgpr_26 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0eec 00000018 803a0eec 0 _restgpr_27 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0ebc 00000048 803a0ebc 0 __restore_gpr::
+803a0ec0 00000044 803a0ec0 0 __restore_gpr::
+803a0ec4 00000040 803a0ec4 0 __restore_gpr::
+803a0ec8 0000003c 803a0ec8 0 __restore_gpr::
+803a0ecc 00000038 803a0ecc 0 __restore_gpr::
+803a0ed0 00000034 803a0ed0 0 __restore_gpr::
+803a0ed4 00000030 803a0ed4 0 __restore_gpr::
+803a0ed8 0000002c 803a0ed8 0 __restore_gpr::
+803a0edc 00000028 803a0edc 0 __restore_gpr::
+803a0ee0 00000024 803a0ee0 0 __restore_gpr::
+803a0ee4 00000020 803a0ee4 0 __restore_gpr::
+803a0ee8 0000001c 803a0ee8 0 __restore_gpr::
+803a0eec 00000018 803a0eec 0 __restore_gpr::
 803a0f04 000000ec 803a0f04 0 __div2u
 803a0ff0 00000138 803a0ff0 0 __div2i
 803a1128 000000e0 803a1128 0 __mod2u
