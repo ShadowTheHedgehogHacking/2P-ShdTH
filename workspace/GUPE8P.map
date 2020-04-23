@@ -818,7 +818,7 @@
 8001dfe8 0000005c 8001dfe8 0 zz_8001dfe8_
 8001e044 0000002c 8001e044 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 8001e070 0000019c 8001e070 0 HAS_SonicteamUSA::System::Range::RangeCapsule
-8001e20c 000000d0 8001e20c 0 r29=System
+8001e20c 000000d0 8001e20c 0 PATH Parser (r7=o:\PJS\PJSart\exportdata\stage\stg0X0X\path, r29=System)
 8001e2dc 0000007c 8001e2dc 0 zz_8001e2dc_
 8001e358 000000ac 8001e358 0 zz_8001e358_
 8001e404 00000054 8001e404 0 zz_8001e404_
@@ -15522,7 +15522,7 @@
 801d048c 0000024c 801d048c 0 zz_801d048c_
 801d06d8 00000058 801d06d8 0 zz_801d06d8_
 801d0730 0000003c 801d0730 0 GameSceneManager::__ct(void)
-801d076c 00000034 801d076c 0 CameraUpdatePositionMain
+801d076c 00000034 801d076c 0 MainFunc(r3=PJSCameraPostTask)_CameraUpdatePositionMain
 801d07a0 00000088 801d07a0 0 zz_801d07a0_
 801d0828 00000050 801d0828 0 zz_801d0828_
 801d0878 00000004 801d0878 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -20638,7 +20638,7 @@
 8026f6a4 000000bc 8026f6a4 0 zz_8026f6a4_
 8026f760 00000050 8026f760 0 zz_8026f760_
 8026f7b0 00000098 8026f7b0 0 zz_8026f7b0_
-8026f848 00000030 8026f848 0 zz_8026f848_
+8026f848 00000030 8026f848 0 AccessCameraFactory
 8026f878 00000064 8026f878 0 zz_8026f878_
 8026f8dc 00000070 8026f8dc 0 zz_8026f8dc_
 8026f94c 000000b8 8026f94c 0 zz_8026f94c_
@@ -20806,7 +20806,7 @@
 80272bfc 00000044 80272bfc 0 P2_SplitDisabled_Subtitles_on_Split0
 80272c40 00000074 80272c40 0 zz_80272c40_
 80272cb4 000000fc 80272cb4 0 zz_80272cb4_
-80272db0 000000c0 80272db0 0 zz_80272db0_
+80272db0 000000c0 80272db0 0 r3=CameraRender
 80272e70 0000000c 80272e70 0 WorldDarkening::Fade(float, float)
 80272e7c 00000018 80272e7c 0 zz_80272e7c_
 80272e94 00000018 80272e94 0 zz_80272e94_
@@ -29517,10 +29517,10 @@
 8039e0c4 0000004c 8039e0c4 0 TRKTargetReadInstruction
 8039e110 0000014c 8039e110 0 TRKTargetAccessMemory
 8039e25c 000002a4 8039e25c 0 TRKValidMemory32
-8039e500 00000008 8039e500 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e508 00000008 8039e508 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e510 00000008 8039e510 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
-8039e518 00000008 8039e518 0 TRKPositionFile (entry of .text) 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\debugger\embedded\MetroTRK\Processor\
+8039e500 00000008 8039e500 0 TRKPositionFile1
+8039e508 00000008 8039e508 0 TRKPositionFile2
+8039e510 00000008 8039e510 0 TRKPositionFile3
+8039e518 00000008 8039e518 0 TRKPositionFile4
 8039e520 0000018c 8039e520 0 TRKSaveExtended1Block
 8039e6ac 0000002c 8039e6ac 0 zz_8039e6ac_
 8039e6d8 000001b8 8039e6d8 0 TRKRestoreExtended1Block
@@ -29615,43 +29615,43 @@
 803a0d6c 0000000c 803a0d6c 0 GetOneTimerLeadGroundContactAnims(void)
 803a0d78 0000005c 803a0d78 0 __cvt_fp2unsigned
 803a0dd4 0000004c 803a0dd4 0 __save_fpr
-803a0e00 00000020 803a0e00 0 _savefpr_25 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e08 00000018 803a0e08 0 _savefpr_27 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e0c 00000014 803a0e0c 0 _savefpr_28 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e10 00000010 803a0e10 0 _savefpr_29 (entry of __save_fpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e00 00000020 803a0e00 0 __save_fpr::
+803a0e08 00000018 803a0e08 0 __save_fpr::
+803a0e0c 00000014 803a0e0c 0 __save_fpr::
+803a0e10 00000010 803a0e10 0 __save_fpr::
 803a0e20 0000004c 803a0e20 0 __restore_fpr
-803a0e4c 00000020 803a0e4c 0 _restfpr_25 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e54 00000018 803a0e54 0 _restfpr_27 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e58 00000014 803a0e58 0 _restfpr_28 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e5c 00000010 803a0e5c 0 _restfpr_29 (entry of __restore_fpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e4c 00000020 803a0e4c 0 __restore_fpr::
+803a0e54 00000018 803a0e54 0 __restore_fpr::
+803a0e58 00000014 803a0e58 0 __restore_fpr::
+803a0e5c 00000010 803a0e5c 0 __restore_fpr::
 803a0e6c 0000004c 803a0e6c 0 __save_gpr
-803a0e70 00000048 803a0e70 0 _savegpr_15 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e74 00000044 803a0e74 0 _savegpr_16 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e78 00000040 803a0e78 0 _savegpr_17 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e7c 0000003c 803a0e7c 0 _savegpr_18 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e80 00000038 803a0e80 0 _savegpr_19 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e84 00000034 803a0e84 0 _savegpr_20 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e88 00000030 803a0e88 0 _savegpr_21 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e8c 0000002c 803a0e8c 0 _savegpr_22 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e90 00000028 803a0e90 0 _savegpr_23 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e94 00000024 803a0e94 0 _savegpr_24 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e98 00000020 803a0e98 0 _savegpr_25 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0e9c 0000001c 803a0e9c 0 _savegpr_26 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ea0 00000018 803a0ea0 0 _savegpr_27 (entry of __save_gpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0e70 00000048 803a0e70 0 __save_gpr::
+803a0e74 00000044 803a0e74 0 __save_gpr::
+803a0e78 00000040 803a0e78 0 __save_gpr::
+803a0e7c 0000003c 803a0e7c 0 __save_gpr::
+803a0e80 00000038 803a0e80 0 __save_gpr::
+803a0e84 00000034 803a0e84 0 __save_gpr::
+803a0e88 00000030 803a0e88 0 __save_gpr::
+803a0e8c 0000002c 803a0e8c 0 __save_gpr::
+803a0e90 00000028 803a0e90 0 __save_gpr::
+803a0e94 00000024 803a0e94 0 __save_gpr::
+803a0e98 00000020 803a0e98 0 __save_gpr::
+803a0e9c 0000001c 803a0e9c 0 __save_gpr::
+803a0ea0 00000018 803a0ea0 0 __save_gpr::
 803a0eb8 0000004c 803a0eb8 0 __restore_gpr
-803a0ebc 00000048 803a0ebc 0 _restgpr_15 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec0 00000044 803a0ec0 0 _restgpr_16 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec4 00000040 803a0ec4 0 _restgpr_17 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ec8 0000003c 803a0ec8 0 _restgpr_18 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ecc 00000038 803a0ecc 0 _restgpr_19 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed0 00000034 803a0ed0 0 _restgpr_20 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed4 00000030 803a0ed4 0 _restgpr_21 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ed8 0000002c 803a0ed8 0 _restgpr_22 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0edc 00000028 803a0edc 0 _restgpr_23 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee0 00000024 803a0ee0 0 _restgpr_24 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee4 00000020 803a0ee4 0 _restgpr_25 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0ee8 0000001c 803a0ee8 0 _restgpr_26 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
-803a0eec 00000018 803a0eec 0 _restgpr_27 (entry of __restore_gpr) 	Runtime.PPCEABI.H.a runtime.o
+803a0ebc 00000048 803a0ebc 0 __restore_gpr::
+803a0ec0 00000044 803a0ec0 0 __restore_gpr::
+803a0ec4 00000040 803a0ec4 0 __restore_gpr::
+803a0ec8 0000003c 803a0ec8 0 __restore_gpr::
+803a0ecc 00000038 803a0ecc 0 __restore_gpr::
+803a0ed0 00000034 803a0ed0 0 __restore_gpr::
+803a0ed4 00000030 803a0ed4 0 __restore_gpr::
+803a0ed8 0000002c 803a0ed8 0 __restore_gpr::
+803a0edc 00000028 803a0edc 0 __restore_gpr::
+803a0ee0 00000024 803a0ee0 0 __restore_gpr::
+803a0ee4 00000020 803a0ee4 0 __restore_gpr::
+803a0ee8 0000001c 803a0ee8 0 __restore_gpr::
+803a0eec 00000018 803a0eec 0 __restore_gpr::
 803a0f04 000000ec 803a0f04 0 __div2u
 803a0ff0 00000138 803a0ff0 0 __div2i
 803a1128 000000e0 803a1128 0 __mod2u
@@ -31217,7 +31217,7 @@
 8040e488 00000034 8040e488 0 zz_8040e488_
 8040e4bc 000000c0 8040e4bc 0 zz_8040e4bc_
 8040e57c 000000a0 8040e57c 0 zz_8040e57c_
-8040e61c 000001fc 8040e61c 0 zz_8040e61c_
+8040e61c 000001fc 8040e61c 0 SceneManageAlloc(r7=Scene, r28=Particle, r30=StageManager, r31=Manager)
 8040e818 00000158 8040e818 0 zz_8040e818_
 8040e970 00000018 8040e970 0 zz_8040e970_
 8040e988 00000014 8040e988 0 zz_8040e988_
