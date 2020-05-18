@@ -9199,3 +9199,234 @@ Rest Heap -> (has everything before the three are allocated)
 Global -> 0x250000
 Event -> 0xB80000
 ETC -> 0x580000
+
+-------------
+2020-05-17
+Airbug: Revengeance
+@ 801037b4
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+addi r15, r15, 0x290
+li r29, 1
+stw r31, 0x0(r15)
+
+@ 801038e0 bctrl
+Try: skip if not stored fan
+lis r15, 0x807D
+ori r15, r15, 0x71A0
+lwz r15, 0x0(r15)
+lwz r15, 0x0(r15)
+lwz r15, 0x290(r15)
+cmpw r15, r31
+bne- 0x8
+bctrl
+
+@ 80103794 lwz	r0, 0x0010 (sp)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r23,0x10(sp)
+cmplw r22,r23
+bne- 0x14
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmpw r15, r31
+bne- 0xC
+stw r22,0x24(r31)
+stw r22,0x10(sp)
+lwz	r0, 0x0010 (sp)
+
+------
+
+Mk 2
+No detection -> Set it to P1 (flawed, need to alternate p1/p2, state not saved)
+
+
+@ 80103794 lwz	r0, 0x0010 (sp)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r23,0x10(sp)
+cmplw r22,r23
+bne 0x
+//I want to store it, its a match, collision detect
+stw r31, 0x290(r22)
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x0010(sp) //store opposing value
+beq //skip to lwz r0
+lis r22, 0x807D
+ori r22,r22,0x71A
+lwz r22,0(r22)
+lwz r22,0(r22)
+
+
+bne- 0xC
+stw r22,0x24(r31)
+stw r22,0x10(sp)
+lwz	r0, 0x0010 (sp)
+
+Abort, realized flaw 
+----
+Alt ver (newest)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //I want to store it, its a match, collision detect for P1 on current fan
+//do the same for P2 
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //P2 collision match
+
+//alternate equally
+lwz r0,0x24(r31) //get stored fan's player alternate 
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22, r0
+beq- 0xC//p1 was already in fan
+stw r22, 0x24(r31)
+bne 0x18 //jump to end 
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x24(r31)
+//end
+stw r22, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+
+Code only:
+
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lwz r0,0x24(r31)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22, r0
+beq- 0xC
+stw r22, 0x24(r31)
+bne 0x18
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x24(r31)
+stw r22, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+
+
+Phase 1 Airbug Successful
+c2103794 00000010
+3ec0807d 62d671a0
+82d60000 82d60000
+80010010 7c160040
+40820008 93f60290
+3ec0807d 62d671a8
+82d60000 82d60000
+7c160040 40820008
+93f60290 801f0024
+3ec0807d 62d671a0
+82d60000 82d60000
+7c160040 4182000c
+92df0024 40820018
+3ec0807d 62d671a8
+82d60000 82d60000
+92df0024 92c10010
+80010010 00000000
+
+
+Phase 2 Plan:
+If player does not have stored fan, abort fall()
+If player DOES have stored fan, validate radius, then call fall(), only if the above fails without the check
+
+Inject @ 801037c0 (lwz	r4, 0x0010 (sp)) |
+Note: branch of 0xCC in original, need force jump to 80103888 if aborting 
+Note2: 0x10(sp) contains player ID again
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10// its not p1
+lwz r15, 0x290(r22)
+cmplw r15, r31 //check is player stored current fan if match, exit function
+beq 0x30 // jump to exit function
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31 //check is player stored current fan if match, exit function
+beq 0x14 // jump to exit function
+//abort
+lis r15, 0x8010
+ori r15, r15, 0x3888
+mtlr r15
+blr
+//exit function
+lwz r4, 0x0010(sp)
+
+No comments ver:
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x30
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x3888
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+
+
+
+Found problem:
+Fan keeps calling r0 of last player to touch fan, even when collision ends until next player touches fan
+resuming later.
