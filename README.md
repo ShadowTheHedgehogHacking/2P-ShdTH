@@ -11,8 +11,8 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 # All levels and modes are compatible v2.0+
 
 ## Problems
-* "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt when activating a wind tunnel) - Break out with Chaos Blast or move back to the source of the wind
 * Not Compatible with Nintendont Since v2.0
+* "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) [Fixed in v2.1 (not released yet)
 * DevilDoom crashes for some people [Fixed in v2.1 (not released yet)]
 * DevilDoom fight is not balanced for two players (very hard to win) [Fixed in v2.1 (not released yet)] 
 
@@ -48,7 +48,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * GUN Fortress Security Camera segments are free-cam
 * Android characters have unique JumpBall colors
 * Individual death-to-checkpoint (Basic)
-* Physics Rewrite for GUNMech Jumpers (Optional)
+* Physics Rewrite for GUNMech Jumpers
 * Downscale all stage and stage_gdt textures to make the game crashless
 * P2's scores and rings add to game totals at ranking
 
