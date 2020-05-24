@@ -9277,7 +9277,7 @@ lwz	r0, 0x0010 (sp)
 
 Abort, realized flaw 
 ----
-Alt ver (newest)
+Phase 1 Airbug
 lis r22, 0x807D
 ori r22,r22,0x71A0
 lwz r22,0(r22)
@@ -9430,3 +9430,1077 @@ lwz r4, 0x0010(sp)
 Found problem:
 Fan keeps calling r0 of last player to touch fan, even when collision ends until next player touches fan
 resuming later.
+----------
+2020-05-18
+Phase 2 but jump to abort on stack instead of 3888 (38EC)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x30
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+
+c21037c0 0000000c
+3ec0807d 62d671a0
+82d60000 82d60000
+81e10010 7c0fb040
+40820010 81f60290
+7c0ff840 41820030
+3ec0807d 62d671a8
+82d60000 82d60000
+81f60290 7c0ff840
+41820014 3de08010
+61ef38ec 7de803a6
+4e800020 80810010
+60000000 00000000
+
+
+This results in almost perfect behavior, except when prior fan overwrites player's new fan pointer, then 'drop spam' happens
+DonutInject Stream Height Fix
+c21dbae4 00000005
+82c40000 82d6022c
+82d60030 82d60010
+2c160018 40820008
+4e800020 9421ffe0
+60000000 00000000
+
+
+Airbug Phase 1
+c2103794 00000010
+3ec0807d 62d671a0
+82d60000 82d60000
+80010010 7c160040
+40820008 93f60290
+3ec0807d 62d671a8
+82d60000 82d60000
+7c160040 40820008
+93f60290 801f0024
+3ec0807d 62d671a0
+82d60000 82d60000
+7c160040 4182000c
+92df0024 40820018
+3ec0807d 62d671a8
+82d60000 82d60000
+92df0024 92c10010
+80010010 00000000
+
+Airbug Phase 2
+c21037c0 0000000c
+3ec0807d 62d671a0
+82d60000 82d60000
+81e10010 7c0fb040
+40820010 81f60290
+7c0ff840 41820030
+3ec0807d 62d671a8
+82d60000 82d60000
+81f60290 7c0ff840
+41820014 3de08010
+61ef38ec 7de803a6
+4e800020 80810010
+60000000 00000000
+
+New finding: if P2's fan is not cleared or does not match p1's, iter loop gets stuck for P1
+Clearing current player's fan entry on drop success:
+
+Phase 2 attempt3
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x30
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+li r15, -1
+stw r15, 0x290(r22)
+lwz r4, 0x0010(sp)
+
+Fail: causes airbug to come back
+
+Phase 2 attempt 4 (add stack check for P2's part)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x3C
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+
+fail: p1 gets airbug again
+
+Phase 2 attempt 5
+Inject @ 801037c0 (lwz	r4, 0x0010 (sp)) |
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10// its not p1
+lwz r15, 0x290(r22)
+//Additional check for null (not assigned fan), but guaranteed player is in stream state
+cmpwi r15, 0
+beq 0x44
+cmplw r15, r31 //check is player stored current fan if match, exit function
+beq 0x3C // jump to exit function
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10// its not p2 (abort)
+lwz r15, 0x290(r22)
+cmplw r15, r31 //check is player stored current fan if match, exit function
+beq 0x14 // jump to exit function
+//abort
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+//exit function
+lwz r4, 0x0010(sp)
+
+no comments
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmpwi r15, 0
+beq 0x44
+cmplw r15, r31
+beq 0x3C
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15,0x10(sp)
+cmplw r15, r22
+bne- 0x10
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+
+
+Phase 3: Clear stored fan on true successful drop:
+Inject @ 801038dc (mtctr r12), r3 = 0x10(sp) [player num]
+mtctr r12
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r3
+bne- 0xC
+stw r16, 0x290(r15)
+beq- 0x18
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r16, 0x290(r15)
+
+
+Phase 1 attempt 2 : no alternate @ 80103794
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lwz	r0, 0x0010 (sp)
+
+FAIL : Original airbug back, and race condition still exists
+
+Phase 2 but no stack checks
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x30
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+-- Both players drop spam if either is in different but existing fans
+
+New Phase 2 :
+Calling drop() will result in an exit, can only execute on one player at a time
+
+If p1's stored fan matches r31 (current fan) {
+    drop(p1) -> exit 
+}
+If p2's stored fan matches r31 (current fan) {
+	drop(p2) -> exit 
+}
+If p1/p2 fan == 0 and prior exits did not execute, {
+	drop() on that player : this would fix airbug if pending
+}
+
+Missing case: p1/p2 in same fan, need to somehow drop both -> trying without first
+
+Inject @ 801037c0
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x40
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r16, 0x290(r22)
+cmplw r16, r31
+beq 0x24
+// for now, only drop() for p1 if both are 0, may need to use alternating var
+cmplwi r15, 0
+beq 0x1C
+cmplwi r16, 0
+beq 0x14
+//
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp) //might need to set r4 to current decided drop rather than stored drop
+
+
+Same as above, but swap out r4 for picked player (in stack)
+Inject @ 801037c0
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r4,0(r22)
+stw r4, 0x10(sp)
+lwz r15, 0x290(r4)
+cmplw r15, r31
+beq 0x4C
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x10(sp)
+lwz r16, 0x290(r22)
+cmplw r16, r31
+beq 0x2C
+cmplwi r15, 0
+stw r4, 0x10(sp)
+beq 0x20
+cmplwi r16, 0
+stw r22, 0x10(sp)
+beq 0x14
+lis r15, 0x8010
+ori r15, r15, 0x38EC
+mtlr r15
+blr
+lwz r4, 0x0010(sp)
+----------------
+2020-05-22
+
+Phase 1 PseudoCode Revision
+
+Update Phase 1 to account for race condition:
+
+Every Exec -> force alternate between players every frame, every fan.
+Store Fan on collision type non-0 -- ignore race condition here handle next
+If collision type 0, check P1 fan: 
+        if P1's stored fan is non 0, skip to P2
+        if P1's stored fan is 0, check state (for p1)
+If collision type 0, check P2 fan:
+       if P2's stored fan is non 0, skip to end alternation code
+        if P2's stored fan is 0, check state (for p2)
+Perform usual fan assignment for collision type non-0 here
+
+End Alternation code here, every exec
+==========
+
+          checkState:
+             re-acquire current player pointer, deref 6 layers down to static behavior exec: If matching '80520ABC' = in stream state
+                                       -> if in stream state, force current exec to be player's new stored fan 
+                                                         note: no apparent issue w/ spamming drop state when  not in fan
+                                     -> jump to End Alternation code block
+Alternate deref for stream: level 5 0x10 = state value, stream = '0x18'
+				 
+Phase 1 PseudoCode Revision (Race Condition / State Confirmation)
+Change r22 to r15 for safety
+
+lwz r0,0x10(sp) // get current collision fan state
+cmpwi r0, 0
+bne- 0xB0 //skip to Performing usual fan assignment for type non-0
+//check P1 fan
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x40 // P1's stored fan is non 0, skip to P2
+
+//check state for P1
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x1C // no fan, but also not in stream state; jump to Check P2 fan
+
+//in stream state, force current exec to be player's new stored fan
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r31, 0x290(r15)
+beq 0x94 // jump to alternate equally
+
+//check P2 fan
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x78 // P2's stored fan is non 0, skip to Alternate Equally section
+
+//check state for P2
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x54 // no fan, but also not in stream state; jump to Alternate Equally section
+
+//in stream state, force current exec to be player's new stored fan
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r31, 0x290(r15)
+beq 0x3C // jump to alternate equally
+
+
+// Performing usual fan assignment for type non-0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15) //I want to store it, its a match, collision detect for P1 on current fan
+     //potentially add a skip to alternate equally section of code here? is it necessary to check P2 if we know current execution is P1?
+//do the same for P2 
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15) //P2 collision match
+
+//alternate equally
+lwz r0,0x24(r31) //get stored fan's player alternate 
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r0
+beq- 0xC//p1 was already in fan
+stw r15, 0x24(r31)
+bne 0x18 //jump to end 
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15, 0x24(r31)
+//end
+stw r15, 0x0010(sp) // replace collision with both players alternating equally
+lwz	r0, 0x0010 (sp)
+
+--
+No comments version 
+Phase 1 Pseudocode Race Condition Check Revision
+Phase 1 PseudoCode Revision (Race Condition / State Confirmation)
+Change r22 to r15 for safety
+
+lwz r0,0x10(sp)
+cmpwi r0, 0
+bne- 0xB0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x40
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x1C
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r31, 0x290(r15)
+beq 0x94
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x78
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x54
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r31, 0x290(r15)
+beq 0x3C
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15)
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15)
+lwz r0,0x24(r31)
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r0
+beq- 0xC
+stw r15, 0x24(r31)
+bne 0x18
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15, 0x24(r31)
+stw r15, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+-----------------------
+Start from scratch drafting:
+On the original function exec every frame() check for collision: instead
+leave as is BUT add a state check on the players: 
+
+if collision = 0 {
+	if p1 fan = 0 {
+		if p1 state = stream {
+			p1 fan = current fan
+			jump to end
+		}
+	} else {
+	    if p2 fan = 0 {
+		    p2 fan = current fan 
+		}
+	}
+} else {
+    assign fan if match here 
+----------------------
+Identified problem with phase 1:
+When 0 case and P1 assignment to fan occurs, ending r0 ends up being P2
+Needs to use alternate for compare only to prevent this issue:
+
+
+Phase 1 PseudoCode Revision (Race Condition / State Confirmation) MK 2
+
+lwz r0,0x10(sp) // get current collision fan state
+cmpwi r0, 0
+bne- 0xBC //skip to Performing usual fan assignment for type non-0
+
+//check P1 fan
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x4C // P1's stored fan is non 0, skip to P2
+
+//check state for P1
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x28 // no fan, but also not in stream state; jump to Check P2 fan
+
+//in stream state, force current exec to be player's new stored fan
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15,0x10(sp) //NEW CODE HERE
+stw r31, 0x290(r15)
+beq 0x // jump to lw stack and EXIT
+
+//check P2 fan
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x // P2's stored fan is non 0, skip to EXIT
+
+//check state for P2
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x54 // no fan, but also not in stream state; jump to EXIT
+
+//in stream state, force current exec to be player's new stored fan
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15,0x10(sp) //NEW CODE HERE
+stw r31, 0x290(r15)
+beq 0x3C // jump EXIT
+
+
+// Performing usual fan assignment for type non-0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15) //I want to store it, its a match, collision detect for P1 on current fan
+     //potentially add a skip to alternate equally section of code here? is it necessary to check P2 if we know current execution is P1?
+//do the same for P2 
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15) //P2 collision match
+
+lwz	r0, 0x0010 (sp) //EXIT 
+
+
+-- NO COMMENTS VERSION (branches corrected too) -- MKII
+lwz r0,0x10(sp)
+cmpwi r0, 0
+bne- 0xBC
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x44
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x20
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15,0x10(sp)
+stw r31, 0x290(r15)
+beq 0x98
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x290(r15)
+cmpwi r15, 0
+bne- 0x7C
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r15, 0x22C(r15)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0x58
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r15,0x10(sp)
+stw r31, 0x290(r15)
+beq 0x3C
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15)
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15,r0
+bne 0x8
+stw r31, 0x290(r15)
+lwz	r0, 0x0010 (sp)
+
+---
+Phase 3 MKII - Accounting for Same Fan Scenario
+
+Inject @ 801038dc (mtctr r12), r3 = 0x10(sp) [player num]
+mtctr r12
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r3
+bne- 0x34
+lwz r22, 0x290(r15)
+stw r16, 0x290(r15)
+//match, now check FAN value in P1/P2 to be safe
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r16, 0x290(r15)
+cmplw r16, r22
+bne- 0x58 //jump to exit 
+li r16, 0
+stw r16, 0x290(r15)
+beq- 0x4C //jump to exit 
+
+// first bne jump to p2 check
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r3
+bne- 0x30 // EXIT
+lwz r22, 0x290(r15)
+stw r16, 0x290(r15)
+//match, now check FAN value in P1 to be safe
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r16, 0x290(r15)
+cmplw r16, r22
+bne- 0xC //jump to exit 
+li r16, 0
+stw r16, 0x290(r15)
+
+--
+No comments version:
+Inject @ 801038dc
+mtctr r12
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r3
+bne- 0x34
+lwz r22, 0x290(r15)
+stw r16, 0x290(r15)
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r16, 0x290(r15)
+cmplw r16, r22
+bne- 0x58
+li r16, 0
+stw r16, 0x290(r15)
+beq- 0x4C
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+cmplw r15, r3
+bne- 0x30
+lwz r22, 0x290(r15)
+stw r16, 0x290(r15)
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+lwz r16, 0x290(r15)
+cmplw r16, r22
+bne- 0xC 
+li r16, 0
+stw r16, 0x290(r15)
+
+--
+Always delete stored fan if a player drops
+Phase 3 Simple Always Drop Both Player Ver 
+Inject @ 801038dc (mtctr r12)
+mtctr r12
+li r16, 0
+lis r15, 0x807D
+ori r15,r15,0x71A0
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r16, 0x290(r15)
+lis r15, 0x807D
+ori r15,r15,0x71A8
+lwz r15,0(r15)
+lwz r15,0(r15)
+stw r16, 0x290(r15)
+
+------------------------------------
+Phase 1: Preventative Version
+    airbug only happens if same-fan case, so need to alternate for both players if a fan match is detected
+    problem: collision will only happen on re-entry and if rise max not exceeded
+
+//alternate current player, this will be the only player checked this exec() IFF collisionPlayer has no stored value
+Phase 1 Airbug Preventative Version @ 80103794
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //I want to store it, its a match, collision detect for P1 on current fan
+//do the same for P2 
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //P2 collision match
+
+//alternate equally
+lwz r0,0x24(r31) //get stored fan's player alternate 
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22, r0
+beq- 0xC//p1 was already in fan
+stw r22, 0x24(r31)
+bne 0x18 //jump to end 
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x24(r31)
+//end
+// NEW CODE: Perform fan check here to determine if sp should be overwritten
+lwz r15, 0x290(r22)
+cmplw r15, r31
+bne 0x8
+stw r22, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+
+
+//alternate current player, this will be the only player checked this exec() IFF collisionPlayer has no stored value
+Phase 1 Airbug Preventative Version w StateCheck @ 80103794
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //I want to store it, its a match, collision detect for P1 on current fan
+//do the same for P2 
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22) //P2 collision match
+
+//alternate equally
+lwz r0,0x24(r31) //get stored fan's player alternate 
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22, r0
+beq- 0xC//p1 was already in fan
+stw r22, 0x24(r31)
+bne 0x18 //jump to fan check  
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x24(r31)
+// NEW CODE: Perform fan check here to determine if sp should be overwritten
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x24 //exit and store r22 to stack 
+//now check if stored fan is 0
+cmplwi r15, 0
+bne 0x20 //exit without store r22 stack 
+//it is 0, continue:
+//check state
+lwz r15, 0x22C(r22)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0xC // no fan, but also not in stream state; jump to exit without stack overwrite
+
+//in stream state, force current exec to be player's new stored fan
+stw r31, 0x290(r22)
+
+stw r22, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+
+
+Phase 1 Airbug Preventative Version w StateCheck @ 80103794
+No Comments Ver
+
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+lwz r0,0x10(sp)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22,r0
+bne 0x8
+stw r31, 0x290(r22)
+lwz r0,0x24(r31)
+lis r22, 0x807D
+ori r22,r22,0x71A0
+lwz r22,0(r22)
+lwz r22,0(r22)
+cmplw r22, r0
+beq- 0xC
+stw r22, 0x24(r31)
+bne 0x18
+lis r22, 0x807D
+ori r22,r22,0x71A8
+lwz r22,0(r22)
+lwz r22,0(r22)
+stw r22, 0x24(r31)
+lwz r15, 0x290(r22)
+cmplw r15, r31
+beq 0x24
+cmplwi r15, 0
+bne 0x20
+lwz r15, 0x22C(r22)
+lwz r15, 0x30(r15)
+lwz r15, 0x10(r15)
+cmpwi r15, 0x18
+bne- 0xC
+stw r31, 0x290(r22)
+stw r22, 0x0010(sp)
+lwz	r0, 0x0010 (sp)
+
+
+Success.
+FINAL VERSION Codes:
+DonutInject Stream Height Fix
+Phase 1 Airbug Preventative Version w StateCheck
+Airbug Phase 3
+
+DonutInject Stream Height Fix:
+C21DBAE4 00000005
+82C40000 82D6022C
+82D60030 82D60010
+2C160018 40820008
+4E800020 9421FFE0
+60000000 00000000
+
+Airbug Phase 1 Preventative Version w StateCheck:
+C2103794 00000016
+3EC0807D 62D671A0
+82D60000 82D60000
+80010010 7C160040
+40820008 93F60290
+3EC0807D 62D671A8
+82D60000 82D60000
+7C160040 40820008
+93F60290 801F0024
+3EC0807D 62D671A0
+82D60000 82D60000
+7C160040 4182000C
+92DF0024 40820018
+3EC0807D 62D671A8
+82D60000 82D60000
+92DF0024 81F60290
+7C0FF840 41820024
+280F0000 40820020
+81F6022C 81EF0030
+81EF0010 2C0F0018
+4082000C 93F60290
+92C10010 80010010
+60000000 00000000
+
+Airbug Phase 3:
+C21038DC 00000008
+7D8903A6 3A000000
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+7C0F1840 4082000C
+920F0290 41820018
+3DE0807D 61EF71A8
+81EF0000 81EF0000
+920F0290 00000000
+
+2P Essentials Airbug Fix for Wind/Fan Objs v1 [dreamsyntax & DonutStopGaming]
+C21DBAE4 00000005
+82C40000 82D6022C
+82D60030 82D60010
+2C160018 40820008
+4E800020 9421FFE0
+60000000 00000000
+C2103794 00000016
+3EC0807D 62D671A0
+82D60000 82D60000
+80010010 7C160040
+40820008 93F60290
+3EC0807D 62D671A8
+82D60000 82D60000
+7C160040 40820008
+93F60290 801F0024
+3EC0807D 62D671A0
+82D60000 82D60000
+7C160040 4182000C
+92DF0024 40820018
+3EC0807D 62D671A8
+82D60000 82D60000
+92DF0024 81F60290
+7C0FF840 41820024
+280F0000 40820020
+81F6022C 81EF0030
+81EF0010 2C0F0018
+4082000C 93F60290
+92C10010 80010010
+60000000 00000000
+C21038DC 00000008
+7D8903A6 3A000000
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+7C0F1840 4082000C
+920F0290 41820018
+3DE0807D 61EF71A8
+81EF0000 81EF0000
+920F0290 00000000
+* Note: Only fixes Fan/Wind Objects. Mad Matrix ElecFan object is still broken as of this version

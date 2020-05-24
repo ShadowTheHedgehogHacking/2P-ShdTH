@@ -2756,6 +2756,18 @@
         },
         {
             "address": "80575FA8",
+            "baseIndex": 1,
+            "label": "Arbitrary P2 FAN (290 Ver)",
+            "pointerOffsets": [
+                "8",
+                "0",
+                "290"
+            ],
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80575FA8",
             "baseIndex": 0,
             "label": "Arbitrary P1 FAN (Temp 210 ver",
             "pointerOffsets": [
@@ -2779,18 +2791,6 @@
             "unsigned": false
         },
         {
-            "address": "80575FA8",
-            "baseIndex": 0,
-            "label": "Arbitrary P2 FAN (290 Ver)",
-            "pointerOffsets": [
-                "8",
-                "0",
-                "290"
-            ],
-            "typeIndex": 2,
-            "unsigned": false
-        },
-        {
             "address": "807D866C",
             "baseIndex": 1,
             "label": "Master Shadow.one Handler",
@@ -2798,9 +2798,34 @@
             "unsigned": false
         },
         {
+            "address": "80F8DDF4",
+            "baseIndex": 1,
+            "label": "Fan1 0x24 custom",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "80F8DDD0",
+            "baseIndex": 0,
+            "label": "Fan1 Start",
+            "length": 55,
+            "pointerOffsets": [
+                "0"
+            ],
+            "typeIndex": 5,
+            "unsigned": false
+        },
+        {
             "address": "805F13B0",
             "baseIndex": 1,
             "label": "Master MTP/BON Load Address for Shadow",
+            "typeIndex": 2,
+            "unsigned": false
+        },
+        {
+            "address": "8060A3F0",
+            "baseIndex": 1,
+            "label": "No label",
             "typeIndex": 2,
             "unsigned": false
         }
