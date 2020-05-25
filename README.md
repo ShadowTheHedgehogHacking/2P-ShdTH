@@ -12,7 +12,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Problems
 * Not Compatible with Nintendont Since v2.0
-* Minor Exception thrown for Airbug:Height fix (will not crash game, hit ignore for now)
 * Memory leak found in Space Gadget (will throw exception on free rarely, eventually game will halt)
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) [Fixed in v2.1 (not released yet)]
 * DevilDoom crashes for some people [Fixed in v2.1 (not released yet)]
