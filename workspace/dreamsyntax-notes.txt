@@ -9191,8 +9191,8 @@ Sonic Jump Ball Addon:
 0460a850 38800001
 ----------
 Missing textures identified:
-Prison Island general forest textures
-Space gadget hero route expert missing HD earth
+Prison Island general forest textures - DONE
+Space gadget hero route expert missing HD earth - NORMAL (looks bad in original too, but is better than crunched ver) - Replaced with SA2 Earth (thanks tybis)
 -------------
 2020-03-30
 Rest Heap -> (has everything before the three are allocated)
@@ -10626,3 +10626,11 @@ C2266C60 00000016
 92C10010 80010010
 60000000 00000000
 * Fixes 'Airbug' with Fan/Wind/ElecFan objects
+--
+Bug Hunt results:
+
+Identified exception being thrown (non-critical, will not halt but does throw panic messages): Caused by DonutInject Stream Height Fix
+Other Commands call it, and sometimes do not have player in r4 or deref far down enough-
+solution: either null check or check both players manually
+
+Identified memory leak on Space Gadget (probably from GravCollision object related code, but need to verify its not the switches)
