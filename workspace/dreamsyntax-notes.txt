@@ -10780,3 +10780,6 @@ Update space gadget cmn to remove double GravityColi objects- may have been caus
 Replaced with more GravityHoop objects (which have same issue of Airbug: if players both hit at same time only one player will be assigned)
 
 Nope, still leaks. Resuming later.
+
+Appears to be fixed after removing any modification to GravityChangeCollision, even with spamming hoop/switch types.
+MCM updated with removal (v4 gravity code)

@@ -43,7 +43,7 @@
 80009370 00000048 80009370 0 zz_80009370_
 800093b8 00000050 800093b8 0 zz_800093b8_
 80009408 00000054 80009408 0 GUI_something
-8000945c 0000006c 8000945c 0 ??EffectsElement_8000945c_
+8000945c 0000006c 8000945c 0 CameraAndEffectBCTRL_Iter
 800094c8 00000038 800094c8 0 LoadablePhysicsMesh::Destroy(void)
 80009500 00000048 80009500 0 cHeadTrack::__dt(void)
 80009548 0000006c 80009548 0 HAS_PJSCamera::PJSCameraFactory_1
@@ -2729,7 +2729,7 @@
 8005fecc 00000024 8005fecc 0 zz_8005fecc_
 8005fef0 0000005c 8005fef0 0 zz_8005fef0_
 8005ff4c 0000009c 8005ff4c 0 zz_8005ff4c_
-8005ffe8 0000003c 8005ffe8 0 zz_8005ffe8_
+8005ffe8 0000003c 8005ffe8 0 Target* TargetSearchList
 80060024 00000034 80060024 0 zz_80060024_
 80060058 0000006c 80060058 0 zz_80060058_
 800600c4 00000050 800600c4 0 zz_800600c4_
@@ -2798,7 +2798,7 @@
 800611c4 0000005c 800611c4 0 FormationOffensive::__dt(void)
 80061220 0000005c 80061220 0 FormationOffensive::__dt(void)
 8006127c 00000018 8006127c 0 zz_8006127c_
-80061294 00000028 80061294 0 SidelineExplodable::Allocate(void)
+80061294 00000028 80061294 0 boost::detail::sp_counted_base_impl<TargetSearchList *, boost::checked_deleter<TargetSearchList>>
 800612bc 0000004c 800612bc 0 zz_800612bc_
 80061308 00000028 80061308 0 SidelineExplodable::Allocate(void)
 80061330 0000004c 80061330 0 zz_80061330_
@@ -6565,7 +6565,7 @@
 800d1090 0000004c 800d1090 0 zz_800d1090_
 800d10dc 00000028 800d10dc 0 SidelineExplodable::Allocate(void)
 800d1104 0000004c 800d1104 0 zz_800d1104_
-800d1150 00000028 800d1150 0 SidelineExplodable::Allocate(void)
+800d1150 00000028 800d1150 0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Collision::CollisionResultList *, boost::checked_deleter<SonicteamUSA::System::Collision::CollisionResultList>>
 800d1178 0000004c 800d1178 0 zz_800d1178_
 800d11c4 00000064 800d11c4 0 zz_800d11c4_
 800d1228 00000004 800d1228 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -15155,7 +15155,7 @@
 801c71c0 00000004 801c71c0 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 801c71c4 00000028 801c71c4 0 SidelineExplodable::Allocate(void)
 801c71ec 0000004c 801c71ec 0 zz_801c71ec_
-801c7238 00000028 801c7238 0 SidelineExplodable::Allocate(void)
+801c7238 00000028 801c7238 0 boost::detail::sp_counted_base_impl<PJSCamera::Collision::ProcessRay2Eye *, boost::checked_deleter<PJSCamera::Collision::ProcessRay2Eye>>
 801c7260 0000004c 801c7260 0 zz_801c7260_
 801c72ac 0000000c 801c72ac 0 zz_801c72ac_
 801c72b8 00000478 801c72b8 0 zz_801c72b8_
@@ -20684,9 +20684,9 @@
 802709d8 00000088 802709d8 0 zz_802709d8_
 80270a60 0000005c 80270a60 0 FormationOffensive::__dt(void)
 80270abc 0000005c 80270abc 0 FormationOffensive::__dt(void)
-80270b18 0000002c 80270b18 0 zz_80270b18_
+80270b18 0000002c 80270b18 0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraRequest *, void (*)(SonicteamUSA::System::Camera::CameraRequest *)>
 80270b44 0000004c 80270b44 0 zz_80270b44_
-80270b90 0000002c 80270b90 0 zz_80270b90_
+80270b90 0000002c 80270b90 0 boost::detail::sp_counted_base_impl<SonicteamUSA::System::Camera::CameraMode *, void (*)(SonicteamUSA::System::Camera::CameraMode *)>
 80270bbc 0000004c 80270bbc 0 zz_80270bbc_
 80270c08 000000c4 80270c08 0 zz_80270c08_
 80270ccc 00000004 80270ccc 0 DBClose 	NdevExi2A.a DebuggerDriver.o
@@ -23028,7 +23028,7 @@
 802c7d28 0000005c 802c7d28 0 zz_802c7d28_
 802c7d84 0000009c 802c7d84 0 zz_802c7d84_
 802c7e20 00000024 802c7e20 0 ListContainerBase<P6cSAnim,33NewAdapter<19ListEntry<P6cSAnim>>>::DeleteEntry(ListEntry<P6cSAnim> *)
-802c7e44 00000024 802c7e44 0 cFielder::EndAction(void)
+802c7e44 00000024 802c7e44 0 r5=boost::detail::sp_counted_base_impl<AdvReal::SelectMode::Phase *, boost::checked_deleter<AdvReal::SelectMode::Phase>>
 802c7e68 00000034 802c7e68 0 zz_802c7e68_
 802c7e9c 0000002c 802c7e9c 0 zz_802c7e9c_
 802c7ec8 0000005c 802c7ec8 0 FormationOffensive::__dt(void)

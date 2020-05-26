@@ -546,7 +546,7 @@ bl <DistanceCheck>
 	-==-
 
 
-2P Essentials GravitySwitcher Fix v3
+2P Essentials GravitySwitcher Fix v4
 [DonutStopGaming, dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80293938 ---- 808D4F00 -> Branch
@@ -600,7 +600,6 @@ EDEF882A FC0FA840
 ------------- 0x80246A4C ---- 4BF1A895 -> 60000000
 ------------- 0x80247B84 ---- 4BF1AC81 -> 60000000
 ------------- 0x80247BE0 ---- 4BF19701 -> 60000000
-------------- 0x80247860 ---- 4182000C -> 60000000
 
 
 	-==-
