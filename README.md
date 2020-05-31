@@ -12,7 +12,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Problems
 * Not Compatible with Nintendont Since v2.0
-* Memory leak found in Space Gadget
+* Memory leak found in Space Gadget [Fixed in v2.1 (not released yet)]
 * "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) [Fixed in v2.1 (not released yet)]
 * DevilDoom crashes for some people [Fixed in v2.1 (not released yet)]
 * DevilDoom fight is not balanced for two players (very hard to win) [Fixed in v2.1 (not released yet)] 
@@ -62,6 +62,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 * Phase 2 Warp for P2 in Diablon Boss
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
+* Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
 
 ## Dev
 * dreamsyntax
