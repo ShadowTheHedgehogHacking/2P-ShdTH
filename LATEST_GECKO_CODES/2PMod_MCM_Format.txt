@@ -879,22 +879,6 @@ NTSC 1.06 --- 0x801DBAE4 ---- 9421FFE0 -> Branch
 4E800020 9421FFE0
 48000000
 
-------------- 0x80103794 ---- 80010010 -> Branch
-
-bl <PlayerStoredFan_Store>
-
-------------- 0x801038DC ---- 7D8903A6 -> Branch
-
-bl <PlayerStoredFan_Cleanup>
-
-------------- 0x80266D14 ---- 7D8903A6 -> Branch
-
-bl <PlayerStoredFan_Cleanup>
-
-------------- 0x80266C60 ---- 80010010 -> Branch
-
-bl <PlayerStoredFan_Store>
-
 <PlayerStoredFan_Cleanup> NTSC 1.06
 7d8903a6 3a000000
 3de0807d 61ef71a0
@@ -928,3 +912,8 @@ bl <PlayerStoredFan_Store>
 4082000c 93f60290
 92c10010 80010010
 4E800020
+
+------------- 0x80266C60 ---- 80010010 -> bl <PlayerStoredFan_Store>
+------------- 0x80103794 ---- 80010010 -> bl <PlayerStoredFan_Store>
+------------- 0x801038DC ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
+------------- 0x80266D14 ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
