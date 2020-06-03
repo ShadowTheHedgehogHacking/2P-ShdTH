@@ -554,7 +554,7 @@
 80016104 0000015c 80016104 0 zz_80016104_
 80016260 00000024 80016260 0 tanf
 80016284 00000028 80016284 0 GetFloatComplement(r4=FloatXYZ) :: Returns r3=Float NegativeX NegativeY NegativeZ
-800162ac 000000a4 800162ac 0 zz_800162ac_
+800162ac 000000a4 800162ac 0 SonicRidersFeetMode_Saucer
 80016350 00000020 80016350 0 cPlayer::PostPhysicsUpdate(void)
 80016370 00000020 80016370 0 cPlayer::PostPhysicsUpdate(void)
 80016390 00000064 80016390 0 glxCopyMatrix(float (&)[3][4], nlMatrix4 &)
@@ -2885,7 +2885,7 @@
 80063178 0000002c 80063178 0 zz_80063178_
 800631a4 00000008 800631a4 0 CBGetBytesAvailableForRead 	TRK_Hollywood_Revolution.a C:\products\RVL\runtime_libs\gamedev\cust_connection\utils\common\Circle
 800631ac 00000024 800631ac 0 cFielder::UpdatePlay(float)
-800631d0 0000002c 800631d0 0 zz_800631d0_
+800631d0 0000002c 800631d0 0 AirSaucer_FlickerOnHurt
 800631fc 00000038 800631fc 0 zz_800631fc_
 80063234 00000024 80063234 0 cFielder::UpdatePlay(float)
 80063258 00000024 80063258 0 cFielder::UpdatePlay(float)
@@ -3982,7 +3982,7 @@
 8007e0f8 0000002c 8007e0f8 0 zz_8007e0f8_
 8007e124 0000010c 8007e124 0 bctrlToMountVehiclesAndTurrets
 8007e230 0000005c 8007e230 0 zz_8007e230_
-8007e28c 0000025c 8007e28c 0 zz_8007e28c_
+8007e28c 0000025c 8007e28c 0 RenderRelated
 8007e4e8 0000002c 8007e4e8 0 LexicalCast<46BasicString<Us,Q26Detail19TempStringAllocator>,46BasicString<Us,Q26Detail19TempStringAllocator>>(BasicString<Us,Q
 8007e514 00000008 8007e514 0 nw4hbm::ut::TextWriterBase<w>::GetCharSpace(void) const 	homebuttonLib.a ut_TextWriterBase.o
 8007e51c 00000070 8007e51c 0 MapPlayerModel_and_UpdatePosition_To_VehicleorTurret
@@ -14378,12 +14378,12 @@
 801ac9e4 00000048 801ac9e4 0 dCreateGeom
 801aca2c 00000030 801aca2c 0 zz_801aca2c_
 801aca5c 00000054 801aca5c 0 zz_801aca5c_
-801acab0 000000e4 801acab0 0 zz_801acab0_
+801acab0 000000e4 801acab0 0 GUNMech_ExecuteBehaviors
 801acb94 000000f0 801acb94 0 zz_801acb94_
 801acc84 000001b0 801acc84 0 GUNMECH_DirectionalControl_Physics
 801ace34 00000324 801ace34 0 GUNMech_HOVERPHYSICS
 801ad158 000000d0 801ad158 0 GUNMech_JumpToHoverTransitionFunction
-801ad228 00000084 801ad228 0 ??GUNMech_FirstHitFullHP_801ad228_
+801ad228 00000084 801ad228 0 GUNMech_FirstHitFullHP
 801ad2ac 0000008c 801ad2ac 0 GUNMech_HasLandedState
 801ad338 00000084 801ad338 0 GUNMech_ToGround_AnimationTransition
 801ad3bc 000001e0 801ad3bc 0 ??GUNMech_ControllerForJumpAndDismount_801ad3bc_
@@ -14393,7 +14393,7 @@
 801ad700 000000dc 801ad700 0 zz_801ad700_
 801ad7dc 00000118 801ad7dc 0 zz_801ad7dc_
 801ad8f4 00000194 801ad8f4 0 zz_801ad8f4_
-801ada88 000000c8 801ada88 0 zz_801ada88_
+801ada88 000000c8 801ada88 0 GUNMech_CalculateCollisionToWorld
 801adb50 000000fc 801adb50 0 zz_801adb50_
 801adc4c 0000005c 801adc4c 0 zz_801adc4c_
 801adca8 00000068 801adca8 0 DismountGUNMechType_Operations
@@ -14498,7 +14498,7 @@
 801b1440 00000024 801b1440 0 cFielder::UpdatePlay(float)
 801b1464 0000003c 801b1464 0 OnDismountSaucerTypeVehicle_
 801b14a0 0000005c 801b14a0 0 OnMountSaucerTypeVehicle
-801b14fc 000008b4 801b14fc 0 zz_801b14fc_
+801b14fc 000008b4 801b14fc 0 AirSaucer_VehicleLogic
 801b1db0 00000024 801b1db0 0 tanf
 801b1dd4 00000024 801b1dd4 0 zz_801b1dd4_
 801b1df8 000000bc 801b1df8 0 zz_801b1df8_
@@ -14664,7 +14664,7 @@
 801b5aa4 00000030 801b5aa4 0 zz_801b5aa4_
 801b5ad4 00000034 801b5ad4 0 zz_801b5ad4_
 801b5b08 00000024 801b5b08 0 cFielder::UpdatePlay(float)
-801b5b2c 000001bc 801b5b2c 0 ??bctrlToVehicleLogic?@801b5b64
+801b5b2c 000001bc 801b5b2c 0 bctrlToVehicleLogic@801b5b64
 801b5ce8 00000034 801b5ce8 0 zz_801b5ce8_
 801b5d1c 00000008 801b5d1c 0 nw4hbm::ut::TextWriterBase<w>::SetCharSpace(float) 	homebuttonLib.a ut_TextWriterBase.o
 801b5d24 00000030 801b5d24 0 zz_801b5d24_
@@ -25027,7 +25027,7 @@
 802fe24c 00000058 802fe24c 0 zz_802fe24c_
 802fe2a4 00000004 802fe2a4 0 DBClose 	NdevExi2A.a DebuggerDriver.o
 802fe2a8 00000028 802fe2a8 0 zz_802fe2a8_
-802fe2d0 00000190 802fe2d0 0 zz_802fe2d0_
+802fe2d0 00000190 802fe2d0 0 BAGunShip_SelectPlayerToTarget@802fe320
 802fe460 00000040 802fe460 0 zz_802fe460_
 802fe4a0 0000013c 802fe4a0 0 zz_802fe4a0_
 802fe5dc 00000040 802fe5dc 0 zz_802fe5dc_
@@ -26487,7 +26487,7 @@
 80333448 0000005c 80333448 0 zz_80333448_
 803334a4 0000004c 803334a4 0 zz_803334a4_
 803334f0 00000028 803334f0 0 zz_803334f0_
-80333518 00000028 80333518 0 ??GUNMech_EnterHover_80333518_
+80333518 00000028 80333518 0 GUNMech_EnterHover
 80333540 00000028 80333540 0 zz_80333540_
 80333568 00000028 80333568 0 zz_80333568_
 80333590 00000170 80333590 0 zz_80333590_
