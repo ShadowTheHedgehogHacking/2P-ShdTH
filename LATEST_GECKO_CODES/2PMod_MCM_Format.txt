@@ -917,3 +917,25 @@ NTSC 1.06 --- 0x801DBAE4 ---- 9421FFE0 -> Branch
 ------------- 0x80103794 ---- 80010010 -> bl <PlayerStoredFan_Store>
 ------------- 0x801038DC ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
 ------------- 0x80266D14 ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
+
+
+	-==-
+
+
+2P Essentials BkWorm and BkGunship Targets Closest Player
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80192408 ---- 80AD3148 -> Branch
+
+7FF1FB78 82310000
+3A310110
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x802FE320 ---- 80AD3148 -> Branch
+
+7FF1FB78 3A31022C
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000

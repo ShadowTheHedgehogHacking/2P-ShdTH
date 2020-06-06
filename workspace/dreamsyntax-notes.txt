@@ -10927,3 +10927,9 @@ C2266C60 00000016
 60000000 00000000
 --
 Airbug Fix MCM version done, see file 2PMod_MCM_Format in LATEST_GECKO_CODES folder
+---------
+2020-06-06
+Preparing for final version release 2.1.
+Patched BkWorm to attack based on player distance.
+Still looking for BkGunship floats
+Rewriting docs, moving DMW/Symbol map to own repo to support Shadow:Reloaded project and close this repo.

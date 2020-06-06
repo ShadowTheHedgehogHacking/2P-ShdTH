@@ -29,13 +29,10 @@
 									Bring you
 							2 Player Shadow The Hedgehog
 
-=== Release 6 / v2.1 - 2020.0X.XX ===
+=== Release 6 / v2.1 - 2020.06.06 ===
 
-=== Things to Know ===
-- Airbug is NOT FIXED IN THIS BUILD! Use Chaos Blast to break out of endless floating if you enter this glitched state
 - Change characters:
 	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
-- Z+L is Chaos Blast Activator, Z+R is Chaos Control Activator, Z+L+R is Clear Chaos Powers
 
 === Setup ===
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
@@ -75,7 +72,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod - How To Set
 DO NOT USE 5.0 STABLE! Use 5.0-10912 or newer! 
   There are tons of performance fixes that directly impact this game
   You can download the latest Dolphin here: https://dolphin-emu.org/download/
-  Be sure to install the pre-req of "64-bit Visual C++ redistributable for Visual Studio 2017" linked at the top of Dolphin download page
+  Be sure to install the pre-req of "64-bit Visual C++ redistributable for Visual Studio 2019" linked at the top of Dolphin download page
 
 0. GUPE8P.ini needs to be moved/copied to your Documents\Dolphin Emulator\GameSettings\ folder
 	OR if you are in portable mode (add portable.txt to Dolphin dir to enable) this folder instead will be in "<Dolphin.exe Directory>\User\GameSettings\"
@@ -94,12 +91,17 @@ Select Graphics
 		Set Backend to Direct3D 11 or Vulkan (as of 5.0-10912 Direct3D 12 can cause crashes for 2P-ShdTH)
 		Set Aspect Ratio to Force 16:9 or Stretch to Window
 	Under Enhancements:
-		I recommend 3x Native, other settings here are optional
+		I recommend 3x Native if on a 1080p monitor, other settings here are optional
 	Under Hacks:
 		Check/Enable everything
 	Under Advanced:
 		Check/Enable Load Custom Textures and Prefetch Custom Textures
-******** TODO: Mention HD texture pack instructions here
+
+2.5. SD Texture Pack
+	Download the latest SD Texture Pack (mentioned on the releases page where you downloaded this) and unpack to
+		Dolphin\User\Load\Textures
+	This is optional but will restore the original game textures rather than the highly crunched versions required to not crash
+
 3. Configure Controllers
 4. Play!
 5. FPS optimization (CPU variable):

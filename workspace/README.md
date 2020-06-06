@@ -4,9 +4,11 @@
 Contains addresses I (dreamsyntax) found that are interesting and my process (if you can follow my notes).
 As time went on the notes got more consistent/better and are more readable.
 
-`GUPE8P.map` is our latest self-defined symbols for Shadow The Hedgehog (US).
+[GUPE8P.map](https://github.com/ShadowTheHedgehogHacking/shadow-disasm-and-dmw) is our latest self-defined symbols for Shadow The Hedgehog (US).
 
 The `*.dmw` files are memory list files for Shadow The Hedgehog (US), which can be opened with [aldelaro5's Dolphin Memory Engine](https://github.com/aldelaro5/Dolphin-memory-engine)
+
+Note: The .dmw files and symbols have moved to [shadow-disasm-and-dmw](https://github.com/ShadowTheHedgehogHacking/shadow-disasm-and-dmw)
 
 Other misc files may be brief codes or descriptions used while trying to understand the game
 
@@ -34,7 +36,7 @@ Research files and struct definitions are by DonutStopGaming
 7. Select the folder where you will store the game content and modify its files
 
 ### Configuration of Dolphin
-** IT IS RECOMMENDED YOU USE OUR DOLPHIN BUILD in the main repo with TryTwo's additional debugger features at this time
+** IT IS RECOMMENDED YOU USE OUR DOLPHIN BUILD in the main repo with TryTwo's additional debugger features 
 1. Open Dolphin
 2. Select Configuration
 3. Select Paths Tab
@@ -54,8 +56,6 @@ Use [aldelaro5's Dolphin Memory Engine](https://github.com/aldelaro5/Dolphin-mem
 
 I recommend building the latest master, but 0.5.0 is fine.
 
-DMWs go into in 2P-ShdTH/workspace
-
 ### ASM Editing/Gecko Codes
 In Dolphin to generate the known GameCube symbols etc that aren't game specific:
 1. Launch Game
@@ -66,8 +66,9 @@ In Dolphin to generate the known GameCube symbols etc that aren't game specific:
 
 Note these symbols may be incorrect but it helps to have a few named even if they are wrong.
 
+Be sure to grab our latest map for Shadow The Hedgehog linked above, the file is GUPE8P.map
 
-Get a proper map for Shadow The Hedgehog from 2P-ShdTH/workspace GUPE8P.map and place in the Dolphin/user/maps folder
+Place it in the `Dolphin/user/maps` folder
 
 
 Watch this video series if you aren't familiar with gecko/editing

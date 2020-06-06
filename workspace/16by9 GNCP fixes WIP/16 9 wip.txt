@@ -1,5 +1,10 @@
 WIP Patches to remaining UI elements to be true 16:9 without weirdness
 
+tex1_128x128_e94789188fe554c0_558454a17b9f01cb_8.png removes the RingUI image,
+since it has not been possible to move it across the screen yet.
+Move it to <DolphinDir>\User\Load\Textures\GUPE8P
+and enables custom textures in graphics
+
 $Dreamsyntax 169 UI SuperFix WIP
 045f67a0 c1700000
 045f67a8 44250000

@@ -12,10 +12,6 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Problems
 * Not Compatible with Nintendont Since v2.0
-* Memory leak found in Space Gadget [Fixed in v2.1 (not released yet)]
-* "Air bug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) [Fixed in v2.1 (not released yet)]
-* DevilDoom crashes for some people [Fixed in v2.1 (not released yet)]
-* DevilDoom fight is not balanced for two players (very hard to win) [Fixed in v2.1 (not released yet)] 
 
 ## Done so far:
 * Level chunks load/unload based on both players
@@ -52,13 +48,16 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * Physics Rewrite for GUNMech Jumpers
 * Downscale all stage and stage_gdt textures to make the game crashless
 * P2's scores and rings add to game totals at ranking
+* "Airbug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) Fixed
+* DevilDoom crashing fixed (P2's skin data will be transparent in DevilDoom stage until death as a side effect)
+* DevilDoom is balanced for two players (ring collection is shared)
+* Worm Enemies target closest player
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
-* Worm Enemies and AlienShips will only target P1
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 * Phase 2 Warp for P2 in Diablon Boss
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
@@ -70,9 +69,9 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Credits
 * dreamsyntax for starting this project/everything
-* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries
+* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
-* TheHatedGravity for red/yellow TrueBlackShadow textures, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
+* TheHatedGravity for red/yellow TrueBlackShadow textures, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Muzzarino for some symbol findings
 
@@ -81,7 +80,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * TryTwo for extremely useful new debugging features in Dolphin
 * aldelaro5 for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
-* LimblessVector for Shadow file reversing work (HeroesPowerPlant)
+* LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
 * Heroes Hacking Central (&Shadow) for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
