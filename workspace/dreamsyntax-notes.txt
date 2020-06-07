@@ -10933,3 +10933,5 @@ Preparing for final version release 2.1.
 Patched BkWorm to attack based on player distance.
 Still looking for BkGunship floats
 Rewriting docs, moving DMW/Symbol map to own repo to support Shadow:Reloaded project and close this repo.
+
+Target 2020-06-16 for release date

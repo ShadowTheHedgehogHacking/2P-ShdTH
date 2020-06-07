@@ -935,7 +935,7 @@ bl <DistanceCheck>
 
 ------------- 0x802FE320 ---- 80AD3148 -> Branch
 
-7FF1FB78 3A31022C
+7C310B78 3A310060
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000

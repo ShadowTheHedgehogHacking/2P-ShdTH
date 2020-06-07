@@ -51,7 +51,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * "Airbug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) Fixed
 * DevilDoom crashing fixed (P2's skin data will be transparent in DevilDoom stage until death as a side effect)
 * DevilDoom is balanced for two players (ring collection is shared)
-* Worm Enemies target closest player
+* Worm Enemies and Alien Gunships target closest player
 
 ## Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
