@@ -1,10 +1,5 @@
 WIP Patches to remaining UI elements to be true 16:9 without weirdness
 
-tex1_128x128_e94789188fe554c0_558454a17b9f01cb_8.png removes the RingUI image,
-since it has not been possible to move it across the screen yet.
-Move it to <DolphinDir>\User\Load\Textures\GUPE8P
-and enables custom textures in graphics
-
 $Dreamsyntax 169 UI SuperFix WIP
 045f67a0 c1700000
 045f67a8 44250000
@@ -14,7 +9,7 @@ $Dreamsyntax 169 UI SuperFix WIP
 
 use in combination with wiki code below (split for testing)
 
-$Dolphin 16:9 pt1 ingamecamera (bad) + fonts
+$Dolphin 16:9 pt1 ingamecamera + fonts
 c249475c 00000003
 3dc03f40 91c22000
 c2222000 ec110032
