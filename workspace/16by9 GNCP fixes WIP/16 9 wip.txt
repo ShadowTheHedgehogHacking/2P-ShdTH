@@ -36,7 +36,7 @@ c2484334 00000002
 3dc04000 91c22000
 c0822000 00000000
 *
-$169 pt3
+$169 pt3 - SFDs
 c2036764 00000006
 3dc08057 3de03f40
 91eee098 3de0bf40
@@ -44,6 +44,7 @@ c2036764 00000006
 3de03f80 91eee098
 3de0bf80 91eee084
 60000000 00000000
+* Note: credits uses black bars around the SFDs to create a blending effect with the background. With this code on the right-side bar overlaps the media
 *
 $169 pt4 - main 169 functionality
 c236328c 00000006
