@@ -1,11 +1,27 @@
 WIP Patches to remaining UI elements to be true 16:9 without weirdness
 
-$Dreamsyntax 169 UI SuperFix WIP
+$Dreamsyntax 169 UI SuperFix WIP [dreamsyntax]
 045f67a0 c1700000
 045f67a8 44250000
 045f67e0 442f0000
 045f67d0 c2600000
 045f67f0 c2780000
+
+$ Health Bar and TargetLock UI Fix [dreamsyntax]
+c20622a8 00000006
+3dc08057 3de03f40
+91eee098 3de0bf40
+91eee084 4e800421
+3de03f80 91eee098
+3de0bf80 91eee084
+60000000 00000000
+c2062300 00000006
+3dc08057 3de03f40
+91eee098 3de0bf40
+91eee084 4e800421
+3de03f80 91eee098
+3de0bf80 91eee084
+60000000 00000000
 
 use in combination with wiki code below (split for testing)
 
