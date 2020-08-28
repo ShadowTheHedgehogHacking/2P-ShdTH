@@ -10934,4 +10934,27 @@ Patched BkWorm to attack based on player distance.
 Still looking for BkGunship floats
 Rewriting docs, moving DMW/Symbol map to own repo to support Shadow:Reloaded project and close this repo.
 
-Target 2020-06-16 for release date
+----
+Release on hold until other misc codes done.
+------
+2020-07-20
+Working on 'unrestrict filenames' geo/coli code v2:
+
+
+target caller for geo/coli? (might just be geo) : 80046720 <- expect this in stack
+
++0xA0 + 0x10 + 0x44
+(minus 0x4 per subcall)
+
+inject @ 801e280c | original : cmpwi r3, 0
+
+lwz	r15, 0x00F4 (sp)
+lis r16, 0x8004
+ori r16, r16, 0x6720
+cmpw r15, r16
+bne- 0x jump to end
+lis r15 0x801E
+ori r15, r15, 0x2814
+mtlr r15
+blr
+cmpwi r3, 0
