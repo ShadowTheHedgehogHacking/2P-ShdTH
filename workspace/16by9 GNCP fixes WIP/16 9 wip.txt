@@ -7,7 +7,7 @@ $Dreamsyntax 169 UI SuperFix WIP [dreamsyntax]
 045f67d0 c2600000
 045f67f0 c2780000
 
-$ Health Bar and TargetLock UI Fix [dreamsyntax]
+$16by9 LockOn Sprite Fix for Singleplayer [dreamsyntax]
 c20622a8 00000006
 3dc08057 3de03f40
 91eee098 3de0bf40
@@ -23,7 +23,72 @@ c2062300 00000006
 3de0bf80 91eee084
 60000000 00000000
 
-use in combination with wiki code below (split for testing)
+$16by9 LockOn Sprite Fix for Vertical SplitScreen [dreamsyntax]
+C20622A8 00000007
+3DC08057 3DE03F4C
+61EFCCCD 91EEE098
+3DE0BF66 61EF6666
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C2062300 00000007
+3DC08057 3DE03F4C
+61EFCCCD 91EEE098
+3DE0BF66 61EF6666
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+$16by9 LockOn Sprite Fix for Horizontal SplitScreen [dreamsyntax]
+C20622A8 00000007
+3DC08057 3DE03F33
+61EF3333 91EEE098
+3DE0BF33 61EF3333
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C2062300 00000007
+3DC08057 3DE03F33
+61EF3333 91EEE098
+3DE0BF33 61EF3333
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+$16by9 HPBar Fix and original code's Part 5 for Vertical SplitScreen [dreamsyntax] 
+C2363180 0000000B
+81C10124 3DE0800B
+61EFF388 7C0E7800
+3DC08057 41820014
+3DE03F40 91EEE098
+3DE0BF40 40820018
+3DE03F4C 61EFCCCD
+91EEE098 3DE0BF66
+61EF6666 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+$16by9 HPBar Fix and original code's Part 5 for Horizontal SplitScreen [dreamsyntax]
+C2363180 0000000B
+81C10124 3DE0800B
+61EFF388 7C0E7800
+3DC08057 41820014
+3DE03F40 91EEE098
+3DE0BF40 40820018
+3DE03F33 61EF3333
+91EEE098 3DE0BF33
+61EF3333 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+
+above use in combination with wiki code below (split for testing)
 
 $Dolphin 16:9 pt1 ingamecamera + fonts
 c249475c 00000003
@@ -44,7 +109,7 @@ c2036764 00000006
 3de03f80 91eee098
 3de0bf80 91eee084
 60000000 00000000
-* Note: credits uses black bars around the SFDs to create a blending effect with the background. With this code on the right-side bar overlaps the media
+* Note: during credits black bars are put around the SFDs to create a blending effect with the background. With this code on the right-side bar overlaps the media
 *
 $169 pt4 - main 169 functionality
 c236328c 00000006
@@ -55,7 +120,7 @@ c236328c 00000006
 3de0bf80 91eee084
 60000000 00000000
 *
-$169pt 5 - chaosbars and fadescreen and load screen
+$169pt 5 - chaosbars and fadescreen and load screen - SINGLEPLAYER ONLY!!!!!! DO NOT USE IF USING VERTICAL/HORIZONTAL
 c2363180 00000006
 3dc08057 3de03f40
 91eee098 3de0bf40

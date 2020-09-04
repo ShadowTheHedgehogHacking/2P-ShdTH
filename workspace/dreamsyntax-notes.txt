@@ -10958,3 +10958,458 @@ ori r15, r15, 0x2814
 mtlr r15
 blr
 cmpwi r3, 0
+-------
+2020-09-03
+Finish TMeter for 16:9 car health bar for 2PCommandWindow and CommandWindow
+
+
+Looking at DrawLockOn / Sprite2D elements for vert/horizontal versions
+
+
+From 7-11-2020:
+============================
+16:9 UI LockOn TargetDraw Fix (GreenCore Only):
+C20622A8 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BF40
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+Reuse code for all 16:9 elements remaining (health bar, outer core etc):
+lis    r14, 0x8057
+lis    r15, 0x3F40
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF40
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+Check bctrl RenderMaster stack, find bctrl of individual Render state that jumps to 
+DrawWindow() @ 80490e30
+TargetDraw Fix (OuterCore):
+@ 80062300
+==============================
+
+800622a8
+80062300
+core val = 1F68 = 1
+core val = 1F7C = -1
+change: 0.75
+-0.75
+---
+y = -0.3575?
+= BE B7 0A 3D
+
+lis    r14, 0x8057
+lis    r15, 0x3F40
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBEB7
+ori    r15, r15, 0x0A3D
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+Inject @ 80062300 and 800622A8
+
+
+C2062300 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BEB7
+61EF0A3D 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+C20622A8 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BEB7
+61EF0A3D 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+
+Fail, way offset to the right
+
+x = positive .3575
+= 3E B7 0A 3D
+
+
+lis    r14, 0x8057
+lis    r15, 0x3EB7
+ori    r15, r15, 0x0A3D
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBEB7
+ori    r15, r15, 0x0A3D
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+
+C2062300 00000007
+3DC08057 3DE03EB7
+61EF0A3D 91EEE098
+3DE0BEB7 61EF0A3D
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C20622A8 00000007
+3DC08057 3DE03EB7
+61EF0A3D 91EEE098
+3DE0BEB7 61EF0A3D
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+
+lis    r14, 0x8057
+lis    r15, 0x3EB7
+ori    r15, r15, 0x0A3D
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF40
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+C2062300 00000006
+3DC08057 3DE03EB7
+61EF0A3D 91EEE098
+3DE0BF40 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+C20622A8 00000006
+3DC08057 3DE03EB7
+61EF0A3D 91EEE098
+3DE0BF40 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+lis    r14, 0x8057
+lis    r15, 0x3F40
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBFA0
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+
+C2062300 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BFA0
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C20622A8 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BFA0
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+
+lis    r14, 0x8057
+lis    r15, 0x805E
+ori    r15, r15, 0x4584
+lwz	   r15, 0x0(r15)
+stw    r15, -0x1F68 (r14)
+lis    r15, 0x805E
+ori    r15, r15, 0x4588
+lwz	   r15, 0x0(r15)
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+
+Realtime edit code 
+
+Use 805E4584 to edit X, 88 for Y (jumpHeight float)
+
+
+C20622A8 00000008
+3DC08057 3DE0805E
+61EF4584 81EF0000
+91EEE098 3DE0805E
+61EF4588 81EF0000
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C2062300 00000008
+3DC08057 3DE0805E
+61EF4584 81EF0000
+91EEE098 3DE0805E
+61EF4588 81EF0000
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+
+-------
+Determined HealthBar never had an issue in Singleplayer, only 2P.
+Original code renamed to LockOn Sprite Fix16by9 SINGLEPLAYER.
+Has no effect on HealthBars, only LockOn.
+-------
+
+After trial & error found aspect for Vertical split mode:
+
+.80, -.90
+
+where 0x84 in the code above is 3F4C CCCD
+AND   0x88 is BF66 6666
+
+Final gecko:
+lis    r14, 0x8057
+lis    r15, 0x3F4C
+ori    r15, r15, 0xCCCD
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF66
+ori    r15, r15, 0x6666
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+LockOn Sprite Fix 16by9 for Vertical SplitScreen
+C20622A8 00000007
+3DC08057 3DE03F4C
+61EFCCCD 91EEE098
+3DE0BF66 61EF6666
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C2062300 00000007
+3DC08057 3DE03F4C
+61EFCCCD 91EEE098
+3DE0BF66 61EF6666
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+--------
+Will revisit for Horizontal version after other priorities addressed.
+
+Determined wiki 16by9 code below affects HP bar:
+#5 -> chaosbars, fadescreen, loadscreen, hp bar || (sprite elements)
+
+Attempt to modify for 2P healthbar without breaking fadescreen chaosbars etc...
+Original:
+C2363180 00000006
+3DC08057 3DE03F40
+91EEE098 3DE0BF40
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+@ 80363180
+lis r14, 0x8057
+lis r15, 0x3F40
+stw r15, -0x1F68(r14)
+lis r15, 0xBF40
+stw r15, -0x1F7C(r14)
+bctrl
+lis r15, 0x3F80
+stw r15, -0x1F68(r14)
+lis r15, 0xBF80
+stw r15, -0x1F7C(r14)
+
+Modified:
+
+Try with LockOn code?:
+C2363180 00000007
+3DC08057 3DE03F4C
+61EFCCCD 91EEE098
+3DE0BF66 61EF6666
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+Success, fixed HPBar BUT causes some artifacts/weirdness with menus, pause, chaosbars (expected).
+Need to find a way to determine when current cycle is HPBar but some other method
+
+
+Unknown4NONSetObj::Render() is HealthBar, func Renamed
+check for -> parent (parent) of shared_UI_draw_bctrl
+(geo/coli v2 code uses this idea):
+(minus 0x4 per subcall)
+expected popped address: 800bf388
+
+Callstack Chain: 
+0x20
+0x50
+0x30
+0x30
+0x10
+0x20
+0x20 (deepest)
++ 0x4 (to retrieve final val
+
+= 0x124
+
+
+@ 80363180
+#position check
+lwz r14, 0x124(sp)
+lis r15, 0x800B
+ori r15, r15, 0xF388
+cmpw r14, r15
+lis r14, 0x8057 #prior to beq for optimization
+beq 0x14 #jump to HealthBar case
+#original
+lis r15, 0x3F40
+stw r15, -0x1F68(r14)
+lis r15, 0xBF40
+bne 0x18 #jump to execute and cleanup
+#healthbar case
+lis    r15, 0x3F4C
+ori    r15, r15, 0xCCCD
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF66
+ori    r15, r15, 0x6666
+#execute and cleanup
+stw    r15, -0x1F7C (r14)
+bctrl
+lis r15, 0x3F80
+stw r15, -0x1F68(r14)
+lis r15, 0xBF80
+stw r15, -0x1F7C(r14)
+
+
+16by9 Part 5 For Vertical Splitscreen Supported HPBars [dreamsyntax]
+C2363180 0000000B
+81C10124 3DE0800B
+61EFF388 7C0E7800
+3DC08057 41820014
+3DE03F40 91EEE098
+3DE0BF40 40820018
+3DE03F4C 61EFCCCD
+91EEE098 3DE0BF66
+61EF6666 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+Success
+----------------------
+
+Repurpose realtime edit code to test for FadeScreen/PauseFade:
+C2363180 00000008
+3DC08057 3DE0805E
+61EF4584 81EF0000
+91EEE098 3DE0805E
+61EF4588 81EF0000
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+Determined FadeScreen is already working fine, no edits needed.
+
+PauseFade may be controlled by pause.gncp, checking.
+Stage init "loading" also is 4:3, check next if fixable
+
+Done. Edited pause.gncp and stageTitle.gncp with x2 width for the fade/bg objects
+
+Last thing left is Horizontal support for HPBar and TargetLock
+
+Horizontal aspect shift .7/-.7
+
+Final gecko:
+lis    r14, 0x8057
+lis    r15, 0x3F33
+ori    r15, r15, 0x3333
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF33
+ori    r15, r15, 0x3333
+stw    r15, -0x1F7C (r14)
+bctrl    
+lis    r15, 0x3F80
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF80
+stw    r15, -0x1F7C (r14)
+
+LockOn Sprite Fix 16by9 for Horizontal SplitScreen
+C20622A8 00000007
+3DC08057 3DE03F33
+61EF3333 91EEE098
+3DE0BF33 61EF3333
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+C2062300 00000007
+3DC08057 3DE03F33
+61EF3333 91EEE098
+3DE0BF33 61EF3333
+91EEE084 4E800421
+3DE03F80 91EEE098
+3DE0BF80 91EEE084
+60000000 00000000
+
+HPbar:
+@ 80363180
+lwz r14, 0x124(sp)
+lis r15, 0x800B
+ori r15, r15, 0xF388
+cmpw r14, r15
+lis r14, 0x8057
+beq 0x14
+lis r15, 0x3F40
+stw r15, -0x1F68(r14)
+lis r15, 0xBF40
+bne 0x18
+lis    r15, 0x3F33
+ori    r15, r15, 0x3333
+stw    r15, -0x1F68 (r14)
+lis    r15, 0xBF33
+ori    r15, r15, 0x3333
+stw    r15, -0x1F7C (r14)
+bctrl
+lis r15, 0x3F80
+stw r15, -0x1F68(r14)
+lis r15, 0xBF80
+stw r15, -0x1F7C(r14)
+
+16by9 HPBar Fix and original code's Part 5 for Horizontal SplitScreen [dreamsyntax]
+C2363180 0000000B
+81C10124 3DE0800B
+61EFF388 7C0E7800
+3DC08057 41820014
+3DE03F40 91EEE098
+3DE0BF40 40820018
+3DE03F33 61EF3333
+91EEE098 3DE0BF33
+61EF3333 91EEE084
+4E800421 3DE03F80
+91EEE098 3DE0BF80
+91EEE084 00000000
+
+Success.
