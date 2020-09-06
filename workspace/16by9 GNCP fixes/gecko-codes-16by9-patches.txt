@@ -1,11 +1,13 @@
-WIP Patches to remaining UI elements to be true 16:9 without weirdness
+Patches to remaining UI elements to be true 16:9 without weirdness
 
-$Dreamsyntax 169 UI SuperFix WIP [dreamsyntax]
-045f67a0 c1700000
-045f67a8 44250000
-045f67e0 442f0000
-045f67d0 c2600000
-045f67f0 c2780000
+$Widescreen v3 UI GNCP Adjustment [dreamsyntax]
+045F67A0 C1700000
+045F67A8 44250000
+045F67E0 442F0000
+045F67D0 C2600000
+045F67F0 C2780000
+*Patches the hardcoded remaining UI elements to be true 16:9 without weirdness
+*Requires 16:9 GNCP patches
 
 $16by9 LockOn Sprite Fix for Singleplayer [dreamsyntax]
 c20622a8 00000006
@@ -86,7 +88,6 @@ C2363180 0000000B
 4E800421 3DE03F80
 91EEE098 3DE0BF80
 91EEE084 00000000
-
 
 above use in combination with wiki code below (split for testing)
 
