@@ -11413,3 +11413,6 @@ C2363180 0000000B
 91EEE084 00000000
 
 Success.
+-----------------------------
+2020-09-07
+Rewriting docs, moving repo files around. Getting ready to deploy final version

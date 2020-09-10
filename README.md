@@ -13,7 +13,12 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Problems
 * Not Compatible with Nintendont Since v2.0
 
+
+## How to play / use
+* See `HOW TO PLAY.txt`
+
 ## Done so far:
+* Widescreen support for in-game UI and some other elements in GNCP files
 * Level chunks load/unload based on both players
 * ChaosPowers activate for both players
 * Partner/Mission Helpers can be remapped to permanent AI or P3/SLOT3
@@ -71,7 +76,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 * dreamsyntax for starting this project/everything
 * DonutStopGaming for major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
-* TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on 16:9 gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
+* TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on widescreen gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Muzzarino for some symbol findings
 

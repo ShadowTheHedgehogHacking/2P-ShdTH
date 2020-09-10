@@ -29,7 +29,7 @@
 									Bring you
 							2 Player Shadow The Hedgehog
 
-=== Release 6 / v2.1 - 2020.0X.0X ===
+=== Release 6 / v2.1 - 2020.09.09 ===
 
 - Change characters:
 	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
@@ -38,35 +38,52 @@
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: fc936c9b0144c925b45b805fd39da2ac
 
 To play this mod, you must:
-(1) copy over the files in 'files' onto the root of the ShadowTheHedgehog.iso
-(2) enable Gecko codes and use provided GCT (Wii/Nintendont) or game config .ini (Dolphin)
+(1) replace the main.dol over 'sys' and overwrite any files in 'files' from the ISO_EDITS folder in the repo.
+(2) enable Gecko codes and use provided game config .ini (Dolphin)
+(3) Optimize Dolphin! It's worth it, see below
 
 You can find a setup tutorial video by searching for "Shadow 2P Mod - How To Setup by dreamsyntax" on YouTube
 
 === Extracting and Rebuilding ISO ===
-<Rewrite steps to use NOD instead of GCR or just xdelta>
 
-=== Nintendont / Wii Setup ===
-    **This assumes you are familiar with Nintendont**
-      If not, I recommend a quick read here:
-        https://github.com/FIX94/Nintendont
-    You do NOT need kenobiwii.bin! 
+If you are having problems, make sure its the USA version of the game.
 
-    Tested with XXXX on a Wii
-    Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
-       e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
-                               game.iso
-                               GUPE8P.gct
-            in the folder.
-    Copy 'saves' folder to root of USB or SD (same one where game is)
-    Nintendont should be configured as follows for the best experience:
-        Cheats ON
-        Force Widescreen OFF (ensure its not ON!) 
-        Unlock Read Speed ON
-		
-    Optional:
-       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
-        Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
+(Windows only)
+1. Copy GUPE8P.iso to ISOPatch folder
+2. Open nod_extract.bat
+3. Copy and overwrite files in nodEXT from the "ISO_EDITS"
+4. Make any additional file changes if you want (Char models etc)
+5. Open nod_build.bat
+-> Use the newly generated 2P-ShdTH-9-9-2020.iso
+
+OR
+
+Use cmd/powershell and do the following.
+1. Use bundled nod_tool and extract the iso with:
+	.\nodtool-2020-05-31.exe extract .\GUPE8P.iso nodEXT
+then overwrite files from ISO_EDITS onto nodEXT
+
+1.5 If you want to change anything here (change character models etc, do it before you build your ISO in the next step)
+
+2. Use bundled nod_tool to rebuild a new iso with:
+	.\nodtool-2020-05-31.exe makegcn .\nodEXT\ 2P-ShdTH-9-9-2020.iso
+	
+Your new ISO is now made!
+----------------------------
+
+If this is too confusing: an xdelta3 patch is available, but its 417MB for some unknown reason we could not figure out. xdelta 1 (for linux) produces a 3mb file
+but for some reason xdelta3 produces a huge file, sometimes 1GB! This is as small as I could get it where windows/mac/linux could properly generate the modded iso.
+
+You can download it here:
+https://mega.nz/file/zbQjyKjK#RA2EkFWuXQf2NFRPvpSQdTec7DklLBFfwOGaFx7r1pc
+OR (Mirror): 
+https://www.mediafire.com/file/pw3r5fe6eb3r7gj/2P-ShdTH-2.1-ISO_Patcher.rar/file
+
+Follow the README.txt to build the ISO on Windows/Mac/Linux.
+
+DO NOT USE GCR! GCR causes problems with the extended DOL.
+Dolphin Extracted Format / FST IS NOT Recommended! Has a higher rate of crashing for this mod and game in general.
+
 
 === Dolphin Setup ===
 DO NOT USE 5.0 STABLE! Use 5.0-10912 or newer! 
@@ -91,13 +108,14 @@ Select Graphics
 		Set Backend to Direct3D 11 or Vulkan (as of 5.0-10912 Direct3D 12 can cause crashes for 2P-ShdTH)
 		Set Aspect Ratio to Force 16:9 or Stretch to Window
 	Under Enhancements:
-		I recommend 3x Native if on a 1080p monitor, other settings here are optional
+		I recommend 3x Native if on a 1080p monitor, settings here are optional. If you are on a low end PC leave as 1x Native.
 	Under Hacks:
-		Check/Enable everything
+		Check/Enable everything (big performance gain)
 	Under Advanced:
 		Check/Enable Load Custom Textures and Prefetch Custom Textures
 
 2.5. SD Texture Pack
+	https://mega.nz/file/vO50lSwT#CCB2iqM-bvullTHaORTLTSEvvHpPVGoD6InZjEuTFQU
 	Download the latest SD Texture Pack (mentioned on the releases page where you downloaded this) and unpack to
 		Dolphin\User\Load\Textures
 	This is optional but will restore the original game textures rather than the highly crunched versions required to not crash
