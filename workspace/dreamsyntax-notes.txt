@@ -11416,3 +11416,64 @@ Success.
 -----------------------------
 2020-09-07
 Rewriting docs, moving repo files around. Getting ready to deploy final version
+-----------------------------
+2021-03-20 - 2021-03-30
+Revisited MTP code w/Donut. Multiple POC. Ended up finding r5 contains .one handle,
+can be used instead of r29.
+
+v3 MTP Inject for Yellow Android ONLY (Containerized w Escape, any player)
+Inject @ 800b44dc
+lis r16, 0x807D
+ori r16, r16, 0x18C4
+cmpw r5, r16
+li r15, 0
+beq originalEnding
+addi r16, r5, 4
+lwz r16, 0x0(r16)
+lwz r16, 0x14(r16)
+#check for SW2P
+lis r15, 0x5357
+ori r15, r15, 0x3250
+lwz r4, 0x0(r16)
+cmpw r15, r4
+li r15, 0
+bne originalEnding
+subi r16, r16, 0x30C #shadow2py.one specific
+li r15, 0x2729
+
+originalEnding:
+lwz r4, 0x085C (r31)
+
+Combine with part 2/part 3, replace part 1 of code with new inject above.
+
+YellowAndroid MTP Animation Override [dreamsyntax, DonutStopGaming]
+c20b44dc 00000009
+3e00807d 621018c4
+7c058000 39e00000
+41820030 3a050004
+82100000 82100014
+3de05357 61ef3250
+80900000 7c0f2000
+39e00000 4082000c
+3a10fcf4 39e02729
+809f085c 00000000
+c201483c 00000003
+2c0f2729 40820008
+92030014 80030014
+60000000 00000000
+c20b474c 00000004
+38210020 3de0807d
+61ef866c 3e00809d
+621093a8 920f0000
+60000000 00000000
+*shadow2py.one archive MUST CONTAIN:
+*HS.BON
+*SONDOW.MTP
+*IN THAT ORDER at the bottom of the file
+*
+*You can put whatever BON/MTP you want, including whatever models, but the name must match the above.
+*
+*The other androids must not contain custom MTP with this version of the code.
+
+This new version allows any player to be the custom, or both, or none with no side effect.
+Only catch is other android slots must remain unmodified (will use shadow.one's MTP/BON).
