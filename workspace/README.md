@@ -53,9 +53,6 @@ Research files and struct definitions are by DonutStopGaming
 ### Other
 Use [aldelaro5's Dolphin Memory Engine](https://github.com/aldelaro5/Dolphin-memory-engine) instead of Dolphin's built in cheat-search/cheatengine.
 
-
-I recommend building the latest master, but 0.5.0 is fine.
-
 ### ASM Editing/Gecko Codes
 In Dolphin to generate the known GameCube symbols etc that aren't game specific:
 1. Launch Game

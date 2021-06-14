@@ -10,14 +10,11 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 ## Level Status
 # All levels and modes are compatible v2.0+
 
-## Problems
-* Not Compatible with Nintendont Since v2.0
-
-
 ## How to play / use
 * See `HOW TO PLAY.txt`
 
 ## Done so far:
+* Nintendont support for v2.0+ (Requires custom Nintendont build)
 * Widescreen support for in-game UI and some other elements in GNCP files
 * Level chunks load/unload based on both players
 * ChaosPowers activate for both players

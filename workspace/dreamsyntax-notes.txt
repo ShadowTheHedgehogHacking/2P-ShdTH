@@ -11477,3 +11477,115 @@ c20b474c 00000004
 
 This new version allows any player to be the custom, or both, or none with no side effect.
 Only catch is other android slots must remain unmodified (will use shadow.one's MTP/BON).
+----
+2020-04-17
+
+FX Shoe for YellowAndroid disable:
+
+lwz r0, 0x0064 (r3)
+cmpwi r0, 15
+bne- end
+li r0, 1
+end:
+
+
+YellowAndroid to Sonic Color & FX
+0460a800 38000001
+0460a850 38800001
+c2083898 00000003
+80030064 2c00000f
+40820008 38000001
+60000000 00000000
+*Change YellowAndroid slot to have:
+*Sonic's jumpball
+*No shoe flame FX
+
+--
+2021-06-10
+
+801b1728 | Air Saucer Jump while on Ground
+
+---
+2021-06-13
+
+CameraResetCam command () -> invoke at 803a0a5c || Remember this for Z bind reset camera (R4 has command) bctr_to_SETObj::Render()__Layer4_CheckpointWarpVirtualFunction_bctr
+800a5c74 || shadow first person chaos control cam thing blr
+
+ICE type material (floor)
+@ 0042CA4C .rdata (XBE JP version)
+
+
+Downward spike instead of double jump for air saucer
+@ 801b177c
+lfs f1, -0x3D9C (rtoc)
+fadds f1, f1, f1
+fneg f1, f1
+
+2P Diablon Black Comet
+17:56:004 Common\MsgHandler.cpp:133 E[MASTER]: Question: Invalid read from 0x0000000e, PC = 0x8034acf0
+Caused by Vibration function being turned on and playing Diablon in 2P mod, where P1 attacks sonic repeatedly
+
+Vibration::Request type confirmed causing many crashes in 2P mod
+
+---
+Fix Nintendont for v2.2 release:
+
+||Original Boot Log||
+Nintendont IOS58 v24.32
+Built   : May 29 2021 15:12:05
+Version : 6.496
+Game path: /games/Shadow The Hedgehog [GUPE8P]/game.iso
+EXIInit Start
+Kernel Start
+DIP:Apploader, preparing to patch
+DIP:DOL Size:5768772 MinOff:0x00003100 MaxOff:0x005FB4C0
+DIP:DOL EntryPoint::0x80002F90, GameEntry::0x80003154
+Patch:Offset:0x00003100 EOffset:0x005FB4C0 Length:005F83C0
+Patch:Game ID = 47555045
+
+||2P 2.1 Boot Log||
+Nintendont IOS58 v24.32
+Built   : May 29 2021 15:12:05
+Version : 6.496
+Game path: /games/Shadow The Hedgehog [GUPE8P]/game.iso
+EXIInit Start
+Kernel Start
+DIP:Apploader, preparing to patch
+DIP:DOL Size:5772864 MinOff:0x8060A570 MaxOff:0x005FB4C0
+DIP:DOL EntryPoint::0x80002F90, GameEntry::0x80003154
+Patch:Offset:0x8060A570 EOffset:0x005FB4C0 Length:7FFF0F50
+Patch:Game ID = 47555045
+
+
+Patch offset & length incorrectly calculated:
+
+Expected
+Patch:Offset:0x00003100 EOffset:0x005FB4C0 Length:005F83C0
+
+Actual
+Patch:Offset:0x8060A570 EOffset:0x005FB4C0 Length:7FFF0F50
+
+Caused by:
+
+StackReduction
+Reduces Stack from 0x10000 to 0x9000
+Uses this space for code injection
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80003328 ---- 6021B568 -> 6021A568
+
+
+CONFIRMED: 
+- Having StackReduction code only still halt at same part
+
+NEED TO CONFIRM:
+- Is it MCM related (some melee related patch that goes under the radar?)
+
+
+Update: Nope. DOL Extension causing the problem.
+Nintendont is grabbing incorrect size.
+Forcing hardcode in Nintendont results in proper booting.
+
+Found crash if Unlock Read Speed is on for Last Story Event #2
+
+Success on calculation change to proper offset.

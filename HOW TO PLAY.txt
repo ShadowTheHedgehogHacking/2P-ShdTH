@@ -29,7 +29,7 @@
 									Bring you
 							2 Player Shadow The Hedgehog
 
-=== Release 6 / v2.1 - 2020.09.09 ===
+=== Release 7 / v2.2 - 2021.XX.XX ===
 
 - Change characters:
 	Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
@@ -48,42 +48,22 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod - How To Set
 
 If you are having problems, make sure its the USA version of the game.
 
-(Windows only)
-1. Copy GUPE8P.iso to ISOPatch folder
-2. Open nod_extract.bat
-3. Copy and overwrite files in nodEXT from the "ISO_EDITS"
-4. Make any additional file changes if you want (Char models etc)
-5. Open nod_build.bat
--> Use the newly generated 2P-ShdTH-9-9-2020.iso
-
-OR
-
-Use cmd/powershell and do the following.
-1. Use bundled nod_tool and extract the iso with:
-	.\nodtool-2020-05-31.exe extract .\GUPE8P.iso nodEXT
-then overwrite files from ISO_EDITS onto nodEXT
-
-1.5 If you want to change anything here (change character models etc, do it before you build your ISO in the next step)
-
-2. Use bundled nod_tool to rebuild a new iso with:
-	.\nodtool-2020-05-31.exe makegcn .\nodEXT\ 2P-ShdTH-9-9-2020.iso
+Use Dolphin to Extract the Game and Rebuild an ISO:
+Right click Shadow the Hedgehog in the game list. Click Properties
+GUPE8P.iso to ISOPatch folder. Update this with instructions from FST format doc.
+Copy and overwrite files in  from the "ISO_EDITS"
+Make any additional file changes if you want (Char models etc)
+Add FST entry to Dolphin
+Right click FST entry, click "Convert File..." and create an ISO
+Use the newly generated ISO.
+	----------------------------
 	
-Your new ISO is now made!
-----------------------------
-
-If this is too confusing: an xdelta3 patch is available, but its 417MB for some unknown reason we could not figure out. xdelta 1 (for linux) produces a 3mb file
-but for some reason xdelta3 produces a huge file, sometimes 1GB! This is as small as I could get it where windows/mac/linux could properly generate the modded iso.
-
-You can download it here:
-https://mega.nz/file/zbQjyKjK#RA2EkFWuXQf2NFRPvpSQdTec7DklLBFfwOGaFx7r1pc
-OR (Mirror): 
-https://www.mediafire.com/file/pw3r5fe6eb3r7gj/2P-ShdTH-2.1-ISO_Patcher.rar/file
-
-Follow the README.txt to build the ISO on Windows/Mac/Linux.
-
 DO NOT USE GCR! GCR causes problems with the extended DOL.
-Dolphin Extracted Format / FST IS NOT Recommended! Has a higher rate of crashing for this mod and game in general.
+Playing in Dolphin Extracted Format / FST IS NOT Recommended! Has a higher rate of crashing for this mod and game in general.
 
+
+=== Nintendont Setup ===
+TODO: Add details before v2.2 release
 
 === Dolphin Setup ===
 DO NOT USE 5.0 STABLE! Use 5.0-10912 or newer! 
@@ -115,6 +95,7 @@ Select Graphics
 		Check/Enable Load Custom Textures and Prefetch Custom Textures
 
 2.5. SD Texture Pack
+	TODO UPDATE THIS PACK BEFORE v2.2 RELEASE
 	https://mega.nz/file/vO50lSwT#CCB2iqM-bvullTHaORTLTSEvvHpPVGoD6InZjEuTFQU
 	Download the latest SD Texture Pack (mentioned on the releases page where you downloaded this) and unpack to
 		Dolphin\User\Load\Textures
