@@ -1,7 +1,7 @@
 ## Source code for the mod / process
 
 `dreamsyntax-notes.txt` was not intended for others.
-Contains addresses I (dreamsyntax) found that are interesting and my process (if you can follow my notes).
+Contains addresses I thought were interesting while exploring this game and my process (if you can follow my notes).
 As time went on the notes got more consistent/better and are more readable.
 
 [GUPE8P.map](https://github.com/ShadowTheHedgehogHacking/shadow-disasm-and-dmw) is our latest self-defined symbols for Shadow The Hedgehog (US).
@@ -18,13 +18,13 @@ Research files and struct definitions are by DonutStopGaming
 ## Setup / Getting Started
 
 ### Download/Verification
-1. Build our fork of dolphin OR Get latest [dolphin-5.0-8930 or newer](https://dolphin-emu.org/download/)
+1. Get the latest beta or dev Dolphin - [dolphin-5.0-14344 or newer](https://dolphin-emu.org/download/)
 2. Before launching dolphin, create an empty file
-
    `portable.txt` in the same folder as Dolphin.exe
-3. Ensure you have the US version of ShadowTheHedgehog with md5:
-
-   `fc936c9b0144c925b45b805fd39da2ac`
+3. Ensure you have the US version of ShadowTheHedgehog:
+	* Right click the game in Dolphin, click Properties.
+	* Click the Verify tab. Click Verify Integrity.
+	* MD5 calculated should match this: `fc936c9b0144c925b45b805fd39da2ac`
    
 ### Extraction of Game / FST Format
 1. Open Dolphin
@@ -36,18 +36,16 @@ Research files and struct definitions are by DonutStopGaming
 7. Select the folder where you will store the game content and modify its files
 
 ### Configuration of Dolphin
-** IT IS RECOMMENDED YOU USE OUR DOLPHIN BUILD in the main repo with TryTwo's additional debugger features 
 1. Open Dolphin
-2. Select Configuration
+2. Select Config
 3. Select Paths Tab
 4. Select "Add" for Game Folders
 5. Navigate to the folder where you extracted the game
 6. Open the `sys` folder, and select "Select Folder"
-7. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog
-   Where the 0 filesize entry is the FST format game.
-8. Close Dolphin
-9. Add -d to launch options on shortcut
-10. Open Dolphin - note the new buttons.
+7. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the FST format game.
+8. Open Dolphin Config (next to Graphics and Controllers)
+9. Click Interface on the Config settings window
+10. Enable "Show Debugging UI", then close the window.
 11. Select 'View' in the menu bar and pick the things you need (Code, breakpoints, registers is a good start)
 
 ### Other

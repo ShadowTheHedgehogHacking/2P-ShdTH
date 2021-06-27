@@ -10,6 +10,8 @@ https://github.com/CLF78/CodeManager2
 And open the GUPE8P.ini to generate a GCT
 
 As of 2021-06-13 you need a special build of Nintendont to work with 2P Mod v2.0+
+You can get it here
+https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix
 
 ## DEVELOPERS
 Note we have hit the Gecko limit, so `development_only` is only used for verifying codes.

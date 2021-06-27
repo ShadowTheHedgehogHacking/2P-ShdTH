@@ -11589,3 +11589,12 @@ Forcing hardcode in Nintendont results in proper booting.
 Found crash if Unlock Read Speed is on for Last Story Event #2
 
 Success on calculation change to proper offset.
+
+----
+
+$Do Not Hide Partner On Mission Change [dreamsyntax]
+04073320 4e800020
+
+$Show Both Mission UI [dreamsyntax]
+040bc1b8 60000000
+040bc1bc 60000000
