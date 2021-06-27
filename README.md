@@ -176,6 +176,7 @@ TODO update
 * TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on widescreen gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Muzzarino for some symbol findings
+* RaphaelDrewBoltman for the GitHub icon / HHC related textures
 
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
