@@ -21,7 +21,7 @@ Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: `fc936c9b0144c
 To play this mod, you must:
 1. Build a custom ISO overwriting any files in `sys` and `files` from the `ISO_EDITS` folder.
 2. Enable Cheats and use provided game config .ini (Dolphin) or .gct (Nintendont)
-3. Optimize Dolphin Settings, OR use Custom Nintendont build for real hardware.
+3. Optimize Dolphin Settings, OR use [Custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix) for real hardware.
 
 You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How To Setup by dreamsyntax" on YouTube
 
@@ -64,7 +64,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 1. Close Dolphin if it is open
 2. GUPE8P.ini needs to be moved/copied to `<Dolphin.exe Directory>\User\GameSettings\`
 3. If you did not make portable.txt earlier, instead you will find the folder at `Documents\Dolphin Emulator\GameSettings\`
-4. Unpack the SD Texture Pack v1.1 in `<Dolphin.exe Directory>\User\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
+4. Unpack the [SD Texture Pack v1.1](https://mega.nz/file/Cfh2UBoC#z_Lhfz8mltDimmCl9TSfrSoaMI_y421hqP9OrhlDZGE) in `<Dolphin.exe Directory>\User\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
 5. If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin.exe Directory>\User\GC\USA\Card A\`
 6. Open Dolphin
 7. Open Config, Enable Cheats
@@ -110,8 +110,29 @@ Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustme
 
 ### Configuring for Nintendont
 *Skip this section if playing on Dolphin*
-TODO update
 
+
+**This assumes you are familiar with Nintendont**
+* If not, I recommend a quick read here: https://github.com/FIX94/Nintendont
+* You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0+ mod
+```
+Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
+	e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
+		game.iso
+		GUPE8P.gct
+	in the folder.
+Copy 'saves' folder to root of USB or SD (same one where game is)
+    Nintendont should be configured as follows for the best experience:
+        Cheats ON
+        Force Widescreen OFF (ensure its not ON!) 
+        Unlock Read Speed ON
+		
+    Optional:
+       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
+		Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
+		Set your TV to "Stretch or Full Aspect" mode. Since the game originally is 4:3, with the 16:9 patches it should be displayed as a stretched image to get proper aspect ratio
+```
+* If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
 
 ## Done so far:
 * Nintendont support for v2.0+ (Requires [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix))
