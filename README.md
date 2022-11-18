@@ -19,7 +19,7 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: `fc936c9b0144c925b45b805fd39da2ac`
 
 To play this mod, you must:
-1. Build a custom ISO overwriting any files in `sys` and `files` from the `ISO_EDITS` folder.
+1. Build a custom ISO overwriting any files in `sys` and `files` from the `ISO_EDITS` folder. (NOTE: sys is only available in the releases; Use the releases tab for easiest setup. Do not pull files from GitHub unless manually patching DOL with MCM).
 2. Enable Cheats and use provided game config .ini (Dolphin) or .gct (Nintendont)
 3. Optimize Dolphin Settings, OR use [Custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix) for real hardware.
 
