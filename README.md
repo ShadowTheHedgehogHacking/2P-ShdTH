@@ -16,12 +16,17 @@ Story Mode, Select Mode, Expert Mode, Last Story.
 
 
 ## How to play / Setup
-Please verify you are using a 1:1 ShadowTheHedgehog USA ISO: md5: `fc936c9b0144c925b45b805fd39da2ac`
+Please verify you are using a 1:1 ShadowTheHedgehog USA ISO:
 
-To play this mod, you must:
-1. Build a custom ISO overwriting any files in `sys` and `files` from the `ISO_EDITS` folder. (NOTE: sys is only available in the releases; Use the releases tab for easiest setup. Do not pull files from GitHub unless manually patching DOL with MCM).
-2. Enable Cheats and use provided game config .ini (Dolphin) or .gct (Nintendont)
-3. Optimize Dolphin Settings, OR use [Custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix) for real hardware.
+
+CRC32: `f582cf1e`
+
+
+or
+
+
+SHA-1: `5dc81ad9c97549394e30bedc252bfa37d4db1de0`
+
 
 You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How To Setup by dreamsyntax" on YouTube
 
@@ -34,7 +39,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 3. Ensure you have the US version of ShadowTheHedgehog:
 	* Right click the game in Dolphin, click Properties.
 	* Click the Verify tab. Click Verify Integrity.
-	* MD5 calculated should match: `fc936c9b0144c925b45b805fd39da2ac`
+	* CRC32 calculated should match: `f582cf1e`
    
 ### Extraction of Game / FST Format
 1. Open Dolphin
@@ -114,7 +119,7 @@ Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustme
 
 **This assumes you are familiar with Nintendont**
 * If not, I recommend a quick read here: https://github.com/FIX94/Nintendont
-* You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0+ mod
+* You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0 - v2.2 mod
 ```
 Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
 	e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
