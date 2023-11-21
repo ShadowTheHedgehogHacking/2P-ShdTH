@@ -1,4 +1,6 @@
-<div align="center"><h1>2 Player Shadow The Hedgehog</h1>
+<div align="center">
+<h1>2 Player Shadow The Hedgehog</h1>
+<h3>A multiplayer mod for Shadow the Hedgehog NTSC-U (GameCube)</h3>
 <img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/main_banner.png" align="center" />
 </div>
 
@@ -7,39 +9,37 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 
 Story Mode, Select Mode, Expert Mode, Last Story.
 
-## Level Status / Important Notes
-# TURN OFF VIBRATION IN-GAME OR YOU WILL EXPERIENCE MORE CRASHES!
+## Important Notes
+* TURN OFF VIBRATION IN-GAME OR YOU WILL EXPERIENCE MORE CRASHES!
 * All levels and modes are compatible v2.0+
-* DO NOT USE GCR to build custom ISO! GCR causes problems with the extended DOL.
+* DO NOT USE GCR to build custom ISO! GCR causes problems with the extended DOL. Build using Dolphin (steps below).
 * Playing in Dolphin Extracted Format / FST IS NOT Recommended! Has a higher rate of crashing for this mod and game in general.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
 
 
 ## How to play / Setup
-Please verify you are using a 1:1 ShadowTheHedgehog USA ISO:
+This mod is only compatible with the NTSC-U GameCube version.
 
-
-CRC32: `f582cf1e`
-
-
-or
-
-
-SHA-1: `5dc81ad9c97549394e30bedc252bfa37d4db1de0`
+Please verify you are using a 1:1 Shadow The Hedgehog NTSC-U ISO (steps in *Building the ISO*).
 
 
 You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How To Setup by dreamsyntax" on YouTube
 
+### Xdelta ISO patch
+* TODO for release v2.3
 
 ### Building the ISO / Setting up Dolphin
-**NOTE: Even if you plan to play on real hardware, you will need Dolphin to build the Custom ISO!**
-1. Get the latest beta or dev Dolphin - [dolphin-5.0-14344 or newer](https://dolphin-emu.org/download/)
+**NOTE: Even if you plan to play on real hardware, you will need Dolphin to build the Custom ISO**
+1. Get the latest beta or dev Dolphin - [dolphin-5.0-20201 or newer](https://dolphin-emu.org/download/)
 2. Before launching dolphin, create an empty file
    `portable.txt` in the same folder as Dolphin.exe
 3. Ensure you have the US version of ShadowTheHedgehog:
 	* Right click the game in Dolphin, click Properties.
 	* Click the Verify tab. Click Verify Integrity.
-	* CRC32 calculated should match: `f582cf1e`
+	* Hash should match this: 
+	* CRC32: `f582cf1e`
+	* or
+	* SHA-1: `5dc81ad9c97549394e30bedc252bfa37d4db1de0`
    
 ### Extraction of Game / FST Format
 1. Open Dolphin
@@ -140,7 +140,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
 
 ## Done so far:
-* Nintendont support for v2.0+ (Requires [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix))
+* Real Hardware / Nintendont compatibility
 * Widescreen support for in-game UI and some other elements in GNCP files
 * Level chunks load/unload based on both players
 * ChaosPowers activate for both players
