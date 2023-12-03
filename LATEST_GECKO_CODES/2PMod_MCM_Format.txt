@@ -969,3 +969,31 @@ Allows for both players to continue moving during checkpoint menu open, checkpoi
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80129D7C ---- 480D9BF5 -> 60000000
 ------------- 0x80117FEC ---- 480EB985 -> 60000000
+
+
+	-==-
+
+
+2P Essentials BossCams
+Bosscams for both players
+First test version only applies to:
+Subbosses, Black Doom, and Devil Doom.
+
+Diablon and Egg Dealer are not affected.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802912E8 ---- 38C00000 -> Branch
+
+3DE08051 61EF5458
+80CF0000 00000000
+
+------------- 0x802913C0 ---- 48000058 -> Branch
+
+820F0000 2C100000
+40820010 3A000001
+920F0000
+b 0x8029128C
+3A000000 920F0000
+b 0x80291418
+
+------------- 0x80515458 ---- 58545F49 -> 00000000
