@@ -1,0 +1,967 @@
+2P Essentials Prevent SplitScreen Reset
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80205DBC ---- 90050060 -> 60000000
+------------- 0x80205ED4 ---- 90030060 -> 60000000
+------------- 0x80204A4C ---- 90030060 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Attach Cam1 to P2 v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801CE900 ---- 4182001C -> 60000000
+
+
+	-==-
+
+
+2P Essentials Spawn P2 v2
+Does not spawn P2 during events taking place on non-playable levels (e.g. stg900)
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8017707C ---- 808400A8 -> Branch
+
+808400A8 2C04032B
+41810008 38800320
+48000000
+
+
+	-==-
+
+
+2P Essentials SETObject Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800CB5E4 ---- 880300B2 -> 38000001
+------------- 0x80169C08 ---- 880400B2 -> 38000001
+
+
+	-==-
+
+
+2P Essentials P2 Sound Listener Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801D9990 ---- 880300B2 -> 38000001
+
+
+	-==-
+
+
+2P Essentials UI for 1P Modes
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801FFE0C ---- 880300B2 -> 60000000
+------------- 0x801FEC40 ---- 41820048 -> 60000000
+------------- 0x801FF65C ---- 41820094 -> 60000000
+------------- 0x80201F18 ---- 418202D4 -> 60000000
+------------- 0x80200764 ---- 418201B4 -> 60000000
+------------- 0x80201358 ---- 418204D4 -> 60000000
+------------- 0x801FE99C ---- 41820188 -> 60000000
+
+
+	-==-
+
+
+2P Essentials ChaosPowers Half Idle Drain Speed
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016F0D4 ---- 2C050000 -> Branch
+
+2C050000 38A5000C
+48000000
+
+
+	-==-
+
+
+2P Essentials Chunk Fix
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8003A58C ---- 38600000 -> Branch
+
+C01E0000 C02301B0
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0000
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0004 C02301B4
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0004
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+C01E0008 C02301B8
+FC010040 40800018
+38600000 3DE08003
+61EFA6A0 7DE803A6
+4E800020 C01F0008
+FC010040 4C411382
+40820018 38600000
+3DE08003 61EFA6A0
+7DE803A6 4E800020
+3DE08003 61EFA69C
+7DE803A6 4E800020
+48000000
+
+------------- 0x8003A5A4 ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5BC ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5D4 ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A5EC ---- 38600000 -> b 0x8003A58C
+------------- 0x8003A604 ---- 38600000 -> b 0x8003A58C
+
+
+	-==-
+
+
+2P Essentials ChaosPowers CameraEvent for Both Players
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A65B8 ---- 38A00000 -> Branch
+
+3CA0807D 60A571A0
+80A50000 80A50000
+80A5023C 80A50028
+7C05F000 38A00000
+41820008 38A00001
+60000000 00000000
+
+
+	-==-
+
+
+2P Essentials Disable ChaosControl Skew & CameraEffect
+* CameraEffect not yet implemented
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A5D30 ---- 38C00000 -> Branch
+
+3CC0807D 60C671A0
+80C60000 80C60000
+80C6023C 7C06E800
+38C00000 41820008
+38C00001 00000000
+
+
+	-==-
+
+
+2P Essentials Prevent Vehicle Despawn
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801B5F4C ---- 41820038 -> 60000000
+
+
+	-==-
+
+
+2P Essentials P2 Can Pause
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801E3ADC ---- 4182003C -> 60000000
+
+
+	-==-
+
+
+2P Essentials Remove ScreenShake v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801FA2DC ---- 9421FFC0 -> 4E800020
+------------- 0x8000EF58 ---- 9421FFF0 -> 4E800020
+------------- 0x8000EFC0 ---- 9421FF70 -> 4E800020
+
+
+	-==-
+
+
+2P Optionals Freecam for All Bosses
+Disables special cam hooks for bosses
+Intentionally does not include intro/defeat special cams
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8029120C ---- 9421FEF0 -> 4E800020
+------------- 0x8031AAF4 ---- 9421FFD0 -> 4E800020
+
+
+	-==-
+
+
+2P Essentials Circus Park Hero Mission Co-Op
+Makes P2's collected rings count towards Hero Mission
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016ED2C ---- 7C641B78 -> Branch
+
+3DE08057 61EF6758
+81EF0000 7C637A14
+7C641B78 48000000
+
+
+	-==-
+
+
+2P Essentials Fix Barrier/Vacuum Effect Artifacts for Split2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x804342CC ---- 9421FE40 -> 4E800020
+
+
+	-==-
+
+
+2P Essentials GUN Fortress SecurityTurret Fix
+Applies SpecialCamera for security turret segments to both players as they enter
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80268CEC ---- 38A00000 -> Branch
+
+7FF1FB78 3A310030
+82310000
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 00000000
+
+
+	-==-
+
+
+2P Essentials Partner Despawn Fix
+Fixes partners disappearing if P2 gets to them while P1 is not in range
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801F4454 ---- 4BE7F511 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Keydoors Detect P2
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8011B934 ---- 40820024 -> Branch
+
+40820014 3DE08011
+61EFB938 7DE803A6
+4E800020 3CA0807D
+60A571A8 80A50000
+80A50000 3DE08040
+61EFCD74 7DE803A6
+4E800021 3DE08040
+61EFCF2C 7DE803A6
+4E800021 C00D38B0
+FC010040 4C401382
+41820014 3DE08011
+61EFB958 7DE803A6
+4E800020 48000000
+
+
+	-==-
+
+
+2P Essentials Westopolis Lasers Fix v2
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800E1174 ---- 40800010 -> Branch
+
+41800078 80BE000C
+386100CC 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 386100F0
+388100CC 3DE08000
+61EF91EC 7DE803A6
+4E800021 386100F0
+3DE08040 61EFCF50
+7DE803A6 4E800021
+807E0000 C003003C
+FC010040 41800014
+3DE0800E 61EF1184
+7DE803A6 4E800020
+48000000
+
+
+	-==-
+
+
+2P Essentials Computer Room Goal Fix
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802317F4 ---- 408000C0 -> Branch
+
+41800074 80BF0030
+38610038 3C80807D
+608471A8 80840000
+80840000 3DE08040
+61EFCD74 7DE803A6
+4E800021 38610044
+38810038 3DE08000
+61EF91EC 7DE803A6
+4E800021 38610044
+3DE08040 61EFCF50
+7DE803A6 4E800021
+C01F003C FC010040
+41800014 3DE08023
+61EF18B4 7DE803A6
+4E800020 48000000
+
+
+	-==-
+
+
+Timer No Reset On Death
+[LimblessVector]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178BC4 ---- D0040094 -> 60000000
+
+
+	-==-
+
+
+2P Essentials Checkpoint Warping Fix
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80331114 ---- 9421FFF0 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+3A65FFFF 1E73001C
+7E319A14 C1F10000
+C2110004 C2310008
+C24F0000 C26F0004
+C28F0008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEB1782A C1F10000
+C2110004 C2310008
+C2500000 C2700004
+C2900008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDF1782A FC0FA840
+3A000001 41800008
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 48000000
+
+------------- 0x80117614 ---- 9421FFF0 -> Branch
+
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFF0 48000000
+
+------------- 0x80129B50 ---- 9421FFE0 -> Branch
+
+3A000000 3DE0805E
+61EFE588 920F0000
+9421FFE0 48000000
+
+------------- 0x80331390 ---- 38800004 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+8263003C 3A73FFFF
+1E73001C 7E319A14
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38800005
+41800008 38800004
+48000000
+
+<CheckpointUI_DistCheck> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+3E208057 62315FE4
+827E003C 3A73FFFF
+1E73001C 7E319A14
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38800005
+41800008 38800004
+4E800020
+
+------------- 0x803314D8 ---- 38800004 -> bl <CheckpointUI_DistCheck>
+------------- 0x80331460 ---- 38800004 -> bl <CheckpointUI_DistCheck>
+------------- 0x80331424 ---- 38800004 -> bl <CheckpointUI_DistCheck>
+
+
+	-==-
+
+
+2P Essentials Zipline/Pulley/Coaster Fix v2
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801316D0 ---- 80AD3148 -> 80BF0020
+------------- 0x80132128 ---- 80AD3148 -> 80BF0020
+------------- 0x801323C4 ---- 80AD3148 -> 80BF0020
+------------- 0x8015BEB4 ---- 7C7F1B78 -> Branch
+
+7FEFFB78 7C7F1B78
+48000000
+
+------------- 0x8015BEF0 ---- 387F0034 -> Branch
+
+387F0034 55F0273E
+2C100008 408200BC
+3CE0805F 60E74230
+810F0000 7C083840
+408200A8 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EF00E8
+C20F00EC C22F00F0
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EF00E8
+C20F00EC C22F00F0
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EF0020
+48000000
+
+------------- 0x801313F8 ---- 4809D65D -> 60000000
+
+
+	-==-
+
+
+2P Essentials Bosses Target Closest Player
+Full supported boss types: BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
+Includes partial patch for EggDealer
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+<Boss_PickPlayer> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+823F0008 8231001C
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 38A00001
+41800008 38A00000
+4E800020
+
+NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x8024D6D8 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x80242B10 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x802A6DA8 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x80334B1C ---- C0030008 -> Branch
+
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+7C0F1800 40820020
+823F0000
+bl <DistanceCheck>
+40800014 3C60807D
+606371A8 80630000
+80630000 C0030008
+48000000
+
+
+	-==-
+
+
+2P Essentials GravitySwitcher Fix v4
+[DonutStopGaming, dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80293938 ---- 808D4F00 -> Branch
+
+808D4F00 811F0000
+3D20804F 61293D08
+7C084840 41820020
+3D20804F 61293BD8
+7C084840 4182001C
+815F0040 397F006C
+4800001C 815F0034
+397F0020 48000010
+815F0034 397F0074
+48000004 3CE0807D
+60E771A0 80E70000
+80E70000 3D00807D
+610871A8 81080000
+81080000 C1EA0000
+C20A0004 C22A0008
+C2470000 C2670004
+C2870008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EEAF882A C1EA0000
+C20A0004 C22A0008
+C2480000 C2680004
+C2880008 EDEF9028
+EDEF03F2 EE109828
+EE100432 EDEF802A
+EE31A028 EE310472
+EDEF882A FC0FA840
+38E00001 41800008
+38E7FFFF 90EB0000
+390D3150 1CE70004
+7D083A14 93E80000
+60000000 00000000
+
+------------- 0x8029396C ---- 80AD3148 -> Branch
+
+811F0000 3D20804F
+61293D08 7C084840
+4182001C 3D20804F
+61293BD8 7C084840
+41820014 80BF006C
+48000010 80BF0020
+48000008 80BF0074
+60000000 00000000
+
+------------- 0x802469DC ---- 4BF1BE29 -> 60000000
+------------- 0x80246A4C ---- 4BF1A895 -> 60000000
+------------- 0x80247B84 ---- 4BF1AC81 -> 60000000
+------------- 0x80247BE0 ---- 4BF19701 -> 60000000
+
+
+	-==-
+
+
+2P Essentials P2 Vehicles/Turrets/Flyables Camera Fix v1
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801CEDC4 ---- 80980000 -> Branch
+
+80980000 2C0F00EF
+40820018
+bl <DistanceCheck>
+39E00001 41800008
+39E00000 91E400A0
+48000000
+
+------------- 0x801B8010 ---- 38A00000 -> Branch
+
+7F91E378 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x801B3B14 ---- 38A00000 -> Branch
+
+823E0000 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x8031722C ---- 39400001 -> Branch
+
+7FF1FB78 39400001
+39E000EF 48000000
+
+------------- 0x800EB524 ---- 38A00000 -> Branch
+
+7FF1FB78 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x800E943C ---- 38A00000 -> Branch
+
+7FF1FB78 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+
+	-==-
+
+
+2P Essentials Fix Vehicles for P2 v3
+Allows for P2 to drive CarType vehicles
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801BA5D0 ---- 38A00000 -> Branch
+
+7FF1FB78 3A310008
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x801B924C ---- 38A00000 -> Branch
+
+7FF1FB78 
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+
+	-==-
+
+
+2P Essentials P2 Super for DevilDoom v2
+Purposely leaves transparent skin for P2
+Let P2 run out of rings to fix, otherwise there is no issue
+[DonutStopGaming, dreamsyntax,]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80177124 ---- 4BF40D21 -> Branch
+
+3DE0800B 61EF7E44
+7DE803A6 4E800021
+38600001 7DE803A6
+4E800021 00000000
+
+------------- 0x8041D338 ---- 80030000 -> Branch
+
+2C030000 40820014
+3DE08041 61EFD34C
+7DE803A6 4E800020
+80030000 00000000
+
+------------- 0x8027E77C ---- 38600000 -> Branch
+
+2C060000 40820014
+3DE08027 61EFEA84
+7DE803A6 4E800020
+38600000 00000000
+
+
+	-==-
+
+
+StackReduction
+Reduces Stack from 0x10000 to 0x9000
+Uses this space for code injection
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80003328 ---- 6021B568 -> 6021A568
+
+
+	-==-
+
+
+DistanceCheck Standalone Function
+DistanceCheck(r17) where r17=Address of floatX of comparison obj
+[dreamsyntax, DonutStopGaming]
+<DistanceCheck> NTSC 1.06
+3DE0807D 61EF71A0
+81EF0000 81EF0000
+3E00807D 621071A8
+82100000 82100000
+C1F10000 C2110004
+C2310008 C24F0000
+C26F0004 C28F0008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EEB1782A
+C1F10000 C2110004
+C2310008 C2500000
+C2700004 C2900008
+EDEF9028 EDEF03F2
+EE109828 EE100432
+EDEF802A EE31A028
+EE310472 EDF1782A
+FC0FA840 4E800020
+
+
+	-==-
+
+
+Partner mapped to PORT3 v2
+[DonutStopGaming,]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A85C4 ---- 7C7F1B78 -> Branch
+
+3FE08056 63FFED4C
+82430010 7FFF9050
+281F0000 41820038
+82430010 3FE08056
+63FFED78 7C1F9040
+40820030 826D314C
+3A730001 926D314C
+28130001 4182001C
+3A5F002C 92430010
+48000010 824D314C
+3A400000 924D314C
+7C7F1B78 48000000
+
+
+	-==-
+
+
+2P Essentials ScoreFix
+P2's Scores and Ring count adds to result totals and in-game UI totals
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802018CC ---- 80BD002C -> Branch
+
+80BD002C 81FD0078
+7CA57A14 00000000
+
+------------- 0x8020287C ---- 8063002C -> Branch
+
+81E3002C 80630078
+7C637A14 00000000
+
+------------- 0x80202DC8 ---- 80A4002C -> Branch
+
+80A4002C 81E40078
+7CA57A14 00000000
+
+------------- 0x80202850 ---- 8063002C -> Branch
+
+81E3002C 80630078
+7C637A14 00000000
+
+------------- 0x802018F8 ---- 80BD0030 -> Branch
+
+80BD0030 81FD007C
+7CA57A14 00000000
+
+------------- 0x802027B4 ---- 80A30030 -> Branch
+
+80A30030 81E3007C
+7CA57A14 00000000
+
+------------- 0x80202C68 ---- 80A40030 -> Branch
+
+80A40030 81E4007C
+7CA57A14 00000000
+
+------------- 0x802027D0 ---- 80A30034 -> Branch
+
+80A30034 81E30080
+7CA57A14 00000000
+
+------------- 0x802027EC ---- 8063002C -> Branch
+
+81E3002C 80630078
+7C637A14 00000000
+
+------------- 0x80201924 ---- 80BD0034 -> Branch
+
+80BD0034 81FD0080
+7CA57A14 00000000
+
+------------- 0x80202834 ---- 80A30034 -> Branch
+
+80A30034 81E30080
+7CA57A14 00000000
+
+------------- 0x80202D18 ---- 80A40034 -> Branch
+
+80A40034 81E40080
+7CA57A14 00000000
+
+------------- 0x80202818 ---- 80A30030 -> Branch
+
+80A30030 81E3007C
+7CA57A14 00000000
+
+------------- 0x80202F54 ---- 4BF6C32D -> Branch
+
+81E30000 8063004C
+7C637A14 00000000
+
+
+	-==-
+
+
+2P Essentials DevilDoom BalloonRings Adds To Both Players
+[dreamsyntax,]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178B34 ---- 387F0028 -> Branch
+
+387F0028 3E008057
+6210D748 82100000
+2C1002C6 40820014
+39E3004C 820F0000
+7E102214 920F0000
+60000000 00000000
+
+
+	-==-
+
+
+2P Essentials Airbug Fix v3
+Fixes 'Airbug' with Fan/Wind/ElecFan objects
+[dreamsyntax, DonutStopGaming,]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801DBAE4 ---- 9421FFE0 -> Branch
+
+82C40000 3DE0807D
+61EF71A0 81EF0000
+81EF0000 7C167840
+4182001C 3DE0807D
+61EF71A8 81EF0000
+81EF0000 7C167840
+4082001C 82D6022C
+82D60030 82D60010
+2C160018 40820008
+4E800020 9421FFE0
+48000000
+
+<PlayerStoredFan_Cleanup> NTSC 1.06
+7d8903a6 3a000000
+3de0807d 61ef71a0
+81ef0000 81ef0000
+7c0f1840 4082000c
+920f0290 41820018
+3de0807d 61ef71a8
+81ef0000 81ef0000
+920f0290 4E800020
+
+<PlayerStoredFan_Store> NTSC 1.06
+3ec0807d 62d671a0
+82d60000 82d60000
+80010010 7c160040
+40820008 93f60290
+3ec0807d 62d671a8
+82d60000 82d60000
+7c160040 40820008
+93f60290 801f0024
+3ec0807d 62d671a0
+82d60000 82d60000
+7c160040 4182000c
+92df0024 40820018
+3ec0807d 62d671a8
+82d60000 82d60000
+92df0024 81f60290
+7c0ff840 41820024
+280f0000 40820020
+81f6022c 81ef0030
+81ef0010 2c0f0018
+4082000c 93f60290
+92c10010 80010010
+4E800020
+
+------------- 0x80266C60 ---- 80010010 -> bl <PlayerStoredFan_Store>
+------------- 0x80103794 ---- 80010010 -> bl <PlayerStoredFan_Store>
+------------- 0x801038DC ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
+------------- 0x80266D14 ---- 7D8903A6 -> bl <PlayerStoredFan_Cleanup>
+
+
+	-==-
+
+
+2P Essentials BkWorm and BkGunship Targets Closest Player
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80192408 ---- 80AD3148 -> Branch
+
+7FF1FB78 82310000
+3A310110
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x802FE320 ---- 80AD3148 -> Branch
+
+7C310B78 3A310060
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+
+	-==-
+
+
+2P Optionals Warp Hole / Checkpoint Movement Allowed
+Allows for both players to continue moving during checkpoint menu open, checkpoint warping, and using warp hole. As side effect, Chaos Meter points will continue to drain if active and timer will not stop.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80129D7C ---- 480D9BF5 -> 60000000
+------------- 0x80117FEC ---- 480EB985 -> 60000000
+
+
+	-==-
+
+
+2P Essentials BossCams
+Bosscams for both players
+First test version only applies to:
+Subbosses, Black Doom, and Devil Doom.
+
+Diablon and Egg Dealer are not affected.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802912E8 ---- 38C00000 -> Branch
+
+3DE08051 61EF5458
+80CF0000 00000000
+
+------------- 0x80515458 ---- 58545F49 -> 00000000
+------------- 0x802913C0 ---- 48000058 -> Branch
+
+820F0000 2C100000
+40820010 3A000001
+920F0000
+b 0x8029128C
+b 0x80291418
+
+------------- 0x80178C54 ---- 9421FFD0 -> Branch
+
+9421FFD0 3DE08051
+61EF5458 3A000000
+920F0000 00000000
