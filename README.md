@@ -10,12 +10,8 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Important Notes
-* TURN OFF VIBRATION IN-GAME OR YOU WILL EXPERIENCE MORE CRASHES!
-* All levels and modes are compatible v2.0+
 * DO NOT USE GCR to build custom ISO! GCR causes problems with the extended DOL. Build using Dolphin (steps below).
-* Playing in Dolphin Extracted Format / FST IS NOT Recommended! Has a higher rate of crashing for this mod and game in general.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
-
 
 ## How to play / Setup
 This mod is only compatible with the NTSC-U GameCube version.
@@ -25,8 +21,6 @@ Please verify you are using a 1:1 Shadow The Hedgehog NTSC-U ISO (steps in *Buil
 
 You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How To Setup by dreamsyntax" on YouTube
 
-### Xdelta ISO patch
-* TODO for release v2.3
 
 ### Building the ISO / Setting up Dolphin
 **NOTE: Even if you plan to play on real hardware, you will need Dolphin to build the Custom ISO**
@@ -140,6 +134,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
 
 ## Done so far:
+* All levels and modes are compatible v2.0+
 * Real Hardware / Nintendont compatibility
 * Widescreen support for in-game UI and some other elements in GNCP files
 * Level chunks load/unload based on both players
@@ -181,15 +176,27 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * DevilDoom is balanced for two players (ring collection is shared)
 * Worm Enemies and Alien Gunships target closest player
 
-## Other Known Issues (Not planned to be fixed)
-* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
-* Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
-* If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
-* Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
-* Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
-* Phase 2 Warp for P2 in Diablon Boss
+## Things to be fixed in v2.3
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
 * Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
+* Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
+* If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
+* P2 can properly interact with helicopters
+* Vibration for P2
+* Rework core respawning to be based on independent respawns
+* Remove 'game pause' on either player respawning
+* Fix some independent respawn cases (downward rail and dark spline)
+* Space Gadget gravity switcher rework
+* Boss cameras will act as the original game for both players
+* Toggleable Player Targetting (ex: P1 can homing attack P2, and will aim at P2)
+* CC/CB EventsCamera (Maybe)
+* Independent Chunk Culling / Overlap (Unlikely - but will attempt)
+
+## Other Known Issues (Not planned to be fixed)
+* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
+* Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
+* Phase 2 Warp for P2 in Diablon Boss
+* Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
 
 ## Dev
 * dreamsyntax
