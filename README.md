@@ -177,6 +177,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Worm Enemies and Alien Gunships target closest player
 
 ## Things to be fixed in v2.3
+* Add notice for v2.3c and later versions: "You must set Dolphin to use 64MB of RAM to play this mod. If you are playing on Wii/GameCube, you must apply the console-compatibility-textures branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM."
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
 * Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
