@@ -965,3 +965,20 @@ b 0x80291418
 9421FFD0 3DE08051
 61EF5458 3A000000
 920F0000 00000000
+
+
+	-==-
+
+
+2P Essentials - Helicopter Attach to Closest Player
+Allows player 2 to grab a Helicopter leg, patching it to use distance check.
+Does not allow both players to grab different legs at the same time.
+If that is ever possible it would be a different code / patching the executor that calls this subfunc.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802F7624 ---- 80AD3148 -> Branch
+
+7FF1FB78 3A3100C4
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
