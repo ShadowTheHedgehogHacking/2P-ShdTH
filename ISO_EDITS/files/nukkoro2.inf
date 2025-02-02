@@ -1,6 +1,6 @@
 #ステージパラメータ
-#2P spawn positions 2019-09-15
-#Game interprets P2 xpos spawn as xpos+-5 or xpos+-10 until Pause->Restart
+#2P spawn positions 2025-02-01
+#IMPORTANT: On StageAction::InitAction P2's spawn will shift, typically xpos+-5 or xpos+-10 until Pause->Restart
 
 [Practice]
 PLAYER : 0 0 0 0 0 0 0
@@ -225,7 +225,7 @@ MISSIONCOUNT_H : 1 1
 [Space]
 #Space Gadget
 PLAYER : 0 1160 1716 47 0 90 0
-PLAYER : 1 1160 1766 47 0 90 0
+PLAYER : 1 1160 1856 47 0 90 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : -11175 -7744 -10624
 GOALEVENTPOS_H : -11175 -7744 -10624
