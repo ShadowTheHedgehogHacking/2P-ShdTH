@@ -978,7 +978,7 @@ If that is ever possible it would be a different code / patching the executor th
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x802F7624 ---- 80AD3148 -> Branch
 
-7FF1FB78 3A3100C4
+7FF1FB78 3A3100F0
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
