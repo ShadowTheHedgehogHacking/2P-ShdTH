@@ -329,13 +329,13 @@ NTSC 1.06 --- 0x80178BC4 ---- D0040094 -> 60000000
 	-==-
 
 
-2P Essentials Checkpoint Warping Fix v2 (Unfinished)
+2P Essentials Checkpoint Warping Fix v2
 Uses Junk MEM:
 P1 @ 80513C90
-P2 @ 80513C94
---
-TODO: add safety checks or guaranteed deref Tasks for the Junk MEM.
-Add 'cleanup' also to exiting a checkpoint without warping
+
+Improved Checkpoint Warping system that doesn't rely on MainPlayerID
+No more weird respawn bugs from checkpoints being open will occur.
+As a side benefit, players can warp from different checkpoints at the same time without overwriting the other player's warp to/from.
 [dreamsyntax, DonutStopGaming]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x803314D8 ---- 38800004 -> bl <Checkpoint_CheckPlayerStoredTask>
@@ -364,6 +364,7 @@ bl <DistanceCheck>
 9421FFF0 7C0803A6
 48000000
 
+------------- 0x80513C90 ---- 6261645F -> 80575FA8
 ------------- 0x801176AC ---- 80AD3148 -> Branch
 
 80A100EC 80A50040
@@ -371,7 +372,16 @@ bl <DistanceCheck>
 820F0000 82100040
 7C058000 4082000C
 38A00000 41820008
-38A00001 00000000
+38A00001 48000000
+
+------------- 0x80330FD8 ---- 9421FFF0 -> Branch
+
+81FE0040 3E008051
+62103C90 82700000
+82730040 7C0F9800
+40820010 3DE08057
+61EF5FA8 91F00000
+9421FFF0 48000000
 
 
 	-==-
