@@ -17,7 +17,7 @@ Early research files and struct definitions are a collaboration between Limbless
 ## Setup / Getting Started
 
 ### Download/Verification
-1. Get the latest beta or dev Dolphin - [dolphin-5.0-20201 or newer](https://dolphin-emu.org/download/)
+1. Get the latest beta or dev Dolphin - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
 2. Before launching dolphin, create an empty file
    `portable.txt` in the same folder as Dolphin.exe
 3. Ensure you have the NTSC-U version of ShadowTheHedgehog:
