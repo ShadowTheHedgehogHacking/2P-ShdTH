@@ -10,7 +10,8 @@ This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1
 Story Mode, Select Mode, Expert Mode, Last Story.
 
 ## Important Notes
-* DO NOT USE GCR to build custom ISO! GCR causes problems with the extended DOL. Build using Dolphin (steps below).
+* DO NOT USE GCR to build custom ISO! Build using Dolphin (steps below), or use xdelta if you don't plan to make other modifications.
+* WARNING: If Using the YellowAndroid MTP Animation Override code to have P2 be Sonic/Omega expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
 
 ## How to play / Setup
@@ -24,7 +25,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 
 ### Building the ISO / Setting up Dolphin
 **NOTE: Even if you plan to play on real hardware, you will need Dolphin to build the Custom ISO**
-1. Get the latest beta or dev Dolphin - [dolphin-5.0-20201 or newer](https://dolphin-emu.org/download/)
+1. Get the latest release or dev Dolphin - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
 2. Before launching dolphin, create an empty file
    `portable.txt` in the same folder as Dolphin.exe
 3. Ensure you have the US version of ShadowTheHedgehog:
@@ -46,7 +47,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 
 ### Replacement of Files & Converting FST to ISO
 1. Open the newly extracted folder and merge/overwrite the `sys` and `files` files with the two folders in `ISO_EDITS`.
-2. Make any additional changes you want (ex: Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want
+2. Make any additional changes you want (ex: Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. REMINDER: THIS CAUSES MORE CRASHES.
 3. Open Dolphin
 4. Open Config (next to Graphics and Controllers)
 5. Select Paths Tab
@@ -55,14 +56,14 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 8. Open the `sys` folder, and select "Select Folder"
 9. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the FST format game.
 10. Right click the FST format game and pick `Convert File...`
-11. The Convert window will appear, click "Convert..." and name it `game.iso` for Nintendont, or `2PShdTH-2021-06-26.iso` for Dolphin.
+11. The Convert window will appear, click "Convert..." and name it `game.iso` for Nintendont, or `2PShdTH.iso` for Dolphin.
 12. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize. Use this when playing the game. 
 
 ### Configuring for Dolphin
 *Skip this section if playing on Nintendont*
 1. Close Dolphin if it is open
-2. GUPE8P.ini needs to be moved/copied to `<Dolphin.exe Directory>\User\GameSettings\`
-3. If you did not make portable.txt earlier, instead you will find the folder at `Documents\Dolphin Emulator\GameSettings\`
+2. `GUPE8P.ini` needs to be moved/copied to `<Dolphin.exe Directory>\User\GameSettings\`
+3. If you did not make portable.txt earlier, instead you will find the folder at `%appdata%\Dolphin Emulator\GameSettings\`
 4. Unpack the [SD Texture Pack v1.1](https://mega.nz/file/Cfh2UBoC#z_Lhfz8mltDimmCl9TSfrSoaMI_y421hqP9OrhlDZGE) in `<Dolphin.exe Directory>\User\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
 5. If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin.exe Directory>\User\GC\USA\Card A\`
 6. Open Dolphin
@@ -72,7 +73,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 #### Dolphin 2P Mod Tweaks / Cheats Config
 1. Right click the game and choose Properties
 2. Choose the Gecko Codes tab
-3. Here you can enable/disable some of the codes and customize some tweaks, such as enabling Independent Respawns.
+3. Here you can enable/disable some of the codes and customize some tweaks.
 4. Note some codes are embedded in the dol and are not able to be disabled.
 
 #### Dolphin Performance & Enable Texture Pack Configuration
@@ -182,15 +183,17 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
-* P2 can properly interact with helicopters
+* P2 can properly interact with helicopters | DONE
 * Vibration for P2
-* Rework core respawning to be based on independent respawns
+* Rework core respawning to be based on independent respawns | DONE
 * Remove 'game pause' on either player respawning
-* Fix some independent respawn cases (downward rail and dark spline)
-* Space Gadget gravity switcher rework
-* Boss cameras will act as the original game for both players
-* Toggleable Player Targetting (ex: P1 can homing attack P2, and will aim at P2)
+* Fix some independent respawn cases (downward rail and dark spline) | DONE
+* Space Gadget gravity switcher rework | DONE (has one issue remaining with checkpoint warping)
+* Boss cameras will act as the original game for both players (partial)
+* Player Targetting Preference Setting (ex: P1 can homing attack P2, and will aim at P2) | DONE
 * CC/CB EventsCamera (Maybe)
+* Checkpoint Warping System Reworked to allow other player unaffected
+* Fadescreen Added for most cases without interrupting play session with Independent Respawns
 * Independent Chunk Culling / Overlap (Unlikely - but will attempt)
 
 ## Other Known Issues (Not planned to be fixed)
