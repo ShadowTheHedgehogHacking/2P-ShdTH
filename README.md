@@ -20,7 +20,7 @@ This mod is only compatible with the NTSC-U GameCube version.
 Please verify you are using a 1:1 Shadow The Hedgehog NTSC-U ISO (steps in *Building the ISO*).
 
 
-You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How To Setup by dreamsyntax" on YouTube
+You can find a setup tutorial video by searching for "Shadow 2P Mod v2.3 - How To Setup by dreamsyntax" on YouTube
 
 
 ### Building the ISO / Setting up Dolphin
@@ -111,7 +111,6 @@ Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustme
 ### Configuring for Nintendont
 *Skip this section if playing on Dolphin*
 
-
 **This assumes you are familiar with Nintendont**
 * If not, I recommend a quick read here: https://github.com/FIX94/Nintendont
 * You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0 - v2.2 mod
@@ -133,49 +132,6 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 		Set your TV to "Stretch or Full Aspect" mode. Since the game originally is 4:3, with the 16:9 patches it should be displayed as a stretched image to get proper aspect ratio
 ```
 * If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
-
-## Done so far:
-* All levels and modes are compatible v2.0+
-* Real Hardware / Nintendont compatibility
-* Widescreen support for in-game UI and some other elements in GNCP files
-* Level chunks load/unload based on both players
-* ChaosPowers activate for both players
-* Partner/Mission Helpers can be remapped to permanent AI or P3/SLOT3
-* ChaosPowers EventsCamera and ChaosControl Effects removed
-* Load P2 in any mode (including camera)
-* Enable splitscreen in 1P, disable when in cutscenes/event cameras
-* SET objects load/unload based on both players
-* Carry over VS mode selected characters into CO-OP mode
-* nukkoro2.inf spawn positions for every level
-* P2 Sound Listener
-* P2 UI
-* P2 can pause
-* P2's flyables do not overwrite P1's camera
-* Vehicles no longer disappear on P2 dismount if P1 is not nearby
-* Some segments where a vehicle is required will not have enough distance to cause a respawn (add 2x vehicles)
-* Culling issue for P2's screen when near force-fields / or near Vacuum effect (effect removed)
-* Circus Park Hero Mission counts P2's rings
-* Partner/Mission Helpers (Sonic, Doom's Eye, Espio, etc...) no longer despawn if P2 activates trigger without P1 being in range
-* Vehicles/Turrets/Flyables properly assign Controls and Cameras based on player distance
-* Key Doors, Westopolis Triggers, Computer Room react to P2
-* Independent Warping/Backtracking via Checkpoints
-* Coasters / Ziplines / Pulleys (e.g. hang-rail in Circus Park) activate on correct player
-* Bosses will act on closest player
-* Gravity Switchers on Space Gadget alter proper player's gravity* (Checkpoint warp/deaths may run into issues)
-* SuperShadow/DevilDoom activates for both players
-* 1:1 misc/unknown bytes for level edits per HPP v0.7.6+
-* Fix "Disable ScreenShake" - (occasional endless shake issue)
-* All bosses are free-cam
-* GUN Fortress Security Camera segments are free-cam
-* Android characters have unique JumpBall colors
-* Individual death-to-checkpoint (Basic)
-* Physics Rewrite for GUNMech Jumpers
-* Downscale all stage and stage_gdt textures to make the game crashless
-* P2's scores and rings add to game totals at ranking
-* "Airbug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) Fixed
-* DevilDoom crashing fixed (P2's skin data will be transparent in DevilDoom stage until death as a side effect) | We force a death on level start for v2.3+
-* DevilDoom is balanced for two players (ring collection is shared)
-* Worm Enemies and Alien Gunships target closest player
 
 ## Things to be fixed in v2.3
 * Add notice for v2.3c and later versions: "You must set Dolphin to use 64MB of RAM to play this mod. If you are playing on Wii/GameCube, you must apply the console-compatibility-textures branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM."
@@ -203,13 +159,9 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Phase 2 Warp for P2 in Diablon Boss
 * Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
 
-## Dev
-* dreamsyntax
-* DonutStopGaming
-
 ## Credits
-* dreamsyntax for starting this project/everything
-* DonutStopGaming for major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries
+* dreamsyntax | lead Developer | for starting this project/everything
+* DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
 * TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on widescreen gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
@@ -219,9 +171,9 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
 * TryTwo for extremely useful new debugging features in Dolphin
-* aldelaro5 for Dolphin Memory Engine
+* aldelaro5 & contributors for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
 * TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
-* Heroes Hacking Central (&Shadow) for keeping us insane during this project
+* Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
