@@ -80,7 +80,7 @@ You can find a setup tutorial video by searching for "Shadow 2P Mod v2.2 - How T
 ```
 Select Graphics
 	Under General:
-		Set Backend to Direct3D 11 or Vulkan (as of 5.0-10912 Direct3D 12 can cause crashes for 2P-ShdTH)
+		Set Backend to Direct3D 11, Vulkan, or OpenGL
 		Set Aspect Ratio to Force 16:9 or Stretch to Window
 	Under Enhancements:
 		I recommend 3x Native if on a 1080p monitor, settings here are optional. If you are on a low end PC leave as 1x Native.
@@ -96,9 +96,9 @@ Select Graphics
     
 	It varies per system, some run better with underclock/overclock
 	
-	I recommend trying 80%, 120%, 165%, 189%, 217%, 230%, 287% 
+	I recommend trying 80%, 150%, 200%, 300% 
 	Note that higher clockspeeds may result in audio distortions, if it occurs lower the clockspeed.
-	I run 217% on an AMD Ryzen 7 3800X, and ran 165% on a Intel i5-3570k with both having great FPS for most levels
+	I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
 How?:
 	Select Config
     Select Advanced Tab
@@ -173,7 +173,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Downscale all stage and stage_gdt textures to make the game crashless
 * P2's scores and rings add to game totals at ranking
 * "Airbug" (occasionally P1 or P2 will be stuck in the floating state until hurt after entering wind/fan/elecfan objects) Fixed
-* DevilDoom crashing fixed (P2's skin data will be transparent in DevilDoom stage until death as a side effect)
+* DevilDoom crashing fixed (P2's skin data will be transparent in DevilDoom stage until death as a side effect) | We force a death on level start for v2.3+
 * DevilDoom is balanced for two players (ring collection is shared)
 * Worm Enemies and Alien Gunships target closest player
 
@@ -192,6 +192,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Boss cameras will act as the original game for both players (partial)
 * Player Targetting Preference Setting (ex: P1 can homing attack P2, and will aim at P2) | DONE
 * CC/CB EventsCamera (Maybe)
+* Devil Doom warping too frequently | DONE
 * Checkpoint Warping System Reworked to allow other player unaffected
 * Fadescreen Added for most cases without interrupting play session with Independent Respawns
 * Independent Chunk Culling / Overlap (Unlikely - but will attempt)
