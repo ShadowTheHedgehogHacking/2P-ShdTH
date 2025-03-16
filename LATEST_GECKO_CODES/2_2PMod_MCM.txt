@@ -434,7 +434,7 @@ EDEF882A FC0FA840
 
 
 2P Essentials Bosses Target Closest Player
-Full supported boss types: BlackDoom, HeavyDog, BlackBull, DevilDoom, EggBreaker
+Full supported boss types: BlackDoom, HeavyDog, BlackBull, EggBreaker
 Includes partial patch for EggDealer
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
@@ -465,7 +465,6 @@ FC0FA840 38A00001
 NTSC 1.06 --- 0x80282514 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x8024D6D8 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x80242B10 ---- 80AD3148 -> bl <Boss_PickPlayer>
-------------- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x802A6DA8 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x80334B1C ---- C0030008 -> Branch
 
@@ -936,3 +935,16 @@ NTSC 1.06 --- 0x802F7624 ---- 80AD3148 -> Branch
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
+
+
+	-==-
+
+
+2P Essentials - Devil Doom Targets Closest Player V2
+V1 Had Devil Doom Constantly Warping when context switching.
+We change the warp vargs to help reduce that.
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
+------------- 0x805F9860 ---- 42C80000 -> 3F800000
+------------- 0x805F9864 ---- 453B8000 -> 461C4000
