@@ -44,19 +44,22 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 5. Select the `2P-ShdTH-[aspect]-[variant].xdelta` file you extracted as the `Patch file`.
 6. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device).
 7. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab.
+8. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods) 
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
 2. (Optional) We recommend keeping a separate Dolphin instance just for this mod. Before launching Dolphin, create an empty file `portable.txt` in the same folder as `Dolphin.exe`
 3. Launch Dolphin. On Dolphin's menu bar, click `File` -> `Open User Folder`. The folder that appears is your `<Dolphin User Folder>` in the below steps.
 4. `GUPE8P.ini` from release zip needs to be moved/copied to `<Dolphin User Folder>\GameSettings\`
-5. Enable Cheats in `Dolphin -> Config`. Right click the game the list and choose `Properties -> Gecko Codes` to change any configuration codes.
-6. Under `Dolphin -> Config -> Advanced` enable `CPU Clock Override` and try various values (CPU dependent). I highly recommend at least `150%` if your CPU can handle it. See [Dolphin FPS optimization (CPU variable)](#dolphin-fps-optimization) 
-7. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window`
-8. (Optional) if using `Force 16:9` and you have black bars, you can enable `Crop` in `Dolphin -> Graphics -> Advanced -> Misc`
-9. (Optional) Unpack the [SD Texture Pack v1.1](https://mega.nz/file/Cfh2UBoC#z_Lhfz8mltDimmCl9TSfrSoaMI_y421hqP9OrhlDZGE) in `<Dolphin User Folder>\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
-10. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
-11. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
+5. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize and with a custom banner. Use this when playing the game. 
+6. If the game does not appear as you expect, select `View` -> `Purge Game List Cache` from Dolphin's menu bar.
+7. Enable Cheats in `Dolphin -> Config`. Right click the game the list and choose `Properties -> Gecko Codes` to change any configuration codes.
+8. Under `Dolphin -> Config -> Advanced` enable `CPU Clock Override` and try various values (CPU dependent). I highly recommend at least `150%` if your CPU can handle it. See [Dolphin FPS optimization (CPU variable)](#dolphin-fps-optimization) 
+9. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window`
+10. (Optional) if using `Force 16:9` and you have black bars, you can enable `Crop` in `Dolphin -> Graphics -> Advanced -> Misc`
+11. (Optional) Unpack the `Texture Fixes` in `<Dolphin User Folder>\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
+12. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
+13. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
 
 ### Nintendont (Wii/Wii U)
 1. At time of release of v2.3c (2025/03/16) Nintendont does not officially support oversized ISOs.
@@ -97,6 +100,33 @@ If audio distortions occur, lower the clockspeed.
 I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
 ```
 
+### Extra Mods
+If you want to make additional modifications (such as Sonic over YellowAndroid) to the xdelta created ISO, you can follow the below extraction steps.
+
+### Extraction of Game / FST Format
+1. Open Dolphin
+2. Right-click your 2P-ShdTH ISO you created in the game list
+3. Select Properties
+4. Select FileSystem Tab
+5. Right-click "Disc"
+6. Select Extract Entire Disc...
+7. Select a new folder where you will store the game content and modify its files
+
+### Replacement of Files & Converting FST to ISO
+1. Open the newly extracted folder and make any additional changes you want (ex: Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want.
+REMINDER: THIS CAUSES MORE CRASHES - Be wary of the warning on the MTP code's description.
+2. Open Dolphin
+3. Open Config (next to Graphics and Controllers)
+4. Select Paths Tab
+5. Select "Add" for Game Folders
+6. Navigate to the folder where you extracted the game
+7. Open the `sys` folder, and select "Select Folder"
+8. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the FST format game.
+9. Right click the FST format game and pick `Convert File...`
+10. The Convert window will appear, click "Convert..." and name it `game.iso` for Nintendont, or `2PShdTH.iso` for Dolphin.
+11. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize and with a custom banner. Use this when playing the game. 
+12. If the game does not appear as you expect, in Dolphin's menu bar select `View` -> `Purge Game List Cache`.
+
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
 * DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
@@ -115,3 +145,5 @@ I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 16
 * TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Link$$$/Polterpup, my local friends, and all the randoms I played with on Parsec for playtesting
 * Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
+
+[Click here to learn how to build from source (not recommended for most users)](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master/workspace)
