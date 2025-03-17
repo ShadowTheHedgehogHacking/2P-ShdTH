@@ -134,15 +134,15 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 2. Player 2 spawns, but there is no split screen for them
 * You have patched the game correctly, but `GUPE8P.ini` is not placed in the correct spot, or Cheats are disabled in Dolphin/Nintendont
 3. I keep crashing after the Rank Screen completes on finishing a level
-* If you are using a Custom BON character with the `YellowAndroid MTP Animation Override` code, you may experience crashes on levels where the swapped character would be a partner. There is no fix at this time. I recommend avoiding this code for now.
+* If you are using a Custom BON character with the `YellowAndroid MTP Animation Override` code, you may experience crashes on levels where the swapped character would be a partner. There is no fix at this time. I recommend avoiding this code for now
 4. I get `Load failed. Please check the Memory Card` message when loading the game
-* Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled.
+* Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled
 5. The aspect ratio switches between 4:3 and 16:9 when someone uses Chaos Control
-* Ensure you are on Dolphin 2503 or newer. For 2P-ShdTH, you must also explicitly choose the aspect ratio (16:9 or Stretch to Window, or 4:3), Auto only works for the original game.
+* Ensure you are on Dolphin 2503 or newer. For 2P-ShdTH, you must also explicitly choose the aspect ratio (16:9 or Stretch to Window, or 4:3), Auto only works for the original game
 6. I have a 16:9 monitor, and am using the widescreen version of the game, but I have black bars on the sides
 * Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable "Stretch to Window" or enable "Crop" in `Graphics -> Advanced` if using Force 16:9 option
 7. My screen explodes with weird textures everywhere
-* Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom.
+* Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
