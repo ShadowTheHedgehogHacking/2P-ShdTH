@@ -41,7 +41,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 2. Extract your chosen version release zip.
 3. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice.
 4. Select your original ISO as the `Source file`.
-5. Select the `2P-ShdTH-[aspect].xdelta` file you extracted as the `Patch file`.
+5. Select the `2P-ShdTH-[aspect]-[variant].xdelta` file you extracted as the `Patch file`.
 6. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device).
 7. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab.
 
@@ -97,34 +97,7 @@ If audio distortions occur, lower the clockspeed.
 I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
 ```
 
-## Development Stuff / Credits Section
-### Things to be fixed in v2.3
-* Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns | DONE - Partial (forced death on init)
-* Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
-* Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
-* If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
-* P2 can properly interact with helicopters | DONE
-* Vibration for P2
-* Rework core respawning to be based on independent respawns | DONE
-* Remove 'game pause' on either player respawning
-* Fix some independent respawn cases (downward rail and dark spline) | DONE
-* 
-* Space Gadget gravity switcher rework | DONE (has one issue remaining with checkpoint warping)
-* Boss cameras will act as the original game for both players | PARTIAL
-* Player Targetting Preference Setting (ex: P1 can homing attack P2, and will aim at P2) | DONE
-* CC/CB EventsCamera (Maybe)
-* Devil Doom warping too frequently | DONE
-* Checkpoint Warping System Reworked to allow other player unaffected | PARTIAL
-* Fadescreen Added for most cases without interrupting play session with Independent Respawns | DONE
-* Independent Chunk Culling / Overlap (Unlikely - but will attempt)
-
-### Other Known Issues (Not planned to be fixed)
-* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
-* Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
-* Phase 2 Warp for P2 in Diablon Boss
-* Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
-
-### Credits
+## Credits
 * dreamsyntax | lead Developer | for starting this project/everything
 * DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
@@ -133,7 +106,7 @@ I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 16
 * Muzzarino for some symbol findings
 * RaphaelDrewBoltman for the GitHub icon / HHC related textures
 
-### Thanks
+## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
 * TryTwo for extremely useful new debugging features in Dolphin
 * aldelaro5 & contributors for Dolphin Memory Engine

@@ -51,3 +51,31 @@ In `\Mods Library` place the .txt files from the repo's `\code\MCM`
 9. Launch MCM. Select your built ISO from step 6. It should show the currently enabled codes across the four files.
 Note: You can open the original game, which will then ask what version is the ROM. Specify 1.06 if ever asked. Note it will MODIFY the ISO that you pick with a MCM header declaring this version, so be sure to only use copies!
 10. Place the `\code\GUPE8P.ini` file in `\GameSettings` of your `Dolphin User Folder`. You can find your `Dolphin User Folder` by launching Dolphin and clicking `File` on the menu bar, then `Open User Folder`.
+
+
+-- TODO: Move this somewhere else
+
+### Things to be fixed in v2.3
+* Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns | DONE - Partial (forced death on init)
+* Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
+* Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
+* If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
+* P2 can properly interact with helicopters | DONE
+* Vibration for P2
+* Rework core respawning to be based on independent respawns | DONE
+* Remove 'game pause' on either player respawning
+* Fix some independent respawn cases (downward rail and dark spline) | DONE
+* Space Gadget gravity switcher rework | DONE (has one issue remaining with checkpoint warping)
+* Boss cameras will act as the original game for both players | PARTIAL
+* Player Targetting Preference Setting (ex: P1 can homing attack P2, and will aim at P2) | DONE
+* CC/CB EventsCamera (Maybe)
+* Devil Doom warping too frequently | DONE
+* Checkpoint Warping System Reworked to allow other player unaffected | PARTIAL
+* Fadescreen Added for most cases without interrupting play session with Independent Respawns | DONE
+* Independent Chunk Culling / Overlap (Unlikely - but will attempt)
+
+### Other Known Issues (Not planned to be fixed)
+* P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
+* Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
+* Phase 2 Warp for P2 in Diablon Boss
+* Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
