@@ -1,7 +1,8 @@
 <div align="center">
 <h1>2 Player Shadow The Hedgehog</h1>
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/workspace/res/banner.png" align="center" />
 <h3>A multiplayer mod for Shadow the Hedgehog NTSC-U (GameCube)</h3>
-<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/res/main_banner.png" align="center" />
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/workspace/res/main_banner.png" align="center" />
 </div>
 
 ## About
