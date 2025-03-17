@@ -65,19 +65,17 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 4. Rename your patched ISO to `game.iso` and place it on your Nintendont SD or USB.
 ```
 Copy GUPE8P.gct to the same directory as your game.iso
-	e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
-		game.iso
-		GUPE8P.gct
-	in the folder.
+ e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
+   game.iso
+   GUPE8P.gct
+ in the folder.
 Copy 'saves' folder to root of USB or SD (same one where game is)
-    Nintendont should be configured as follows for the best experience:
-        Cheats ON
-        Unlock Read Speed ON
-		
-    Optional:
-       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
-		Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
-		Set your TV to "Stretch or Full Aspect" mode. Since the game originally is 4:3, with the 16:9 patches it should be displayed as a stretched image to get proper aspect ratio
+ Nintendont should be configured as follows for the best experience:
+   Cheats ON
+   Unlock Read Speed ON		
+Optional:
+   Memcard Emulation ON (If you want to use provided 100% save)
+   Video Width (Set to whatever fills your screen without black bars, in my case it was 714)
 ``` 
 
 #### Dolphin FPS Optimization
