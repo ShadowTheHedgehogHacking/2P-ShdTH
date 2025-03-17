@@ -10,7 +10,6 @@ This project allows you experience Shadow The Hedgehog (GameCube)'s 1P modes wit
 
 ## Important
 * You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console-compatibility-textures` variant of the mod, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM.
-* DO NOT USE GCR to build custom ISO! Build using Dolphin (steps below), or use xdelta if you don't plan to make other modifications.
 * WARNING: If Using the YellowAndroid MTP Animation Override code to have P2 be Sonic/Omega expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
 
@@ -37,7 +36,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 
 ### Patching
 #### Note: You need the GUPE8P.ini file for the mod to work properly, running just the ISO will not work!
-1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) - choosing either the original aspect ratio version or the widescreen version. Patchers exist for NTSC-U, NTSC-J, and PAL.
+1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) - choosing either the original aspect ratio version or the widescreen version.
 2. Extract your chosen version release zip.
 3. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice.
 4. Select your original ISO as the `Source file`.
