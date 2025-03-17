@@ -78,24 +78,25 @@ Optional:
    Video Width (Set to whatever fills your screen without black bars, in my case it was 714)
 ``` 
 
-#### Dolphin FPS Optimization
+### Dolphin FPS Optimization
+`Config` -> `Advanced` -> `CPU Clock Override slider` 
+Adjust clockspeed while running the game.
+Note: Dolphin only saves this change for next run if your game is NOT running
+You should find the value that runs best, close the game, then set it again.
 
-	Adjust clockspeed while running the game (Note: Dolphin only saves this change for next run if your game is NOT running; You should find the value that runs best then close the game, set it again and it will stay there):
+I recommend loading in Glyphic Canyon, have one player stay at the start,
+have the other go to the first area with enemies and Knuckles.
+Try adjusting the slider here to reach 60fps. It will be ~30fps with default 100% clock.
     
-	It varies per system, some run better with underclock/overclock
+It varies per system, some run better with underclock/overclock
 	
-	I recommend trying 80%, 150%, 200%, 300% 
-	Note that higher clockspeeds may result in audio distortions, if it occurs lower the clockspeed.
-	I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
-How?:
-	Select Config
-    Select Advanced Tab
-    Adjust CPU Clock Override slider
+I recommend trying 80%, 150%, 200%, 300% 
+Note: Higher clockspeeds may result in audio distortions if your system can't keep up
+If audio distortions occur, lower the clockspeed.
+I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
 
-I recommend loading in Glyphic Canyon, have one player stay at the start and the other go to the first area with enemies and Knuckles.
-Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustments)
-
-## Things to be fixed in v2.3
+## Development Stuff / Credits Section
+### Things to be fixed in v2.3
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns | DONE - Partial (forced death on init)
 * Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
@@ -115,13 +116,13 @@ Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustme
 * Fadescreen Added for most cases without interrupting play session with Independent Respawns | DONE
 * Independent Chunk Culling / Overlap (Unlikely - but will attempt)
 
-## Other Known Issues (Not planned to be fixed)
+### Other Known Issues (Not planned to be fixed)
 * P2 spawns according to nukkoro2.inf initially fine, but on restart seems to occasionally be off by +-5 - +-20 (stage dependent, game bug)
 * Rare instance has been recorded where P1 uses a rocket but the rocket never takes off (state issue?)
 * Phase 2 Warp for P2 in Diablon Boss
 * Item Bubbles / Hint Bubbles content render based on P1's camera's relative location
 
-## Credits
+### Credits
 * dreamsyntax | lead Developer | for starting this project/everything
 * DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
@@ -130,7 +131,7 @@ Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustme
 * Muzzarino for some symbol findings
 * RaphaelDrewBoltman for the GitHub icon / HHC related textures
 
-## Thanks
+### Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
 * TryTwo for extremely useful new debugging features in Dolphin
 * aldelaro5 & contributors for Dolphin Memory Engine
