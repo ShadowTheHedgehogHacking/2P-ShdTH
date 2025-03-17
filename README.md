@@ -63,7 +63,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 13. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
 
 ### Nintendont (Wii/Wii U)
-1. At time of release of 2P-ShdTH v2.3c (2025/03/17), Nintendont does not officially support oversized ISOs.
+1. At time of release of 2P-ShdTH v2.4 (2025/03/17), Nintendont does not officially support oversized ISOs.
 2. You will need to use [this build of Nintendont instead](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
 3. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
 4. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB.
@@ -159,7 +159,7 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 * aldelaro5 & contributors for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
-* TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Link$$$/Polterpup, my local friends, and all the randoms I played with on Parsec for playtesting
+* TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Waddle DJ, my local friends, and all the randoms I played with on Parsec for playtesting
 * Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
 
