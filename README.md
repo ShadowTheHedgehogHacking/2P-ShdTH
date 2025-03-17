@@ -113,10 +113,10 @@ If you want to make additional modifications (such as Sonic over YellowAndroid) 
 7. Select a new folder where you will store the game content and modify its files
 
 ### Replacement of Files & Converting FST to ISO
-1. Open the newly extracted folder and make any additional changes you want (ex: Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want.
-REMINDER: THIS CAUSES MORE CRASHES - Be wary of the warning on the MTP code's description.
+1. Open the newly extracted folder and make any additional changes you want, such as Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want.
+REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warning on the MTP code's description.
 2. Open Dolphin
-3. Open Config (next to Graphics and Controllers)
+3. Open Config
 4. Select Paths Tab
 5. Select "Add" for Game Folders
 6. Navigate to the folder where you extracted the game
