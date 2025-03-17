@@ -37,36 +37,35 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 4. Play! See below for detailed steps
 
 ### Patching
-#### Note: You need the GUPE8P.ini file for the mod to work properly, running just the ISO will not work!
-1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) - choosing either the original aspect ratio version or the widescreen version
-2. Extract your chosen version release zip
-3. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice
-4. Select your original ISO as the `Source file`
-5. Select the `2P-ShdTH-[aspect]-[variant].xdelta` file you extracted as the `Patch file`
-6. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device)
-7. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
-8. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods) 
+#### Note: You need the `GUPE8P.ini` file for the mod to work properly, running just the ISO will not work! If you follow Step 4. of the Dolphin setup, this is part of the `GameSettings` folder merge step.
+1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) and extract it somewhere you can access easily.
+2. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice
+3. Select your original ISO as the `Source file`
+4. Select the `2P-ShdTH-[aspect]-[variant].xdelta` file from `Patches` as the `Patch file`. Use `console` variants if playing on real hardware. Use `64M` variants if playing on Dolphin
+5. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device)
+6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
+7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
 2. (Optional) We recommend keeping a separate Dolphin instance just for this mod. Before launching Dolphin, create an empty file `portable.txt` in the same folder as `Dolphin.exe`
 3. Launch Dolphin. On Dolphin's menu bar, click `File` -> `Open User Folder`. The folder that appears is your `<Dolphin User Folder>` in the below steps
-4. `GUPE8P.ini` from release zip needs to be moved/copied to `<Dolphin User Folder>\GameSettings\`
-5. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize and with a custom banner. Use this when playing the game
+4. Copy/Move the two folders (`GameSettings` and `Load`) in `Dolphin Configuration (Required)` to `<Dolphin User Folder>`
+5. Move/Save the patched ISO you created earlier to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphin game list, with greater than 0 filesize, and with a custom banner. Use this when playing the game
 6. If the game does not appear as you expect, select `View` -> `Purge Game List Cache` from Dolphin's menu bar
 7. Enable Cheats in `Dolphin -> Config`. Right click the game the list and choose `Properties -> Gecko Codes` to change any configuration codes
 8. Under `Dolphin -> Config -> Advanced` enable `CPU Clock Override` and try various values (CPU dependent). I highly recommend at least `150%` if your CPU can handle it. See [Dolphin FPS optimization (CPU variable)](#dolphin-fps-optimization) 
 9. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window`
 10. (Optional) if using `Force 16:9` and you have black bars, you can enable `Crop` in `Dolphin -> Graphics -> Advanced -> Misc`
-11. (Optional) Unpack the `Texture Fixes` in `<Dolphin User Folder>\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
-12. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
-13. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
+11. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
+12. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
 
 ### Nintendont (Wii/Wii U)
 1. At time of release of 2P-ShdTH v2.4 (2025/03/17), Nintendont does not officially support oversized ISOs.
 2. You will need to use [this build of Nintendont instead](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
 3. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
 4. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB.
+5. For convenience, the release includes pre-built GCTs for Widescreen and Original Aspect in the Vertical Split Screen mode. If creating your own GCT file and playing with Original Aspect Ratio, you should disable the `Vertical/Horizontal SplitScreen - Advanced Full Widescreen v5 with UI/GNCP Code` and `2P Optionals Show Score/Points UI`.
 ```
 Copy GUPE8P.gct to the same directory as your game.iso
  e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
