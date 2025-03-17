@@ -41,10 +41,19 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) and extract it somewhere you can access easily.
 2. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice
 3. Select your original ISO as the `Source file`
-4. Select the `2P-ShdTH-[aspect]-[variant].xdelta` file from `Patches` as the `Patch file`. Use `console` variants if playing on real hardware. Use `64M` variants if playing on Dolphin
+4. Select the `2P-ShdTH-[version]-[aspect]-[variant].xdelta` file from `Patches` as the `Patch file`. Use `console` variants if playing on real hardware. Use `64M` variants if playing on Dolphin
 5. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device)
 6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
 7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
+
+Expected Patch Results
+
+| PATCH              | CRC32 Hash    | SHA-1 Hash                               |
+| ------------------ | ------------- | ---------------------------------------- |
+| 64M-WIDESCREEN     | f63e5e2f      | af87d012e4a79ddfd033bceca07492c437ee2537 |
+| 64M                | 034e5cda      | 359d6a76c0630b68d2bbdd41dd8c9ea88aa7b4db |
+| CONSOLE            | f4c2fb43      | 20fbd3363b8c20608153813cdd6df3627a04037b |
+| CONSOLE-WIDESCREEN | a51c36a3      | efa3853eacc921ac91d377da28365f97e28866af |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
