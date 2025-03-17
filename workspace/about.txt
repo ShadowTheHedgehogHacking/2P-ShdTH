@@ -1,0 +1,10 @@
+## INCLUDE THIS ON RELEASE; MODIFYING PER BUILD
+
+2P-ShdTH 2.4 / 2025.03.17
+Original Aspect Ratio ## OR Widescreen
+64M Required (will not work on console!) ## OR Console Compatible
+by dreamsyntax & DonutStopGaming
+
+https://github.com/ShadowTheHedgehogHacking/2P-ShdTH
+https://gamebanana.com/mods/310633
+https://www.youtube.com/@dreamsyntax
