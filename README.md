@@ -5,11 +5,10 @@
 </div>
 
 ## About
-This project aims to get 2 Players working in Shadow The Hedgehog (GameCube)'s 1P modes.
-
-Story Mode, Select Mode, Expert Mode, Last Story.
+This project allows you experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional.
 
 ## Important Notes
+* You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM.
 * DO NOT USE GCR to build custom ISO! Build using Dolphin (steps below), or use xdelta if you don't plan to make other modifications.
 * WARNING: If Using the YellowAndroid MTP Animation Override code to have P2 be Sonic/Omega expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
@@ -19,45 +18,12 @@ This mod is only compatible with the NTSC-U GameCube version.
 
 Please verify you are using a 1:1 Shadow The Hedgehog NTSC-U ISO (steps in *Building the ISO*).
 
+You can find a setup tutorial video by searching for "Shadow 2P Mod v2.3 - How To Setup by dreamsyntax" on YouTube.
 
-You can find a setup tutorial video by searching for "Shadow 2P Mod v2.3 - How To Setup by dreamsyntax" on YouTube
+### Summary of How to Setup
+1. Apply `xdeltapatch` with on original NTSC-U ISO
+2. 
 
-
-### Building the ISO / Setting up Dolphin
-**NOTE: Even if you plan to play on real hardware, you will need Dolphin to build the Custom ISO**
-1. Get the latest release or dev Dolphin - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
-2. Before launching dolphin, create an empty file
-   `portable.txt` in the same folder as Dolphin.exe
-3. Ensure you have the US version of ShadowTheHedgehog:
-	* Right click the game in Dolphin, click Properties.
-	* Click the Verify tab. Click Verify Integrity.
-	* Hash should match this: 
-	* CRC32: `f582cf1e`
-	* or
-	* SHA-1: `5dc81ad9c97549394e30bedc252bfa37d4db1de0`
-   
-### Extraction of Game / FST Format
-1. Open Dolphin
-2. Right-click Shadow The Hedgehog in the game list
-3. Select Properties
-4. Select FileSystem Tab
-5. Right-click "Disc"
-6. Select Extract Entire Disc...
-7. Select a new folder where you will store the game content and modify its files
-
-### Replacement of Files & Converting FST to ISO
-1. Open the newly extracted folder and merge/overwrite the `sys` and `files` files with the two folders in `ISO_EDITS`.
-2. Make any additional changes you want (ex: Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. REMINDER: THIS CAUSES MORE CRASHES.
-3. Open Dolphin
-4. Open Config (next to Graphics and Controllers)
-5. Select Paths Tab
-6. Select "Add" for Game Folders
-7. Navigate to the folder where you extracted the game
-8. Open the `sys` folder, and select "Select Folder"
-9. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the FST format game.
-10. Right click the FST format game and pick `Convert File...`
-11. The Convert window will appear, click "Convert..." and name it `game.iso` for Nintendont, or `2PShdTH.iso` for Dolphin.
-12. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize. Use this when playing the game. 
 
 ### Configuring for Dolphin
 *Skip this section if playing on Nintendont*
@@ -84,8 +50,6 @@ Select Graphics
 		Set Aspect Ratio to Force 16:9 or Stretch to Window
 	Under Enhancements:
 		I recommend 3x Native if on a 1080p monitor, settings here are optional. If you are on a low end PC leave as 1x Native.
-	Under Hacks:
-		Check/Enable everything (big performance gain)
 	Under Advanced:
 		Check/Enable Load Custom Textures and Prefetch Custom Textures
 ```		
@@ -108,11 +72,13 @@ I recommend loading in Glyphic Canyon, have one player stay at the start and the
 Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustments)
 ```
 
-### Configuring for Nintendont
+### Configuring for Nintendont: Custom Build Required
 *Skip this section if playing on Dolphin*
 
-**This assumes you are familiar with Nintendont**
-* If not, I recommend a quick read here: https://github.com/FIX94/Nintendont
+At time of release of v2.3c (2025/03/16) Nintendont does not officially support oversized ISOs.
+
+You will need to use [this build of Nintendont instead](https://github.com/nfsman34/Nintendont-SonicRiders/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
+
 * You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0 - v2.2 mod
 ```
 Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
@@ -134,8 +100,7 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
 
 ## Things to be fixed in v2.3
-* Add notice for v2.3c and later versions: "You must set Dolphin to use 64MB of RAM to play this mod. If you are playing on Wii/GameCube, you must apply the console-compatibility-textures branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM."
-* Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns
+* Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns | DONE - Partial (forced death on init)
 * Story Mode Route Menu (Y button when paused) remaps control to P1 until pause is closed
 * Checkpoint Bonus (Rings, Bubble, Lives) are based off P1's ring count if P2 activates checkpoint
 * If ChaosPoints are at 0, Dark/Hero orbs only activate P1's ChaosPowers
@@ -144,13 +109,14 @@ Copy 'saves' folder to root of USB or SD (same one where game is)
 * Rework core respawning to be based on independent respawns | DONE
 * Remove 'game pause' on either player respawning
 * Fix some independent respawn cases (downward rail and dark spline) | DONE
+* 
 * Space Gadget gravity switcher rework | DONE (has one issue remaining with checkpoint warping)
-* Boss cameras will act as the original game for both players (partial)
+* Boss cameras will act as the original game for both players | PARTIAL
 * Player Targetting Preference Setting (ex: P1 can homing attack P2, and will aim at P2) | DONE
 * CC/CB EventsCamera (Maybe)
 * Devil Doom warping too frequently | DONE
-* Checkpoint Warping System Reworked to allow other player unaffected
-* Fadescreen Added for most cases without interrupting play session with Independent Respawns
+* Checkpoint Warping System Reworked to allow other player unaffected | PARTIAL
+* Fadescreen Added for most cases without interrupting play session with Independent Respawns | DONE
 * Independent Chunk Culling / Overlap (Unlikely - but will attempt)
 
 ## Other Known Issues (Not planned to be fixed)
