@@ -33,7 +33,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 ### Summary
 1. Patch your original NTSC-U ISO with the .xdelta of your choice
 2. Dolphin: Ensure you placed `GUPE8P.ini`, Enabled Cheats, and set Force Aspect ratio
-3. Nintendont: Ensure you are using Oversized ISO support version of Nintendont, Ensure you placed `GUPE.gct` file next to `game.iso`, In Nintendont configuration, set `Cheats ON` and `Unlock Read Speed ON`
+3. Nintendont: Ensure you are using Oversized ISO support version of Nintendont, Ensure you placed `GUPE8P.gct` file next to `game.iso`, In Nintendont configuration, set `Cheats ON` and `Unlock Read Speed ON`
 4. Play! See below for detailed steps
 
 ### Patching
