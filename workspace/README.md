@@ -2,8 +2,9 @@
 This mod is modular, so we combine the below when creating a release:
 1. 2P-ShdTH (this repo) - Steps listed in [Applying 2P-ShdTH To A Clean ISO](#applying-2p-shdth-to-a-clean-iso)
 2. [shadow-model-fixes](https://github.com/ShadowTheHedgehogHacking/shadow-model-fixes)
-3. [Widescreen-ShadowTH](https://github.com/ShadowTheHedgehogHacking/Widescreen-ShadowTH) (for non-original aspect editions)
-4. If you are playing on Wii/GameCube, you must also apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM. Apply it last.
+3. [shadow-event-fixes](https://github.com/ShadowTheHedgehogHacking/shadow-event-fixes)
+4. [Widescreen-ShadowTH](https://github.com/ShadowTheHedgehogHacking/Widescreen-ShadowTH) (for non-original aspect editions)
+5. If you are playing on Wii/GameCube, you must also apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM. Apply it last.
 
 ### Applying 2P-ShdTH To A Clean ISO
 1. [Extract the Game](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH?tab=readme-ov-file#extraction-of-game--fst-format)
