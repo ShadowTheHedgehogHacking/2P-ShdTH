@@ -22,6 +22,7 @@ Please verify the ROM you are attempting to patch is a 1:1 ShadowTheHedgehog Gam
 GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below.
 
 You can convert your game by right-clicking your game in Dolphin's game list -> `Convert File...`
+
 You can check your hashes by right-clicking your game in Dolphin's game list -> `Properties` -> `Verify` tab.
 
 | ROM    | CRC32 Hash    | SHA-1 Hash                               |
@@ -97,7 +98,7 @@ I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 16
 ```
 
 ## Credits
-* dreamsyntax | lead Developer | for starting this project/everything
+* dreamsyntax | Lead Developer | for starting this project/everything
 * DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
 * TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on widescreen gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
@@ -111,6 +112,6 @@ I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 16
 * aldelaro5 & contributors for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
-* TheHatedGravity, LimblessVector, Shadowth117, DonutStopGaming, my local friends, and all the randoms I played with on Parsec for playtesting
+* TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Link$$$/Polterpup, my local friends, and all the randoms I played with on Parsec for playtesting
 * Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
