@@ -143,6 +143,8 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 * Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable "Stretch to Window" or enable "Crop" in `Graphics -> Advanced` if using Force 16:9 option
 7. My screen explodes with weird textures everywhere
 * Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
+8. My Wii / Wii U shuts down when loading a stage (Nintendont)
+* You need to use a version of Nintendont that supports Oversized Images. Double check you are loading the one recommended with the version of the mod you downloaded.
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
