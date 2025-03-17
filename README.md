@@ -36,7 +36,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 4. Play! See below for detailed steps.
 
 ### Patching
-#### Note: You need the GUPE8P.ini file for the mod to work properly, just building the ISO will not work!
+#### Note: You need the GUPE8P.ini file for the mod to work properly, running just the ISO will not work!
 1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) - choosing either the original aspect ratio version or the widescreen version. Patchers exist for NTSC-U, NTSC-J, and PAL.
 2. Extract your chosen version release zip.
 3. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice.
