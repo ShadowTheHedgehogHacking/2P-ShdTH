@@ -33,7 +33,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 ### Summary
 1. Patch your original NTSC-U ISO with the .xdelta of your choice
 2. Dolphin: Ensure you placed `GUPE8P.ini`, Enabled Cheats, and set Force Aspect ratio
-3. Nintendont: Ensure you are using Oversized ISO support version of Nintendont, Ensure you placed `GUPE8P.gct` file next to `game.iso`, In Nintendont configuration, set `Cheats ON` and `Unlock Read Speed ON`
+3. Nintendont: Ensure you placed `GUPE8P.gct` file next to `game.iso`, In Nintendont configuration, set `Cheats ON` and `Unlock Read Speed ON`
 4. Play! See below for detailed steps
 
 ### Patching
@@ -61,11 +61,9 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 12. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
 
 ### Nintendont (Wii/Wii U)
-1. At time of release of 2P-ShdTH v2.4 (2025/03/17), Nintendont does not officially support oversized ISOs.
-2. You will need to use [this build of Nintendont instead](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
-3. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
-4. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB.
-5. For convenience, the release includes pre-built GCTs for Widescreen and Original Aspect in the Vertical Split Screen mode. If creating your own GCT file and playing with Original Aspect Ratio, you should disable the `Vertical/Horizontal SplitScreen - Advanced Full Widescreen v5 with UI/GNCP Code` and `2P Optionals Show Score/Points UI`.
+1. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
+2. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB.
+3. For convenience, the release includes pre-built GCTs for Widescreen and Original Aspect in the Vertical Split Screen mode. If creating your own GCT file and playing with Original Aspect Ratio, you should disable the `Vertical/Horizontal SplitScreen - Advanced Full Widescreen v5 with UI/GNCP Code` and `2P Optionals Show Score/Points UI`.
 ```
 Copy GUPE8P.gct to the same directory as your game.iso
  e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
@@ -143,7 +141,7 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 7. My screen explodes with weird textures everywhere
 * Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
 8. My Wii / Wii U shuts down when loading a stage (Nintendont)
-* You need to use a version of Nintendont that supports Oversized Images. Double check you are loading the one recommended with the version of the mod you downloaded.
+* This should not happen with base 2P Mod. If you are experiencing this, it means your additional modifications need to use a version of Nintendont that supports Oversized Images. You can use [this build of Nintendont](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) as a workaround.
 9. Both players are being controlled by one controller
 * You need to ensure the `START` button is not pressed at the same time on multiple controllers during stage load. In Dolphin make sure you haven't accidentally bound `START` to the same key/controller by mistake.
 
