@@ -164,6 +164,6 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
 
 ## A Notice to Modders
-Anyone is free to base mods off this project. If you make a new mod based off of, or having 2P-Mod support, I would love to see it!
+Anyone is free to base mods off this project. If you make a new mod based on it or create something that has 2P-ShdTH support, I would love to see it!
 
 [Click here to learn how to build from source (not recommended for most users)](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master/workspace)
