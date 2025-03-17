@@ -146,7 +146,7 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 8. My Wii / Wii U shuts down when loading a stage (Nintendont)
 * You need to use a version of Nintendont that supports Oversized Images. Double check you are loading the one recommended with the version of the mod you downloaded.
 9. Both players are being controlled by one controller
-* You need to ensure the "START" button is not pressed at the same time during stage load. In Dolphin make sure you haven't accidentally bound START to the same key/controller by mistake.
+* You need to ensure the `START` button is not pressed at the same time on multiple controllers during stage load. In Dolphin make sure you haven't accidentally bound `START` to the same key/controller by mistake.
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
