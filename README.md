@@ -80,6 +80,7 @@ Optional:
 
 ### Dolphin FPS Optimization
 `Config` -> `Advanced` -> `CPU Clock Override slider` 
+```
 Adjust clockspeed while running the game.
 Note: Dolphin only saves this change for next run if your game is NOT running
 You should find the value that runs best, close the game, then set it again.
@@ -94,6 +95,7 @@ I recommend trying 80%, 150%, 200%, 300%
 Note: Higher clockspeeds may result in audio distortions if your system can't keep up
 If audio distortions occur, lower the clockspeed.
 I use 300% for AMD Ryzen 9 5900X; Previously used 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
+```
 
 ## Development Stuff / Credits Section
 ### Things to be fixed in v2.3
