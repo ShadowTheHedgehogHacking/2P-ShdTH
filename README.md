@@ -9,7 +9,7 @@
 This project allows you experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional.
 
 ## Important
-* You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM.
+* You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console-compatibility-textures` variant of the mod, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM.
 * DO NOT USE GCR to build custom ISO! Build using Dolphin (steps below), or use xdelta if you don't plan to make other modifications.
 * WARNING: If Using the YellowAndroid MTP Animation Override code to have P2 be Sonic/Omega expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings.
 * You can change characters. Select 2P-VS, select characters, back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP.
