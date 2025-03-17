@@ -8,7 +8,7 @@
 ## About
 This project allows you experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional.
 
-## Important Notes
+## Important
 * You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM.
 * DO NOT USE GCR to build custom ISO! Build using Dolphin (steps below), or use xdelta if you don't plan to make other modifications.
 * WARNING: If Using the YellowAndroid MTP Animation Override code to have P2 be Sonic/Omega expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings.
@@ -17,46 +17,71 @@ This project allows you experience Shadow The Hedgehog (GameCube)'s 1P modes wit
 ## How to play / Setup
 This mod is only compatible with the NTSC-U GameCube version.
 
-Please verify you are using a 1:1 Shadow The Hedgehog NTSC-U ISO (steps in *Building the ISO*).
+### ROM Validation
+Please verify the ROM you are attempting to patch is a 1:1 ShadowTheHedgehog GameCube ISO.
 
-You can find a setup tutorial video by searching for "Shadow 2P Mod v2.3 - How To Setup by dreamsyntax" on YouTube.
+GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below.
 
-### Summary of How to Setup
-1. Apply `xdeltapatch` with on original NTSC-U ISO
-2. 
+You can convert your game by right-clicking your game in Dolphin's game list -> `Convert File...`
+You can check your hashes by right-clicking your game in Dolphin's game list -> `Properties` -> `Verify` tab.
 
+| ROM    | CRC32 Hash    | SHA-1 Hash                               |
+| ------ | ------------- | ---------------------------------------- |
+| NTSC-U | f582cf1e      | 5dc81ad9c97549394e30bedc252bfa37d4db1de0 |
 
-### Configuring for Dolphin
-*Skip this section if playing on Nintendont*
-1. Close Dolphin if it is open
-2. `GUPE8P.ini` needs to be moved/copied to `<Dolphin.exe Directory>\User\GameSettings\`
-3. If you did not make portable.txt earlier, instead you will find the folder at `%appdata%\Dolphin Emulator\GameSettings\`
-4. Unpack the [SD Texture Pack v1.1](https://mega.nz/file/Cfh2UBoC#z_Lhfz8mltDimmCl9TSfrSoaMI_y421hqP9OrhlDZGE) in `<Dolphin.exe Directory>\User\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
-5. If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin.exe Directory>\User\GC\USA\Card A\`
-6. Open Dolphin
-7. Open Config, Enable Cheats
-8. Open Graphics, Click Advanced Tab, Check/Enable Load Custom Textures and Prefetch Custom Textures
+### Summary
+1. Patch your original NTSC-U ISO with the .xdelta of your choice
+2. Dolphin: Ensure you placed `GUPE8P.ini`, Enabled Cheats, and set Force Aspect ratio
+3. Nintendont: Ensure you are using Oversized ISO support version of Nintendont, Ensure you placed `GUPE.gct` file next to `game.iso`, In Nintendont configuration, set `Cheats ON` and `Unlock Read Speed ON`
+4. Play! See below for detailed steps.
 
-#### Dolphin 2P Mod Tweaks / Cheats Config
-1. Right click the game and choose Properties
-2. Choose the Gecko Codes tab
-3. Here you can enable/disable some of the codes and customize some tweaks.
-4. Note some codes are embedded in the dol and are not able to be disabled.
+### Patching
+#### Note: You need the GUPE8P.ini file for the mod to work properly, just building the ISO will not work!
+1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) - choosing either the original aspect ratio version or the widescreen version. Patchers exist for NTSC-U, NTSC-J, and PAL.
+2. Extract your chosen version release zip.
+3. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice.
+4. Select your original ISO as the `Source file`.
+5. Select the `2P-ShdTH-[aspect].xdelta` file you extracted as the `Patch file`.
+6. Click `Apply Patch`: It will then 'download' the patched file as `ISO NAME-patched.iso` (nothing is actually uploaded/downloaded, it is all done on-device).
+7. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab.
 
-#### Dolphin Performance & Enable Texture Pack Configuration
+### Dolphin
+1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
+2. (Optional) We recommend keeping a separate Dolphin instance just for this mod. Before launching Dolphin, create an empty file `portable.txt` in the same folder as `Dolphin.exe`
+3. Launch Dolphin. On Dolphin's menu bar, click `File` -> `Open User Folder`. The folder that appears is your `<Dolphin User Folder>` in the below steps.
+4. `GUPE8P.ini` from release zip needs to be moved/copied to `<Dolphin User Folder>\GameSettings\`
+5. Enable Cheats in `Dolphin -> Config`. Right click the game the list and choose `Properties -> Gecko Codes` to change any configuration codes.
+6. Under `Dolphin -> Config -> Advanced` enable `CPU Clock Override` and try various values (CPU dependent). I highly recommend at least `150%` if your CPU can handle it. See [Dolphin FPS optimization (CPU variable)](#dolphin-fps-optimization) 
+7. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window`
+8. (Optional) if using `Force 16:9` and you have black bars, you can enable `Crop` in `Dolphin -> Graphics -> Advanced -> Misc`
+9. (Optional) Unpack the [SD Texture Pack v1.1](https://mega.nz/file/Cfh2UBoC#z_Lhfz8mltDimmCl9TSfrSoaMI_y421hqP9OrhlDZGE) in `<Dolphin User Folder>\Load\Textures\` (the unzipped texturepack folder should be named `GUPE8P`)
+10. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
+11. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
+
+### Nintendont (Wii/Wii U)
+1. At time of release of v2.3c (2025/03/16) Nintendont does not officially support oversized ISOs.
+2. You will need to use [this build of Nintendont instead](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
+3. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
+4. Rename your patched ISO to `game.iso` and place it on your Nintendont SD or USB.
 ```
-Select Graphics
-	Under General:
-		Set Backend to Direct3D 11, Vulkan, or OpenGL
-		Set Aspect Ratio to Force 16:9 or Stretch to Window
-	Under Enhancements:
-		I recommend 3x Native if on a 1080p monitor, settings here are optional. If you are on a low end PC leave as 1x Native.
-	Under Advanced:
-		Check/Enable Load Custom Textures and Prefetch Custom Textures
-```		
+Copy GUPE8P.gct to the same directory as your game.iso
+	e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
+		game.iso
+		GUPE8P.gct
+	in the folder.
+Copy 'saves' folder to root of USB or SD (same one where game is)
+    Nintendont should be configured as follows for the best experience:
+        Cheats ON
+        Unlock Read Speed ON
+		
+    Optional:
+       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
+		Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
+		Set your TV to "Stretch or Full Aspect" mode. Since the game originally is 4:3, with the 16:9 patches it should be displayed as a stretched image to get proper aspect ratio
+``` 
 
-#### Dolphin FPS optimization (CPU variable)
-```
+#### Dolphin FPS Optimization
+
 	Adjust clockspeed while running the game (Note: Dolphin only saves this change for next run if your game is NOT running; You should find the value that runs best then close the game, set it again and it will stay there):
     
 	It varies per system, some run better with underclock/overclock
@@ -71,34 +96,6 @@ How?:
 
 I recommend loading in Glyphic Canyon, have one player stay at the start and the other go to the first area with enemies and Knuckles.
 Try adjusting the slider here to reach 60fps. (It will be ~30fps before adjustments)
-```
-
-### Configuring for Nintendont: Custom Build Required
-*Skip this section if playing on Dolphin*
-
-At time of release of v2.3c (2025/03/16) Nintendont does not officially support oversized ISOs.
-
-You will need to use [this build of Nintendont instead](https://github.com/nfsman34/Nintendont-SonicRiders/releases) until [this PR is merged](https://github.com/FIX94/Nintendont/pull/1213). When the PR is merged, you can update your official Nintendont and switch to it.
-
-* You MUST use my [custom Nintendont build](https://github.com/ShadowTheHedgehogHacking/Nintendont-2PMod-Fix), it will not work with any other games and the original Nintendont will not work with 2P-ShdTH v2.0 - v2.2 mod
-```
-Copy GUPE8P.gct to the same directory as your game.iso (doesnt matter if its USB or SD)
-	e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
-		game.iso
-		GUPE8P.gct
-	in the folder.
-Copy 'saves' folder to root of USB or SD (same one where game is)
-    Nintendont should be configured as follows for the best experience:
-        Cheats ON
-        Force Widescreen OFF (ensure its not ON!) 
-        Unlock Read Speed ON
-		
-    Optional:
-       	Memcard Emulation ON (if you don't have a memcard with stages unlocked already)
-		Video Width (Set to whatever fills your screen if you want the same aspect as Dolphin, in my case it was 714)
-		Set your TV to "Stretch or Full Aspect" mode. Since the game originally is 4:3, with the 16:9 patches it should be displayed as a stretched image to get proper aspect ratio
-```
-* If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont
 
 ## Things to be fixed in v2.3
 * Super P2 has transparent/missing skin data on DevilDoom until P2 dies and respawns | DONE - Partial (forced death on init)
