@@ -464,7 +464,7 @@ bl <DistanceCheck>
 
 
 2P Essentials GravitySwitcher Fix v5
-Memleaks may be resolved; Testing needed
+V5 has resolved the memory leak present in v4 and earlier versions
 [DonutStopGaming, dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x802469DC ---- 4BF1BE29 -> 60000000
