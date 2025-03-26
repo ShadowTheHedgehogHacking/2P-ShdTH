@@ -349,7 +349,7 @@ NTSC 1.06 --- 0x803314D8 ---- 38800004 -> bl <Checkpoint_CheckPlayerStoredTask>
 ------------- 0x8033139C ---- 7C7E1B78 -> bl <Checkpoint_CheckPlayerStoredTask>
 <Checkpoint_CheckPlayerStoredTask> NTSC 1.06
 7C0802A6 3DE08051
-61EF3C90 81EF0000
+61EF3C90 81EF0000 
 81EF0040 7C1E7800
 4082000C 38800004
 4800000C 38800005
@@ -401,7 +401,7 @@ Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 7C8802A6 823F0030
 3A3100A0
 bl <DistanceCheck>
-38A00000 41810008
+38A00000 41810008 
 38A00001 7C8803A6
 4E800020
 
@@ -500,14 +500,14 @@ bl <DistanceCheck>
 
 ------------- 0x801B8010 ---- 38A00000 -> Branch
 
-7F91E378
+7F91E378 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
 
 ------------- 0x801B3B14 ---- 38A00000 -> Branch
 
-823E0000
+823E0000 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
@@ -519,14 +519,14 @@ bl <DistanceCheck>
 
 ------------- 0x800EB524 ---- 38A00000 -> Branch
 
-7FF1FB78
+7FF1FB78 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
 
 ------------- 0x800E943C ---- 38A00000 -> Branch
 
-7FF1FB78
+7FF1FB78 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
@@ -548,7 +548,7 @@ bl <DistanceCheck>
 
 ------------- 0x801B924C ---- 38A00000 -> Branch
 
-7FF1FB78
+7FF1FB78 
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
@@ -727,7 +727,7 @@ NTSC 1.06 --- 0x802018CC ---- 80BD002C -> Branch
 
 
 2P Essentials DevilDoom BalloonRings Adds To Both Players
-[dreamsyntax,]
+[dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80178B34 ---- 387F0028 -> Branch
 
