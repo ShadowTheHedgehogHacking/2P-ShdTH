@@ -1,6 +1,6 @@
 ## INCLUDE THIS ON RELEASE; MODIFYING PER BUILD
 
-2P-ShdTH 2.4 / 2025.03.17
+2P-ShdTH 2.4.1 / 2025.04.11
 Original Aspect Ratio ## OR Widescreen
 64M Required (will not work on console!) ## OR Console Compatible
 by dreamsyntax & DonutStopGaming
