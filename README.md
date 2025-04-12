@@ -46,14 +46,14 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
 7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
 
-Expected Patch Results
+Expected Patch Results (v2.4.1)
 
 | PATCH              | CRC32 Hash    | SHA-1 Hash                               |
 | ------------------ | ------------- | ---------------------------------------- |
-| 64M-WIDESCREEN     | f63e5e2f      | af87d012e4a79ddfd033bceca07492c437ee2537 |
-| 64M                | 034e5cda      | 359d6a76c0630b68d2bbdd41dd8c9ea88aa7b4db |
-| CONSOLE            | f4c2fb43      | 20fbd3363b8c20608153813cdd6df3627a04037b |
-| CONSOLE-WIDESCREEN | a51c36a3      | efa3853eacc921ac91d377da28365f97e28866af |
+| 64M-WIDESCREEN     | 679ebe91      | afe70bbc6e068ad3359bfbea4d96ca581371b554 |
+| 64M                | 819cc2e6      | 67d547c31acd5dc42c2ab6adbb384b932adeb554 |
+| CONSOLE            | 4732002d      | 35cb0934e59f08fd13f4117d439494b95a460737 |
+| CONSOLE-WIDESCREEN | d21af3a4      | 3ec7e2f9b420e41043aa0eb3120b7e1f2415f121 |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
