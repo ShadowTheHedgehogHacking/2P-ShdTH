@@ -1,5 +1,5 @@
 #ステージパラメータ
-#2P spawn positions 2025-02-01
+#2P spawn positions 2025-04-13
 #IMPORTANT: On StageAction::InitAction P2's spawn will shift, typically xpos+-5 or xpos+-10 until Pause->Restart
 
 [Practice]
@@ -388,8 +388,8 @@ RANK_N : 120 180 240 270
 [BossSonic_0611]
 #Sonic & Diablon (GUN Fortress)
 MIPMAPK : -57
-PLAYER : 0 0 0 -200 0 180 0
-PLAYER : 1 0 0 -220 0 180 0
+PLAYER : 0 0 0 260 0 0 0
+PLAYER : 1 0 0 320 0 0 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : 0 0 0
 RANK_N : 240 270 300 360
@@ -406,8 +406,8 @@ RANK_N : 200 240 300 360
 [BossSonic_0613]
 #Sonic & Diablon (Black Comet)
 MIPMAPK : -57
-PLAYER : 0 0 0 -260 0 180 0
-PLAYER : 1 0 0 -280 0 180 0
+PLAYER : 0 0 0 260 0 0 0
+PLAYER : 1 0 0 320 0 0 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : 0 0 0
 RANK_N : 240 270 300 360
@@ -416,7 +416,7 @@ RANK_N : 240 270 300 360
 #Egg Dealer (Lava Shelter)
 MIPMAPK : -57
 PLAYER : 0 260 0 380 0 0 0
-PLAYER : 1 240 0 380 0 0 0
+PLAYER : 1 260 0 410 0 0 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : 0 0 0
 RANK_N : 200 240 300 360
@@ -424,7 +424,7 @@ RANK_N : 200 240 300 360
 [BossEggmanRobbo_0615]
 #Egg Dealer (Cosmic Fall)
 PLAYER : 0 350 0 380 0 0 0
-PLAYER : 1 330 0 380 0 0 0
+PLAYER : 1 350 0 410 0 0 0
 STARTSPD : 0 0 0 0
 GOALEVENTPOS_N : 0 0 -380
 RANK_N : 200 240 300 360
