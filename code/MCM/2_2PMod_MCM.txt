@@ -879,3 +879,27 @@ Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
 ------------- 0x805F9860 ---- 42C80000 -> 3F800000
 ------------- 0x805F9864 ---- 453B8000 -> 461C4000
+
+
+	-==-
+
+
+Castle Monster Targets Closest Player
+Fix for Monster in Cryptic Castle to target the closest player
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80138C54 ---- 80AD3148 -> Branch
+
+7FF1FB78 3A310030
+82310000
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x80138F48 ---- 80AD3148 -> Branch
+
+7FF1FB78 3A310030
+82310000
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
