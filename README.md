@@ -50,10 +50,10 @@ Expected Patch Results (v2.4.2)
 
 | PATCH              | CRC32 Hash    | SHA-1 Hash                               |
 | ------------------ | ------------- | ---------------------------------------- |
-| 64M-WIDESCREEN     | pending      | pending |
-| 64M                | pending      | pending |
-| CONSOLE            | pending      | pending |
-| CONSOLE-WIDESCREEN | pending      | pending |
+| 64M-WIDESCREEN     | ce5a31c0      | 36dc713dc7df1754c06b7d39e6e6a4077e39eb23 |
+| CONSOLE-WIDESCREEN | 3792ce12      | 4aca72a8bd5133cb5946d2c51171e0220b8b44d2 |
+| 64M                | c52b9d85      | 546290ec1e91b06845bf5994ef47f92f98914157 |
+| CONSOLE            | c0e946e4      | 5161312e4ba380afc9f0a1ffcc423b16b5b4816d |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
