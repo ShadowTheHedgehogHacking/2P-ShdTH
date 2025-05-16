@@ -46,14 +46,14 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
 7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
 
-Expected Patch Results (v2.4.1)
+Expected Patch Results (v2.4.2)
 
 | PATCH              | CRC32 Hash    | SHA-1 Hash                               |
 | ------------------ | ------------- | ---------------------------------------- |
-| 64M-WIDESCREEN     | 81d66dc0      | 011b513b448fe108cf520c20ce5375e2894b7220 |
-| 64M                | c85fb648      | febd3645698d72560701ddf11b01f61648d07b9d |
-| CONSOLE            | eb2f9273      | 0e2df7ef249fb186b0056605a30c50f56aca6433 |
-| CONSOLE-WIDESCREEN | 1c541a85      | 426173b8a641bc73835339d2a88438605397c2ee |
+| 64M-WIDESCREEN     | pending      | pending |
+| 64M                | pending      | pending |
+| CONSOLE            | pending      | pending |
+| CONSOLE-WIDESCREEN | pending      | pending |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
@@ -101,10 +101,10 @@ Try adjusting the slider here to reach 60fps. It will be ~30fps with default 100
 
 It varies per system, some run better with underclock/overclock
 
-I recommend trying 80%, 150%, 200%, 300% 
+I recommend trying 80%, 150%, 200%, 220%, 250%, 270%, 290%, 300% 
 Note: Higher clockspeeds may result in audio distortions if your system can't keep up
 If audio distortions occur, lower the clockspeed
-I use 300% for AMD Ryzen 9 5900X. Previously 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
+I use 290% for AMD Ryzen 9 5900X. Previously 217% for AMD Ryzen 7 3800X, 165% for Intel i5-3570k
 ```
 
 ### Extra Mods
@@ -150,7 +150,7 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 7. My screen explodes with weird textures everywhere
 * Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
 8. My Wii / Wii U shuts down when loading a stage (Nintendont)
-* This should not happen with base 2P Mod. If you are experiencing this, it means your additional modifications need to use a version of Nintendont that supports Oversized Images. You can use [this build of Nintendont](https://github.com/ShadowTheHedgehogHacking/Nintendont/releases) as a workaround.
+* Update your Nintendont to at least `v6.503 / Apr 30 2025 20:50:09`
 9. Both players are being controlled by one controller
 * You need to ensure the `START` button is not pressed at the same time on multiple controllers during stage load. In Dolphin make sure you haven't accidentally bound `START` to the same key/controller by mistake.
 

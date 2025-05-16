@@ -1,6 +1,6 @@
 # How to Build From Scratch without XDELTA
 This mod is modular, so we combine the below when creating a release:
-1. 2P-ShdTH (this repo) - Steps listed in [Applying 2P-ShdTH To A Clean ISO](#applying-2p-shdth-to-a-clean-iso)
+1. 2P-ShdTH (this repo) - Steps listed in [Applying 2P-ShdTH To A Clean ISO](#applying-2p-shdth-to-a-clean-iso); Note: Use MCM on original ISO first before steps 2-4.
 2. [shadow-model-fixes](https://github.com/ShadowTheHedgehogHacking/shadow-model-fixes)
 3. [shadow-event-fixes](https://github.com/ShadowTheHedgehogHacking/shadow-event-fixes)
 4. [Widescreen-ShadowTH](https://github.com/ShadowTheHedgehogHacking/Widescreen-ShadowTH) (for non-original aspect editions)
