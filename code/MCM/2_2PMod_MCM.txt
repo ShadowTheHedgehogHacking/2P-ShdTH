@@ -18,6 +18,25 @@ NTSC 1.06 --- 0x801CE900 ---- 4182001C -> 60000000
 	-==-
 
 
+2P Essentials Disable ChaosPowers CameraEvent
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8007B400 ---- 4802797D -> 60000000
+------------- 0x8007C4B0 ---- 480268CD -> 60000000
+
+
+	-==-
+
+
+2P Essentials Disable ChaosControl CameraEffect
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A2A64 ---- 480008C9 -> 60000000
+
+
+	-==-
+
+
 2P Essentials Spawn P2 v2
 Does not spawn P2 during events taking place on non-playable levels (e.g. stg900)
 [dreamsyntax]
@@ -124,38 +143,6 @@ FC010040 4C411382
 	-==-
 
 
-2P Essentials ChaosPowers CameraEvent for Both Players
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x800A65B8 ---- 38A00000 -> Branch
-
-3CA0807D 60A571A0
-80A50000 80A50000
-80A5023C 80A50028
-7C05F000 38A00000
-41820008 38A00001
-60000000 00000000
-
-
-	-==-
-
-
-2P Essentials Disable ChaosControl Skew & CameraEffect
-* CameraEffect not yet implemented
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x800A5D30 ---- 38C00000 -> Branch
-
-3CC0807D 60C671A0
-80C60000 80C60000
-80C6023C 7C06E800
-38C00000 41820008
-38C00001 00000000
-
-
-	-==-
-
-
 2P Essentials Prevent Vehicle Despawn
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
@@ -203,23 +190,6 @@ NTSC 1.06 --- 0x8016ED2C ---- 7C641B78 -> Branch
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x804342CC ---- 9421FE40 -> 4E800020
-
-
-	-==-
-
-
-2P Essentials GUN Fortress SecurityTurret Fix
-Applies SpecialCamera for security turret segments to both players as they enter
-Potential memleaks?
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x80268CEC ---- 38A00000 -> Branch
-
-7FF1FB78 3A310030
-82310000
-bl <DistanceCheck>
-38A00001 41800008
-38A00000 00000000
 
 
 	-==-
@@ -871,13 +841,14 @@ bl <DistanceCheck>
 	-==-
 
 
-2P Essentials - Devil Doom Targets Closest Player V2
+2P Essentials - Devil Doom Targets Closest Player V3
 V1 Had Devil Doom Constantly Warping when context switching.
 We change the warp vargs to help reduce that.
+V3 - tweak closest val to make it easier to intentionally make DevilDoom warp more often to avoid running out of rings
 [dreamsyntax, DonutStopGaming]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x8030AD74 ---- 80AD3148 -> bl <Boss_PickPlayer>
-------------- 0x805F9860 ---- 42C80000 -> 3F800000
+------------- 0x805F9860 ---- 42C80000 -> 41A00000
 ------------- 0x805F9864 ---- 453B8000 -> 461C4000
 
 
@@ -903,3 +874,22 @@ bl <DistanceCheck>
 bl <DistanceCheck>
 38A00001 41800008
 38A00000 48000000
+
+
+	-==-
+
+
+2P Essentials GUN Fortress SecurityCamera Targets Closest Player
+SetWatchCamera object uses DistanceCheck instead of hardcoding to mainPlayerID 0
+Also removes hiding the camera model since special cam is disabled
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80268820 ---- 80AD3148 -> Branch
+
+7FF1FB78 3A310030
+82310000
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x80269020 ---- 4BEF9771 -> 60000000
