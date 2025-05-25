@@ -894,3 +894,41 @@ bl <DistanceCheck>
 38A00000 48000000
 
 ------------- 0x80269010 ---- 4BFFFCD1 -> 48000014
+
+
+	-==-
+
+
+GravityChangeCollision Fix
+Patch GravityChangeCollision object to not delete itself on successfully setting gravity. Patch to not apply during ExternalControl state of either player to prevent flipping the opposite player when using Checkpoint Warping.
+
+80513CB8 JUNK MEM for lastExternalCommand while near GravityChangeCollision
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80513CB8 ---- 416C6C6F -> 00000000
+------------- 0x80247854 ---- 4804C275 -> Branch
+
+3EC08057 62D6D728
+3EE08051 62F73CB8
+3DE0807D 61EF71A0
+820F0000 82100000
+8210022C 82100030
+82100010 2C100020
+41820034 820F0008
+82100000 8210022C
+82100030 82100010
+2C100020 41820018
+81F60000 82170000
+7C0F8000 41800014
+48000014 81F60000
+39EF000A 91F70000
+b 0x8024788C
+00000000
+
+------------- 0x8024785C ---- 7C001800 -> 60000000
+------------- 0x80247860 ---- 4182000C -> 60000000
+------------- 0x80247878 ---- 807F0028 -> 60000000
+------------- 0x8024787C ---- 4BE82259 -> 60000000
+------------- 0x80247880 ---- A01F0004 -> 60000000
+------------- 0x80247884 ---- 60000001 -> 60000000
+------------- 0x80247888 ---- B01F0004 -> 60000000
