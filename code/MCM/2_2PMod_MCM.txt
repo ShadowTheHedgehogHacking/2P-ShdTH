@@ -1046,3 +1046,26 @@ NTSC 1.06 --- 0x80177328 ---- 4808C649 -> 60000000
 ------------- 0x8020477C ---- D004001C -> 60000000
 ------------- 0x802045E4 ---- 38800002 -> 38800003
 ------------- 0x802045DC ---- 4BF72CF5 -> 60000000
+
+
+	-==-
+
+
+Render HintRing and ItemCapsule Matrix Rotations by Nearest Player
+Render the ItemCapsule image and the HintRing '?' by nearest position.
+Ideally we would render based on which camera can 'see' the object, but until we can find ways to influence per render this will be an improvement.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80109A7C ---- 38A00000 -> Branch
+
+823E0030
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
+
+------------- 0x8010C29C ---- 38A00000 -> Branch
+
+3A3E0028
+bl <DistanceCheck>
+38A00001 41800008
+38A00000 48000000
