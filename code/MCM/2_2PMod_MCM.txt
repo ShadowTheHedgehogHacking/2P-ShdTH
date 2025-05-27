@@ -1088,3 +1088,24 @@ allow the hrd variant gimmick to function properly.
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x802D3934 ---- 9421FF90 -> 4E800020
+
+
+
+	-==-
+
+
+Route Menu - Rewrite PORT Rules
+Allows Player 1 OR Player 2 to close the Route Menu regardless of who opened it.
+The first player to close the Route Menu will have pause menu control assigned to them.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801E329C ---- 28000010 -> Branch
+
+28000010 41820018
+38630028 80030030
+540006F6 28000010
+4182000C 39E00002
+48000008 39E00003
+60000000 00000000
+
+------------- 0x801E3D90 ---- 38000002 -> 7DE07B78
