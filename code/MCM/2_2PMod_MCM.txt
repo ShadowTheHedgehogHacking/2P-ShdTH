@@ -1109,3 +1109,13 @@ NTSC 1.06 --- 0x801E329C ---- 28000010 -> Branch
 60000000 00000000
 
 ------------- 0x801E3D90 ---- 38000002 -> 7DE07B78
+
+
+	-==-
+
+
+Force 10 Ring Bonus on Checkpoint Activation for Both Players
+Makes Checkpoint/Savepoints give +10 Rings on Activation regardless of ring counts.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801190AC ---- 38630028 -> 48000080
