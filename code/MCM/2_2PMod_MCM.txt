@@ -97,8 +97,16 @@ NTSC 1.06 --- 0x8016F0D4 ---- 2C050000 -> Branch
 	-==-
 
 
-2P Essentials Chunk Fix
-[dreamsyntax, DonutStopGaming]
+2P Essentials Chunk Fix V2
+Chunks fix with independent geometry rendering per splitscreen
+Accounts for multiple visibility chunk ranges overlapping by creating a bitflag
+0 = don't render
+1 = render for P1
+2 = render for P2
+3 = render on both screens
+
+Shoutout to Sewer for helping with optimizing using an OR instead of a long condition chain for the visibility chunk range issue!
+[dreamsyntax, DonutStopGaming, Sewer56]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x8003A5A4 ---- 38600000 -> b 0x8003A58C
 ------------- 0x8003A5BC ---- 38600000 -> b 0x8003A58C
@@ -150,6 +158,23 @@ C01F0008 FC010040
 48000010 2C000001
 40820008 38600000
 00000000
+
+------------- 0x8003A8F4 ---- 7CBEDA14 -> Branch
+
+2C1F0000 4082003C
+81FC0034 81EF0040
+3A000000 7CBEDA14
+83450000 5745083C
+38610008 7E032B2E
+7C1F2800 3B7B0020
+3BFF0001 4180FFE0
+3B600000 3BE00000
+7CBEDA14 00000000
+
+------------- 0x8003A970 ---- 7C83032E -> Branch
+
+7DE3022E 7C847B78
+7C83032E 00000000
 
 
 	-==-
