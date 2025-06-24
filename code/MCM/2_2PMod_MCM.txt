@@ -386,10 +386,11 @@ bl <DistanceCheck>
 	-==-
 
 
-2P Essentials Zipline/Pulley/Coaster Fix v4
+2P Essentials Zipline/Pulley/Coaster Fix v5
 Rewritten to use standalone function and much safer checks without writing to any structs
 No longer affects generic collision check function.
 Disables the External Camera associated with Coasters
+v5 Fixes the Coaster::Exec wrong player warp bug
 [DonutStopGaming, dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 <CoasterCheck> NTSC 1.06
@@ -405,8 +406,7 @@ NTSC 1.06 --- 0x801316D0 ---- 80AD3148 -> bl <CoasterCheck>
 ------------- 0x801313F8 ---- 4809D65D -> 60000000
 ------------- 0x801323C4 ---- 80AD3148 -> Branch
 
-823F0030 82310000
-3A31000C
+3A3F00E8
 bl <DistanceCheck>
 38A00000 41810008
 38A00001 48000000
