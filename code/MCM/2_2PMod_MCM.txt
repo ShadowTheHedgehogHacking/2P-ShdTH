@@ -1156,3 +1156,39 @@ Makes Checkpoint/Savepoints give +10 Rings on Activation regardless of ring coun
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x801190AC ---- 38630028 -> 48000080
+
+
+	-==-
+
+
+Super Shadow Non-Red Shadow Skin Fix
+aka Devil Doom Skin Fix (Donut Didn't Want This Edition)
+Force kills the players on init to fix the resource skin bug until we can come up with a better fix (if ever).
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016F31C ---- 38000032 -> Branch
+
+80010044 3DE08017
+61EF8048 7C0F0000
+38000032 40820008
+38000001 00000000
+
+
+
+	-==-
+
+
+Egg Dealer Shadow Fever Activation Fix
+Guarantee both players get Shadow Fever when Egg Dealer uses Shadow Fever
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8016F1A4 ---- 80030000 -> 38007724
+
+
+	-==-
+
+
+2P Independent Respawns - Keep Chaos Powers on Player Death
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80178BA8 ---- 4BFF6621 -> 60000000
