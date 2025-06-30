@@ -1190,3 +1190,13 @@ NTSC 1.06 --- 0x8016F1A4 ---- 80030000 -> 38007724
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80178BA8 ---- 4BFF6621 -> 60000000
+
+
+	-==-
+
+
+Disable Torch SFX
+Disable the ENV weapon SFX, specifically to block the torch sound effect in Glyphic Canyon and Sky Troops. It was easy in these stages to cause the audio to fight over available loop slots, causing lots of awkard audio cuts/pops/resets due to the amount of Torches placed.
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801226AC ---- 480B17AD -> 60000000
