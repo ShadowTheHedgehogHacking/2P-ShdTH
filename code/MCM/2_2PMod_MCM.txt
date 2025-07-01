@@ -175,6 +175,8 @@ C01F0008 FC010040
 3B600000 3BE00000
 7CBEDA14 00000000
 
+------------- 0x8003A928 ---- 38800001 -> 38800003
+
 
 	-==-
 
@@ -986,6 +988,7 @@ Player Spawn
 Death WeaponDrop Management & UI
 SETObjs Reset Rules & Reset Rules
 Partner / Mission Timer Reset
+Persist HoldingState and Barrier/Invincibiltiy State
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80178C10 ---- 4BFF6365 -> 60000000
@@ -1075,6 +1078,7 @@ NTSC 1.06 --- 0x80178C10 ---- 4BFF6365 -> 60000000
 ------------- 0x802044D0 ---- 4BF69AAD -> 60000000
 ------------- 0x802044D4 ---- 4BE6B281 -> 60000000
 ------------- 0x802044D8 ---- 4BE70681 -> 60000000
+------------- 0x80093DFC ---- 80A40054 -> 60000000
 
 
 	-==-
