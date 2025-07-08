@@ -1204,3 +1204,26 @@ Disable the ENV weapon SFX, specifically to block the torch sound effect in Glyp
 [dreamsyntax, DonutStopGaming]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x801226AC ---- 480B17AD -> 60000000
+
+
+	-==-
+
+
+Vibration Fix for P2
+Enables multiplayer flags for VibrationRequest and VibrationRequestWithPos in singleplayer.
+Manually patches the shared hardcoded VibrationRequest invoke that DashRamps, Springs, DashRings, Gong, Turret, and other objects use to map to the invoking player instead.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80169BBC ---- 38A00000 -> Branch
+
+3CA0800E 60A5905C
+7C002800 41820010
+38A520FC 7C002800
+4082000C 80BE0054
+48000024 80BE0000
+80A50054 2C050001
+41820014 2C050000
+4182000C 80BF0000
+80A50054 00000000
+
+------------- 0x8034B480 ---- 41820010 -> 60000000
