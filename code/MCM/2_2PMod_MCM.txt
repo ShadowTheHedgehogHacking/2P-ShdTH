@@ -78,7 +78,6 @@ NTSC 1.06 --- 0x801FFE0C ---- 880300B2 -> 60000000
 ------------- 0x801FF65C ---- 41820094 -> 60000000
 ------------- 0x80201F18 ---- 418202D4 -> 60000000
 ------------- 0x80200764 ---- 418201B4 -> 60000000
-------------- 0x80201358 ---- 418204D4 -> 60000000
 ------------- 0x801FE99C ---- 41820188 -> 60000000
 
 
@@ -1258,3 +1257,16 @@ NTSC 1.06 --- 0x80169BBC ---- 38A00000 -> Branch
 80A50054 00000000
 
 ------------- 0x8034B480 ---- 41820010 -> 60000000
+
+
+	-==-
+
+
+2P - Do Not Target Other Player
+- Never homing attack other players
+- Never auto-aim/lock-on to other players
+
+A gecko code exists to instead actively target the other player, if desired
+[dreamsyntax, DonutStopGaming]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800B7474 ---- 41820008 -> 48000014
