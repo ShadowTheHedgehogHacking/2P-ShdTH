@@ -20,7 +20,7 @@ This mod is only compatible with the NTSC-U GameCube version
 
 Verify the ROM you are attempting to patch is a 1:1 ShadowTheHedgehog NTSC-U GameCube ISO
 
-GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below
+GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below.
 
 You can convert your game by right-clicking your game in Dolphin's game list -> `Convert File...`
 
@@ -56,7 +56,7 @@ Expected Patch Results (v2.4.3)
 | CONSOLE            | 42816516      | d0bfdc8e5c55acfb9fef3da383a33a0c39fd8a19 |
 
 ### Dolphin
-1. Get the latest Dolphin Emulator - [Dolphin 2503 or newer](https://dolphin-emu.org/download/)
+1. Get the latest Dolphin Emulator - [Dolphin 2506 or newer](https://dolphin-emu.org/download/)
 2. (Optional) We recommend keeping a separate Dolphin instance just for this mod. Before launching Dolphin, create an empty file `portable.txt` in the same folder as `Dolphin.exe`
 3. Launch Dolphin. On Dolphin's menu bar, click `File` -> `Open User Folder`. The folder that appears is your `<Dolphin User Folder>` in the below steps
 4. Copy/Move the two folders (`GameSettings` and `Load`) in `Dolphin Configuration (Required)` to `<Dolphin User Folder>`
@@ -120,7 +120,7 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 7. Select a new folder where you will store the game content and modify its files
 
 ### Replacement of Files & Converting FST to ISO
-1. Open the newly extracted folder and make any additional changes you want, such as Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want
+1. Open the newly extracted folder and make any additional changes you want, such as Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. 
 REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warning on the MTP code's description
 2. Open Dolphin
 3. Open Config
@@ -144,9 +144,9 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 4. I get `Load failed. Please check the Memory Card` message when loading the game
 * Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled
 5. The aspect ratio switches between 4:3 and 16:9 when someone uses Chaos Control
-* Ensure you are on Dolphin 2503 or newer. For 2P-ShdTH, you must also explicitly choose the Aspect Ratio in Dolphin's `Graphics` menu. Pick `Force 16:9`, `Stretch to Window`, or `Force 4:3`. `Auto` Aspect Ratio only works for the original game
+* Ensure you are on Dolphin 2506 or newer. Pick `Force 16:9`, `Stretch to Window`, or `Force 4:3`.
 6. I have a 16:9 monitor, and am using the widescreen version of the game, but I have black bars on the sides
-* Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable "Stretch to Window" or enable "Crop" in `Graphics -> Advanced` if using Force 16:9 option
+* Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable "Stretch to Window" with "Dolphin Widescreen Hack" option, or enable "Crop" in `Graphics -> Advanced` if using Force 16:9 option
 7. My screen explodes with weird textures everywhere
 * Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
 8. My Wii / Wii U shuts down when loading a stage (Nintendont)
@@ -156,10 +156,11 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
-* DonutStopGaming | Developer | major contributions to chunks, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, and numerous other address discoveries, and much more.
+* DonutStopGaming | Developer | major contributions to chunks, symbols, P3/AI partner mapping, Airbug, CoasterFix, GravitySwitchers, PlayerPointer, SuperShadow, structs analysis, numerous other address discoveries, and much more.
 * LimblessVector for his work on identifying objects, work on the initial memory list, SinglePlayer Widescreen Hack, Stray Pixel under HP Bars fix
-* TheHatedGravity for red/yellow TrueBlackShadow textures, Additional work on widescreen gncp patches, HD font, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
+* TheHatedGravity for additional work on widescreen gncp patches, HD font, assistance with Models Fix project, v1.2+ MenuUI, v2.0 Banner, and a ton of testing
 * Original Shadow vector used in banner by nibroc_rock (modified)
+* Sewer56 for assistance brainstorming and optimizing per-splitscreen Chunk Fix V2, and all the inspiration they created
 * Muzzarino for some symbol findings
 * RaphaelDrewBoltman for the GitHub icon / HHC related textures
 
@@ -169,11 +170,12 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 * aldelaro5 & contributors for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
-* TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Waddle DJ, my local friends, and all the randoms I played with on Parsec for playtesting
+* TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Waddle DJ, my local friends, and all the randoms I (dreamsyntax) played with on Parsec & Sunshine/Moonlight for playtesting
 * Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
 
 ## A Notice to Modders
-Anyone is free to base mods off this project. If you make a new mod based on it or create something that has 2P-ShdTH support, I would love to see it!
+Anyone is free to base mods off this project. If you make a new mod based on it or create something that has 2P-ShdTH support, we would love to see it!
+You do not need to ask permission to make mods built off this mod or other derivative works.
 
 [Click here to learn how to build from source (not recommended for most users)](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master/workspace)
