@@ -84,13 +84,57 @@ NTSC 1.06 --- 0x801FFE0C ---- 880300B2 -> 60000000
 	-==-
 
 
-2P Essentials ChaosPowers Half Idle Drain Speed
+2P Essentials ChaosPowers Sync State And Drain Adjustment
+Sync DarkShadow/HeroShadow state when a normal occurance.
+Adjusts the Idle Drain and usage rate for Chaos Control depending on player context
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x8016F0D4 ---- 2C050000 -> Branch
+NTSC 1.06 --- 0x800A49E8 ---- 80A1002C -> Branch
 
-2C050000 38A5000C
-48000000
+3DE0807D 61EF71A0
+820F0000 82100000
+88B000AF 2C050004
+41820010 2C050008
+41820008 40820014
+820F0008 82100000
+8A1000AF 7C102800
+80A1002C 40820008
+38A5000C 00000000
+
+------------- 0x800AF438 ---- 7C040000 -> Branch
+
+7C040000 40800038
+3DE0807D 61EF71A0
+820F0000 82100000
+8A1000AF 2C100008
+4182001C 820F0008
+82100000 8A1000AF
+2C100008 41820008
+7C040000 00000000
+
+------------- 0x800AF458 ---- 7C040000 -> Branch
+
+7C040000 40800038
+3DE0807D 61EF71A0
+820F0000 82100000
+8A1000AF 2C100004
+4182001C 820F0008
+82100000 8A1000AF
+2C100004 41820008
+7C040000 00000000
+
+------------- 0x8007BBEC ---- 7CA000D0 -> Branch
+
+3DE0807D 61EF71A0
+808F0000 80840000
+8084022C 80840030
+80840010 2C04001D
+4082001C 808F0008
+80840000 8084022C
+80840030 80840010
+2C04001D 7CA000D0
+40820008 38A50038
+60000000 00000000
 
 
 	-==-
@@ -1210,20 +1254,11 @@ NTSC 1.06 --- 0x8016F31C ---- 38000032 -> Branch
 	-==-
 
 
-Egg Dealer Shadow Fever Activation Fix
-Guarantee both players get Shadow Fever when Egg Dealer uses Shadow Fever
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x8016F1A4 ---- 80030000 -> 38007724
-
-
-	-==-
-
-
-2P Independent Respawns - Keep Chaos Powers on Player Death
+Keep Chaos Powers & Score on Player Death
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x80178BA8 ---- 4BFF6621 -> 60000000
+------------- 0x80178C20 ---- 4BFF6A0D -> 60000000
 
 
 	-==-
@@ -1270,3 +1305,13 @@ A gecko code exists to instead actively target the other player, if desired
 [dreamsyntax, DonutStopGaming]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x800B7474 ---- 41820008 -> 48000014
+
+
+	-==-
+
+
+No Chaos Powers Glow
+Removes the 'aura' effect when Chaos Powers are active
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x800A4EBC ---- 481D5C61 -> 60000000
