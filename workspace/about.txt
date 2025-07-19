@@ -1,4 +1,4 @@
-2P-ShdTH 2.4.3 / 2025.07.07
+2P-ShdTH 2.4.4 / 2025.07.18
 Original Aspect Ratio ## OR Widescreen
 64M Required (will not work on console!) ## OR Console Compatible
 by dreamsyntax & DonutStopGaming

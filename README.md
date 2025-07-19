@@ -22,7 +22,7 @@ Verify the ROM you are attempting to patch is a 1:1 ShadowTheHedgehog NTSC-U Gam
 
 GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below.
 
-You can convert your game by right-clicking your game in Dolphin's game list -> `Convert File...`
+You can convert your RVZ game by right-clicking your game in Dolphin's game list -> `Convert File...`
 
 You can check your hashes by right-clicking your game in Dolphin's game list -> `Properties` -> `Verify` tab
 
@@ -46,14 +46,14 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
 7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
 
-Expected Patch Results (v2.4.3)
+Expected Patch Results (v2.4.4)
 
 | PATCH              | CRC32 Hash    | SHA-1 Hash                               |
 | ------------------ | ------------- | ---------------------------------------- |
-| 64M-WIDESCREEN     | ce466b06      | db71fb875315d9a9dab40c38181563caeac9aeab |
-| CONSOLE-WIDESCREEN | bb8f5eac      | be964b2ba23112eb3b6c971be4559895c6c7d8bd |
-| 64M                | c537c743      | c2e03dc3786e0c4dad2e4b6b16d0110462f5723c |
-| CONSOLE            | 42816516      | d0bfdc8e5c55acfb9fef3da383a33a0c39fd8a19 |
+| 64M-WIDESCREEN     | 98ae6bb4      | eeac7762229fb1ef6b5c67022f979083ee6c0cfe |
+| CONSOLE-WIDESCREEN | e2f86543      | 061f3a26cad68b29ac85b13a7245a6f1652e27d1 |
+| 64M                | 93dfc7f1      | 2324322ebb4f7caeda995951f402e59622b277e9 |
+| CONSOLE            | 1bf65ef9      | 26833ba149b68833f781831f398b835dec79d16a |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2506 or newer](https://dolphin-emu.org/download/)
