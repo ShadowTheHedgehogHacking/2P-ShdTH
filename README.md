@@ -6,11 +6,11 @@
 </div>
 
 ## About
-This project allows you to experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional
+This project allows you to experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional.
 
 ## Important
-* You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file. If you are playing on Wii/GameCube, you must apply the `console` variant of the mod, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM
-* WARNING: If using the YellowAndroid MTP Animation Override code to play as Sonic/Omega, expect crashes. This is caused by a Partner BON matching the replaced Player BON. Example: if you use Sonic's BON for P2, the game may crash on completion of Westopolis, Lethal Highway, Space Gadget, or Final Haunt. It is unknown if this can be fixed via code, instead of re-exporting animations/bon mappings. This issue exists in all versions of the mod
+* You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file
+* If you are playing on a real Wii/GameCube, you must apply the `console` variant of the mod, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM
 * You can change characters. Select 2P-VS, select characters, then back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP
 * Shadow: Reloaded is NOT compatible with this mod. If you are looking to play a 2P version of Reloaded, it exists as a standalone mod: [2P-Reloaded](https://github.com/ShadowTheHedgehogHacking/2P-Reloaded)
 
@@ -20,7 +20,7 @@ This mod is only compatible with the NTSC-U GameCube version
 
 Verify the ROM you are attempting to patch is a 1:1 ShadowTheHedgehog NTSC-U GameCube ISO
 
-GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below.
+GCZ/WIA/RVZ or any other format than ISO is not supported. Please convert to ISO, then compare your game to the table below
 
 You can convert your RVZ game by right-clicking your game in Dolphin's game list -> `Convert File...`
 
@@ -38,7 +38,7 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 
 ### Patching
 #### Note: You need the `GUPE8P.ini` file for the mod to work properly, running just the ISO will not work! If you follow Step 4. of the Dolphin setup, this is part of the `GameSettings` folder merge step.
-1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) and extract it somewhere you can access easily.
+1. Download [the latest release from here](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/releases) and extract it somewhere you can access easily
 2. Visit https://shadowthehedgehoghacking.github.io/xdelta-wasm/ or any other xdelta3 patcher of your choice
 3. Select your original ISO as the `Source file`
 4. Select the `2P-ShdTH-[version]-[aspect]-[variant].xdelta` file from `Patches` as the `Patch file`. Use `console` variants if playing on real hardware. Use `64M` variants if playing on Dolphin
@@ -82,7 +82,7 @@ Copy GUPE8P.gct to the same directory as your game.iso
 Copy 'saves' folder to root of USB or SD (same one where game is)
 Nintendont should be configured as follows for the best experience:
    Cheats ON
-   Unlock Read Speed ON	
+   Unlock Read Speed ON
  Optional:
    Memcard Emulation ON (If you want to use provided 100% save)
    Video Width (Set to whatever fills your screen without black bars, in my case it was 714)
@@ -108,7 +108,7 @@ I use 290% for AMD Ryzen 9 5900X. Previously 217% for AMD Ryzen 7 3800X, 165% fo
 ```
 
 ### Extra Mods
-After you've patched your ISO with the chosen xdelta, you can make additional modifications. Follow the steps below to use mods such as Sonic over YellowAndroid.
+After you've patched your ISO with the chosen xdelta, you can make additional modifications. Follow the steps below to use mods such as Sonic over Yellow Android.
 
 ### Extraction of Game / FST Format
 1. Open Dolphin
@@ -120,8 +120,7 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 7. Select a new folder where you will store the game content and modify its files
 
 ### Replacement of Files & Converting FST to ISO
-1. Open the newly extracted folder and make any additional changes you want, such as Sonic over YellowAndroid, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. 
-REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warning on the MTP code's description
+1. Open the newly extracted folder and make any additional changes you want, such as Sonic over Yellow Android, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. 
 2. Open Dolphin
 3. Open Config
 4. Select Paths Tab
@@ -140,19 +139,24 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 2. Player 2 spawns, but there is no split screen for them
 * You have patched the game correctly, but `GUPE8P.ini` is not placed in the correct spot, or Cheats are disabled in Dolphin/Nintendont
 3. I keep crashing after the Rank Screen completes on finishing a level
-* If you are using a Custom BON character with the `YellowAndroid MTP Animation Override` code, you may experience crashes on levels where the swapped character would be a partner. There is no fix at this time. I recommend avoiding this code for now
+* If you are using a Custom BON character with the `Yellow Android MTP Animation Override` code, make sure you enabled the `Custom MTP Crash Fix v3` code too.
 4. I get `Load failed. Please check the Memory Card` message when loading the game
-* Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled
+* Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled.
+* Make sure you did not copy a Shadow SX or Shadow Reloaded save file. Only original game saves are compatible.
 5. The aspect ratio switches between 4:3 and 16:9 when someone uses Chaos Control
 * Ensure you are on Dolphin 2506 or newer. Pick `Force 16:9`, `Stretch to Window`, or `Force 4:3`.
-6. I have a 16:9 monitor, and am using the widescreen version of the game, but I have black bars on the sides
-* Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable "Stretch to Window" with "Dolphin Widescreen Hack" option, or enable "Crop" in `Graphics -> Advanced` if using Force 16:9 option
-7. My screen explodes with weird textures everywhere
+6. My game runs at very low FPS
+* This mod is very CPU intensive and requires overclocking the virtual GameCube CPU. Nintendont on Wii is the equivalent of a 150% GameCube CPU Overclock. I recommend at least matching this in Dolphin, but ultimately it depends on your own real CPU's power. See the [Dolphin FPS Optimization](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master?tab=readme-ov-file#dolphin-fps-optimization) section above.
+7. I have a 16:9 monitor, and am using the widescreen version of the game, but I have black bars on the sides
+* Shadow the Hedgehog and Sonic Heroes have an abnormal aspect ratio. You need to either enable `Stretch to Window` with `Dolphin Widescreen Hack` option, or enable `Crop` in `Graphics -> Advanced` if using `Force 16:9` option
+8. My screen explodes with weird textures everywhere
 * Do not use the Dolphin `Graphics Mods` -> `Bloom Removal` feature. Instead use the included Gecko Code if you want No Bloom
-8. My Wii / Wii U shuts down when loading a stage (Nintendont)
+9. My Wii / Wii U shuts down when loading a stage (Nintendont)
 * Update your Nintendont to at least `v6.503 / Apr 30 2025 20:50:09`
-9. Both players are being controlled by one controller
+10. Both players are being controlled by one controller
 * You need to ensure the `START` button is not pressed at the same time on multiple controllers during stage load. In Dolphin make sure you haven't accidentally bound `START` to the same key/controller by mistake.
+11. How do I play with others?
+* This is a local splitscreen modification. Outside of playing in the same physical space, you can either use Dolphin Netplay with Dual Core OFF (it crashes with it ON), or a cloud gaming solution such as [Parsec](https://parsec.app), [Sunshine/Moonlight](https://app.lizardbyte.dev/Sunshine), [Steam Remote Play](https://store.steampowered.com/remoteplay).
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
@@ -162,17 +166,17 @@ REMINDER: Using Custom BON characters CAUSES MORE CRASHES - Be wary of the warni
 * Original Shadow vector used in banner by nibroc_rock (modified)
 * Sewer56 for assistance brainstorming and optimizing per-splitscreen Chunk Fix V2, and all the inspiration they created
 * Muzzarino for some symbol findings
-* RaphaelDrewBoltman for the GitHub icon / HHC related textures
 
 ## Thanks
 * DonutStopGaming for the many nights spent pair reversing and all the contributions to this project
-* TryTwo for extremely useful new debugging features in Dolphin
+* TryTwo, iwubcode, mitaclaw, JosJuice, jordan-woyak, and all Dolphin Developers for all the work they do for the Dolphin Emulator. The debugging features pioneered were essential. Without them, this mod would not be possible.
 * aldelaro5 & contributors for Dolphin Memory Engine
 * igorseabra4 and Sewer56 for Heroes and Shadow file reversing work & editing tools (HeroesPowerPlant, HeroesONE-Reloaded, etc...)
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
 * TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Waddle DJ, my local friends, and all the randoms I (dreamsyntax) played with on Parsec & Sunshine/Moonlight for playtesting
 * Heroes Hacking Central for keeping us insane during this project
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
+* You, for playing the game
 
 ## A Notice to Modders
 Anyone is free to base mods off this project. If you make a new mod based on it or create something that has 2P-ShdTH support, we would love to see it!
