@@ -70,6 +70,39 @@ NTSC 1.06 --- 0x8029120C ---- 9421FEF0 -> 4E800020
 	-==-
 
 
+2P Essentials BossCams
+Uses JUNKMEM @ 80515458
+Bosscams for both players
+First test version only applies to:
+Subbosses, Black Doom, and Devil Doom.
+
+Diablon and Egg Dealer are not affected.
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802912E8 ---- 38C00000 -> Branch
+
+3DE08051 61EF5458
+80CF0000 00000000
+
+------------- 0x80515458 ---- 58545F49 -> 00000000
+------------- 0x802913C0 ---- 48000058 -> Branch
+
+820F0000 2C100000
+40820010 3A000001
+920F0000
+b 0x8029128C
+b 0x80291418
+
+------------- 0x80178C54 ---- 9421FFD0 -> Branch
+
+9421FFD0 3DE08051
+61EF5458 3A000000
+920F0000 00000000
+
+
+	-==-
+
+
 BossCams Phase 2 (Scrapped)
 WIP BossCams Phase 2
 Detach feature, but unstable / causes memory corruption
@@ -133,3 +166,125 @@ bl 0x801CEB9C
 4E800020 387E002C
 80630004 3A000001
 92030004 00000000
+
+
+	-==-
+
+
+BossCams Phase 3
+WIP BossCams Phase 3
+Uses JUNKMEM @ 80515458 & 8051545C & 80515460
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80291414 ---- 4BD78431 -> Branch
+
+bl 0x80009844
+820F0000
+2C100000 40820010
+3A000001 920F0000
+b 0x8029128C
+b 0x80291418
+48000000
+
+------------- 0x80291400 ---- 38610008 -> Branch
+
+3DE08051 61EF5458
+820F0000 2C100001
+4182000C 80630000
+906F0004 38610008
+48000000
+
+------------- 0x802913A8 ---- 38610018 -> Branch
+
+3DE08051 61EF5458
+820F0000 2C100001
+4182000C 80630000
+906F0004 38610018
+48000000
+
+------------- 0x8029145C ---- 387E0028 -> Branch
+
+387E0028 3DE08051
+61EF5458 820F0000
+2C100001 41820008
+48000010 3ADE002C
+82F60000 92EF0008
+48000000
+
+------------- 0x80291468 ---- 4BF3D735 -> Branch
+
+bl 0x801CEB9C
+3DE08051
+61EF5458 820F0000
+2C100001 4082002C
+3A000000 920F0000
+387E0028 82EF0008
+92E30004 82EF0004
+92E30000 82E30004
+38600001 90770004
+48000000
+
+------------- 0x80291458 ---- 40820014 -> Branch
+
+4182003C 387E0028
+80630000 2C030000
+40820014 3C608029
+6063146C 7C6803A6
+4E800020 387E002C
+80630004 2C030000
+4182000C 3A000001
+92030004 00000000
+
+
+	-==-
+
+
+BossCams Skip Allocation if Either Player in Turret
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x802912A0 ---- 4BEDDC29 -> Branch
+
+82030054 80630008
+00000000
+
+------------- 0x802912A4 ---- 2C03000C -> Branch
+
+2C10000C 41820008
+2C03000C 00000000
+
+
+	-==-
+
+
+Phase Bosscams Half HP Free
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80291258 ---- 4BF3D945 -> Branch
+
+bl 0x801CEB9C
+3DE08051
+61EF5458 820F0000
+2C100001 4082002C
+3A000000 920F0000
+387E0028 82EF0008
+92E30004 82EF0004
+92E30000 82E30004
+38600001 90770004
+60000000 00000000
+
+
+	-==-
+
+
+BossCams ResumeCam Loop
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80291414 ---- 4BD78431 -> Branch
+
+bl 0x80009844
+3DE08051 61EF5458
+820F0000 2C100000
+40820010 3A000001
+920F0000
+b 0x8029128C
+00000000
