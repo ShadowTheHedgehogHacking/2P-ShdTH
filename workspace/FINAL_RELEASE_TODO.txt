@@ -1,3 +1,2 @@
 - Convert FNT to all langs
-- Update honban for all langs
-- Horizontal pre-set should disable score numbers UI
+- Dolphin BG HD for other langs
