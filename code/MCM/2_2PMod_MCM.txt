@@ -906,39 +906,6 @@ NTSC 1.06 --- 0x80129D7C ---- 480D9BF5 -> 60000000
 	-==-
 
 
-2P Essentials BossCams
-Uses JUNKMEM @ 80515458
-Bosscams for both players
-First test version only applies to:
-Subbosses, Black Doom, and Devil Doom.
-
-Diablon and Egg Dealer are not affected.
-[dreamsyntax]
-Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x802912E8 ---- 38C00000 -> Branch
-
-3DE08051 61EF5458
-80CF0000 00000000
-
-------------- 0x80515458 ---- 58545F49 -> 00000000
-------------- 0x802913C0 ---- 48000058 -> Branch
-
-820F0000 2C100000
-40820010 3A000001
-920F0000
-b 0x8029128C
-b 0x80291418
-
-------------- 0x80178C54 ---- 9421FFD0 -> Branch
-
-9421FFD0 3DE08051
-61EF5458 3A000000
-920F0000 00000000
-
-
-	-==-
-
-
 2P Essentials - Helicopter Attach to Closest Player
 Allows player 2 to grab a Helicopter leg, patching it to use distance check.
 Does not allow both players to grab different legs at the same time.
@@ -1328,3 +1295,82 @@ Removes the 'aura' effect when Chaos Powers are active
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x800A4EBC ---- 481D5C61 -> 60000000
+
+
+	-==-
+
+
+BossCams Version 4 (Sub Bosses & Black Doom & Devil Doom)
+Bosscams for both players
+Applies to Subbosses, Black Doom, and Devil Doom.
+Egg Dealer and Diablon do not use manage the camera via the BossRootTask, for some reason (different developer probably made these two bosses)
+Re-loops per BossCamExec
+Uses JUNKMEM @ 80515458 - 8051546B
+80515458 - Loop Counter mem
+80515459 - P1 A1 (unused)
+8051545A - P2 A1 (unused)
+8051545C - P1 Struct Data for Holder
+80515460 - P2 Struct Data for Holder
+80515464 - P1 Struct Data for HolderRoot
+80515468 - P2 Struct Data for HolderRoot
+
+802912E8 - camera access code
+80291228 - restore boss args based on stored values
+80291478 - loop and store boss args
+80178C54 - wipe junk data used for current cam iterations
+802912A0 - fix for wrong allocation of bosscam if either player in turret
+802912A4 - fix for wrong allocation of bosscam if either player in turret (part 2)
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80515458 ---- 58545F49 -> 00000000
+------------- 0x8051545C ---- 73496275 -> 00000000
+------------- 0x80515460 ---- 66536166 -> 00000000
+------------- 0x802912E8 ---- 38C00000 -> Branch
+
+3CC08051 60C65458
+88C60000 00000000
+
+------------- 0x80291228 ---- 8804001A -> Branch
+
+3DE08051 61EF5458
+8A0F0000 2C100000
+3A1E0028 40820014
+800F0004 90100004
+800F000C 48000010
+800F0008 90100004
+800F0010 90100000
+8804001A 00000000
+
+------------- 0x80178C54 ---- 9421FFD0 -> Branch
+
+9421FFD0 3DE08051
+61EF5458 3A000000
+920F0000 920F0004
+920F0008 920F000C
+60000000 00000000
+
+------------- 0x80291478 ---- BBC10108 -> Branch
+
+3DE08051 61EF5458
+8A0F0000 2C100000
+3A1E0028 82100000
+40820018 920F000C
+3A1E002C 82100000
+920F0004 48000018
+920F0010 3A1E002C
+82100000 920F0008
+48000014 3A000001
+9A0F0000 7FC3F378
+b 0x80291220
+3A000000 9A0F0000
+BBC10108 00000000
+
+------------- 0x802912A0 ---- 4BEDDC29 -> Branch
+
+82030054 80630008
+00000000
+
+------------- 0x802912A4 ---- 2C03000C -> Branch
+
+2C10000C 41820008
+2C03000C 00000000
