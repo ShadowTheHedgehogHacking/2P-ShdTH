@@ -1307,7 +1307,7 @@ Egg Dealer and Diablon do not use manage the camera via the BossRootTask, for so
 Re-loops per BossCamExec
 Uses JUNKMEM @ 80515458 - 8051546B
 80515458 - Loop Counter mem
-80515459 - P1 A1 (unused)
+80515459 - Loop Counter Special Case (other code)
 8051545A - P2 A1 (unused)
 8051545C - P1 Struct Data for Holder
 80515460 - P2 Struct Data for Holder
@@ -1347,7 +1347,7 @@ NTSC 1.06 --- 0x80515458 ---- 58545F49 -> 00000000
 61EF5458 3A000000
 920F0000 920F0004
 920F0008 920F000C
-60000000 00000000
+920F0010 00000000
 
 ------------- 0x80291478 ---- BBC10108 -> Branch
 
@@ -1374,3 +1374,38 @@ BBC10108 00000000
 
 2C10000C 41820008
 2C03000C 00000000
+
+
+	-==-
+
+
+BossCams V4 SpecialFree Scenario (bugged)
+Special case detach that most bosses uses.
+Current version has a double free bug with Heavy Dog.
+Fixes all other bosses properly
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x8029152C ---- 7C7E1B79 -> Branch
+
+3DE08051 61EF5458
+8A0F0001 2C100000
+3A030028 40820014
+800F0004 90100004
+800F000C 48000010
+800F0008 90100004
+800F0010 90100000
+7C7E1B79 00000000
+
+------------- 0x802915B0 ---- 7FC3F378 -> Branch
+
+3DE08051 61EF5458
+8A0F0001 2C100000
+3A000000 40820010
+920F000C 920F0004
+48000010 920F0010
+920F0008 48000014
+3A000001 9A0F0001
+7FC3F378
+b 0x8029152c
+3A000000 9A0F0001
+7FC3F378 00000000
