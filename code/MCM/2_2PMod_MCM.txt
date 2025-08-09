@@ -1379,10 +1379,8 @@ BBC10108 00000000
 	-==-
 
 
-BossCams V4 SpecialFree Scenario (bugged)
+BossCams V4 SpecialFree Scenario
 Special case detach that most bosses uses.
-Current version has a double free bug with Heavy Dog.
-Fixes all other bosses properly
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
 NTSC 1.06 --- 0x8029152C ---- 7C7E1B79 -> Branch
@@ -1403,9 +1401,20 @@ NTSC 1.06 --- 0x8029152C ---- 7C7E1B79 -> Branch
 3A000000 40820010
 920F000C 920F0004
 48000010 920F0010
-920F0008 48000014
+920F0008 48000034
 3A000001 9A0F0001
+80810014 3DE08033
+61EF5A3C 7C047800
+4182000C 38800000
+48000008 38800001
 7FC3F378
 b 0x8029152c
 3A000000 9A0F0001
 7FC3F378 00000000
+
+------------- 0x802915A0 ---- 7FE00735 -> Branch
+
+7FE00735 40810014
+3DE08051 61EF5458
+8A0F0001 2C100000
+60000000 00000000
