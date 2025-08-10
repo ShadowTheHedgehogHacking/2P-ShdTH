@@ -1434,4 +1434,15 @@ C00F0000 3DE0804E
 61EFDC34 C02F0000
 FC000840 40810008
 4E800020 9421FFC0
-60000000 00000000
+00000000
+
+
+	-==-
+
+
+Fix A Rank Counter
+Fixes the A Rank counter if you use a save file that comes with Expert Unlocked
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x80204FB8 ---- 408200C4 -> 60000000
+------------- 0x80205078 ---- 9BBF16C9 -> 60000000
