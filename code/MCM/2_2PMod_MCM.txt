@@ -253,11 +253,10 @@ NTSC 1.06 --- 0x801E3ADC ---- 4182003C -> 60000000
 	-==-
 
 
-2P Essentials Remove ScreenShake v2
+2P Essentials Remove ScreenShake v3
 [dreamsyntax]
 Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
-NTSC 1.06 --- 0x801FA2DC ---- 9421FFC0 -> 4E800020
-------------- 0x8000EF58 ---- 9421FFF0 -> 4E800020
+NTSC 1.06 --- 0x8000EF58 ---- 9421FFF0 -> 4E800020
 ------------- 0x8000EFC0 ---- 9421FF70 -> 4E800020
 
 
@@ -1417,4 +1416,22 @@ b 0x8029152c
 7FE00735 40810014
 3DE08051 61EF5458
 8A0F0001 2C100000
+60000000 00000000
+
+
+	-==-
+
+
+The Doom/Lost Impact/Heavy Fog Sepia Effect Fix
+For some reason these stages apply the Sepia effect separately rather than through the .fog system...
+Note: Replaces the blr in Radial Blur / Screenshake removal code
+[dreamsyntax]
+Revision ---- DOL Offset ---- Hex to Replace ---------- ASM Code -
+NTSC 1.06 --- 0x801FA2DC ---- 9421FFC0 -> Branch
+
+3DE08057 61EFD734
+C00F0000 3DE0804E
+61EFDC34 C02F0000
+FC000840 40810008
+4E800020 9421FFC0
 60000000 00000000
