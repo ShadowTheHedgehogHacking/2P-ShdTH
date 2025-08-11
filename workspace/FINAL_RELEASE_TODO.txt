@@ -1,2 +1,0 @@
-- Convert FNT to all langs
-- Dolphin BG HD for other langs
