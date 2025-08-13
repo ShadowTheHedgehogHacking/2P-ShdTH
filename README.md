@@ -12,7 +12,7 @@ This project allows you to experience Shadow The Hedgehog (GameCube)'s 1P modes 
 * You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file
 * If you are playing on a real Wii/GameCube, you must apply the `console` variant of the mod, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM
 * You can change characters. Select 2P-VS, select characters, then back out to the main menu at the 1-3 round select screen. Your character choices will carry over to 2P CO-OP
-* Shadow: Reloaded is NOT compatible with this mod. If you are looking to play a 2P version of Reloaded, it exists as a standalone mod: [2P-Reloaded](https://github.com/ShadowTheHedgehogHacking/2P-Reloaded)
+* Shadow the Hedgehog: Reloaded - If you are looking to play a 2P version of Reloaded, go here: [2P-Reloaded](https://github.com/ShadowTheHedgehogHacking/2P-Reloaded)
 
 ## How to play / Setup
 ### ROM Validation
@@ -46,14 +46,14 @@ You can check your hashes by right-clicking your game in Dolphin's game list -> 
 6. If you run into errors, likely the ISO is wrong hash for the xdelta you downloaded. Double check your original game in `Dolphin Verify` tab
 7. If you want to make additional modifications (such as CharacterMods) follow [Extra Mods](#extra-mods)
 
-Expected Patch Results (v2.4.4)
+Expected Patch Results (v2.5)
 
 | PATCH              | CRC32 Hash    | SHA-1 Hash                               |
 | ------------------ | ------------- | ---------------------------------------- |
-| 64M-WIDESCREEN     | 98ae6bb4      | eeac7762229fb1ef6b5c67022f979083ee6c0cfe |
-| CONSOLE-WIDESCREEN | e2f86543      | 061f3a26cad68b29ac85b13a7245a6f1652e27d1 |
-| 64M                | 93dfc7f1      | 2324322ebb4f7caeda995951f402e59622b277e9 |
-| CONSOLE            | 1bf65ef9      | 26833ba149b68833f781831f398b835dec79d16a |
+| 64M-WIDESCREEN     | 0b7edd91      | a5d3f1e5631604c929277b734227b92749106bc4 |
+| CONSOLE-WIDESCREEN | 9df37a91      | 79b3f45b4cbf4d698ceb62cbe81ba1454795e7c8 |
+| 64M                | 6d88d153      | 8f462508dfefeba57849feea86a726d89facaba7 |
+| CONSOLE            | 388f9f84      | fb5547e7c1e490ef0588cdd584b6eee4f8ef5353 |
 
 ### Dolphin
 1. Get the latest Dolphin Emulator - [Dolphin 2506 or newer](https://dolphin-emu.org/download/)
@@ -157,6 +157,10 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 * You need to ensure the `START` button is not pressed at the same time on multiple controllers during stage load. In Dolphin make sure you haven't accidentally bound `START` to the same key/controller by mistake.
 11. How do I play with others?
 * This is a local splitscreen modification. Outside of playing in the same physical space, you can either use Dolphin Netplay with Dual Core OFF (it crashes with it ON), or a cloud gaming solution such as [Parsec](https://parsec.app), [Sunshine/Moonlight](https://app.lizardbyte.dev/Sunshine), [Steam Remote Play](https://store.steampowered.com/remoteplay).
+12. I have texture corruption or Dolphin crashes.
+* Use Vulkan Graphics backend. Do not use Direct3D 12, as it has crashing issues in Dolphin with this game. Direct3D 11 will sometimes corrupt textures (nvidia only).
+13. My game crashed (PPC Halt noise) while playing on console via Nintendont
+* If you travel far apart in some stages, it is still possible to exceed 24M and crash the game on console. This should be rare, but if it happens just avoid splitting up in the areas you commonly crash in.
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
@@ -175,6 +179,7 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 * LimblessVector for Shadow file reversing work (HeroesPowerPlant, DME Memory List)
 * TheHatedGravity, LimblessVector, Jesus_PK, Sora, Shadowth117, DonutStopGaming, SpectralStar, MainMemory, Waddle DJ, my local friends, and all the randoms I (dreamsyntax) played with on Parsec & Sunshine/Moonlight for playtesting
 * Heroes Hacking Central for keeping us insane during this project
+* kotcrab for online xdelta patcher
 * metaconstruct, UnclePunch, psiLupan, and DRGN of the SmashBoards / Melee Hacking Community for MCM and assistance with DOL expansion & modification
 * You, for playing the game
 
