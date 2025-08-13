@@ -139,7 +139,7 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 2. Player 2 spawns, but there is no split screen for them
 * You have patched the game correctly, but `GUPE8P.ini` is not placed in the correct spot, or Cheats are disabled in Dolphin/Nintendont
 3. I keep crashing after the Rank Screen completes on finishing a level
-* If you are using a Custom BON character with the `Yellow Android MTP Animation Override` code, make sure you enabled the `Custom MTP Crash Fix v3` code too.
+* If you are using a Custom BON character with the `Yellow Android MTP Animation Override` code, make sure you enabled the `Custom MTP Crash Fix v4` code too.
 4. I get `Load failed. Please check the Memory Card` message when loading the game
 * Ensure you did not accidentally enable/check a separator in the Gecko Codes list, such as `=== Core Codes ===`, `=== Gameplay Tweaks ===` - these are not codes, just separators and should not be enabled.
 * Make sure you did not copy a Shadow SX or Shadow Reloaded save file. Only original game saves are compatible.
