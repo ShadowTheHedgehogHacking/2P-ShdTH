@@ -10,10 +10,10 @@ This mod is modular, so we combine the below when creating a release:
 5. If you are playing on Wii/GameCube, you must also apply the `console-compatibility-textures` branch, which reduces texture sizes to have mostly stable gameplay with only 24MB of RAM. Apply it last.
 
 ### Applying 2P-ShdTH To A Clean ISO
-1. [Extract the Game](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH?tab=readme-ov-file#extraction-of-game--fst-format)
+1. [Extract the Game](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH?tab=readme-ov-file#extraction-of-game--extracted-game-format)
 2. Open the newly extracted folder and merge/overwrite the `sys` and `files` files with the two folders in `ISO EDITS`.
 3. Apply other mods (shadow-model-fixes, Widescreen-ShadowTH)
-3. [Repack the Game to ISO](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH?tab=readme-ov-file#replacement-of-files--converting-fst-to-iso)
+3. [Repack the Game to ISO](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH?tab=readme-ov-file#replacement-of-files--converting-extracted-game-to-iso)
 4. Use MCM (below) if needing to customize embedded codes.
 
 ### Customizing DOL Injected Codes / Patching a fresh .dol
