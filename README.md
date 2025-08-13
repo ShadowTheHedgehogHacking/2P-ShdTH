@@ -6,7 +6,7 @@
 </div>
 
 ## About
-This project allows you to experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional.
+This project allows you to experience Shadow The Hedgehog (GameCube)'s 1P modes with a second player. Story Mode, Select Mode, Expert Mode, and Last Story are all fully functional
 
 ## Important
 * You must set Dolphin to use 64MB of RAM to play this mod. This is done automatically if you add the `GUPE8P.ini` file
@@ -64,15 +64,14 @@ Expected Patch Results (v2.5)
 6. If the game does not appear as you expect, select `View` -> `Purge Game List Cache` from Dolphin's menu bar
 7. Enable Cheats in `Dolphin -> Config`. Right click the game the list and choose `Properties -> Gecko Codes` to change any configuration codes
 8. Under `Dolphin -> Config -> Advanced` enable `CPU Clock Override` and try various values (CPU dependent). I highly recommend at least `150%` if your CPU can handle it. See [Dolphin FPS optimization (CPU variable)](#dolphin-fps-optimization) 
-9. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window`
-10. (Optional) if using `Force 16:9` and you have black bars, you can enable `Crop` in `Dolphin -> Graphics -> Advanced -> Misc`
-11. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
-12. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\`
+9. Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window` if playing in Widescreen. Set it to `Force 4:3` if playing in Original Aspect Ratio
+10. (Optional) To enable Custom Textures: `Dolphin -> Graphics -> Advanced` Enable `Load Custom Textures` and `Prefetch Custom Textures`
+11. (Optional) If you want to use the 100% Save, place `8P-GUPE-SHADOWTHEHEDGEHOG.gci` GCI file at `<Dolphin User Folder>\GC\USA\Card A\` - This is already done if you copy the Dolphin Configuration (Optional) folder, like in step 4
 
 ### Nintendont (Wii/Wii U)
-1. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these.
-2. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB.
-3. For convenience, the release includes pre-built GCTs for Widescreen and Original Aspect in the Vertical Split Screen mode. If creating your own GCT file and playing with Original Aspect Ratio, you should disable the `Vertical/Horizontal SplitScreen - Advanced Full Widescreen v5 with UI/GNCP Code` and `2P Optionals Show Score/Points UI`.
+1. If you want to customize cheats for Nintendont, use [CodeManager2](https://github.com/CLF78/CodeManager2) with GUPE8P.ini to generate your own `.gct` for Nintendont. A GCT is **required** as the split screen codes are exclusive to these
+2. Rename your patched ISO to `game.iso` and place it on your Nintendont SD/USB
+3. For convenience, the release includes pre-built GCTs for Widescreen and Original Aspect in both Vertical and Horizontal split screen modes. If creating your own GCT file and playing with Original Aspect Ratio, you should disable the `(Widescreen)` code
 ```
 Copy GUPE8P.gct to the same directory as your game.iso
  e.g. USB:/games/Shadow The Hedgehog [GUPE8P] should have:
@@ -108,9 +107,9 @@ I use 290% for AMD Ryzen 9 5900X. Previously 217% for AMD Ryzen 7 3800X, 165% fo
 ```
 
 ### Extra Mods
-After you've patched your ISO with the chosen xdelta, you can make additional modifications. Follow the steps below to use mods such as Sonic over Yellow Android.
+After you've patched your ISO with the chosen xdelta, you can make additional modifications. Follow the steps below to use mods such as Sonic over Yellow Android
 
-### Extraction of Game / FST Format
+### Extraction of Game / Extracted Game Format
 1. Open Dolphin
 2. Right-click your 2P-ShdTH ISO you created in the game list
 3. Select Properties
@@ -119,16 +118,16 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 6. Select Extract Entire Disc...
 7. Select a new folder where you will store the game content and modify its files
 
-### Replacement of Files & Converting FST to ISO
-1. Open the newly extracted folder and make any additional changes you want, such as Sonic over Yellow Android, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want. 
+### Replacement of Files & Converting Extracted Game to ISO
+1. Open the newly extracted folder and make any additional changes you want, such as Sonic over Yellow Android, other [CharacterMods](https://github.com/ShadowTheHedgehogHacking/CharacterMods), or any other changes you want
 2. Open Dolphin
 3. Open Config
 4. Select Paths Tab
 5. Select "Add" for Game Folders
 6. Navigate to the folder where you extracted the game
 7. Open the `sys` folder, and select "Select Folder"
-8. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the FST format game
-9. Right click the FST format game and pick `Convert File...`
+8. Close the confirmation pane, your games list should populate a new 0 filesize game of Shadow The Hedgehog. The 0 filesize entry is the Extracted Game format game
+9. Right click the Extracted Game format game and pick `Convert File...`
 10. The Convert window will appear, click "Convert..." and name it `game.iso` for Nintendont, or `2PShdTH.iso` for Dolphin
 11. Move/Save the ISO to the Path Dolphin detects your games. A new 2P Mod Shadow entry should appear in your Dolphins game list with greater than 0 filesize and with a custom banner. Use this when playing the game
 12. If the game does not appear as you expect, in Dolphin's menu bar select `View` -> `Purge Game List Cache`
@@ -161,6 +160,8 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 * Use Vulkan Graphics backend. Do not use Direct3D 12, as it has crashing issues in Dolphin with this game. Direct3D 11 will sometimes corrupt textures (nvidia only).
 13. My game crashed (PPC Halt noise) while playing on console via Nintendont
 * If you travel far apart in some stages, it is still possible to exceed 24M and crash the game on console. This should be rare, but if it happens just avoid splitting up in the areas you commonly crash in.
+14. My game looks stretched or squished
+* Set Aspect Ratio in `Dolphin -> Graphics -> Aspect Ratio` to `Force 16:9` or `Stretch to Window` if playing in Widescreen. Set it to `Force 4:3` if playing in Original Aspect Ratio.
 
 ## Credits
 * dreamsyntax | Lead Developer | for starting this project/everything
