@@ -17,7 +17,7 @@ This mod is modular, so we combine the below when creating a release:
 4. Use MCM (below) if needing to customize embedded codes.
 
 ### Customizing DOL Injected Codes / Patching a fresh .dol
-This should not be necessary as we ship a patched 'main.dol' in the repo. However, this is how we would create the 'main.dol' from scratch.
+We ship a patched 'main.dol' in the releases. However, it is not included in the repo itself. This is how we would create the 'main.dol' from scratch.
 ```
 1. Download MCM (Melee Code Manager) if you haven't: https://github.com/DRGN-DRC/Melee-Code-Manager/releases
 2. You will need to overwrite configurations to make it work with Shadow. After extracting v4.4.1 or newer:
