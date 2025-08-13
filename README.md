@@ -1,8 +1,8 @@
 <div align="center">
 <h1>2 Player Shadow The Hedgehog</h1>
-<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/workspace/res/banner.png" align="center" />
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/code/res/banner.png" align="center" />
 <h3>A multiplayer mod for Shadow the Hedgehog NTSC-U (GameCube)</h3>
-<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/workspace/res/main_banner.png" align="center" />
+<img src="https://raw.githubusercontent.com/ShadowTheHedgehogHacking/2P-ShdTH/master/code/res/main_banner.png" align="center" />
 </div>
 
 ## About
@@ -187,4 +187,4 @@ After you've patched your ISO with the chosen xdelta, you can make additional mo
 Anyone is free to base mods off this project. If you make a new mod based on it or create something that has 2P-ShdTH support, we would love to see it!
 You do not need to ask permission to make mods built off this mod or other derivative works.
 
-[Click here to learn how to build from source (not recommended for most users)](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master/workspace)
+[Click here to learn how to build from source (not recommended for most users)](https://github.com/ShadowTheHedgehogHacking/2P-ShdTH/tree/master/code)
